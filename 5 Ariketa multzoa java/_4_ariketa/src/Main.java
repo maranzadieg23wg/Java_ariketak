@@ -13,12 +13,13 @@ public class Main {
             System.out.println("Sartu berretzailea");
             berretzailea = sc.nextInt();
 
-            float z1 = berrekizuna / berretzailea;
+            float z1 = berrekizuna;
 
-            float z2 = berrekizuna % berretzailea;
+            for (int i = 1;i<berretzailea;i++){
+                z1 = z1 * berrekizuna;
+            }
 
-            System.out.println(berrekizuna+"/"+berretzailea+" = "+z1);
-            System.out.println("Ondarra = "+z2);
+            System.out.println("Erantzuna da: "+ z1);
 
 
             System.out.println("Jarraitu nahi duzu? B/E");
