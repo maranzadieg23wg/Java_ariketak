@@ -5,6 +5,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int maximoa = 801;
+        int maxPosible = 0;
         System.out.println("Tunel kopurua: (max: 10):");
         int tunelKopurua = sc.nextInt();
         if (tunelKopurua >10){
@@ -33,9 +34,19 @@ public class Main {
                     System.exit(0);
                 }
 
-                if (alturaMaximoa < maximoa){
-                    maximoa = alturaMaximoa;
+                if (alturaMaximoa > maxPosible){
+                    //sartzen den maximoa lortzen dugu.
+                    maxPosible = alturaMaximoa;
                 }
+                if (e == erreiKopurua-1 && maximoa > maxPosible){
+                    maximoa = maxPosible;
+                    //System.out.println("NEW: "+maximoa);
+                }
+
+
+
+
+
             }
         }
 
