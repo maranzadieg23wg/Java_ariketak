@@ -27,15 +27,15 @@ public class Main {
 
         }
         //alderantziz
-        for (int i = 1;i<zenbat+1;i++){
+        for (int i = zenbat-1;i > 0;i--){
 
 
-            for (int r =zenbat;r < i;r--){
-                System.out.print("  t");
+            for (int r =0;r < zenbat-i;r++){
+                System.out.print("  ");
             }
 
 
-            for (int e = zenbat;e > i/2;e--){
+            for (int e = 1;e < i*2;e++){
                 System.out.print("*");
                 System.out.print(" ");
 
