@@ -8,7 +8,10 @@ public class Main {
         int zenbakia = sc.nextInt();
         sc.close();
 
+        System.out.println("1");
+
         int deskonposizioa = deskonposizioa(zenbakia,2);
+
 
 
 
@@ -35,21 +38,25 @@ public class Main {
 
         while (z1 != 1){
             if (z1 % zPrimo == 0){
-                System.out.println(zPrimo);
                 z1 = z1 / zPrimo;
+                System.out.println(zPrimo);
+                if (z1 == 1){
+                    System.exit(1);
+                }
             }
             else {
+                zPrimo++;
+
                 while (primo == false){
-                    zPrimo ++;
                     primo = primo(zPrimo);
+
+                    deskonposizioa(z1, zPrimo);
+
+
                 }
-                deskonposizioa(z1, zPrimo);
 
             }
         }
-
-
-
         return z1;
     }
 }
