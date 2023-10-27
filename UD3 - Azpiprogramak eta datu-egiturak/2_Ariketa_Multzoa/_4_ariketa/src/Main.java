@@ -20,6 +20,10 @@ public class Main {
 
         for (int i = 0;i<10;i++){
             float nota = sc.nextFloat();
+            if (nota <0 || nota>10){
+                nota = 0;
+                System.out.println("Ezin da sartu 0 baino txiagoa den nota bat ezta, 10 baino handiagoa dena.");
+            }
             notak [i] = nota;
 
         }
