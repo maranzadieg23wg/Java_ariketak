@@ -30,12 +30,16 @@ public class Main {
         for (int i =0;i<(zenbakiak1.length+zenbakiak2.length)/3+2;i+=3){
             for (int e =0;e<3;e++){
                 System.out.print(zenbakiak1[i+e]+" - ");
+              //System.out.print("i="+i+" / ");
             }
             for (int e =0;e<3;e++){
-                if (i <(zenbakiak1.length+zenbakiak2.length)+1){
+                if (i <6){
                     System.out.print(zenbakiak2[i+e]+" - ");
                 }else {
-                    System.out.print(zenbakiak2[i+e]);
+                    e =3;
+                    System.out.print(zenbakiak2[i]+" - ");
+                    System.out.print(zenbakiak2[i+1]+" - ");
+                    System.out.print(zenbakiak2[i+2]);
                 }
 
             }
