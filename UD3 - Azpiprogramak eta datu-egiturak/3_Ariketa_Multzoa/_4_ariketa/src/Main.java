@@ -10,7 +10,7 @@ public class Main {
         int [] zenbakiak2 = new int[9];
         int [] zenbakiak3 = new int[18];
 
-        int posizioa =0;
+
 
 
         System.out.println("Bete lehen array-a bederatzi zenbaki osoekin:");
@@ -52,40 +52,29 @@ public class Main {
             }
         }*/
 
-        boolean zen1 = true;
-        int e = 0;
         int a = 0;
-        for (int i = 0;i<19;i+=3){
-
-            if (zen1){
-                if (i <19/3){
-                    System.out.print(zenbakiak3[a]+" - ");
-                    System.out.print(zenbakiak3[a+1]+" - ");
-                    System.out.print(zenbakiak3[a+2]+" - ");
+        int e = 0;
+        for (int i = 0; i < 18; i += 3) {
+            //System.out.println("I: "+i);
+            if (i % 6 == 0) {
+                System.out.print(zenbakiak3[a] + " - ");
+                System.out.print(zenbakiak3[a + 1] + " - ");
+                System.out.print(zenbakiak3[a + 2] + " - ");
+                a += 3;
+            } else {
+                System.out.print(zenbakiak3[e + 9] + " - ");
+                System.out.print(zenbakiak3[e + 10] + " - ");
+                if (i == 15){
+                    System.out.print(zenbakiak3[e + 11]);
                 }else {
-                    System.out.print(zenbakiak3[a]);
-                    System.out.print(zenbakiak3[a+1]);
-                    System.out.print(zenbakiak3[a+2]);
+                    System.out.print(zenbakiak3[e + 11] + " - ");
                 }
-                zen1 = false;
-                a++;
-            }else {
-                if (i <19/3){
-                    System.out.print(zenbakiak3[e+10]+" - ");
-                    System.out.print(zenbakiak3[e+11]+" - ");
-                    System.out.print(zenbakiak3[e+12]+" - ");
-                }else {
-                    System.out.print(zenbakiak3[e+10]);
-                    System.out.print(zenbakiak3[e+11]);
-                    System.out.print(zenbakiak3[e+12]);
 
-
-                }
-                zen1 = true;
-                e++;
+                e += 3;
             }
-
         }
+
+
 
 
 
