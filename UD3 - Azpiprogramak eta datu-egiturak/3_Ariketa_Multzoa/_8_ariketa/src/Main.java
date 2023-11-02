@@ -10,13 +10,11 @@ public class Main {
 
 
 
+
         //System.out.println("Sartu 9 zenbaki oso 10 elementuko array batean:");
 
         for (int i = 0;i<zenbakiak.length;i++){
             int zenb = (int)(Math.random()*20+1);
-            if (zenb<0 || zenb > 20){
-
-            }
             zenbakiak [i] = zenb;
         }
 
@@ -29,11 +27,19 @@ public class Main {
 
             }
         }
+        System.out.println("Hau da bukaerako array-a");
+        int zenbat = sc.nextInt();
 
-        for (int e = 0; e < zenbakiak.length-1; e++) {
-            kopia[e+1] = zenbakiak[e];
+        for (int i = 0;i<zenbat+1;i++){
+            for (int e = 0; e < zenbakiak.length-1; e++) {
+                kopia[e+1] = zenbakiak[e];
+            }
+            kopia[0]=zenbakiak[zenbakiak.length-1];
+            for (int e = 0; e < zenbakiak.length-1; e++) {
+                zenbakiak[e]=kopia[e];
+            }
         }
-        kopia[0]=zenbakiak[zenbakiak.length-1];
+
 
         System.out.println("Hau da bukaerako array-a:");
         for (int i = 0;i< kopia.length;i++){
