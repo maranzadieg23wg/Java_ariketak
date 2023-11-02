@@ -13,7 +13,7 @@ public class Main {
         System.out.println("Sartu 9 zenbaki oso 10 elementuko array batean:");
 
         for (int i = 0;i<zenbakiak.length;i++){
-            int zenb = sc.nextInt();
+            int zenb = (int)(Math.random()*20+1);
             if (zenb<0 || zenb > 20){
 
             }
@@ -33,6 +33,7 @@ public class Main {
         for (int e = 0; e < zenbakiak.length-1; e++) {
             kopia[e+1] = zenbakiak[e];
         }
+        kopia[0]=zenbakiak[zenbakiak.length-1];
 
         System.out.println("Hau da bukaerako array-a:");
         for (int i = 0;i< kopia.length;i++){
