@@ -5,10 +5,9 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-
         int [] zenbakiak1 = new int[10];
         int [] zenbakiak2 = new int[10];
-
+        int [] zenbakiak3 = new int[20];
 
         System.out.println("Bete lehen array-a hamar zenbaki osoekin:");
 
@@ -16,7 +15,6 @@ public class Main {
             int zenb = sc.nextInt();
             zenbakiak1 [i] = zenb;
         }
-
 
         System.out.println("Bete bigarren array-a hamar zenbaki osoekin:");
 
@@ -27,19 +25,34 @@ public class Main {
 
         System.out.println("Eskatutako emaitza: ");
 
-        // System.out.print(" - "+zenbakiak[0]);
         for (int i = 0;i<10;i++){
-            System.out.print(zenbakiak1[i]);
-            if (i <9){
-                System.out.print(" - "+zenbakiak2[i]+" - ");
-            }else {
-                System.out.print(" - "+zenbakiak2[i]);
-            }
+            zenbakiak3 [i] = zenbakiak1[i];
+            zenbakiak3[i+10]=zenbakiak2[i];
         }
+        boolean zen1 = true;
+        int e = 0;
+        int a = 0;
+        for (int i = 0;i<20;i++){
 
+            if (zen1){
+                if (i <19){
+                    System.out.print(zenbakiak3[a]+" - ");
+                }else {
+                    System.out.print(zenbakiak3[a]);
+                }
+                zen1 = false;
+                a++;
+            }else {
+                if (i <19){
+                    System.out.print(zenbakiak3[e+10]+" - ");
+                }else {
+                    System.out.print(zenbakiak3[e+10]);
+                }
+                zen1 = true;
+                e++;
+            }
 
-
-
+        }
 
         sc.close();
 

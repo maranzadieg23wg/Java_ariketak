@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -27,6 +26,7 @@ public class Main {
            if (i == posizioa){
                kopia[i]=zenb;
                kopia[i+1] =zenbakiak[i];
+               System.out.println(zenbakiak[i]);
            }else {
                kopia[i] = zenbakiak[i];
            }
