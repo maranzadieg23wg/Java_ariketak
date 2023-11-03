@@ -16,6 +16,7 @@ public class Main {
         for (int i = 0;i<zenbakiak.length;i++){
             int zenb = (int)(Math.random()*20+1);
             zenbakiak [i] = zenb;
+            kopia [i] =zenb;
         }
 
         System.out.println("1etik 20 arteko zenbaki ausazkoen array-a:");
@@ -29,12 +30,23 @@ public class Main {
         }
         System.out.println("Hau da bukaerako array-a");
         int zenbat = sc.nextInt();
+        zenbat--;
+
+       //int azkena = 0;
 
         for (int i = 0;i<zenbat+1;i++){
             for (int e = 0; e < zenbakiak.length-1; e++) {
+               //System.out.print("AZKENA: "+azkena+" - ");
+
+                //lehenengo zenbakia
+                kopia[0]=kopia[zenbakiak.length-1];
+
+                //Beste zenbakiak jartzen ditu.
                 kopia[e+1] = zenbakiak[e];
             }
-            kopia[0]=zenbakiak[zenbakiak.length-1];
+
+
+
             for (int e = 0; e < zenbakiak.length-1; e++) {
                 zenbakiak[e]=kopia[e];
             }
