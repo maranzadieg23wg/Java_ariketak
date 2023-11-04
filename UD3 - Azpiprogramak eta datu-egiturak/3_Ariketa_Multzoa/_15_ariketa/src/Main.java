@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -21,9 +20,9 @@ public class Main {
         }
 
 
-        for (int i = 0;i<zenbakiak.length-1;i++){
-            int batura = zenbakiak[i]+zenbakiak2[i];
-            zenbakiak2[i+1] = batura;
+        zenbakiak2 [0]=zenbakiak[0];
+        for (int i = 1;i<zenbakiak.length;i++){
+            zenbakiak2[i] = zenbakiak2[i-1] + zenbakiak[i];
         }
 
 
