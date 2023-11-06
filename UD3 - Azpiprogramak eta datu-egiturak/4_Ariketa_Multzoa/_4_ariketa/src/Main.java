@@ -22,7 +22,7 @@ public class Main {
         //matrizetako zenbakiak lekuz aldatzen ditu
         for (int i = 0;i< matrizea.length;i++){
             for (int e = 0;e<matrizea.length;e++){
-
+                matrizea2[e][i]=matrizea[i][e];
             }
         }
 
