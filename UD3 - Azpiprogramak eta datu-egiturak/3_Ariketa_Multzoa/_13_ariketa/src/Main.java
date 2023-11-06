@@ -52,6 +52,7 @@ public class Main {
 
 
         //zenbakiak arraya kopiatzen zenbakiak 3 arrayra
+        //Bi arrayak elkartzen
         for (int i = 0;i<zenbakiak3.length/2;i++){
 
             zenbakiak3 [i] = zenbakiak[i];
