@@ -7,6 +7,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         int [] zenbakiak = new int[6];
+        int temp = 0;
 
 
 
@@ -26,8 +27,21 @@ public class Main {
 
         zenbakiak[zenbakiak.length-1]=txertatu;
 
-        Arrays.sort(zenbakiak);
+        //Arrays.sort(zenbakiak);
 
+        //zenbakiak ordenatu
+        for (int i =0;i< zenbakiak.length;i++){
+            for (int e = 1; e < zenbakiak.length - i; e++) {
+
+                if (zenbakiak[e-1]>zenbakiak[e]){
+                    temp =zenbakiak[e-1];
+                    zenbakiak[e-1]=zenbakiak[e];
+                    zenbakiak[e]=temp;
+                }
+
+            }
+
+        }
 
 
         System.out.println("Hau da bukaerako array-a:");

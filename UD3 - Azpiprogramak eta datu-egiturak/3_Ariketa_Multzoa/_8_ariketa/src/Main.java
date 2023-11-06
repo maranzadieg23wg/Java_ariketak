@@ -34,6 +34,7 @@ public class Main {
 
        //int azkena = 0;
 
+        //zenbakiak mugitu eskubira
         for (int i = 0;i<zenbat+1;i++){
             for (int e = 0; e < zenbakiak.length-1; e++) {
                //System.out.print("AZKENA: "+azkena+" - ");
@@ -44,8 +45,6 @@ public class Main {
                 //Beste zenbakiak jartzen ditu.
                 kopia[e+1] = zenbakiak[e];
             }
-
-
 
             for (int e = 0; e < zenbakiak.length-1; e++) {
                 zenbakiak[e]=kopia[e];
