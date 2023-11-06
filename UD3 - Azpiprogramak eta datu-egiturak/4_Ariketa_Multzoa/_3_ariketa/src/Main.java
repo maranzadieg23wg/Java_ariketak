@@ -11,7 +11,7 @@ public class Main {
 
 
 
-        System.out.println("Bete 4x4 matrize bat zenbaki osoekin:");
+        //System.out.println("Bete 4x4 matrize bat zenbaki osoekin:");
 
         //zenbakiak gehitzen ditut bi matrizetara, zenbakiak aleatorioak dira
         for (int i = 0;i< matrizea.length;i++){
