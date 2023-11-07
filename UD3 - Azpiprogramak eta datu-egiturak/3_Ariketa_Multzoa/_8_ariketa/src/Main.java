@@ -28,7 +28,7 @@ public class Main {
 
             }
         }
-        System.out.println("Hau da hasierako array-a");
+        System.out.println("Zenbat aldiz mugitu egingo dira zenbakiak: ");
         int zenbat = sc.nextInt();
         zenbat--;
 
