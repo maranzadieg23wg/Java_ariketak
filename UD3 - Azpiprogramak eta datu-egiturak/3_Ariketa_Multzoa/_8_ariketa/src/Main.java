@@ -28,7 +28,7 @@ public class Main {
 
             }
         }
-        System.out.println("Hau da bukaerako array-a");
+        System.out.println("Hau da hasierako array-a");
         int zenbat = sc.nextInt();
         zenbat--;
 
