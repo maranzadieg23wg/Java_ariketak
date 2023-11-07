@@ -14,7 +14,7 @@ public class Main {
 
 
         int [][] matrizea = new int[errenkada][zutabe];
-        int [][] matrizea2 = new int[errenkada][zutabe];
+        int [][] matrizea2 = new int[zutabe][errenkada];
 
 
         //System.out.println("Bete 4x4 matrize bat zenbaki osoekin:");
@@ -43,7 +43,7 @@ public class Main {
 
 
         System.out.println("Hau da emaitza matrizea: ");
-        inprimatu(matrizea2,errenkada,zutabe);
+        inprimatu(matrizea2,zutabe,errenkada);
 
 
 
