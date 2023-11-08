@@ -13,13 +13,14 @@ public class Main {
         System.out.println("Sartu matrizearen zutabe kopurua: ");
         int zutabe = sc.nextInt();*/
 
-
+        //pertsona kantitatea
         int errenkada = 10;
+        //datu kantitatea -1. adibidez, 4 da horaingoa, 3 datu sartu al dira
         int zutabe = 4;
 
         float [][] matrizea = new float[errenkada][zutabe];
 
-        String []izenak = new String[10];
+        String []izenak = new String[errenkada];
 
 
         int aukera = 0;
@@ -39,7 +40,7 @@ public class Main {
 
             switch (aukera){
                 case 1:
-                    if (zenbatIzen(izenak)<10){
+                    if (zenbatIzen(izenak)<errenkada){
 
                         int urtea = 2020;
 
@@ -60,16 +61,19 @@ public class Main {
                     break;
                 case 2:
 
-                    datuGuztiak(matrizea, izenak);
+                    datuGuztiak(matrizea, izenak, zutabe);
 
                     break;
                 case 3:
 
-                    markaOnenak(matrizea,izenak);
+                    markaOnenak(matrizea,izenak, zutabe);
 
                     break;
                 case 4:
                     System.out.println("Programa bukatu da.");
+
+                    //ikusteko matrizea.
+                    inprimatu(matrizea, errenkada, zutabe);
                     break;
                 default:
                     System.out.println("ERROR: Sartutako zenbakia ez da aukeretako bat, sartu berriro:");
@@ -153,7 +157,7 @@ public class Main {
 
     }
 
-    public static void datuGuztiak (float [] []matrizea, String []izenak){
+    public static void datuGuztiak (float [] []matrizea, String []izenak, int zutabe){
 
         int zenbat = zenbatIzen(izenak);
 
@@ -163,7 +167,7 @@ public class Main {
             int urtea = 2020;
             System.out.println("Partaidea: "+izenak[i]);
 
-            for (int e = 1;e<4;e++){
+            for (int e = 1;e<zutabe;e++){
                 System.out.print("  "+urtea+"ko marka: "+matrizea[i][e]);
                 urtea++;
                 System.out.println(" ");
@@ -174,14 +178,28 @@ public class Main {
 
     }
 
-    public static void markaOnenak (float [] []matrizea, String []izenak){
+    public static void markaOnenak (float [] []matrizea, String []izenak, int zutabea){
 
         int zenbat = zenbatIzen(izenak);
+
+        float [] lista=new float [zutabea];
 
         System.out.println("********* Marka onenak *********");
 
         for (int i = 0; i<zenbat;i++){
-            System.out.println(izenak[i]+" - "+zenbakiHandiena(matrizea,i));
+            lista [i]= zenbakiHandiena(matrizea,i, zutabea);
+            //System.out.println(izenak[i]+" - "+zenbakiHandiena(matrizea,i, zutabea));
+        }
+
+        Arrays.sort(lista);
+
+        for (int i =0;i<zenbat;i++){
+            for (int e = 0;e<zutabea;e++){
+                if (lista[i]==matrizea[i][e]){
+                    System.out.println(izenak[i]+" - "+lista[i]);
+
+                }
+            }
         }
 
         System.out.println("********************************");
@@ -189,11 +207,11 @@ public class Main {
 
     }
 
-    public static float zenbakiHandiena (float[][]matrizea, int zenbat){
+    public static float zenbakiHandiena (float[][]matrizea, int zenbat, int zutabe){
 
         float handiena = 0;
-        float [] lista = new float[4];
-        for (int i=1;i<4;i++){
+        float [] lista = new float[zutabe];
+        for (int i=1;i<zutabe;i++){
             lista[i]=matrizea[zenbat][i];
 
         }
