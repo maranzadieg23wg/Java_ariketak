@@ -181,7 +181,7 @@ public class Main {
         System.out.println("********* Marka onenak *********");
 
         for (int i = 0; i<zenbat;i++){
-            System.out.println(izenak[i]+" - "+zenbakiHandiena(matrizea,zenbat));
+            System.out.println(izenak[i]+" - "+zenbakiHandiena(matrizea,i));
         }
 
         System.out.println("********************************");
@@ -193,7 +193,7 @@ public class Main {
 
         float handiena = 0;
         float [] lista = new float[4];
-        for (int i=1;i<5;i++){
+        for (int i=1;i<4;i++){
             lista[i]=matrizea[zenbat][i];
 
         }
