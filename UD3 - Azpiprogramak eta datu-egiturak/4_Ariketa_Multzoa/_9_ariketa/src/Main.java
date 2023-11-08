@@ -37,7 +37,7 @@ public class Main {
 
 
 
-        //2 matrizeak inprimatzen
+        //matrizea inprimatzen
         System.out.println("Hau da emaitza matrizea: ");
         inprimatu(matrizea,errenkada,zutabe);
 
