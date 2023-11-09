@@ -1,5 +1,7 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Collections;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -73,7 +75,7 @@ public class Main {
                     System.out.println("Programa bukatu da.");
 
                     //ikusteko matrizea.
-                    inprimatu(matrizea, errenkada, zutabe);
+                   // inprimatu(matrizea, errenkada, zutabe);
                     break;
                 default:
                     System.out.println("ERROR: Sartutako zenbakia ez da aukeretako bat, sartu berriro:");
@@ -182,22 +184,28 @@ public class Main {
 
         int zenbat = zenbatIzen(izenak);
 
-        float [] lista=new float [zutabea];
+        float [] lista=new float [zenbat];
+        float [] kopia=new float [zenbat];
 
         System.out.println("********* Marka onenak *********");
 
         for (int i = 0; i<zenbat;i++){
             lista [i]= zenbakiHandiena(matrizea,i, zutabea);
+            kopia [i]= zenbakiHandiena(matrizea,i, zutabea);
+
             //System.out.println(izenak[i]+" - "+zenbakiHandiena(matrizea,i, zutabea));
         }
 
-        Arrays.sort(lista);
 
-        for (int i =0;i<zenbat;i++){
-            for (int e = 0;e<zutabea;e++){
-                if (lista[i]==matrizea[i][e]){
-                    System.out.println(izenak[i]+" - "+lista[i]);
 
+        //Arrays.sort(kopia, Collections.reverseOrder());
+        Arrays.sort(kopia);
+
+        
+        for (int i = 0; i < zenbat; i++) {
+            for (int j = 0; j < zenbat; j++) {
+                if (lista[j] == kopia[zenbat - i - 1]) {
+                    System.out.println(izenak[j] + " - " + lista[j]);
                 }
             }
         }
