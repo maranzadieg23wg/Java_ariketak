@@ -201,7 +201,7 @@ public class Main {
         //Arrays.sort(kopia, Collections.reverseOrder());
         Arrays.sort(kopia);
 
-        
+
         for (int i = 0; i < zenbat; i++) {
             for (int j = 0; j < zenbat; j++) {
                 if (lista[j] == kopia[zenbat - i - 1]) {
