@@ -24,12 +24,13 @@ public class Main {
         int a =0;
         int b =0;
         if (lista[0].equals("A")){
-            System.out.print("K");
+            //System.out.print("K");
             a++;
         }else if (lista[0].equals("B")) {
-            System.out.print("C");
+            //System.out.print("C");
             b++;
         }
+
 
         for (int i =0;i< lista.length-1;i++){
             if (lista[i].equals(lista[i+1]) && lista[i].equals("A")){
@@ -37,17 +38,18 @@ public class Main {
             }else if (lista[i].equals(lista[i+1]) && lista[i].equals("B")){
                 b++;
             }
-            if (i==9 && a-b <3||b-a<3){
-                System.out.print(a+"-"+b);
+            if ((a>8||b>8) && (a-b >1||b-a>1)){
+                System.out.println(a+"-"+b);
+                a =0;
+                b =0;
             }
-            a =0;
-            b =0;
+
 
         }
 
 
 
-        //matrizea inprimatzen
+        //erantzuna inprimatzen
         System.out.println("Markagailuaren egoera hau da: ");
         System.out.print(a+"-"+b);
 
