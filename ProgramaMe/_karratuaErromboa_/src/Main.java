@@ -4,51 +4,114 @@ public class Main {
 
         int zenbat =11;
 
-        String [][]matrizea = new String[zenbat][zenbat];
 
         zenbat = zenbat/2;
-        for (int i =0;i<zenbat+1;i++){
 
-            for (int e =zenbat;e>i;e--){
-                System.out.print("*");
-               // matrizea[i][e]="*";
+        int counter = 3;
+
+        int counter1 = zenbat*2-2;
+
+
+        for (int e = 0; e < zenbat; e++){
+
+            //Hemen inprimatzen da * herdia.
+            for (int i = e; i < zenbat; i++){
+                System.out.print("* ");
+            }
+            //Gero imprimatu behar du azkeneko asteriskoa
+            if (e ==0){
+                System.out.print("* ");
             }
 
-            for (int r =zenbat;r<i*2;r++){
+            if(e != 0){
+                for (int i = 0; i < counter-1; i++){
+                    System.out.print(" ");
+                    System.out.print(" ");
+                }
+                System.out.print("  ");
+            }
+
+            for (int i = e; i < zenbat; i++){
+                System.out.print("* ");
+            }
+
+
+            System.out.println(" ");
+
+            //Buelta bakoitzean inprimatu behar den utzunea +2 egiten du
+            if (e!=0){
+                counter += 2;
+            }
+
+        }
+
+        //Hemen imprimatzen da herdiko * seguida
+        for (int e = 0; e < 1; e++){
+            //Hemen inprimatzen da * herdia.
+            for (int i = e; i < zenbat*2; i++){
+                System.out.print("* ");
+            }
+            //Gero imprimatu behar du azkeneko asteriskoa
+            System.out.println("* ");
+        }
+
+        //Alderantziz
+        for (int e = zenbat-1; e > 0; e--){
+
+            //Hemen inprimatzen da * herdia.
+
+            for (int i = zenbat; i > e; i--) {
+
+                System.out.print("* ");
+
+            }
+
+            //Gero imprimatu behar du azkeneko asteriskoa
+
+            if (e == zenbat) {
+                System.out.print("* ");
+            }
+
+
+            for (int i = 0; i < counter1; i++){
                 System.out.print(" ");
-                //matrizea[i][r]="1";
+                System.out.print(" ");
             }
+            System.out.print("  ");
 
-            for (int e =zenbat;e>i;e--){
-                //System.out.print("*");
-                // matrizea[i][e]="*";
+
+            for (int i = zenbat; i > e; i--) {
+                System.out.print("* ");
             }
+            System.out.println(" ");
 
 
+            //Buelta bakoitzean inprimatu behar den utzunea +2 egiten du
 
+            counter1 -= 2;
 
-            System.out.println(" ");
 
         }
-        //Buelta heman
+
+        //Hemen imprimatzen da azkeneko * seguida
+        for (int e = 0; e < 1; e++){
+            //Hemen inprimatzen da * herdia.
+            for (int i = e; i < zenbat*2; i++){
+                System.out.print("* ");
+            }
+            //Gero imprimatu behar du azkeneko asteriskoa
+            System.out.println("* ");
+        }
 
 
 
 
 
 
-        //imprimatu(matrizea,zenbat,zenbat);
+
 
 
     }
 
-    public static void imprimatu (String [][]matrizea, int goraka, int eskubira){
 
-        for (int i=0;i<goraka;i++){
-            for (int e =0;e<eskubira;e++){
-                System.out.print(matrizea[i][e]+" ");
-            }
-            System.out.println(" ");
-        }
-    }
 }
