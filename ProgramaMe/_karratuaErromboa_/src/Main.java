@@ -7,7 +7,51 @@ public class Main {
         String [][]matrizea = new String[zenbat][zenbat];
 
         zenbat = zenbat/2;
-       
+
+        int counter = 3;
+
+
+        for (int e = 0; e < zenbat; e++){
+
+            //Hemen inprimatzen da * herdia.
+            for (int i = e; i < zenbat; i++){
+                System.out.print("* ");
+            }
+            //Gero imprimatu behar du azkeneko asteriskoa
+            if (e ==0){
+                System.out.print("* ");
+            }
+
+            //Lehenengo bueltan ez denez imprimatzen  , inprimatu behar dugu "* " utsunearekin-
+
+
+            if(e != 0){
+                for (int i = 0; i < counter-1; i++){
+                    System.out.print("1");
+                    System.out.print(" ");
+                }
+                System.out.print("1 ");
+            }
+
+            for (int i = e; i < zenbat; i++){
+                System.out.print("* ");
+            }
+
+
+            System.out.println(" ");
+
+            //Buelta bakoitzean inprimatu behar den utzunea +2 egiten du
+            if (e!=0){
+                counter += 2;
+            }
+
+        }
+
+
+
+
+
+
         //Buelta heman
 
 
