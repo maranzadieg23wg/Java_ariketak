@@ -7,29 +7,7 @@ public class Main {
         String [][]matrizea = new String[zenbat][zenbat];
 
         zenbat = zenbat/2;
-        for (int i =0;i<zenbat+1;i++){
-
-            for (int e =zenbat;e>i;e--){
-                System.out.print("*");
-               // matrizea[i][e]="*";
-            }
-
-            for (int r =zenbat;r<i*2;r++){
-                System.out.print(" ");
-                //matrizea[i][r]="1";
-            }
-
-            for (int e =zenbat;e>i;e--){
-                //System.out.print("*");
-                // matrizea[i][e]="*";
-            }
-
-
-
-
-            System.out.println(" ");
-
-        }
+       
         //Buelta heman
 
 
