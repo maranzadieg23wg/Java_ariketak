@@ -11,6 +11,9 @@ public class ProduktuProba {
 
         //Objetuan dauden metodoak deitzeko
         p1.erakutsiProduktuak();
+        p2.erakutsiProduktuak();
+        p3.erakutsiProduktuak();
+        p4.erakutsiProduktuak();
 
 
 
