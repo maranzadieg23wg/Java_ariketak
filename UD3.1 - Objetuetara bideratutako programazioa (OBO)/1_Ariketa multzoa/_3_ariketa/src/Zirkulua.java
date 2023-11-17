@@ -29,7 +29,13 @@ public class Zirkulua {
         }
     }
 
-    public void berdinaDa(){}
+    public void berdinaDa(Object zirkulua){
+        if (this == zirkulua){
+            System.out.println("Bi objetuak berberak dira.");
+        }else {
+            System.out.println("Bi objetuak desberdinak dira.");
+        }
+    }
 
     public void erakutsi(){
         System.out.println("Zirkuluaren kolorea da: "+kolorea);
