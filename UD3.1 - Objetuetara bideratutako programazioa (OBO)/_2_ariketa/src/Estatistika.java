@@ -5,9 +5,16 @@ public class Estatistika {
     int zenbat =0;
 
 
-    public Estatistika(int zenbakia){
-        this.zenbakia += zenbakia;
-        this.zenbat+=1;
+    public Estatistika(){
+
+        //Ez da behar
+        /*this.zenbakia += zenbakia;
+        this.zenbat+=1;*/
+    }
+
+    public void gehituZenbaki(int zenbakia){
+        this.zenbakia+=zenbakia;
+        zenbat++;
     }
 
     public void zenbatZenbaki(){
