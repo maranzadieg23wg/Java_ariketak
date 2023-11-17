@@ -29,6 +29,7 @@ public class Zirkulua {
         }
     }
 
+    //Ez du funtzionatzen
     public void berdinaDa(Object zirkulua){
         if (this.equals(zirkulua)){
             System.out.println("Bi objetuak berberak dira.");
@@ -49,6 +50,7 @@ public class Zirkulua {
 
         Zirkulua p1 = (Zirkulua)obje;
 
+        //Honekin bakarrik funtzionatu egingo zuken
         return this.kolorea.equals(p1.kolorea) && this.erradioa == p1.erradioa;
 
     }
