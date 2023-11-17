@@ -12,15 +12,15 @@ public class Zirkulua {
     }
 
     public void azalera(){
-        System.out.println("Azalera da: "+3.14151692*erradioa*erradioa);
+        System.out.println("Azalera da: "+Math.PI*erradioa*erradioa);
     }
 
     public  void perimetroa(){
-        System.out.println("Perimetroa da: "+2*3.14151692*erradioa);
+        System.out.println("Perimetroa da: "+2*Math.PI*erradioa);
     }
 
     public void handiaDa(){
-        double azalera = 3.14151692*erradioa*erradioa;
+        double azalera = Math.PI*erradioa*erradioa;
 
         if (azalera>20){
             System.out.println("Zirkulua handia da.");
@@ -30,12 +30,29 @@ public class Zirkulua {
     }
 
     public void berdinaDa(Object zirkulua){
-        if (this == zirkulua){
+        if (this.equals(zirkulua)){
             System.out.println("Bi objetuak berberak dira.");
         }else {
             System.out.println("Bi objetuak desberdinak dira.");
         }
+
     }
+
+    @Override public boolean equals(Object obje) {
+        if (this == obje) {
+            return true;
+        }
+
+        if (obje == null || this.getClass() != obje.getClass()){
+            return false;
+        }
+
+        Zirkulua p1 = (Zirkulua)obje;
+
+        return this.kolorea.equals(p1.kolorea) && this.erradioa == p1.erradioa;
+
+    }
+
 
     public void erakutsi(){
         System.out.println("Zirkuluaren kolorea da: "+kolorea);
