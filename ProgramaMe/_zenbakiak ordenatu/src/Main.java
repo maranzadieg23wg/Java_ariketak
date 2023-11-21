@@ -44,6 +44,29 @@ public class Main {
 
         listaImprimatu(ordenatzeko);
 
+        //alderantziz jartzen dira zenbakiak
+        int temp1 = ordenatzeko[ordenatzeko.length-2];
+        for (int i =0;i< ordenatzeko.length;i++){
+            for (int e =i; e< ordenatzeko.length;e++){
+                temp = ordenatzeko[i];
+                ordenatzeko[i]=ordenatzeko[e];
+                ordenatzeko[e]=temp;
+            }
+        }
+        ordenatzeko[0]=temp1;
+
+        listaImprimatu(ordenatzeko);
+
+
+
+        ordenatzeko[0]=ordenatzeko[ordenatzeko.length-1];
+        for (int i =1;i< ordenatzeko.length;i++){
+            ordenatzeko[i]=ordenatzeko[i-1];
+        }
+
+
+
+        listaImprimatu(ordenatzeko);
 
 
 
