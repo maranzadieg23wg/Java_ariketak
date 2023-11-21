@@ -33,13 +33,13 @@ public class Main {
                         System.out.print("  ");
                     }
                 }
-        System.out.println(" ");
+                System.out.println(" ");
 
 
             sc.close();
-    }
+        }
 
-
+    /*
     public static boolean zenbakiaEskatu(int zenbat){
 
         if (zenbat <4 || zenbat %2 !=0){
@@ -49,7 +49,7 @@ public class Main {
             return true;
         }
 
-
+    */
 
 
     }
