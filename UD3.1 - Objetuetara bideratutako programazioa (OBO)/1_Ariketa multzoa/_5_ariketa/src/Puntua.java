@@ -10,7 +10,7 @@ public class Puntua {
         this.zY=zY;
     }
 
-    
+
 
 
 }
