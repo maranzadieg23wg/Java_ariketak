@@ -2,13 +2,7 @@ public class Liburutegia {
 
 
 
-    //int zenbakia;
 
-
-
-    Liburutegia(){
-        //this.zenbakia = zenbakia;
-    }
 
 
     public static boolean bikoitiaDa(int zenbakia){
