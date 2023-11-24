@@ -6,7 +6,7 @@ public class Liburutegia {
 
 
 
-    Liburutegia(int zenbakia){
+    Liburutegia(){
         //this.zenbakia = zenbakia;
     }
 
@@ -47,7 +47,7 @@ public class Liburutegia {
         if (hamartar){
             System.out.println("Sartutako zenbakia hamarren multiploa da.");
         }else {
-            System.out.println("Sartutako zenbakia ez hamarren multiploa.");
+            System.out.println("Sartutako zenbakia ez da hamarren multiploa.");
         }
     }
 
