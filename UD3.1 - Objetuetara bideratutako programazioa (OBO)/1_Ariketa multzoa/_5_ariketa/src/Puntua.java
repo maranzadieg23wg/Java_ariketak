@@ -1,9 +1,9 @@
 public class Puntua {
 
 
-    static int zX;
+    int zX;
 
-    static int zY;
+    int zY;
 
     Puntua(int zX, int zY){
         this.zX=zX;
@@ -11,7 +11,8 @@ public class Puntua {
     }
 
 
-    public static int koadrantea(){
+    public int koadrantea(){
+
 
         boolean X = zX>0;
         boolean Y = zY>0;
