@@ -29,7 +29,7 @@ public class Liburutegia {
     }
 
     public void digituKopurua(int zenbakia){
-        
+        int zenbat = (int)(Math.log10(zenbakia)+1);
     }
 
 
