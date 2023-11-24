@@ -26,6 +26,12 @@ public class Puntua {
             return 4;
         }
 
+    }
+
+    public void inprimatuPuntua(){
+        System.out.println("X: "+zX);
+        System.out.println("Y: "+zY);
+        System.out.println("Kuadrantea: "+koadrantea());
 
     }
 
