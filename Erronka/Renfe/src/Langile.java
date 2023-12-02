@@ -37,11 +37,7 @@ public class Langile {
         System.out.println("Emaila: " + email);
         System.out.println("Jaiotze data: " + jaiotzeData);
 
-        System.out.println("Kurtsoak: ");
-        for (int i =0;i<kurtsoak.size();i+=2){
-            System.out.println("ID: "+kurtsoak.get(i));
-            System.out.println("Izena: "+kurtsoak.get(i+1));
-        }
+
     }
 
     public void datuakAldatu(int DNIberria, String izenBerria, String abizenBerria, int telefonoBerria, int lanekoTelefonoBerria, String emailBerria, int jaiotzeDataBerria) {
@@ -52,6 +48,14 @@ public class Langile {
         this.lanekoTelefonoa = lanekoTelefonoBerria;
         this.email = emailBerria;
         this.jaiotzeData = jaiotzeDataBerria;
+    }
+
+    public void ikusiIkastariak(){
+        System.out.println("Ikastaroak: ");
+        for (int i =0;i<kurtsoak.size();i+=2){
+            System.out.println("ID: "+kurtsoak.get(i));
+            System.out.println("Izena: "+kurtsoak.get(i+1));
+        }
     }
 
     public void gehituIkastaroa(int idIkastaroa, String ikastaroIzena){
