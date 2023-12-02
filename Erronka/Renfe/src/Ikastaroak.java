@@ -2,14 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ikastaroak {
-
-    String egoera;
-    int hasieraData;
-    int bukeraData;
-
-    String DNI;
-    int idIkastaroa;
-
+    
     List<Object> kurtsoLista;
 
 
@@ -25,6 +18,8 @@ public class Ikastaroak {
                System.out.println("Ikastaroaren egoera: "+kurtsoLista.get(i));
             }
         }
+
+
     }
 
     public void gehituIkastaroak(int idIkastaroa, String DNI, int hasieraData, int bukeraData, String egoera){
@@ -34,6 +29,8 @@ public class Ikastaroak {
         kurtsoLista.add(hasieraData);
         kurtsoLista.add(bukeraData);
         kurtsoLista.add(egoera);
+
+
     }
 
     public  void  borratuIkastaroak(int idIkastaroa, String DNI){

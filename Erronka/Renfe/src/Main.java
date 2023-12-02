@@ -12,6 +12,7 @@ public class Main {
 
         // Añadir cursos a los empleados con los nuevos nombres de curso y estados
         langile1.gehituIkastaroa(1, "ikastaro1", 2023, 2024, "ganditua");
+        langile1.gehituIkastaroa(2, "ikastaro2", 2023, 2024, "ez gainditua");
         langile2.gehituIkastaroa(2, "ikastaro2", 2023, 2024, "ez gainditua");
         langile3.gehituIkastaroa(3, "ikastaro3", 2023, 2024, "egiten");
         langile4.gehituIkastaroa(1, "ikastaro1", 2023, 2024, "ganditua");
@@ -41,5 +42,9 @@ public class Main {
         System.out.println("-----------------------------------");
         langile1.datuakErakutsi();
         langile1.ikusiIkastaroak();
+
+        System.out.println("-----------------------------------");
+        ikastaroak.ikastaroEgoera("11111111B",5);
+
     }
 }
