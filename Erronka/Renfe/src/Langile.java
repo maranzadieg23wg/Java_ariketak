@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Langile {
 
 
-    int DNI;
+    String DNI;
     String izena;
     String abizena;
     int telefonoa;
@@ -12,10 +13,10 @@ public class Langile {
     String email;
     int jaiotzeData;
 
-    List<String> kurtsoak;
+    List<Object> kurtsoak;
 
 
-    Langile(int DNI, String izena, String abizena, int telefonoa, int lanekoTelefonoa, String email, int jaiotzeData) {
+    Langile(String DNI, String izena, String abizena, int telefonoa, int lanekoTelefonoa, String email, int jaiotzeData) {
 
         this.DNI = DNI;
         this.izena = izena;
@@ -40,7 +41,7 @@ public class Langile {
 
     }
 
-    public void datuakAldatu(int DNIberria, String izenBerria, String abizenBerria, int telefonoBerria, int lanekoTelefonoBerria, String emailBerria, int jaiotzeDataBerria) {
+    public void datuakAldatu(String DNIberria, String izenBerria, String abizenBerria, int telefonoBerria, int lanekoTelefonoBerria, String emailBerria, int jaiotzeDataBerria) {
         this.DNI = DNIberria;
         this.izena = izenBerria;
         this.abizena = abizenBerria;
@@ -50,7 +51,7 @@ public class Langile {
         this.jaiotzeData = jaiotzeDataBerria;
     }
 
-    public void ikusiIkastariak(){
+    public void ikusiIkastaroak(){
         System.out.println("Ikastaroak: ");
         for (int i =0;i<kurtsoak.size();i+=2){
             System.out.println("ID: "+kurtsoak.get(i));
@@ -58,17 +59,27 @@ public class Langile {
         }
     }
 
-    public void gehituIkastaroa(int idIkastaroa, String ikastaroIzena){
-        kurtsoak.add(idIkastaroa, ikastaroIzena);
+    public void gehituIkastaroa(int idIkastaroa, String ikastaroIzena, int hasieraData, int bukaeraData, String egoera){
+        kurtsoak.add(idIkastaroa);
+        kurtsoak.add(ikastaroIzena);
+
+
+        Ikastaroak ikastaroak = new Ikastaroak();
+        ikastaroak.gehituIkastaroak(idIkastaroa,this.DNI, hasieraData, bukaeraData, egoera);
+
     }
 
-    public void borratuIkastaroa(int idIkastaroa){
+    public void kenduIkastaroa(int idIkastaroa){
         for (int i =0;i<kurtsoak.size();i+=2){
             if (kurtsoak.get(i).equals(idIkastaroa)) {
-                kurtsoak.remove(i);
                 kurtsoak.remove(i + 1);
+                kurtsoak.remove(i);
+
             }
         }
+        Ikastaroak ikastaroak = new Ikastaroak();
+        ikastaroak.borratuIkastaroak(idIkastaroa,this.DNI);
+
     }
 
 }
