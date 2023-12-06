@@ -9,7 +9,7 @@ public class PuntuSistema {
 
 
 
-        System.out.println();
+        System.out.println("Puntuak: "+puntuak);
     }
 
 

@@ -31,30 +31,37 @@ public class Bidai {
     }
 
     public int getOkupazioa(){
+
         return this.okupazioa;
     }
 
     public int getIdBidaia(){
+
         return this.idBidaia;
     }
 
     public void gehituPertsona(){
+
         okupazioa++;
     }
 
     public void setBalorazioa(int nota){
+
         balorazioa+=nota;
     }
 
     public float getBalorazioa(){
+
         return this.balorazioa/this.okupazioa;
     }
 
     public String getBidaiMota(){
+
         return this.bidaiMota;
     }
 
     public float getDistantzia(){
+
         return this.distantzia;
     }
 

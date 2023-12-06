@@ -76,7 +76,7 @@ public class Erabiltzaileak {
         this.puntuak+=zenbat;
     }
 
-    
+
 
 
 
