@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration; // Importa la clase Duration
 
-public class ComprarEntradasBot {
+public class Main {
     public static void main(String[] args) {
         // Ruta al driver de Chrome. Asegúrate de tenerlo descargado.
         System.setProperty("webdriver.chrome.driver", "/home/manex/Descargas/chromedriver_linux64/chromedrive");
