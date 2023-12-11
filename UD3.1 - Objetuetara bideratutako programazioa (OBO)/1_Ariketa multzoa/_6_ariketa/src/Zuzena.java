@@ -65,7 +65,7 @@ public class Zuzena {
     }
 
     public float luzeena(Zuzena zuzena){
-        float luzeera2 = getLuzera();
+        float luzeera2 = zuzena.getLuzera();
 
         if (this.zabalera > luzeera2){
             return this.zabalera;
