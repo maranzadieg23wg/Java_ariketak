@@ -17,4 +17,18 @@ public class KontuKorronte {
     }
 
 
+    public void diruGordailua(float gehituDirua){
+        this.dirua+=gehituDirua;
+    }
+
+    public void diruaKendu(float kenduDirua){
+        this.dirua-=kenduDirua;
+    }
+
+    public void erakutsiKontua(){
+        System.out.println("Izena: "+izena);
+        System.out.println("Dirua: "+dirua);
+    }
+
+
 }
