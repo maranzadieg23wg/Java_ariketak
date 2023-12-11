@@ -1,23 +1,26 @@
 from selenium import webdriver
 import time
 
+
+denbora =5
+
 web = webdriver.Chrome()
 web.get("https://www.bataplandisco.com/tickets/#/es/event/bataplan-university-we-love-thursdays-1--143840")
-time.sleep(5)
+time.sleep(denbora)
 
 entradas = web.find_element("xpath", "/html/body/div[8]/div/div[3]/div/div/div/article/div/div/div/div/div/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[1]/section/div/div")
 entradas.click()
-time.sleep(5)
+time.sleep(denbora)
 
 # Cantidad de entradas
 cantidad =web.find_element("xpath", "/html/body/div[13]/div/div/div/div[1]/div/div[2]/div/button[2]")
 cantidad.click()
-time.sleep(5)
+time.sleep(denbora)
 
 
 jarraitu = web.find_element("xpath", "/html/body/div[13]/div/div/div/div[2]/div[4]/div/div[2]")
 jarraitu.click()
-time.sleep(5)
+time.sleep(denbora)
 
 inputName = web.find_element("xpath", "/html/body/div[13]/div/div/div/div[1]/div/div/div/form/div/div/div[1]/input")
 inputName.click()
@@ -37,25 +40,27 @@ inputEmail2.send_keys("manexae@gmail.com")
 
 jarraitu2 = web.find_element("xpath", "/html/body/div[13]/div/div/div/div[2]/div[4]/div/div[2]")
 jarraitu2.click()
-time.sleep(5)
+time.sleep(denbora+3)
 
+#Fallatzen du zenbakiak beti aldatzen da
 # Tarjeta de crédito
-zenbakia = web.find_element("xpath", "/html/body/div/input")
+
+zenbakia = web.find_element("xpath", '//*[contains(@id="adyen-checkout-encryptedCardNumber")]')
 zenbakia.click()
 zenbakia.send_keys("12345")
 
 # Fecha de caducidad de la tarjeta
-data = web.find_element("xpath", "/html/body/div/input")
+data = web.find_element("xpath", '//*[contains(@id="adyen-checkout-encryptedExpiryDate")]')
 data.click()
 data.send_keys("0505")
 
 # SVC
-SVC = web.find_element("xpath", "/html/body/div/input")
+SVC = web.find_element("xpath", '//*[contains(@id="adyen-checkout-encryptedSecurityCode")]')
 SVC.click()
 SVC.send_keys("050")
 
 # Nombre
-izena = web.find_element("xpath", "/html/body/div/input")
+izena = web.find_element("xpath", '//*[contains(@id="adyen-checkout-holderName")]')
 izena.click()
 izena.send_keys("Proba J.")
 
