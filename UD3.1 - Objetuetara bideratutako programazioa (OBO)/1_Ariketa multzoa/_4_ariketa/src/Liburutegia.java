@@ -24,7 +24,7 @@ public class Liburutegia {
     }
 
     public static boolean bostDitu(int zenbakia){
-        int zenbat = (int)(Math.log10(zenbakia)+1);
+        int zenbat = digituKopurua(zenbakia);
 
         if (zenbat>=5){
             //System.out.println("Zenbaki honek 5 digitu baino gehiago ditu.");
