@@ -36,5 +36,11 @@ public class Puntua {
 
     }
 
+    public int getzX(){
+        return  zX;
+    }
 
+    public int getzY() {
+        return zY;
+    }
 }
