@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class ComprarEntradasBot {
     public static void main(String[] args) {
         // Ruta al driver de Chrome. Asegúrate de tenerlo descargado.
-        System.setProperty("webdriver.chrome.driver", "ruta/al/driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/home/manex/Descargas/chromedriver_linux64/chromedrive");
 
         // Inicializar el WebDriver (ChromeDriver en este caso)
         WebDriver driver = new ChromeDriver();
