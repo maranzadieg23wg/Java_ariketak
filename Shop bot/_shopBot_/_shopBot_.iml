@@ -20,5 +20,6 @@
         <jarDirectory url="file://$USER_HOME$/Downloads/selenium-java-4.15.0" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="selenium-java-4.15" level="project" />
   </component>
 </module>
