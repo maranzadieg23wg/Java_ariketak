@@ -8,13 +8,18 @@ public class Zuzena {
     int zY;
 
 
-    Zuzena(float zabalera, int zX, int zY){
+    Zuzena(float zabalera, Puntua puntua){
 
         this.zabalera = zabalera;
-        this.zX=zX;
-        this.zY=zY;
+
+        this.zX = puntua.getzX();
+        this.zY=puntua.getzY();
+
 
     }
+    
+
+
 
 
 }
