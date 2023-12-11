@@ -1,0 +1,9 @@
+sudo mv '/home/manex/Descargas/ideaIC-2023.3' /opt/idea; 
+sudo cat /usr/share/applications/idea.desktop > [Desktop Entry]
+Type=Application
+Icon=/opt/idea/bin/idea.svg
+Name=IntelliJ
+Exec=/opt/idea/bin/idea.sh
+GenericName=IDE IntelliJ
+Categories=Develoment;IDE
+Keywords=Intellj,idea
