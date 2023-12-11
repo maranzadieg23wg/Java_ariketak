@@ -1,0 +1,24 @@
+Ariketa	Atala	Puntuazioa	Nota	Oharra
+Ariketa 1	 	0,75	0,75	 
+Ariketa 2	 	0,75	0	 
+Ariketa 3	 	0,75	0,45	 
+Ariketa 4	 	0,75	0,3	 
+Ariketa 5	Langileak irabazitako dirua	0,25	0,25	Ondo
+ 	25 urte baino gehiago	0,5	0,25	Batezbestekoa gordetzeko aldagaia ezin da int izan, bestela zatiketa osoa izango da
+ 	Proiektua irabaziarazi	0,5	0,5	Ondo
+Ariketa 6	Zenbakiak irakurri eta gorde	0,25	0,15	Ez duzu emandako ausazko funtzioa erabili, zuk erabilitakoak 0 eta 49 arteko zenbakiak sortzen ditu.
+ 	Errepikatzen direnen detekzioa	0,5	0,4	Errepikatua dagoen begiratzeko ez da oso eraginkorra, baina funtzionatzen du.
+ 	Asmatutakoen kopurua	0,5	0,5	Ondo
+Ariketa 7	Matrizea irakurri	0,25	0,25	Ondo
+ 	Goiko matrizea	0,5	0	Ez dago ondo edo bukatu gabe
+ 	Beheko matrizea	0,5	0	Ez dago ondo edo bukatu gabe
+ 	Matrizea erakustea	0,25	0,25	Ondo
+Ariketa 8	Matrizea inprimatzeko azpiprograma	0,25	0,25	Ondo
+ 	Menu sistema	0,25	0,25	Ondo, baina switch-case batekin hobeto egongo litzateke.
+ 	Errenkada eskuinera	0,25	0,15	Ondo, baina ez da azpiprograma
+ 	Errenkada ezkerrera	0,25	0,15	Ondo, baina ez da azpiprograma
+ 	Zutabea behera	0,25	0,15	Ondo, baina ez da azpiprograma
+ 	Zutabea gora	0,25	0,15	Ondo, baina ez da azpiprograma
+Ariketa 9	Array-ak betetzea eta erakustea	0,75	0,75	Ondo
+ 	Eramaten direnen kalkulua	0,75	0,75	Ondo
+Guztira	10	6,65	
