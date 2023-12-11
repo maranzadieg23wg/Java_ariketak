@@ -19,10 +19,14 @@ public class Zuzena {
         this.zX = puntua.getzX();
         this.zY=puntua.getzY();
 
+
+
+    }
+
+    public void bigarrenPuntua(Puntua puntua){
         //Bigarren puntua
         this.zX2 = puntua.getzX();
         this.zY2=puntua.getzY();
-
     }
 
     public boolean horizontalaDa(){
