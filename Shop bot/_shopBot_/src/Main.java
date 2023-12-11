@@ -18,7 +18,7 @@ public class Main {
         WebDriverWait wait = new WebDriverWait(driver, timeout);
         //WebDriverWait wait = new WebDriverWait(driver, 10); No funciona
 
-
+        
         // Navegar a la página de las entradas
         driver.get("https://www.bataplandisco.com/tickets/#/es/event/bataplan-university-electro-latino--143322");
 
