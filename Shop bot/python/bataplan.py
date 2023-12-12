@@ -47,7 +47,7 @@ time.sleep(denbora+3)
 
 time.sleep(260)
 
-
+'''
 #Fallatzen du zenbakiak beti aldatzen da
 # Tarjeta de crédito
 
@@ -72,3 +72,4 @@ izena.send_keys("Proba J.")
 
 jarraitu3 = web.find_element("xpath", "/html/body/div[13]/div/div/div/div[2]/div[4]/div/div[2]")
 jarraitu3.click()
+'''
