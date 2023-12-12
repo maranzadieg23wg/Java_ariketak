@@ -2,11 +2,11 @@ from selenium import webdriver
 import time
 
 
-denbora =5
+denbora =1
 
 web = webdriver.Chrome()
 web.get("https://www.bataplandisco.com/tickets/#/es/event/bataplan-university-we-love-thursdays-1--143840")
-time.sleep(denbora)
+time.sleep(denbora+2)
 
 entradas = web.find_element("xpath", "/html/body/div[8]/div/div[3]/div/div/div/article/div/div/div/div/div/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[1]/section/div/div")
 entradas.click()
