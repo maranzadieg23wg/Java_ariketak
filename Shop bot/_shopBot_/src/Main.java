@@ -4,16 +4,21 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration; // Importa la clase Duration
 
-public class ComprarEntradasBot {
+public class Main {
     public static void main(String[] args) {
         // Ruta al driver de Chrome. Asegúrate de tenerlo descargado.
-        System.setProperty("webdriver.chrome.driver", "ruta/al/driver/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/home/manex/Descargas/chromedriver_linux64/chromedrive");
 
         // Inicializar el WebDriver (ChromeDriver en este caso)
         WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        // Utiliza Duration para especificar el tiempo de espera
+        Duration timeout = Duration.ofSeconds(10);
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        //WebDriverWait wait = new WebDriverWait(driver, 10); No funciona
 
+        
         // Navegar a la página de las entradas
         driver.get("https://www.bataplandisco.com/tickets/#/es/event/bataplan-university-electro-latino--143322");
 
