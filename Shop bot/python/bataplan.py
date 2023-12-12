@@ -42,6 +42,12 @@ jarraitu2 = web.find_element("xpath", "/html/body/div[13]/div/div/div/div[2]/div
 jarraitu2.click()
 time.sleep(denbora+3)
 
+
+
+
+time.sleep(260)
+
+
 #Fallatzen du zenbakiak beti aldatzen da
 # Tarjeta de crédito
 
