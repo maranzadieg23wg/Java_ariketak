@@ -71,10 +71,10 @@ public class Zuzena {
 
         if (this.getLuzera() > luzeera2){
             //return this.getLuzera();
-            return "Zuzena1";
+            return this;
         }else {
             //return luzeera2;
-            return "Zuzena2";
+            return z;
 
         }
     }

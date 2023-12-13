@@ -2,21 +2,21 @@ public class KontuKorronte {
 
 
     int id;
-    //String izena;
+    Pertsona pertsona;
     float dirua;
 
-    KontuKorronte (int id/*,String izena*/){
+    public KontuKorronte (int id,Pertsona pertsona){
 
         this.id=id;
-        //this.izena=izena;
+        this.pertsona=pertsona;
 
         this.dirua=0;
     }
 
-    KontuKorronte(int id/*, String izena*/, float dirua){
+    public KontuKorronte(int id, Pertsona pertsona, float dirua){
 
         this.id=id;
-        //this.izena=izena;
+        this.pertsona=pertsona;
 
         this.dirua=dirua;
     }
@@ -33,7 +33,7 @@ public class KontuKorronte {
     }
 
     public void erakutsiKontua(){
-        //System.out.println("Izena: "+izena);
+        System.out.println("Izena: "+pertsona.getIzena());
 
         System.out.println("Dirua: "+dirua);
     }
