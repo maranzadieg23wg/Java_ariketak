@@ -11,7 +11,7 @@ public class Zuzena {
     int zY2;
 
 
-    Zuzena(float zabalera, Puntua puntua){
+    public Zuzena(float zabalera, Puntua puntua){
 
         this.zabalera = zabalera;
 
@@ -67,9 +67,8 @@ public class Zuzena {
         int yTotal = this.zY-this.zY2;
 
         float guztira = (yTotal*yTotal)+(xTotal*xTotal);
-        double pitagoras = Math.sqrt(guztira);
+        return Math.sqrt(guztira);
 
-        return pitagoras;
     }
 
     public double luzeena(Zuzena zuzena){
@@ -85,7 +84,7 @@ public class Zuzena {
     public void erakutsiZuzena(){
         System.out.println("X: "+zX);
         System.out.println("Y: "+zY);
-        System.out.println("Luzeera: "+zabalera);
+        System.out.println("Luzeera: "+getLuzera());
     }
 
 
