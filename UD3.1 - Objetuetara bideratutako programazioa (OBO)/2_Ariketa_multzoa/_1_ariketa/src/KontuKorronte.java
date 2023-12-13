@@ -1,16 +1,21 @@
 public class KontuKorronte {
 
 
+    int id;
     String izena;
     float dirua;
 
-    KontuKorronte (String izena){
+    KontuKorronte (int id,String izena){
+
+        this.id=id;
         this.izena=izena;
 
         this.dirua=0;
     }
 
-    KontuKorronte(String izena, float dirua){
+    KontuKorronte(int id,String izena, float dirua){
+
+        this.id=id;
         this.izena=izena;
 
         this.dirua=dirua;
