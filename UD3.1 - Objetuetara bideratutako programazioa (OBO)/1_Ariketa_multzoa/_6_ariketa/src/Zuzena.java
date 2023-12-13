@@ -63,17 +63,19 @@ public class Zuzena {
 
     }
 
-    //Ez du funtzionatzen luzeena
-    public double luzeena(Zuzena zuzena){
-        double luzeera2 = zuzena.getLuzera();
+    public Object luzeena(Zuzena z){
+        double luzeera2 = z.getLuzera();
 
         /*System.out.println("Luzeera: "+this.getLuzera());
         System.out.println("Luzeera2: "+luzeera2);*/
 
         if (this.getLuzera() > luzeera2){
-            return this.getLuzera();
+            //return this.getLuzera();
+            return "Zuzena1";
         }else {
-            return luzeera2;
+            //return luzeera2;
+            return "Zuzena2";
+
         }
     }
 
