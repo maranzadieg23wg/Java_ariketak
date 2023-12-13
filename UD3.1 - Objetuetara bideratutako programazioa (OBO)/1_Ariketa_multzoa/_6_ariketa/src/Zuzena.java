@@ -63,8 +63,8 @@ public class Zuzena {
     public double getLuzera(){
 
 
-        int xTotal = this.zX-this.zX2;
-        int yTotal = this.zY-this.zY2;
+        int xTotal = zX-zX2;
+        int yTotal = zY-zY2;
 
         float guztira = (yTotal*yTotal)+(xTotal*xTotal);
         return Math.sqrt(guztira);
@@ -74,8 +74,11 @@ public class Zuzena {
     public double luzeena(Zuzena zuzena){
         double luzeera2 = zuzena.getLuzera();
 
-        if (this.zabalera > luzeera2){
-            return this.zabalera;
+        /*System.out.println("Luzeera: "+this.getLuzera());
+        System.out.println("Luzeera2: "+luzeera2);*/
+
+        if (this.getLuzera() > luzeera2){
+            return this.getLuzera();
         }else {
             return luzeera2;
         }
