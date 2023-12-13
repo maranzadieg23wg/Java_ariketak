@@ -11,7 +11,7 @@ public class Zuzena {
     int zY2;
 
 
-    Zuzena(float zabalera, Puntua puntua){
+    public Zuzena(float zabalera, Puntua puntua){
 
         this.zabalera = zabalera;
 
@@ -30,23 +30,15 @@ public class Zuzena {
     }
 
     public boolean horizontalaDa(){
-        boolean horizontala=false;
 
-        if (zX == zX2){
-            horizontala =true;
-        }
+        return zX == zX2;
 
-        return horizontala;
     }
 
     public boolean bertikalaDa(){
-        boolean bertikala=false;
 
-        if (zY == zY2){
-            bertikala =true;
-        }
+        return zY == zY2;
 
-        return bertikala;
     }
 
     public int altuena(){
@@ -60,15 +52,26 @@ public class Zuzena {
 
     }
 
-    public float getLuzera(){
-        return zabalera;
+    public double getLuzera(){
+
+
+        int xTotal = zX-zX2;
+        int yTotal = zY-zY2;
+
+        float guztira = (yTotal*yTotal)+(xTotal*xTotal);
+        return Math.sqrt(guztira);
+
     }
 
-    public float luzeena(Zuzena zuzena){
-        float luzeera2 = zuzena.getLuzera();
+    //Ez du funtzionatzen luzeena
+    public double luzeena(Zuzena zuzena){
+        double luzeera2 = zuzena.getLuzera();
 
-        if (this.zabalera > luzeera2){
-            return this.zabalera;
+        /*System.out.println("Luzeera: "+this.getLuzera());
+        System.out.println("Luzeera2: "+luzeera2);*/
+
+        if (this.getLuzera() > luzeera2){
+            return this.getLuzera();
         }else {
             return luzeera2;
         }
@@ -77,7 +80,7 @@ public class Zuzena {
     public void erakutsiZuzena(){
         System.out.println("X: "+zX);
         System.out.println("Y: "+zY);
-        System.out.println("Luzeera: "+zabalera);
+        System.out.println("Luzeera: "+getLuzera());
     }
 
 
