@@ -34,6 +34,8 @@ public class KontuKorronte {
 
     public void erakutsiKontua(){
         System.out.println("Izena: "+pertsona.getIzena());
+        System.out.println("Nan: "+pertsona.getDNI());
+        System.out.println("Adina: "+pertsona.getAdina());
 
         System.out.println("Dirua: "+dirua);
     }

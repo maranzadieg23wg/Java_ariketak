@@ -14,6 +14,14 @@ public class Banku {
 
     }
 
+    public void gehituKontuKorronte(KontuKorronte korrontea){
+        kontuKorronteLista.add(korrontea);
+    }
+
+    public void kenduKontuKorronte(KontuKorronte korrontea){
+        kontuKorronteLista.remove(korrontea);
+    }
+
 
 
 
