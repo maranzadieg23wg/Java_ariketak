@@ -11,15 +11,14 @@ public class Pertsona {
         this.adina=adina;
     }
 
+
     public String getIzena(){
         return this.izena;
     }
     public String getDNI(){
         return this.DNI;
     }
-    public int getAdina(){
-        return this.adina;
-    }
+    public int getAdina(){return this.adina;}
 
 
 

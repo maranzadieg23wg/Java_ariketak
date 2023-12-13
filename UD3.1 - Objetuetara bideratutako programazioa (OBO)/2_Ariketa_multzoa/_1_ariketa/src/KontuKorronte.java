@@ -18,10 +18,12 @@ public class KontuKorronte {
 
 
     public void diruGordailua(float gehituDirua){
+
         this.dirua+=gehituDirua;
     }
 
     public void diruaKendu(float kenduDirua){
+
         this.dirua-=kenduDirua;
     }
 
