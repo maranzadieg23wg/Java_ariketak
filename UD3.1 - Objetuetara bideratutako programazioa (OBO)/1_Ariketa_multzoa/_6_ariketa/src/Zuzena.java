@@ -60,12 +60,20 @@ public class Zuzena {
 
     }
 
-    public float getLuzera(){
-        return zabalera;
+    public double getLuzera(){
+
+
+        int xTotal = this.zX-this.zX2;
+        int yTotal = this.zY-this.zY2;
+
+        float guztira = (yTotal*yTotal)+(xTotal*xTotal);
+        double pitagoras = Math.sqrt(guztira);
+
+        return pitagoras;
     }
 
-    public float luzeena(Zuzena zuzena){
-        float luzeera2 = zuzena.getLuzera();
+    public double luzeena(Zuzena zuzena){
+        double luzeera2 = zuzena.getLuzera();
 
         if (this.zabalera > luzeera2){
             return this.zabalera;
