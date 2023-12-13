@@ -30,23 +30,15 @@ public class Zuzena {
     }
 
     public boolean horizontalaDa(){
-        boolean horizontala=false;
 
-        if (zX == zX2){
-            horizontala =true;
-        }
+        return zX == zX2;
 
-        return horizontala;
     }
 
     public boolean bertikalaDa(){
-        boolean bertikala=false;
 
-        if (zY == zY2){
-            bertikala =true;
-        }
+        return zY == zY2;
 
-        return bertikala;
     }
 
     public int altuena(){
@@ -71,6 +63,7 @@ public class Zuzena {
 
     }
 
+    //Ez du funtzionatzen luzeena
     public double luzeena(Zuzena zuzena){
         double luzeera2 = zuzena.getLuzera();
 
