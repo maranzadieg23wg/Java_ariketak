@@ -22,6 +22,10 @@ public class Banku {
         kontuKorronteLista.remove(korrontea);
     }
 
+    public void ikusiKontuKorronte(KontuKorronte korrontea){
+        korrontea.erakutsiKontua();
+    }
+
 
 
 
