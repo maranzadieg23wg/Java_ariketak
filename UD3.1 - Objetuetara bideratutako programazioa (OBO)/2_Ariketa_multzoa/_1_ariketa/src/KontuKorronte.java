@@ -34,7 +34,7 @@ public class KontuKorronte {
 
     public void erakutsiKontua(){
         //System.out.println("Izena: "+izena);
-        
+
         System.out.println("Dirua: "+dirua);
     }
 
