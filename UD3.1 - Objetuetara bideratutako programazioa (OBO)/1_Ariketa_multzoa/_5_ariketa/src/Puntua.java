@@ -1,11 +1,11 @@
 public class Puntua {
 
 
-    int zX;
+    private int zX;
 
-    int zY;
+    private int zY;
 
-    Puntua(int zX, int zY){
+    public Puntua(int zX, int zY){
         this.zX=zX;
         this.zY=zY;
     }
