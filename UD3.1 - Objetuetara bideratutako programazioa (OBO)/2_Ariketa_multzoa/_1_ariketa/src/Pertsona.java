@@ -5,7 +5,7 @@ public class Pertsona {
     int adina;
 
 
-    Pertsona(String izena, String DNI, int adina){
+    public Pertsona(String izena, String DNI, int adina){
         this.izena=izena;
         this.DNI=DNI;
         this.adina=adina;
