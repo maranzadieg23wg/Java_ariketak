@@ -18,7 +18,6 @@ public class Dado {
     }
 
     public void erakutsi(){
-        System.out.println("--------------------------------");
         System.out.println("Azkeneko zenbakia: "+azkZenbakia);
         System.out.println("Jaurtiketa kopurua: "+jaurtiketaKop);
         System.out.println("--------------------------------");

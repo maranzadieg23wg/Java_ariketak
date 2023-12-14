@@ -17,5 +17,11 @@ public class Jokalari {
         System.out.println("Zenbakia: "+this.d1.getAzkZenbakia());
     }
 
+    public void erakutsi(){
+        System.out.println("--------------------------------");
+        System.out.println("Izena: "+izena);
+        this.d1.erakutsi();
+    }
+
 
 }
