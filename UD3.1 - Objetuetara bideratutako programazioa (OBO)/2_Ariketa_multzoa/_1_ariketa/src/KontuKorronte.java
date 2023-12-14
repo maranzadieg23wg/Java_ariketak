@@ -60,7 +60,7 @@ public class KontuKorronte {
         System.out.println("Adina: "+pertsona.getAdina());
 
         System.out.println("Dirua: "+dirua);
-        System.out.println("Zenbaki gorritan "+zenbakiGorrian);
+        System.out.println("Zenbaki gorritan: "+zenbakiGorrian);
         System.out.println("----------------------------------");
 
     }
