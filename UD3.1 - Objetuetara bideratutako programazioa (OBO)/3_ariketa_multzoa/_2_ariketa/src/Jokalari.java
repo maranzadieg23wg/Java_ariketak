@@ -18,6 +18,13 @@ public class Jokalari {
         return this.d1.getAzkZenbakia();
     }
 
+    public int getAzkZenbakia(){
+        return this.d1.getAzkZenbakia();
+    }
+    public String getIzena(){
+        return this.izena;
+    }
+
     public void erakutsi(){
         System.out.println("--------------------------------");
         System.out.println("Izena: "+izena);
