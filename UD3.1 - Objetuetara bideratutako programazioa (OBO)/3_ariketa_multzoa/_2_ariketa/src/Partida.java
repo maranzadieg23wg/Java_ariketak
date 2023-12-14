@@ -41,6 +41,9 @@ public class Partida {
         int puntuakOrdenatuta= max(puntuak);
 
         //Ikusten dugu zeinek irabazi egin duen konparatzen listako lehenengo zenbakia puntuak listan dauden zenbakiekin.
+        System.out.println("--------------------------------");
+        System.out.println("PUNTU GEHIEN: ");
+
         if (puntuak[0]==puntuakOrdenatuta){
             System.out.println("Irabazlea da: "+j1.getIzena());
             System.out.println("Puntuak: "+puntuak[0]);
@@ -52,7 +55,10 @@ public class Partida {
             System.out.println("Puntuak: " + puntuak[2]);
         }
 
+
         int seiMax = max(sei);
+        System.out.println("--------------------------------");
+        System.out.println("SEI GEHIENEZ ATERATA: ");
 
         if (sei[0]==seiMax){
             System.out.println("Irabazlea da: "+j1.getIzena());
