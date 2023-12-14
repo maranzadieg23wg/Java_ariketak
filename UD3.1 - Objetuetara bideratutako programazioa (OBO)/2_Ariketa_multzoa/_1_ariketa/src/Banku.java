@@ -5,9 +5,9 @@ public class Banku {
 
     String izena;
 
-    List<KontuKorronte> kontuKorronteLista;
+    ArrayList<KontuKorronte> kontuKorronteLista;
 
-    Banku(String izena){
+    public Banku(String izena){
         this.izena=izena;
 
         kontuKorronteLista = new ArrayList<>();
@@ -19,12 +19,21 @@ public class Banku {
     }
 
     public void kenduKontuKorronte(KontuKorronte korrontea){
+
         kontuKorronteLista.remove(korrontea);
     }
 
     public void ikusiKontuKorronte(KontuKorronte korrontea){
+
         korrontea.erakutsiKontua();
     }
+
+    public void listaKontuKorronte(){
+        for (int i =0;i< kontuKorronteLista.size();i++){
+            kontuKorronteLista.get(i).erakutsiKontua();
+        }
+    }
+
 
 
 
