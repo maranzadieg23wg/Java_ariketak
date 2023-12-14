@@ -13,10 +13,6 @@ public class Jokalari {
         this.d1.jaurti();
     }
 
-    public int jasoBalioa(){
-        //System.out.println("Zenbakia: "+);
-        return this.d1.getAzkZenbakia();
-    }
 
     public int getAzkZenbakia(){
         return this.d1.getAzkZenbakia();
