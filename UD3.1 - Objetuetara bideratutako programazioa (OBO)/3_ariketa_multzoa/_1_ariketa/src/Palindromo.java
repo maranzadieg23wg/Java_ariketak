@@ -1,23 +1,24 @@
 public class Palindromo {
 
-    
-    long zenbaki;
 
-    Palindromo(){
-        this.zenbaki=0;
+
+
+    String karaktere;
+
+    Palindromo(String karaktere){
+        this.karaktere=karaktere;
     }
 
 
-
-    public boolean palindromoaDa(int zenbaki){
+    public boolean palindromoaDa(){
 
         boolean palindromo = false;
 
 
-        for (int i =0;i<digituKop(zenbaki);i++){
-            if (digiPosN(zenbaki,i) !=digiPosN(zenbaki,digituKop(zenbaki)-i-1)){
+        for (int i =0;i<digituKop();i++){
+            if (digiPosN(i) !=digiPosN(digituKop()-i-1)){
                 palindromo = false;
-                i=digituKop(zenbaki)+1;
+                i=digituKop()+1;
             }else {
                 palindromo = true;
             }
@@ -29,17 +30,19 @@ public class Palindromo {
 
 
 
-    public int digituKop(int zenbaki){
 
-        return (int)(Math.log10(zenbaki)+1);
+    public int digituKop(){
+        return karaktere.length();
     }
 
 
-    public int digiPosN(long zenbaki,int n){
 
-        String s = String.valueOf(zenbaki);
-        return s.charAt(n);
+
+    public char digiPosN(int n){
+
+        return karaktere.charAt(n);
     }
+
 
 
 }

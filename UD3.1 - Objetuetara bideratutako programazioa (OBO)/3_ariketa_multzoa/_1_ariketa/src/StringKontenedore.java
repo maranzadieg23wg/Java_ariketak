@@ -2,6 +2,8 @@ public class StringKontenedore {
     private String karakterea;
     private int aldaketa;
 
+    private Palindromo palindromo;
+
     public StringKontenedore(String karakterea){
         this.karakterea=karakterea;
         this.aldaketa =0;
@@ -18,6 +20,15 @@ public class StringKontenedore {
     public boolean berdinaDa(StringKontenedore stringKontenedore){
         return this.karakterea.equals(stringKontenedore.karakterea);
     }
+
+
+    public boolean palindromoaDa(){
+        String zuriuneGabe = karakterea.replace(" ","");
+        this.palindromo = new Palindromo(zuriuneGabe);
+        return this.palindromo.palindromoaDa();
+    }
+
+
 
 
 }
