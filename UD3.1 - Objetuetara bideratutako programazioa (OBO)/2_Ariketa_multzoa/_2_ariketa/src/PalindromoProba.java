@@ -8,7 +8,7 @@ public class PalindromoProba {
         System.out.println(p1.digiPosN(0));
         System.out.println(p1.digituKop());
         System.out.println(p1.palindromoaDa());
-        
+
 
 
 
