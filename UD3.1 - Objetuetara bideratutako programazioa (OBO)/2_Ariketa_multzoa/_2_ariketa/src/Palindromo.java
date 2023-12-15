@@ -18,18 +18,27 @@ public class Palindromo {
 
         boolean palindromo = false;
 
-        char [] lista = new char[digituKop()];
-
-        for (int i =0;i<digituKop()/2;i++){
-            lista[i]= digiPosN(i);
-        }
-        //Ikusteko nola dagoen lista
-        /*for (int i =0;i<digituKop()/2;i++){
-            System.out.print(lista[i]+" ");
-        }*/
 
         for (int i =0;i<digituKop();i++){
             if (digiPosN(i) !=digiPosN(digituKop()-i-1)){
+                palindromo = false;
+                i=digituKop()+1;
+            }else {
+                palindromo = true;
+            }
+        }
+
+        return palindromo;
+
+    }
+
+    public boolean palindromoaDa(int zenbaki){
+
+        boolean palindromo = false;
+
+
+        for (int i =0;i<digituKop();i++){
+            if (digiPosN(zenbaki,i) !=digiPosN(zenbaki,digituKop(zenbaki)-i-1)){
                 palindromo = false;
                 i=digituKop()+1;
             }else {
@@ -47,6 +56,7 @@ public class Palindromo {
     }
 
     public int digituKop(int zenbaki){
+
         return (int)(Math.log10(zenbaki)+1);
     }
 
