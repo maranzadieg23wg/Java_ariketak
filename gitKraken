@@ -1,0 +1,12 @@
+sudo mv '/home/manex/Descargas/gitkraken-amd64/gitkraken' /opt/gitkraken;
+sudo nano /usr/share/applications/gitkraken.desktop > 
+[Desktop Entry]
+Type=Application
+Icon=/opt/gitkraken/gitkraken.png
+Name=GitKraken
+Exec=/opt/idea/gitkraken/gitkraken
+GenericName=GitKraken
+Categories=Develoment;Git;Kraken
+Keywords=GitKraken;Kraken;Git
+-----------------------
+Sudo snap install gitkraken --classic
