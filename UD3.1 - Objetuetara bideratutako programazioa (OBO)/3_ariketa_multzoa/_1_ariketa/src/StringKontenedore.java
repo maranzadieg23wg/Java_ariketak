@@ -45,6 +45,25 @@ public class StringKontenedore {
         return aldatuta;
     }
 
+    public String mugituEskubira(int zenbat, String aldatu){
+        String aldatuta ="";
+
+        for (int e =0;e<zenbat;e++){
+            aldatuta +=aldatu;
+        }
+        for (int i =0;i<this.karakterea.length()-zenbat;i++){
+
+            String temp = String.valueOf(this.karakterea.charAt(i));
+            aldatuta +=temp;
+
+
+        }
+
+
+        aldaketa++;
+        return aldatuta;
+    }
+
 
 
 
