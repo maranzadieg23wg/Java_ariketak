@@ -94,15 +94,6 @@ public class StringKontenedore {
                 return this.karakterea;
         }
 
-
-
-
-
-
-
-
-
-
         aldaketa++;
         return aldatuta;
     }
