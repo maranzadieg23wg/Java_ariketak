@@ -34,8 +34,6 @@ public class StringKontenedore {
 
             String temp = String.valueOf(this.karakterea.charAt(i));
             aldatuta +=temp;
-
-
         }
         for (int e =0;e<zenbat;e++){
             aldatuta +=aldatu;
@@ -55,14 +53,61 @@ public class StringKontenedore {
 
             String temp = String.valueOf(this.karakterea.charAt(i));
             aldatuta +=temp;
-
-
         }
 
 
         aldaketa++;
         return aldatuta;
     }
+
+    public String biratu(int zenbat, String norabidea){
+        String aldatuta ="";
+
+        switch (norabidea){
+            case "R":
+                //String-aren azkeneko "zenbat" karaktereak asieran jartzen ditu
+                for (int e =karakterea.length()-zenbat;e<karakterea.length();e++){
+                    aldatuta +=String.valueOf(this.karakterea.charAt(e));
+                }
+                //Ondoren gehitzen dio gelditzen diren beste karaktereak, eta azkeneko karaktereak ez dira gehitzen.
+                for (int i =0;i<this.karakterea.length()-zenbat;i++){
+
+                    String temp = String.valueOf(this.karakterea.charAt(i));
+                    aldatuta +=temp;
+                }
+                break;
+            case "L":
+
+                //Idazten ditu String-aren karaktere guztiak daudenak "zenbatetik" aurrera
+                for (int i =zenbat;i<this.karakterea.length();i++){
+
+                    String temp = String.valueOf(this.karakterea.charAt(i));
+                    aldatuta +=temp;
+                }
+                //Hemen geitzen saltatu egin diren karaktereak.
+                for (int e =0;e<zenbat;e++){
+                    aldatuta +=String.valueOf(this.karakterea.charAt(e));
+                }
+                break;
+            default:
+                aldaketa++;
+                return this.karakterea;
+        }
+
+
+
+
+
+
+
+
+
+
+        aldaketa++;
+        return aldatuta;
+    }
+
+
 
 
 
