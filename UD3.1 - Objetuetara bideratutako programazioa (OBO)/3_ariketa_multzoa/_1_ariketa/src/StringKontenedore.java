@@ -28,6 +28,23 @@ public class StringKontenedore {
         return this.palindromo.palindromoaDa();
     }
 
+    public String mugituEzkerrera(int zenbat, String aldatu){
+        String aldatuta ="";
+        for (int i =zenbat;i<this.karakterea.length();i++){
+
+            String temp = String.valueOf(this.karakterea.charAt(i));
+            aldatuta +=temp;
+
+
+        }
+        for (int e =0;e<zenbat;e++){
+            aldatuta +=aldatu;
+        }
+
+        aldaketa++;
+        return aldatuta;
+    }
+
 
 
 
