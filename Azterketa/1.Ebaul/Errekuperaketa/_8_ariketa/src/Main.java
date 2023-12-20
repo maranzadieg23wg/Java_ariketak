@@ -62,7 +62,7 @@ public class Main {
             }
         }
 
-        imprimatu(matrizea);
+        //imprimatu(matrizea);
         return egokia;
     }
 
