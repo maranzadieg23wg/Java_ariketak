@@ -1,16 +1,16 @@
 public class StringKontenedore {
     private String karakterea;
-    private int aldaketa;
+    private static int aldaketa;
 
     private Palindromo palindromo;
 
     public StringKontenedore(String karakterea){
         this.karakterea=karakterea;
-        this.aldaketa =0;
+        aldaketa =0;
     }
     public StringKontenedore(){
         this.karakterea="";
-        this.aldaketa =0;
+        aldaketa =0;
     }
 
     public int getAldaketa(){
