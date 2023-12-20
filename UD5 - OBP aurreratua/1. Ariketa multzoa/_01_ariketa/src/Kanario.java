@@ -1,7 +1,7 @@
 public class Kanario extends Txori {
 
 
-    float tamaina;
+    private float tamaina;
 
     public Kanario(char sexua, int adina) {
         super(sexua, adina);
@@ -19,5 +19,9 @@ public class Kanario extends Txori {
         }else {
             System.out.println("Hertaina");
         }
+    }
+
+    public void setTamaina(float tamaina){
+        this.tamaina = tamaina;
     }
 }

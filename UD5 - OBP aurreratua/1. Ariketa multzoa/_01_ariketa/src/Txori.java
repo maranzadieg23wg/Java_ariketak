@@ -2,15 +2,15 @@ public class Txori {
 
     private char sexua;
     private int adina;
-    int txoriKop;
+    static int txoriKop = 0;
 
     public Txori(char sexua, int adina) {
         this.sexua = sexua;
         this.adina = adina;
-        this.txoriKop = 0;
+        txoriKop++;
     }
 
-    public int getTxoriKop(){
+    public static int getTxoriKop(){
         return txoriKop;
     }
 
@@ -20,4 +20,6 @@ public class Txori {
         System.out.println("Adina: "+adina);
         System.out.println("------------------------------");
     }
+
+
 }
