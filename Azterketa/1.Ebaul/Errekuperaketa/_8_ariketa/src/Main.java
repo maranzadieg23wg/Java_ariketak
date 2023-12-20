@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
 
-        int matrizea [][]= new int[48][48];
+        int matrizea [][]= new int[24][24];
 
         boolean balio = true;
 
@@ -10,7 +10,7 @@ public class Main {
         for (int i =0;i<matrizea.length;i++){
             for (int e =0;e<matrizea.length;e++){
                 //Hemen aukeratzen da, datu proba
-                matrizea[i][e]= proba1(posizioa);
+                matrizea[i][e]= proba2(posizioa);
                 posizioa++;
             }
         }
