@@ -8,6 +8,8 @@ web = webdriver.Chrome()
 web.get("https://www.bataplandisco.com/tickets/#/es/event/bataplan-university-we-love-thursdays-1--143840")
 time.sleep(denbora+2)
 
+#Honen bitartez ireki egiten da erosteko ticketak, berriro egin behar da bot-a
+#document.getElementsByClassName('StyledContainer-sc-sdy56u-0 Box-sc-sdy56u-3 Card-sc-1gnzppj-0 cTlrYq kRjbYe ilqwYK')[0].click();
 entradas = web.find_element("xpath", "/html/body/div[8]/div/div[3]/div/div/div/article/div/div/div/div/div/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[1]/section/div/div")
 entradas.click()
 time.sleep(denbora)
