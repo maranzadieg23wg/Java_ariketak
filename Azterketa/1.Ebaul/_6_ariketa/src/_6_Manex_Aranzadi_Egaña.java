@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Main {
+public class _6_Manex_Aranzadi_Egaña {
     public static void main(String[] args) {
 
 
