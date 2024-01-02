@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
 
-        int luzeera = (proba2(1,0))/48;
+        int luzeera = (int)(Math.pow(proba1(1,0), 0.5));
 
         int matrizea [][]= new int[luzeera][luzeera];
 
@@ -15,7 +15,7 @@ public class Main {
 
 
 
-                matrizea[i][e]= proba2(posizioa,1);
+                matrizea[i][e]= proba1(posizioa,1);
                 posizioa++;
             }
         }
