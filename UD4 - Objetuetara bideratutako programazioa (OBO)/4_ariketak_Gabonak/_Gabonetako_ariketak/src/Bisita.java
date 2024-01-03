@@ -20,6 +20,7 @@ public class Bisita {
     }
 
     public String toString(){
+
         return bezero.toString()+"Zenbat: "+zenbat+" --  Data: "+data;
     }
 
