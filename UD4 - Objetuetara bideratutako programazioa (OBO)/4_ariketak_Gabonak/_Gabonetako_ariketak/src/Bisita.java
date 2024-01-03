@@ -1,14 +1,15 @@
-import java.util.Date;
+import java.time.LocalDate;
+
 public class Bisita {
 
     private Bezero bezero;
     private double zenbat =0;
-    private java.util.Date data;
+    private java.time.LocalDate data;
 
-    Bisita(Bezero bezero){
+    Bisita(Bezero bezero, LocalDate data){
         this.bezero = bezero;
 
-        this.data = new java.util.Date();
+        this.data = data;
     }
 
     public double kalkulatuZenbatekoa(float zenbat){
