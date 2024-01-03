@@ -18,33 +18,41 @@ public class Bezero {
         this.maila = maila;
     }
 
-    public double jasoDeskontua(float zenbat){
+    public double jasoDeskontua(/*float zenbat*/){
+
+        if (!bazkide){
+            return 0;
+        }
 
         switch (this.maila){
             case "Premium":
-                return (zenbat *0.2);
+                return (0.2);
                 //break;
 
             case "Urre":
-                return (zenbat *0.15);
+                return (0.15);
                 //break;
 
             case "Zilar":
-                return (zenbat *0.2);
+                return (0.2);
                 //break;
 
             default:
-                return zenbat;
+                return 0;
                 //break;;
         }
 
+
+
     }
+
+
 
     public String toString(){
         if (!bazkide){
-            return "Izena: "+ izena+" -- NAN: "+NAN;
+            return "Izena: "+ izena+" -- NAN: "+NAN+" -- ";
         }else {
-            return "Izena: "+ izena+" -- NAN: "+NAN+" -- Bazkide: "+bazkide+" -- Maila: "+maila;
+            return "Izena: "+ izena+" -- NAN: "+NAN+" -- Bazkide: "+bazkide+" -- Maila: "+maila+" -- ";
         }
 
     }
