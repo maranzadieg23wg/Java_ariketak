@@ -49,11 +49,13 @@ public class Bezero {
 
 
     public String toString(){
+        /*
         if (!bazkide){
             return "Izena: "+ izena+" -- NAN: "+NAN+" -- ";
         }else {
             return "Izena: "+ izena+" -- NAN: "+NAN+" -- Bazkide: "+bazkide+" -- Maila: "+maila+" -- ";
-        }
+        }*/
+        return "Izena: "+ izena+" -- NAN: "+NAN+" -- Bazkide: "+bazkide+" -- Maila: "+maila+" -- ";
 
     }
 
@@ -61,6 +63,10 @@ public class Bezero {
     public void setBazkide(boolean bazkide) {
 
         this.bazkide = bazkide;
+
+        if (!this.bazkide){
+            this.maila = null;
+        }
     }
 
     public void setMaila(String maila){
