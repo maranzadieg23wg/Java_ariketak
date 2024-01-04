@@ -8,13 +8,12 @@ public class Bisita {
 
     Bisita(Bezero bezero, LocalDate data){
         this.bezero = bezero;
-
         this.data = data;
     }
 
     public double kalkulatuZenbatekoa(float zenbat){
 
-        this.zenbat = zenbat * bezero.jasoDeskontua();
+        this.zenbat = zenbat-(zenbat * bezero.jasoDeskontua());
         return this.zenbat;
 
     }
