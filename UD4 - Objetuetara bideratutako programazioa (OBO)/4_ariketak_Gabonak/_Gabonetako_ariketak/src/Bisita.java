@@ -24,5 +24,10 @@ public class Bisita {
         return bezero.toString()+"Zenbat: "+zenbat+" --  Data: "+data;
     }
 
+    //Lortzen dugna honekin da, lortzea bezero objetua.
+    public Bezero getBezero(){
+        return bezero;
+    }
+
 
 }
