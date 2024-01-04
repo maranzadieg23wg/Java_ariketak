@@ -28,7 +28,7 @@ public class Main {
         apaindegi.gehituZenbatekoa(apaindegi.jasoBezeroa("57864321T"), LocalDate.parse("2024-01-08"), 56);
 
 
-        apaindegi.erakutsiBezeroak();
+        //apaindegi.erakutsiBezeroak();
         apaindegi.erakutsiBisitak();
 
 
