@@ -34,7 +34,7 @@ public class Bezero {
                 //break;
 
             case "Zilar":
-                return (0.2);
+                return (0.1);
                 //break;
 
             default:
@@ -64,7 +64,7 @@ public class Bezero {
     }
 
     public void setMaila(String maila){
-        
+
         this.maila = maila;
         setBazkide(true);
     }
