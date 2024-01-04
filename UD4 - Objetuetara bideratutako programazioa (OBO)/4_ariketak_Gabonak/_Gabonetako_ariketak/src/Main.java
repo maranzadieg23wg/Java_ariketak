@@ -3,18 +3,38 @@ import java.time.LocalDate;
 public class Main {
     public static void main(String[] args) {
 
-        Bezero b1 = new Bezero("Manex", "12345678R");
-        Bezero b2 = new Bezero("Manex", "12345678R", "Urre");
+        //Ileapaindegia sortzen
+        Apaindegi apaindegi = new Apaindegi(10, 20);
+
+        //Bezeroak sortzen.
+        apaindegi.gehituBezeroa("Manex", "12345678R");
+        apaindegi.gehituBezeroa("Manolo", "98765432A");
+        apaindegi.gehituBezeroa("Patxi", "57864321T");
 
 
-        Bisita bi1 = new Bisita(b2, LocalDate.parse("2020-07-06"));
+        //Bi bezeroei ezartzen maila
+        apaindegi.esleituBazkideMaila(apaindegi.jasoBezeroa("12345678R"), "Urre");
+        apaindegi.esleituBazkideMaila(apaindegi.jasoBezeroa("98765432A"), "Premium");
+
+        //Gehitzen bisitak
+        apaindegi.gehituBisita(apaindegi.jasoBezeroa("12345678R"), LocalDate.parse("2024-01-02"));
+        apaindegi.gehituBisita(apaindegi.jasoBezeroa("98765432A"), LocalDate.parse("2023-12-29"));
+        apaindegi.gehituBisita(apaindegi.jasoBezeroa("57864321T"), LocalDate.parse("2024-01-08"));
 
 
-        System.out.println(b1.toString());
-        System.out.println(b2.toString());
+        //Gehitzen zenbat ordaindu duten.
+        apaindegi.gehituZenbatekoa(apaindegi.jasoBezeroa("12345678R"), LocalDate.parse("2024-01-02"), 100);
+        apaindegi.gehituZenbatekoa(apaindegi.jasoBezeroa("98765432A"), LocalDate.parse("2023-12-29"), 22);
+        apaindegi.gehituZenbatekoa(apaindegi.jasoBezeroa("57864321T"), LocalDate.parse("2024-01-08"), 56);
 
-        System.out.println(bi1.kalkulatuZenbatekoa(100));
-        System.out.println(bi1.toString());
+
+        apaindegi.erakutsiBezeroak();
+        apaindegi.erakutsiBisitak();
+
+
+
+
+
 
 
     }
