@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Apaindegi {
@@ -90,16 +91,41 @@ public class Apaindegi {
     }
 
     public void erakutsiBezeroak(){
-        for (int i =0;i<bisitaList.length;i++){
-            Bezero bezero = (Bezero) bisitaList[i];
-            System.out.println(bezero.toString());
+        for (int i =0;i<bezeroList.length;i++){
+            /*Bisita bisita = (Bisita) bisitaList[i];
+            Bezero bezero = bisita.getBezero();
+            System.out.println(bezero.toString());*/
+            if (bezeroList[i]!=null){
+                System.out.println(bezeroList[i]);
+            }
         }
     }
 
     public void erakutsiBisitak(){
         for (int i =0;i<bisitaList.length;i++){
+            /*
             Bisita bisita = (Bisita) bisitaList[i];
-            System.out.println(bisita.toString());
+            System.out.println(bisita.toString());*/
+            if (bisitaList[i]!=null){
+                System.out.println(bisitaList[i]);
+            }
+        }
+    }
+
+
+
+    public void gehituZenbatekoa(Bezero bezero, LocalDate data, float zenbatekoa){
+        String NAN = bezero.getNAN();
+
+        for (int i =0;i<bisitaKant;i++){
+            Bisita bisita = (Bisita) bisitaList[i];
+            Bezero bezero1 = bisita.getBezero();
+            String NAN1 = bezero1.getNAN();
+
+            if (NAN.equals(NAN1) && data.equals(bisita.getData())){
+                bisita.kalkulatuZenbatekoa(zenbatekoa);
+                i = bisitaKant;
+            }
         }
     }
 
