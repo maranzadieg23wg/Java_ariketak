@@ -20,7 +20,7 @@ public class Bisita {
 
     public String toString(){
 
-        return bezero.toString()+"Zenbat: "+zenbat+" --  Data: "+data;
+        return bezero.toString()+"Zenbat: "+zenbat+" -- Data: "+data;
     }
 
     //Lortzen dugna honekin da, lortzea bezero objetua.

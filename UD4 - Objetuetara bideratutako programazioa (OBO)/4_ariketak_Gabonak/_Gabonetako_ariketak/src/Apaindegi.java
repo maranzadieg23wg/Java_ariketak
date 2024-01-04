@@ -96,6 +96,7 @@ public class Apaindegi {
             Bezero bezero = bisita.getBezero();
             System.out.println(bezero.toString());*/
             if (bezeroList[i]!=null){
+                System.out.print(i+1+". ");
                 System.out.println(bezeroList[i]);
             }
         }
@@ -107,6 +108,7 @@ public class Apaindegi {
             Bisita bisita = (Bisita) bisitaList[i];
             System.out.println(bisita.toString());*/
             if (bisitaList[i]!=null){
+                System.out.print(i+1+". ");
                 System.out.println(bisitaList[i]);
             }
         }
