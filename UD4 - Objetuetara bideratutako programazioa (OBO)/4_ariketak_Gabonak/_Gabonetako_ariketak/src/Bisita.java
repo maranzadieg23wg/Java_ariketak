@@ -29,5 +29,9 @@ public class Bisita {
         return bezero;
     }
 
+    public java.time.LocalDate getData(){
+        return data;
+    }
+
 
 }
