@@ -59,11 +59,14 @@ public class Bezero {
 
     //Esaten diogu bazkidea den a la ez
     public void setBazkide(boolean bazkide) {
+
         this.bazkide = bazkide;
     }
 
     public void setMaila(String maila){
+        
         this.maila = maila;
+        setBazkide(true);
     }
 
     public String getNAN(){
