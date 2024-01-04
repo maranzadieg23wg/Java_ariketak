@@ -2,7 +2,9 @@ import java.util.ArrayList;
 
 public class Apaindegi {
 
-    private int luzeera;
+    private int luzeeraBezero;
+    private int luzeeraBisita;
+
     private Object bezeroList[];
     private Object bisitaList[];
 
@@ -10,11 +12,12 @@ public class Apaindegi {
     private int bisitaKant;
 
 
-    Apaindegi(int luzeera){
+    Apaindegi(int luzeeraBezero, int luzeeraBisita){
 
-        this.luzeera = luzeera;
-        bezeroList = new Object[luzeera];
-        bisitaList = new Object[luzeera];
+        this.luzeeraBezero = luzeeraBezero;
+        this.luzeeraBisita = luzeeraBisita;
+        bezeroList = new Object[luzeeraBezero];
+        bisitaList = new Object[luzeeraBisita];
         bezeroKant =0;
         bisitaKant =0;
     }
@@ -58,7 +61,7 @@ public class Apaindegi {
     //Konpondu behar da. Egiin behar da funtzio bat lortzeko bezeroa.
     public ArrayList jasoBisitak(Bezero bezero){
 
-        Object listaBisita []= new Object [this.luzeera];
+        Object listaBisita []= new Object [bisitaKant];
         int kant =0;
 
         for (int i =0;i<bisitaKant;i++){
