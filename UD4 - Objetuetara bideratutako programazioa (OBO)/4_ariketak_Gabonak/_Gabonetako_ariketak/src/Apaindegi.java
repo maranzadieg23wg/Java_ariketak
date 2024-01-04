@@ -47,18 +47,33 @@ public class Apaindegi {
         //return "Ez da aurkitu "+NAN+" NANa daukagun bezeroa.";
     }
 
-    public void gehituBezeroa(Bezero bezero){
+    //Bisitak lortzen ditugu honekin
+    public Bisita jasoBisita(String NAN, LocalDate data){
+        for (int i =0;i<bisitaList.length;i++){
+            Bisita bisita = (Bisita) bisitaList[i];
+            Bezero bezero = bisita.getBezero();
+            if (bisita != null &&bezero.getNAN().equals(NAN)&&bisita.getData().equals(data)){
+                return (Bisita) bisitaList[i];
+            }
+        }
+
+        return null;
+        //return "Ez da aurkitu "+NAN+" NANa daukagun bezeroa.";
+    }
+
+    public void gehituBezeroa(String izena, String NAN){
+        Bezero bezero = new Bezero(izena, NAN);
         bezeroList[bezeroKant]= bezero;
         bezeroKant++;
     }
 
-    public void gehituBisita(String NAN, java.time.LocalDate data){
-        Bisita bisita = new Bisita(jasoBezeroa(NAN), data);
+    public void gehituBisita(Bezero bezero, java.time.LocalDate data){
+        Bisita bisita = new Bisita(bezero, data);
         bisitaList[bisitaKant]= bisita;
+        //System.out.println("Bisita: "+bisitaKant+ "Lista: "+bisitaList[bisitaKant]);
         bisitaKant++;
     }
 
-    //Konpondu behar da. Egiin behar da funtzio bat lortzeko bezeroa.
     public ArrayList jasoBisitak(Bezero bezero){
 
         Object listaBisita []= new Object [bisitaKant];
