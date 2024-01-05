@@ -1,6 +1,6 @@
 import javax.annotation.processing.SupportedSourceVersion;
 import java.util.Scanner;
-public class Main {
+public class _9_Manex_Aranzadi_Egaña {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
