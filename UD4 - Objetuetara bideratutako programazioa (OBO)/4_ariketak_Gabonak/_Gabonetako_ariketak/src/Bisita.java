@@ -13,8 +13,8 @@ public class Bisita {
 
     public double kalkulatuZenbatekoa(float zenbat){
 
-        this.zenbat = zenbat-(zenbat * bezero.jasoDeskontua()); //←eskatzen diogu bezero objetuari zein den bere deskontua, ondoren biderkatzen dugu prezioarekin jakiteko zenbat kendu behar zaion eta kentzen diogu.
-        return this.zenbat;
+        this.zenbat = zenbat-(zenbat * bezero.jasoDeskontua()); //←Eskatzen diogu bezero objetuari zein den bere deskontua, ondoren biderkatzen dugu prezioarekin jakiteko zenbat kendu behar zaion eta kentzen diogu.
+        return this.zenbat; //←Bueltatzen diogu zein izango den azkeneko prezioa.
 
     }
 
