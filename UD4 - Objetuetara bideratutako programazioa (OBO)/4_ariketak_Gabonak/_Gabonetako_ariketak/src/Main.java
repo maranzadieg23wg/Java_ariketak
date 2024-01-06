@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,20 +18,25 @@ public class Main {
         apaindegi.esleituBazkideMaila(apaindegi.jasoBezeroa("98765432A"), "Premium");
 
         //Gehitzen bisitak
-        apaindegi.gehituBisita(apaindegi.jasoBezeroa("12345678R"), LocalDate.parse("2024-01-02"));
-        apaindegi.gehituBisita(apaindegi.jasoBezeroa("98765432A"), LocalDate.parse("2023-12-29"));
-        apaindegi.gehituBisita(apaindegi.jasoBezeroa("57864321T"), LocalDate.parse("2024-01-08"));
+        apaindegi.gehituBisita(apaindegi.jasoBezeroa("12345678R"), 2024, 1,10);
+        apaindegi.gehituBisita(apaindegi.jasoBezeroa("12345678R"),  2024, 3,1);
+
+        apaindegi.gehituBisita(apaindegi.jasoBezeroa("98765432A"),  2024, 12,31);
+        apaindegi.gehituBisita(apaindegi.jasoBezeroa("57864321T"),  2024, 3,1);
 
 
         //Gehitzen zenbat ordaindu duten.
-        apaindegi.gehituZenbatekoa(apaindegi.jasoBezeroa("12345678R"), LocalDate.parse("2024-01-02"), 100);
-        apaindegi.gehituZenbatekoa(apaindegi.jasoBezeroa("98765432A"), LocalDate.parse("2023-12-29"), 22);
-        apaindegi.gehituZenbatekoa(apaindegi.jasoBezeroa("57864321T"), LocalDate.parse("2024-01-08"), 56);
+        apaindegi.gehituZenbatekoa(apaindegi.jasoBezeroa("12345678R"),  2024, 1,10, 100);
+        apaindegi.gehituZenbatekoa(apaindegi.jasoBezeroa("98765432A"), 2024, 12,31, 22);
+        apaindegi.gehituZenbatekoa(apaindegi.jasoBezeroa("57864321T"), 2024, 3,1,56);
 
 
         //Hemen bezero eta bisita lista lortzen dugu.
         //apaindegi.erakutsiBezeroak();
         apaindegi.erakutsiBisitak();
+
+
+
 
 
 
