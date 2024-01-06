@@ -1,5 +1,7 @@
+import java.util.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Apaindegi {
 
@@ -46,7 +48,8 @@ public class Apaindegi {
     }
 
     //Bisitak lortzen ditugu honekin
-    public Bisita jasoBisita(String NAN, LocalDate data){ //←Bilatzen dugu bisita konkretu bat, horretarako bezeroaren NAN-a erabiltzen da, eta bisitaren data.
+    public Bisita jasoBisita(String NAN, int urtea, int hilabetea, int eguna){ //←Bilatzen dugu bisita konkretu bat, horretarako bezeroaren NAN-a erabiltzen da, eta bisitaren data.
+        Date data = new Date(urtea-1900, hilabetea-1, eguna);
         for (int i =0;i<bisitaList.length;i++){
             Bisita bisita = (Bisita) bisitaList[i]; //←i posizioan dagoen bisita objetua ateratzen dugu.
             Bezero bezero = bisita.getBezero(); //←Bisita objetua dagoen bezero objetua lortzen dugu.
@@ -71,8 +74,9 @@ public class Apaindegi {
         bezeroKant++;
     }
 
-    public void gehituBisita(Bezero bezero, java.time.LocalDate data){ //←Bisita bat sortu egiten du.
-        Bisita bisita = new Bisita(bezero, data); //Bisita bat sortzen da guk ezarritako egunean eta honekin batera, sartutako bezeroa ere bai gehitzen diogu.
+    public void gehituBisita(Bezero bezero, int urtea, int hilabetea, int eguna){ //←Bisita bat sortu egiten du.
+        Date date1= new Date( urtea-1900,  hilabetea-1,  eguna);
+        Bisita bisita = new Bisita(bezero, date1); //Bisita bat sortzen da guk ezarritako egunean eta honekin batera, sartutako bezeroa ere bai gehitzen diogu.
         bisitaList[bisitaKant]= bisita;
         //System.out.println("Bisita: "+bisitaKant+ "Lista: "+bisitaList[bisitaKant]);
         bisitaKant++; //← Bisita kopurua kontrolatzeko funtzioari gehitzen diogu zenbaki bat.
@@ -121,8 +125,9 @@ public class Apaindegi {
 
 
 
-    public void gehituZenbatekoa(Bezero bezero, LocalDate data, float zenbatekoa){ //←Gehitzen diogu zenbatekoa bisita bateri
+    public void gehituZenbatekoa(Bezero bezero, int urtea, int hilabeta, int eguna, float zenbatekoa){ //←Gehitzen diogu zenbatekoa bisita bateri
         String NAN = bezero.getNAN(); //←Lortzen dugu bezeroaren objetua.
+        Date data = new Date(urtea-1900, hilabeta-1, eguna);
 
         for (int i =0;i<bisitaKant;i++){
             Bisita bisita = (Bisita) bisitaList[i]; //←Bisita listatikan lortzen dugu bisita objetua
