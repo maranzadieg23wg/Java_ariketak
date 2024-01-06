@@ -87,50 +87,51 @@ public class Apaindegi {
             Bisita bisita = (Bisita) bisitaList[i]; //←Lortzen ditugu bisita listatikan bisita objetua
             Bezero bezero1 = bisita.getBezero(); //←Bisitatikan lortzen dugu bezero objetua.
             if (bezero.getNAN().equals(bezero1.getNAN())){
-                listaBisita[kant]= bisitaList[i];
+                listaBisita[kant]= bisitaList[i]; //←Hemen gehitzen dugu
                 kant++;
             }
         }
-        return (ArrayList) listaBisita[kant];
+        return (ArrayList) listaBisita[kant]; //←Hemen bueltatu egiten dugu lista
+
     }
 
-    public void erakutsiBezeroak(){
+    public void erakutsiBezeroak(){ //←Bezero guztien datu guztiak erakusten ditu.
         for (int i =0;i<bezeroList.length;i++){
             /*Bisita bisita = (Bisita) bisitaList[i];
             Bezero bezero = bisita.getBezero();
             System.out.println(bezero.toString());*/
-            if (bezeroList[i]!=null){
-                System.out.print(i+1+". ");
-                System.out.println(bezeroList[i]);
+            if (bezeroList[i]!=null){ //←Begiratzen du lista guztia, null ez diren baloreak.
+                System.out.print(i+1+". "); //←Esaten digu zenbagarren bezeroa den, batetikan hasita.
+                System.out.println(bezeroList[i]); //←Hemen inprimatzen dugu informazioa.
             }
         }
     }
 
-    public void erakutsiBisitak(){
+    public void erakutsiBisitak(){ //←Bisiten datu guztiak erakusten ditu.
         for (int i =0;i<bisitaList.length;i++){
             /*
             Bisita bisita = (Bisita) bisitaList[i];
             System.out.println(bisita.toString());*/
-            if (bisitaList[i]!=null){
-                System.out.print(i+1+". ");
-                System.out.println(bisitaList[i]);
+            if (bisitaList[i]!=null){ //←Begiratzen du lista guztia, null ez diren baloreak.
+                System.out.print(i+1+". "); //←Esaten digu zenbagarren bisita den, batetikan hasita.
+                System.out.println(bisitaList[i]); //←Hemen inprimatzen dugu informazioa.
             }
         }
     }
 
 
 
-    public void gehituZenbatekoa(Bezero bezero, LocalDate data, float zenbatekoa){
-        String NAN = bezero.getNAN();
+    public void gehituZenbatekoa(Bezero bezero, LocalDate data, float zenbatekoa){ //←Gehitzen diogu zenbatekoa bisita bateri
+        String NAN = bezero.getNAN(); //←Lortzen dugu bezeroaren objetua.
 
         for (int i =0;i<bisitaKant;i++){
-            Bisita bisita = (Bisita) bisitaList[i];
-            Bezero bezero1 = bisita.getBezero();
-            String NAN1 = bezero1.getNAN();
+            Bisita bisita = (Bisita) bisitaList[i]; //←Bisita listatikan lortzen dugu bisita objetua
+            Bezero bezero1 = bisita.getBezero(); //←Bisita objetutikan lortzen dugu bezero objetua
+            String NAN1 = bezero1.getNAN(); //←Lortzen dugu bisita objetuko bezeroaren NAN-a
 
-            if (NAN.equals(NAN1) && data.equals(bisita.getData())){
-                bisita.kalkulatuZenbatekoa(zenbatekoa);
-                i = bisitaKant;
+            if (NAN.equals(NAN1) && data.equals(bisita.getData())){ //←Begiratzen dugu ea NAN-a berbera den eta bi datak berberak diren
+                bisita.kalkulatuZenbatekoa(zenbatekoa); //←Zenbatekoa bidaltzen diogu bisita objetuko kalkulatze zenbateko funtzioari.
+                i = bisitaKant; //← For a bukatzen dugu honen bitartez.
             }
         }
     }

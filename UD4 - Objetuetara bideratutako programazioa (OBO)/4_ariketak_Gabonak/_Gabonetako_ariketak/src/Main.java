@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,6 +19,8 @@ public class Main {
 
         //Gehitzen bisitak
         apaindegi.gehituBisita(apaindegi.jasoBezeroa("12345678R"), LocalDate.parse("2024-01-02"));
+        apaindegi.gehituBisita(apaindegi.jasoBezeroa("12345678R"), LocalDate.parse("2024-01-03"));
+
         apaindegi.gehituBisita(apaindegi.jasoBezeroa("98765432A"), LocalDate.parse("2023-12-29"));
         apaindegi.gehituBisita(apaindegi.jasoBezeroa("57864321T"), LocalDate.parse("2024-01-08"));
 
@@ -30,8 +33,9 @@ public class Main {
 
         //Hemen bezero eta bisita lista lortzen dugu.
         //apaindegi.erakutsiBezeroak();
-        //apaindegi.erakutsiBisitak();
-        System.out.println(apaindegi.jasoBisitak(apaindegi.jasoBezeroa("12345678R")));
+        apaindegi.erakutsiBisitak();
+
+
 
 
 
