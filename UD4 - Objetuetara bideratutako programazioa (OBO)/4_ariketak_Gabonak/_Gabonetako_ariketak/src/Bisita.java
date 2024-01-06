@@ -13,23 +13,23 @@ public class Bisita {
 
     public double kalkulatuZenbatekoa(float zenbat){
 
-        this.zenbat = zenbat-(zenbat * bezero.jasoDeskontua());
+        this.zenbat = zenbat-(zenbat * bezero.jasoDeskontua()); //←eskatzen diogu bezero objetuari zein den bere deskontua, ondoren biderkatzen dugu prezioarekin jakiteko zenbat kendu behar zaion eta kentzen diogu.
         return this.zenbat;
 
     }
 
     public String toString(){
 
-        return bezero.toString()+"Zenbat: "+zenbat+" -- Data: "+data;
+        return bezero.toString()+"Zenbat: "+zenbat+" -- Data: "+data; //←Bueltatzen du bezeroaren datuak erabiltzen toString funtzioa eta honekin batera zenbat gastatu egin duen egun horretan eta zein egunetan
     }
 
-    //Lortzen dugna honekin da, lortzea bezero objetua.
+
     public Bezero getBezero(){
-        return bezero;
+        return bezero; //←Daukan bezero objetua bueltatzen du, horrela, bertatikan lortu egin daiteke bezeroak dituen datuak.
     }
 
     public java.time.LocalDate getData(){
-        return data;
+        return data; //←Bueltatzen du bisitaren data.
     }
 
 

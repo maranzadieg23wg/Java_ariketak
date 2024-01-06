@@ -30,7 +30,9 @@ public class Main {
 
         //Hemen bezero eta bisita lista lortzen dugu.
         //apaindegi.erakutsiBezeroak();
-        apaindegi.erakutsiBisitak();
+        //apaindegi.erakutsiBisitak();
+        System.out.println(apaindegi.jasoBisitak(apaindegi.jasoBezeroa("12345678R")));
+
 
 
 
