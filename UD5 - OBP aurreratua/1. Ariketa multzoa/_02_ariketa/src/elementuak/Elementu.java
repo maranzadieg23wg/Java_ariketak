@@ -2,9 +2,9 @@ package elementuak;
 
 public class Elementu {
 
-    int kodea;
-    String izenburua;
-    String egilea;
+    private int kodea;
+    private String izenburua;
+    private String egilea;
 
     public Elementu(int kodea, String izenburua, String egilea){
         this.kodea = kodea;
@@ -16,4 +16,9 @@ public class Elementu {
         System.out.println("Kodea: "+kodea+" Izenburua: "+izenburua+" Egilea: "+egilea);
     }
 
+    public  int getKodea(){
+        return kodea;
+    }
+
+    public String getIzenburua;
 }
