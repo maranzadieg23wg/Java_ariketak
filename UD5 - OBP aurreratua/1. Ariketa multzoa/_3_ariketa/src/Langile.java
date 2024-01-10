@@ -1,4 +1,4 @@
-public class Langile {
+abstract class Langile {
 
     private String izena;
     private String abizena;
