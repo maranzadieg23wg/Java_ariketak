@@ -20,5 +20,8 @@ public class KomisioLangile extends Langile{
         return this.salmentak*this.komisioa;
     }
 
+    public String toString(){
+        return super.toString()+ " Salmentak: "+salmentak+" Komisioa: "+komisioa;
+    }
 
 }

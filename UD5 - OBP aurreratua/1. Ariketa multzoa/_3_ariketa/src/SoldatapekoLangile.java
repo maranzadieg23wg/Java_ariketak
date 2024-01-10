@@ -14,4 +14,8 @@ public class SoldatapekoLangile extends Langile{
     public float irabaziak(){
         return astekoSoldata;
     }
+
+    public String toString(){
+        return super.toString()+" Asteko Soldata: "+astekoSoldata;
+    }
 }
