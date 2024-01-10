@@ -11,7 +11,7 @@ public class SoldatapekoLangile extends Langile{
 
 
     }
-    public float irabaziak(){
+    public double irabaziak(){
         return astekoSoldata;
     }
 

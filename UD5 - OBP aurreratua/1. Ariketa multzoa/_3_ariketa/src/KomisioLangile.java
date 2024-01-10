@@ -16,7 +16,7 @@ public class KomisioLangile extends Langile{
         }
     }
 
-    public float irabaziak(){
+    public double irabaziak(){
         return this.salmentak*this.komisioa;
     }
 

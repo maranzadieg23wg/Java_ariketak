@@ -11,7 +11,7 @@ public class SoldatapekoKomisioLangile extends KomisioLangile{
         }
     }
 
-    public float irabaziak(){
+    public double irabaziak(){
         return oinarrizkoSoldata+salmentak*komisioa;
     }
 
