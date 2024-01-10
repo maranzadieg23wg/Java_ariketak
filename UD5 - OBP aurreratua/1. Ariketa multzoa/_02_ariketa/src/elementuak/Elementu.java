@@ -1,10 +1,12 @@
-public class Elementuak {
+package elementuak;
+
+public class Elementu {
 
     int kodea;
     String izenburua;
     String egilea;
 
-    public Elementuak (int kodea, String izenburua, String egilea){
+    public Elementu(int kodea, String izenburua, String egilea){
         this.kodea = kodea;
         this.izenburua = izenburua;
         this.egilea = egilea;

@@ -1,4 +1,6 @@
-public class Disko extends Elementuak{
+package elementuak;
+
+public class Disko extends Elementu {
 
     String diskografia;
 
