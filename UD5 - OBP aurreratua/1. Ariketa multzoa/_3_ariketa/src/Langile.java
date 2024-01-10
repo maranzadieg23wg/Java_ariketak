@@ -14,6 +14,7 @@ abstract class Langile {
         return "Izena: "+izena+" Abizena:"+abizena+ "GSZ: "+gsz;
     }
 
+    public abstract double irabaziak();
 
 
 
