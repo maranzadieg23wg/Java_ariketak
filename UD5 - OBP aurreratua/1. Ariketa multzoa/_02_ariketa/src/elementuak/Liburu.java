@@ -1,5 +1,6 @@
 package elementuak;
 
+
 public class Liburu extends Elementu {
 
     int orrialdeKop;
