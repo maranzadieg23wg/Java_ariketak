@@ -4,7 +4,7 @@ public class Elementuak {
     String izenburua;
     String egilea;
 
-    Elementuak (int kodea, String izenburua, String egilea){
+    public Elementuak (int kodea, String izenburua, String egilea){
         this.kodea = kodea;
         this.izenburua = izenburua;
         this.egilea = egilea;
