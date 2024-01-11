@@ -14,6 +14,7 @@ public class Mailegu {
 
     public Mailegu(int urtea, int hilabetea, int eguna, Elementu elementu){
         hasieraData = LocalDate.of(urtea, hilabetea, eguna);
+        itzuleraData = null;
         this.elementu = elementu;
     }
 
