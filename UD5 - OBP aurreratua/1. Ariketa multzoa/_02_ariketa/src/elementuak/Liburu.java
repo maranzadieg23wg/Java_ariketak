@@ -11,6 +11,6 @@ public class Liburu extends Elementu {
     }
 
     public String kodeOsoa(){
-        return "Kodea: "+getKodea()+" Izenburua: "+getIzenburua+" Orrialde Kopurua: "+orrialdeKop;
+        return "Kodea: "+getKodea()+" Izenburua: "+getIzenburua()+" Egilea: "+getEgilea()+" Orrialde Kopurua: "+orrialdeKop;
     }
 }
