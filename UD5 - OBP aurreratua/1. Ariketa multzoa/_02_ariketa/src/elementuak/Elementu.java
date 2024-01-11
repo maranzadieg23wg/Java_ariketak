@@ -6,7 +6,7 @@ public class Elementu {
     private String izenburua;
     private String egilea;
 
-    public Elementu(int kodea, String izenburua, String egilea){
+    Elementu(int kodea, String izenburua, String egilea){
         this.kodea = kodea;
         this.izenburua = izenburua;
         this.egilea = egilea;
@@ -20,5 +20,10 @@ public class Elementu {
         return kodea;
     }
 
-    public String getIzenburua;
+    public String getIzenburua(){
+        return izenburua;
+    }
+    public String getEgilea(){
+        return  egilea;
+    }
 }
