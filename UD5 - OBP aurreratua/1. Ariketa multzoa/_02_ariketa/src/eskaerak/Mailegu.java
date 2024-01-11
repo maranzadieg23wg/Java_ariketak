@@ -1,18 +1,20 @@
 package eskaerak;
 
 import java.util.Date;
+import java.time.LocalDate;
+
 
 public class Mailegu {
 
-    Date hasieraData;
-    Date itzuleraData;
+    LocalDate hasieraData;
+    LocalDate itzuleraData;
 
-    Mailegu(){
-        hasieraData = new Date();
+    Mailegu(int urtea, int hilabetea, int eguna){
+        hasieraData = LocalDate.of(urtea, hilabetea, eguna);
     }
 
-    public void setItzuleraData(){
-        itzuleraData = new Date();
+    public void setItzuleraData(int urtea, int hilabetea, int eguna){
+        itzuleraData = LocalDate.of(urtea, hilabetea, eguna);
     }
 
     public void erakutsi(){
