@@ -1,12 +1,12 @@
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Bisita {
 
     private Bezero bezero;
     private double zenbat =0;
-    private Date data;
+    private LocalDate data;
 
-    Bisita(Bezero bezero, Date data){
+    Bisita(Bezero bezero, LocalDate data){
         this.bezero = bezero;
         this.data = data;
     }
@@ -28,7 +28,7 @@ public class Bisita {
         return bezero; //←Daukan bezero objetua bueltatzen du, horrela, bertatikan lortu egin daiteke bezeroak dituen datuak.
     }
 
-    public Date getData(){
+    public LocalDate getData(){
         return data; //←Bueltatzen du bisitaren data.
     }
 
