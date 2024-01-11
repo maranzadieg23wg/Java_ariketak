@@ -1,5 +1,7 @@
 package eskaerak;
 
+import elementuak.Elementu;
+
 import java.util.Date;
 import java.time.LocalDate;
 
@@ -8,17 +10,25 @@ public class Mailegu {
 
     LocalDate hasieraData;
     LocalDate itzuleraData;
+    Elementu elementu;
 
-    Mailegu(int urtea, int hilabetea, int eguna){
+    public Mailegu(int urtea, int hilabetea, int eguna, Elementu elementu){
         hasieraData = LocalDate.of(urtea, hilabetea, eguna);
+        this.elementu = elementu;
     }
 
     public void setItzuleraData(int urtea, int hilabetea, int eguna){
         itzuleraData = LocalDate.of(urtea, hilabetea, eguna);
     }
 
+    public Elementu getElementu(){
+        return elementu;
+    }
+
+
+
     public void erakutsi(){
-        System.out.println("Mailegu data: "+hasieraData+" Itzulera Data: +"+itzuleraData);
+        System.out.println("Mailegu data: "+hasieraData+" Itzulera Data: +"+itzuleraData+ " Elementua: "+elementu);
     }
 
 }

@@ -1,5 +1,7 @@
 package eskaerak;
 
+import elementuak.Elementu;
+
 public class Bezero {
 
     String NAN;
@@ -8,7 +10,7 @@ public class Bezero {
 
     private Mailegu maileguList[];
 
-    Bezero(String NAN, String izena){
+    public Bezero(String NAN, String izena){
         this.NAN = NAN;
         this.izena = izena;
         maileguKop =0;
