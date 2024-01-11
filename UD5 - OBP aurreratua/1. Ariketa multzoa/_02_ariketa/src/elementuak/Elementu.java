@@ -20,5 +20,10 @@ public class Elementu {
         return kodea;
     }
 
-    public String getIzenburua;
+    public String getIzenburua(){
+        return izenburua;
+    }
+    public String getEgilea(){
+        return  egilea;
+    }
 }
