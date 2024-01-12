@@ -1,3 +1,5 @@
+package langileak;
+
 abstract class Langile {
 
     private String izena;

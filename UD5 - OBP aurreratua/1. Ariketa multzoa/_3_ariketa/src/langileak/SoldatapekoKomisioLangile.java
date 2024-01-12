@@ -1,3 +1,5 @@
+package langileak;
+
 public class SoldatapekoKomisioLangile extends KomisioLangile{
 
 

@@ -1,3 +1,5 @@
+package langileak;
+
 public class OrdukoLangile extends Langile{
 
     int orduak;

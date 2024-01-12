@@ -1,3 +1,5 @@
+package langileak;
+
 public class KomisioLangile extends Langile{
     float salmentak;
     float komisioa;

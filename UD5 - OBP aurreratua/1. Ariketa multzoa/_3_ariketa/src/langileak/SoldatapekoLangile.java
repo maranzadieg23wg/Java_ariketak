@@ -1,3 +1,5 @@
+package langileak;
+
 public class SoldatapekoLangile extends Langile{
     private float astekoSoldata;
 
