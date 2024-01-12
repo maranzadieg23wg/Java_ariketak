@@ -29,10 +29,11 @@ public class Mailegu {
 
 
     public void erakutsi(){
+        System.out.println("-----------------------------------------");
         if (itzuleraData !=null){
-            System.out.println("Mailegu data: "+hasieraData+" Itzulera Data: "+itzuleraData+ " Elementua: "+elementu);
+            System.out.println("Mailegu data: "+hasieraData+" Itzulera Data: "+itzuleraData+ " Elementua: "+elementu.getErakutsi());
         }else {
-            System.out.println("Mailegu data: "+hasieraData+" Ez da itzuli "+ " Elementua: "+elementu);
+            System.out.println("Mailegu data: "+hasieraData+" Ez da itzuli "+ " Elementua: "+elementu.getErakutsi());
 
         }
     }

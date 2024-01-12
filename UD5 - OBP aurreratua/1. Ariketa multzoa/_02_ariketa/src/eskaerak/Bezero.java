@@ -18,7 +18,13 @@ public class Bezero {
     }
 
     public void erakutsi(){
+        System.out.println("********************************");
         System.out.println("NAN: "+NAN+" Izena: "+izena+" Mailegu Kopurua: "+maileguKop);
+        for (int i =0;i<maileguList.length;i++){
+            if (maileguList[i]!=null){
+                this.maileguList[i].erakutsi();
+            }
+        }
     }
 
     public void gehituMailegu(Mailegu mailegu){
