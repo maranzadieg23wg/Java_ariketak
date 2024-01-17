@@ -10,7 +10,7 @@ public class Loro extends Txori{
     }
 
 
-    public void nongoaZara(){
+    void nongoaZara(){
         if (this.zonaldea == 'I'){
             System.out.println("Iparraldea");
         } else if (this.zonaldea =='H') {
@@ -22,7 +22,7 @@ public class Loro extends Txori{
         }
     }
 
-    public void setZonaldea(char zonaldea){
+    void setZonaldea(char zonaldea){
         this.zonaldea=zonaldea;
     }
 

@@ -11,7 +11,7 @@ public class Kanario extends Txori {
         this.tamaina=tamaina;
     }
 
-    public void neurtu(){
+    void neurtu(){
         if (tamaina>30){
             System.out.println("Handia");
         } else if (tamaina<15) {
@@ -21,7 +21,7 @@ public class Kanario extends Txori {
         }
     }
 
-    public void setTamaina(float tamaina){
+    void setTamaina(float tamaina){
         this.tamaina = tamaina;
     }
 }
