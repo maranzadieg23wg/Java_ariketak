@@ -3,14 +3,18 @@ package enpresa;
 public class Mugikor {
 
     private String zenbakia;
-    int bateria;
+    private int bateria;
 
     public Mugikor(String zenbakia, int bateria) {
         this.zenbakia = zenbakia;
         this.bateria = bateria;
     }
 
-    public  void erabili(int zenbat){
-        this.bateria -= zenbat;
+    public  void erabili(){
+        this.bateria -= 1;
+    }
+
+    public int getBateria(){
+        return bateria;
     }
 }

@@ -7,6 +7,7 @@ public class Pertsona {
     private float altuera;
     private float pisua;
 
+
     Pertsona(String izena, String NAN, float altuera, float pisua){
         this.izena = izena;
         this.NAN = NAN;
