@@ -15,11 +15,11 @@ public class Langile extends Pertsona{
     }
 
 
-    public void diruaIrabazi(float dirua){
+    void diruaIrabazi(float dirua){
         this.dirua +=dirua;
     }
 
-    public void  diruaGastatu(float dirua){
+    void  diruaGastatu(float dirua){
         this.dirua -=dirua;
     }
 

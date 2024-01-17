@@ -10,11 +10,15 @@ public class Mugikor {
         this.bateria = bateria;
     }
 
-    public  void erabili(){
-        this.bateria -= 1;
+    void erabili(){
+        if (this.bateria <0){
+            System.out.println("Mugikorrak ez dauka bateriarik.");
+        }else {
+            this.bateria -= 1;
+        }
     }
 
-    public int getBateria(){
+    int getBateria(){
         return bateria;
     }
 }
