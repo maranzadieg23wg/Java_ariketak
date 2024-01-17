@@ -8,19 +8,19 @@ public class DatuPertsonal {
         this.jabelzena = jabelzena;
     }
 
-    public String getTxorilzena() {
+    String getTxorilzena() {
         return txorilzena;
     }
 
-    public void setTxorilzena(String txorilzena) {
+    void setTxorilzena(String txorilzena) {
         this.txorilzena = txorilzena;
     }
 
-    public String getJabelzena() {
+    String getJabelzena() {
         return jabelzena;
     }
 
-    public void setJabelzena(String jabelzena) {
+    void setJabelzena(String jabelzena) {
         this.jabelzena = jabelzena;
     }
 }
