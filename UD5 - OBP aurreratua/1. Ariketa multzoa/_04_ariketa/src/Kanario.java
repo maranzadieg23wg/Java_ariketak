@@ -3,11 +3,15 @@ public class Kanario extends Txori {
 
     private float tamaina;
 
-    public Kanario(char sexua, int adina) {
-        super(sexua, adina);
+    public Kanario(char sexua, int adina, DatuPertsonal izenak) {
+        super(sexua, adina, izenak);
     }
-    public Kanario(char sexua, int adina, float tamaina) {
-        super(sexua, adina);
+
+
+
+
+    public Kanario(char sexua, int adina, float tamaina, DatuPertsonal izenak) {
+        super(sexua, adina, izenak);
         this.tamaina=tamaina;
     }
 
@@ -24,4 +28,7 @@ public class Kanario extends Txori {
     void setTamaina(float tamaina){
         this.tamaina = tamaina;
     }
+
+    void abestu() {}
+
 }

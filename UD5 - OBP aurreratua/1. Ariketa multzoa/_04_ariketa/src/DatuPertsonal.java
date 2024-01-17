@@ -1,26 +1,26 @@
 public class DatuPertsonal {
 
-    private String txorilzena;
-    private String jabelzena;
+    private String txoriIzena;
+    private String jabeIzena;
 
     DatuPertsonal(String txorilzena, String jabelzena) {
-        this.txorilzena = txorilzena;
-        this.jabelzena = jabelzena;
+        this.txoriIzena = txorilzena;
+        this.jabeIzena = jabelzena;
     }
 
-    String getTxorilzena() {
-        return txorilzena;
+    String getTxoriIzena() {
+        return txoriIzena;
     }
 
-    void setTxorilzena(String txorilzena) {
-        this.txorilzena = txorilzena;
+    void setTxoriIzena(String txoriIzena) {
+        this.txoriIzena = txoriIzena;
     }
 
-    String getJabelzena() {
-        return jabelzena;
+    String getJabeIzena() {
+        return jabeIzena;
     }
 
-    void setJabelzena(String jabelzena) {
-        this.jabelzena = jabelzena;
+    void setJabeIzena(String jabeIzena) {
+        this.jabeIzena = jabeIzena;
     }
 }

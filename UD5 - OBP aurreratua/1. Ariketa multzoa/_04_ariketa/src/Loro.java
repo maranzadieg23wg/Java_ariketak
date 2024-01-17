@@ -3,8 +3,8 @@ public class Loro extends Txori{
 
     private char zonaldea;
     private String kolorea;
-    public Loro(char sexua, int adina, char zonaldea, String kolorea) {
-        super(sexua, adina);
+    public Loro(char sexua, int adina, char zonaldea, String kolorea, DatuPertsonal izenak) {
+        super(sexua, adina, izenak);
         this.zonaldea=zonaldea;
         this.kolorea=kolorea;
     }
@@ -24,6 +24,10 @@ public class Loro extends Txori{
 
     void setZonaldea(char zonaldea){
         this.zonaldea=zonaldea;
+    }
+
+    void  abestu(){
+        System.out.println("Nire izena " + getTxoriIzena() +" da eta lorito bonito abesten dut");
     }
 
 
