@@ -27,6 +27,12 @@ public class Main2 {
 
 
 
+        for (int i =0;i< txoriLista.length;i++){
+            if (txoriLista[i]!=null){
+                Txori tx = txoriLista[i];
+                tx.abestu();
+            }
+        }
 
 
         System.out.println("Txori Kopurua: "+Txori.getTxoriKop());

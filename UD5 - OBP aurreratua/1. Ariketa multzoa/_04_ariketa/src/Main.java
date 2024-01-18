@@ -13,19 +13,19 @@ public class Main {
         Piolin p3 = new Piolin('M', 4, 5 , 4, i4);
 
 
-       p1.norNaiz();
-       p2.norNaiz();
-       p3.norNaiz();
+        p1.norNaiz();
+        p2.norNaiz();
+        p3.norNaiz();
 
-       p1.setJabeIzena("Lucas");
-       p1.setTxoriIzena("Bunny");
+        p1.setJabeIzena("Lucas");
+        p1.setTxoriIzena("Bunny");
 
-       p1.norNaiz();
+        p1.norNaiz();
 
 
-       Loro l1 = new Loro('E', 24, 'I', "Gorria", i2);
+        Loro l1 = new Loro('E', 24, 'I', "Gorria", i2);
 
-       System.out.println("Txori Kopurua: ");
+        System.out.println("Txori Kopurua: "+Txori.getTxoriKop());
 
         p1.abestu();
         l1.abestu();
