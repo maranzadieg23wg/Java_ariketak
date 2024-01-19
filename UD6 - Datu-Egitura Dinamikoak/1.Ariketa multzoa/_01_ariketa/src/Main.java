@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Random;
 
 
 public class Main {
@@ -11,7 +12,7 @@ public class Main {
 
         ArrayList<Integer> zenbakiList = new ArrayList<>();
 
-        while (zenbakiList.size()<10){
+        /*while (zenbakiList.size()<10){
             int zenbakia = eskatu();
 
             zenbakiList = zenbakiList(zenbakiList, zenbakia);
@@ -22,11 +23,13 @@ public class Main {
         }
 
 
+        erakutsi(zenbakiList);*/
 
-
-        //System.out.print(zenbakiList.size());
+        zenbakiList = ausas(zenbakiList, 100, 50, false);
         erakutsi(zenbakiList);
 
+        zenbakiList = ausas(zenbakiList, 20, 10, true);
+        erakutsi(zenbakiList);
 
 
 
@@ -49,10 +52,6 @@ public class Main {
         int z =1;
         while (list.size()<10){
 
-
-
-            //System.out.print("z: "+z+" ");
-
             if (zenbakia % z ==0){
                 list.add(z);
             }
@@ -66,20 +65,50 @@ public class Main {
         return list;
     }
 
+    public static ArrayList ausas(ArrayList lista,int zenbaki, int zenbat, boolean errepikatu){
+
+        lista.clear();
+        for (int i =0;i<zenbat;i++){
+            int negative = zenbaki*(-1);
+            int gehitu = (int)Math.floor((Math.random()*(zenbaki - negative +1)+negative));
+
+            if (errepikatu){
+                if (!lista.contains(gehitu) || i ==0){
+                    lista.add(gehitu);
+                }else {
+                    i--;
+                }
+            }else {
+                lista.add(gehitu);
+            }
 
 
-    public static void erakutsi (ArrayList list){
+
+        }
+
+        return lista;
+
+
+    }
+
+
+    public static void erakutsi (ArrayList<Integer> list){
 
         Iterator<Integer> it = list.iterator();
 
 
         while (it.hasNext()){
-
-
-
-            System.out.print(" "+it.next());
+            //System.out.print(it.next()+" ");
             //System.out.print("Z"+z);
+            int zenbakia = it.next();
+
+            System.out.print(zenbakia+" ");
+
+            /*if (zenbakia==100 || zenbakia == -100 || zenbakia == 99 || zenbakia == -99){
+                System.out.print(zenbakia+" ");
+            }*/
         }
+        System.out.println(" ");
     }
 
 
