@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -15,6 +17,17 @@ public class Main {
         p4.inprimatuPuntua();
 
         System.out.println("P3-ren koadrantea da: "+p3.koadrantea());
+
+        ArrayList<Puntua> puntuList = new ArrayList<>();
+
+        puntuList.add(p1);
+        puntuList.add(p2);
+        puntuList.add(p3);
+
+        PuntuSistema ps = new PuntuSistema(puntuList);
+
+        ps.erakutsi();
+
 
 
 
