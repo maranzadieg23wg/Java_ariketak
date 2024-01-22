@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Puntua {
 
@@ -44,5 +45,18 @@ public class Puntua {
 
     public int getzY() {
         return zY;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Puntua puntua = (Puntua) o;
+        return zX == puntua.zX && zY == puntua.zY;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(zX, zY);
     }
 }

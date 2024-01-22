@@ -83,7 +83,7 @@ public class PuntuSistema {
 
             if (puntuList.get(i) != null){
                 Puntua puntua = puntuList.get(i);
-                if (puntua.getzX() ==1 && puntua.getzY()==1){
+                if (puntua.equals(new Puntua(1, 1))){
                     return true;
                 }else {
                     i++;
