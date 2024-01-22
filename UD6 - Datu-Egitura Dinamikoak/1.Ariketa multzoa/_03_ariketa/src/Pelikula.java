@@ -21,7 +21,7 @@ public class Pelikula {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pelikula pelikula = (Pelikula) o;
-        return urtea == pelikula.urtea && iraupena == pelikula.iraupena && Objects.equals(izenburua, pelikula.izenburua);
+        return urtea == pelikula.urtea && (iraupena - pelikula.iraupena <=5 || pelikula.iraupena - iraupena <=5) && Objects.equals(izenburua, pelikula.izenburua);
     }
-    
+
 }
