@@ -19,6 +19,7 @@ public class PuntuSistema {
         for (Puntua puntua : puntuList){
             System.out.print(puntua+" ");
         }
+        System.out.println(" ");
     }
 
     public ArrayList alderantzizkatu(){
@@ -94,6 +95,38 @@ public class PuntuSistema {
         }
         //System.out.println("Ez dago punturik daukana 1,1 posizioa");
         return false;
+    }
+
+    public void ezabatuDistantzia10(){
+        Iterator<Puntua> it = this.puntuList.iterator();
+        while (it.hasNext()){
+            Puntua puntua = it.next();
+
+            int x = puntua.getzX();
+            int y = puntua.getzY();
+
+            double z = (x*x)+(y*y);
+
+            z = Math.pow(z, 0.5);
+
+            if (z <10){
+                puntuList.remove(puntua);
+                break;
+            }
+
+        }
+    }
+
+    public void ezabatu4Koadrantea(){
+        Iterator<Puntua> it = this.puntuList.iterator();
+
+        while (it.hasNext()){
+            Puntua puntua = it.next();
+
+            if (puntua.koadrantea() == 4){
+                puntuList.remove(puntua);
+            }
+        }
     }
 
 

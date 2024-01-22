@@ -10,23 +10,30 @@ public class Main {
         Puntua p2 = new Puntua(-1, 2);
         Puntua p3 = new Puntua(-1, -2);
         Puntua p4 = new Puntua(1, -2);
+        Puntua p5 = new Puntua(2, -10);
 
-        p1.inprimatuPuntua();
-        p2.inprimatuPuntua();
-        p3.inprimatuPuntua();
-        p4.inprimatuPuntua();
 
-        System.out.println("P3-ren koadrantea da: "+p3.koadrantea());
 
         ArrayList<Puntua> puntuList = new ArrayList<>();
 
         puntuList.add(p1);
         puntuList.add(p2);
         puntuList.add(p3);
+        puntuList.add(p4);
+        puntuList.add(p5);
 
         PuntuSistema ps = new PuntuSistema(puntuList);
 
         ps.erakutsi();
+        ps.ezabatuDistantzia10();
+        ps.erakutsi();
+
+        ArrayList<Puntua> alderantziz = ps.alderantzizkatu();
+
+        for (Puntua puntua : alderantziz){
+            System.out.print(puntua+" ");
+        }
+
 
 
 
