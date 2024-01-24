@@ -27,4 +27,12 @@ public class Pelikula {
     public String getIzenburua() {
         return izenburua;
     }
+
+    public int getUrtea() {
+        return urtea;
+    }
+
+    public int getIraupena() {
+        return iraupena;
+    }
 }

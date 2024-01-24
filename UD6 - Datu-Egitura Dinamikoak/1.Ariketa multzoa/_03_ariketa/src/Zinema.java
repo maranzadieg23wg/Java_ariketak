@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Zinema {
 
@@ -8,6 +10,8 @@ public class Zinema {
     private ArrayList<Pelikula> pelikulaList = new ArrayList<>();
 
     private Pelikula aretoa[];
+
+    Scanner sc = new Scanner(System.in);
 
     public Zinema(String izena, int kopurua) {
         this.izena = izena;
@@ -30,54 +34,49 @@ public class Zinema {
 
     public void gehituPelikula(Pelikula pelikula){
 
-        int libre=-1;
-        boolean zineman = false;
+        int zineman = pelikularenAretoa(pelikula.getIzenburua(), pelikula.getUrtea(), pelikula.getIraupena());
 
-        for (int i =0;i<aretoa.length;i++){
-            if (aretoa[i]==null && libre ==-1){
-                libre = i;
+        boolean libre = true;
+
+        if (zineman != -1){
+            System.out.println(pelikula.getIzenburua()+" pelikula zineman dago "+zineman+" aretoan");
+        }else {
+            for (int i =0;i<aretoa.length;i++){
+
+                if (aretoa[i]==null){
+                    aretoa[i]=pelikula;
+                    i = aretoa.length+2;
+                    libre = true;
+                }else {
+                    libre = false;
+                }
+
             }
-            if (aretoa[i].equals(pelikula)){
-                zineman = true;
-            }
         }
-
-        if (!zineman && libre !=-1){
-            aretoa[libre]=pelikula;
+        if (!libre){
+            System.out.println("Zinemako areto guztiak okupatuta daude beste pelikulekin.");
         }
-
-        if (zineman){
-            System.out.println(pelikula.getIzenburua()+" pelikula zineman dago.");
-        }
-
-        if (libre ==-1){
-            System.out.println("Zinemako areto guztiak okupatuta daude.");
-        }
-
 
     }
 
     public void gehituPelikula(Pelikula pelikula, int aretoNum){
 
-        boolean zineman = false;
+        int zineman = pelikularenAretoa(pelikula.getIzenburua(), pelikula.getUrtea(), pelikula.getIraupena());
 
-        for (int i =0;i<aretoa.length;i++){
-            if (aretoa[i].equals(pelikula)){
-                zineman = true;
-                i = aretoa.length+2;
+        boolean libre = true;
+
+        if (zineman != -1){
+            System.out.println(pelikula.getIzenburua()+" pelikula zineman dago "+zineman+" aretoan");
+        }else {
+            if (aretoa[aretoNum]==null){
+                aretoa[aretoNum]=pelikula;
+                libre = true;
+            }else {
+                libre = false;
             }
         }
-
-        if (!zineman && aretoa[aretoNum]==null){
-            aretoa[aretoNum]=pelikula;
-        }
-
-        if (zineman){
-            System.out.println(pelikula.getIzenburua()+" pelikula zineman dago.");
-        }
-
-        if (aretoa[aretoNum]!=null){
-            System.out.println(aretoNum+" aretoa ez dago libre.");
+        if (!libre){
+            System.out.println("Zinemako "+aretoNum+" sala okupatuta dago "+ aretoa[aretoNum].getIzenburua()+" pelikularekin.");
         }
 
     }
@@ -116,6 +115,82 @@ public class Zinema {
 
         }
         return libre;
+    }
+
+    public void garbituZinema(){
+        for (int i =1; i<aretoa.length;i++){
+            aretoa[i]= null;
+        }
+    }
+
+    public void aldatuAretoa(Pelikula pelikula){
+
+        int zineman = pelikularenAretoa(pelikula.getIzenburua(), pelikula.getUrtea(), pelikula.getIraupena());
+        boolean mugituta = false;
+
+        if (zineman == -1){
+            System.out.println(pelikula.getIzenburua()+" ez dago zinemako aretotan.");
+        }else {
+            System.out.println(zineman+" aretoan dago pelikula");
+
+
+            System.out.println("Zein aretora nahi duzu mugitu pelikula?");
+            while (!mugituta){
+                int kodea = sc.nextInt();
+
+                if (aretoa[kodea]!=null){
+                    gehituPelikula(pelikula, kodea);
+                    mugituta = true;
+                }else {
+                    System.out.println(kodea+" posizioan "+aretoa[kodea].getIzenburua()+" pelikula dago eta ezin da bertan sartu.");
+                    System.out.println("Sartu beste areto bat.");
+                }
+            }
+
+
+
+
+        }
+
+    }
+
+
+    public ArrayList<Pelikula> motzagoakBaino(int denboraMin){
+
+        ArrayList<Pelikula> gutxiago = new ArrayList<>();
+
+        for (int i =0;i<pelikulaList.size();i++){
+
+            int iraupena = pelikulaList.get(i).getIraupena();
+
+            if (denboraMin > iraupena){
+                gutxiago.add(pelikulaList.get(i));
+            }
+
+
+        }
+
+        return gutxiago;
+    }
+
+    public ArrayList<Pelikula> motzagoakBaino(int denboraHor, int denboraMin){
+
+        ArrayList<Pelikula> gutxiago = new ArrayList<>();
+
+        int denbora = (denboraHor*60)+denboraMin;
+
+        for (int i =0;i<pelikulaList.size();i++){
+
+            int iraupena = pelikulaList.get(i).getIraupena();
+
+            if (denbora > iraupena){
+                gutxiago.add(pelikulaList.get(i));
+            }
+
+
+        }
+
+        return gutxiago;
     }
 
     
