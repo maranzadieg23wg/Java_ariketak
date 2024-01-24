@@ -24,4 +24,7 @@ public class Pelikula {
         return urtea == pelikula.urtea && (iraupena - pelikula.iraupena <=5 || pelikula.iraupena - iraupena <=5) && Objects.equals(izenburua, pelikula.izenburua);
     }
 
+    public String getIzenburua() {
+        return izenburua;
+    }
 }
