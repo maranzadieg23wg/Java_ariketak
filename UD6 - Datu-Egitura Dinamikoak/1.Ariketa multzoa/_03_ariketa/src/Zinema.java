@@ -16,17 +16,20 @@ public class Zinema {
     public Zinema(String izena, int kopurua) {
         this.izena = izena;
         this.aretoa = new Pelikula [kopurua+1];
-        aretoa[1] = new Pelikula("???", 0, 0);
+        aretoa[0] = new Pelikula("???", 0, 0);
     }
 
-    public int pelikularenAretoa(String izenburua, int urtea, int iraupena){
+    int pelikularenAretoa(String izenburua, int urtea, int iraupena){
         for (int i =0;i<aretoa.length;i++){
 
 
-            boolean berbera = aretoa[i].equals(new Pelikula(izenburua, urtea, iraupena));
-            if (berbera){
-                return i+1;
+            if (aretoa[i] !=null){
+                boolean berbera = aretoa[i].equals(new Pelikula(izenburua, urtea, iraupena));
+                if (berbera){
+                    return i+1;
+                }
             }
+
         }
 
         return -1;
@@ -34,6 +37,7 @@ public class Zinema {
 
     public void gehituPelikula(Pelikula pelikula){
 
+        pelikulaList.add(pelikula);
         int zineman = pelikularenAretoa(pelikula.getIzenburua(), pelikula.getUrtea(), pelikula.getIraupena());
 
         boolean libre = true;
@@ -60,6 +64,8 @@ public class Zinema {
     }
 
     public void gehituPelikula(Pelikula pelikula, int aretoNum){
+
+        pelikulaList.add(pelikula);
 
         int zineman = pelikularenAretoa(pelikula.getIzenburua(), pelikula.getUrtea(), pelikula.getIraupena());
 
@@ -95,11 +101,14 @@ public class Zinema {
     public void ezabatuPelikula(String izena){
         for (int i =1;i<aretoa.length;i++){
 
-            Pelikula pelikula = aretoa[i];
+            if (aretoa[i]!=null){
+                Pelikula pelikula = aretoa[i];
 
-            if (pelikula.getIzenburua().equals(izena)){
-                aretoa[i]=null;
+                if (pelikula.getIzenburua().equals(izena)){
+                    aretoa[i]=null;
+                }
             }
+
         }
     }
 
@@ -109,7 +118,7 @@ public class Zinema {
 
         for (int i=1;i<aretoa.length;i++){
 
-            if (aretoa[i]!=null){
+            if (aretoa[i]==null){
                 libre.add(i);
             }
 
@@ -138,9 +147,11 @@ public class Zinema {
             while (!mugituta){
                 int kodea = sc.nextInt();
 
-                if (aretoa[kodea]!=null){
+                if (aretoa[kodea]==null){
+                    ezabatuPelikula(pelikula.getIzenburua());
                     gehituPelikula(pelikula, kodea);
                     mugituta = true;
+
                 }else {
                     System.out.println(kodea+" posizioan "+aretoa[kodea].getIzenburua()+" pelikula dago eta ezin da bertan sartu.");
                     System.out.println("Sartu beste areto bat.");
@@ -175,20 +186,10 @@ public class Zinema {
 
     public ArrayList<Pelikula> motzagoakBaino(int denboraHor, int denboraMin){
 
-        ArrayList<Pelikula> gutxiago = new ArrayList<>();
-
         int denbora = (denboraHor*60)+denboraMin;
 
-        for (int i =0;i<pelikulaList.size();i++){
+        ArrayList<Pelikula> gutxiago = motzagoakBaino(denbora);
 
-            int iraupena = pelikulaList.get(i).getIraupena();
-
-            if (denbora > iraupena){
-                gutxiago.add(pelikulaList.get(i));
-            }
-
-
-        }
 
         return gutxiago;
     }
