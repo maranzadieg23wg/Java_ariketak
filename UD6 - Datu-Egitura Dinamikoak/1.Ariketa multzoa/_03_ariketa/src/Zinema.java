@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 
@@ -99,17 +100,18 @@ public class Zinema {
     }
 
     public void ezabatuPelikula(String izena){
-        for (int i =1;i<aretoa.length;i++){
 
-            if (aretoa[i]!=null){
-                Pelikula pelikula = aretoa[i];
+        Iterator<Pelikula> it = this.pelikulaList.iterator();
 
-                if (pelikula.getIzenburua().equals(izena)){
-                    aretoa[i]=null;
-                }
+        while (it.hasNext()){
+            Pelikula pelikula = it.next();
+            if(pelikula.getIzenburua().startsWith(izena)){
+                it.remove();
+                int i = pelikularenAretoa(pelikula.getIzenburua(), pelikula.getUrtea(), pelikula.getIraupena());
+                aretoa[i]=null;
             }
-
         }
+
     }
 
     public ArrayList<Integer> aretoLibreak(){
