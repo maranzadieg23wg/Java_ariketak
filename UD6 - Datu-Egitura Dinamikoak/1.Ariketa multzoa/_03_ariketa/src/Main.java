@@ -5,7 +5,7 @@ public class Main {
 
 
 
-        Pelikula p1 = new Pelikula("Beyond the fog", 2023, 100);
+        Pelikula p1 = new Pelikula("Beyond the fog", 2023, 142);
 
         Pelikula p2 = new Pelikula("Poor thinks", 2024, 150);
 
@@ -40,7 +40,7 @@ public class Main {
         */
 
 
-        ArrayList<Pelikula> gutxiago = z1.motzagoakBaino(2, 10);
+        ArrayList<Pelikula> gutxiago = z1.motzagoakBaino(140);
         System.out.println(gutxiago);
 
 
