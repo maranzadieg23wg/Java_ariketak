@@ -188,10 +188,7 @@ public class Zinema {
 
         int denbora = (denboraHor*60)+denboraMin;
 
-        ArrayList<Pelikula> gutxiago = motzagoakBaino(denbora);
-
-
-        return gutxiago;
+        return motzagoakBaino(denbora);
     }
 
     
