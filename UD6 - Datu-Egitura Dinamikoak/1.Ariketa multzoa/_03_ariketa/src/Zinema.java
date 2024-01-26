@@ -130,7 +130,7 @@ public class Zinema {
 
     public void garbituZinema(){
 
-        pelikulaList.clear();
+        pelikulaList.clear(); 
 
         for (int i =1; i<aretoa.length;i++){
             aretoa[i]= null;
