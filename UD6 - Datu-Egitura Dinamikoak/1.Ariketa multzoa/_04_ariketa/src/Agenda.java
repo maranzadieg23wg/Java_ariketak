@@ -15,7 +15,7 @@ public class Agenda {
 
     void gehituSarrera(String izena, int[] telefonoak){
 
-        if (agenda.size()>this.zenbat){
+        if (agenda.size()+1>this.zenbat){
             System.out.println("Agenda beteta dago");
         }else {
 
@@ -65,7 +65,7 @@ public class Agenda {
         }
     }
 
-    int zenbaiKopurua(int telefonoa){
+    int zenbakiKopurua(int telefonoa){
         int zenbat =0;
         Iterator<String> it = agenda.keySet().iterator();
         while (it.hasNext()){
