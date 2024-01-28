@@ -15,7 +15,7 @@ public class Agenda {
 
     void gehituSarrera(String izena, int[] telefonoak){
 
-        if (agenda.size()+1>this.zenbat){
+        if (agenda.size()+1>this.zenbat && agenda.get(izena) ==null){
             System.out.println("Agenda beteta dago");
         }else {
 
@@ -27,7 +27,7 @@ public class Agenda {
 
                 System.out.println("Agendan "+izena+" pertsonarentzat "+ Arrays.toString(agenda.get(izena)) +" telefonoak daude.");
                 System.out.println("Nahi dituzu aldatu, hemandako telefonoen gatik?");
-                while (egokia){
+                while (!egokia){
                     System.out.println("BAI/EZ");
                     String erantzuna = sc.nextLine();
                     if (erantzuna.equals("BAI")|| erantzuna.equals("EZ") || erantzuna.equals("bai") || erantzuna.equals("ez")){

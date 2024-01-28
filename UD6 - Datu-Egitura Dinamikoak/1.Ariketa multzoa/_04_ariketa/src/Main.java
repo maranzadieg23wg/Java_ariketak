@@ -20,14 +20,17 @@ public class Main {
         agenda.gehituSarrera("Ibai",telefono4);
         agenda.gehituSarrera("Castafiore",telefono5);
         agenda.gehituSarrera("Xuban",telefono6);
+        //agenda.gehituSarrera("Xuban2",telefono6);
+
 
 
         agenda.erakutsi();
-        agenda.bilatuIzena("Xuban");
-        agenda.bilatuIzena("Xuban");
-        System.out.println(agenda.zenbakiKopurua(66669999));
+        //agenda.bilatuIzena("Xuban");
+        //agenda.bilatuIzena("Xuban");
+        //System.out.println(agenda.zenbakiKopurua(66669999));
 
         agenda.gehituSarrera("Xuban",telefono7);
+        agenda.bilatuIzena("Xuban");
 
 
 
