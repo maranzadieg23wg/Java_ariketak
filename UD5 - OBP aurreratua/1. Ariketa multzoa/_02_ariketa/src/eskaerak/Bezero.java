@@ -18,12 +18,18 @@ public class Bezero {
     }
 
     public void erakutsi(){
+        System.out.println("********************************");
         System.out.println("NAN: "+NAN+" Izena: "+izena+" Mailegu Kopurua: "+maileguKop);
+        for (int i =0;i<maileguList.length;i++){
+            if (maileguList[i]!=null){
+                this.maileguList[i].erakutsi();
+            }
+        }
     }
 
     public void gehituMailegu(Mailegu mailegu){
         if (maileguKop >= maileguList.length){
-            System.out.println("Bezeroak ditu maileguan "+maileguKop+" liburu, ezin ditu gehiago artu. Bueltatu behar du baten bat.");
+            System.out.println("Bezeroak ditu maileguan "+maileguKop+" liburu, ezin du elementu gehiago artu. Bueltatu behar du elementu bat.");
             mailegu = null;
         }else {
             for (int i =0;i<maileguList.length;i++){

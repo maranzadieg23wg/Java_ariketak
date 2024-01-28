@@ -13,7 +13,11 @@ public class Elementu {
     }
 
     public void erakutsi(){
-        System.out.println("Kodea: "+kodea+" Izenburua: "+izenburua+" Egilea: "+egilea);
+        System.out.println(getErakutsi());
+    }
+
+    public String getErakutsi(){
+        return  "Kodea: "+kodea+" Izenburua: "+izenburua+" Egilea: "+egilea;
     }
 
     public  int getKodea(){
