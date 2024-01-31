@@ -85,24 +85,58 @@ public class Txapelketa {
 
     }
 
+    void duatleta() {
+        HashSet<Kirolari> duatletak = new HashSet<>();
+
+        for (Kirolari kirolari : korrikalari) {
+            if (txirrindulari.contains(kirolari) || igerilari.contains(kirolari)) {
+                duatletak.add(kirolari);
+            }
+        }
+        for (Kirolari kirolari : txirrindulari) {
+            if (igerilari.contains(kirolari) || korrikalari.contains(kirolari)) {
+                duatletak.add(kirolari);
+            }
+        }
+
+        /*for (Kirolari kirolari : duatletak){
+            if (korrikalari.contains(kirolari) && txirrindulari.contains(kirolari) && igerilari.contains(kirolari)){
+                duatletak.remove(kirolari);
+            }
+        }*/
+
+        //↓ Intellij-tak urrengo formatua gomendatudik erabiltzea eta ez for-a
+        duatletak.removeIf(kirolari -> korrikalari.contains(kirolari) && txirrindulari.contains(kirolari) && igerilari.contains(kirolari));
+
+        System.out.println("*****************************KORRIKALARI*****************************");
+        for (Kirolari kirolari : korrikalari) {
+            if (duatletak.contains(kirolari)) {
+                System.out.println(kirolari.getIzena() + " " + kirolari.getAdina());
+            }
+        }
+
+        System.out.println("*****************************TXIRRINDULARI***************************");
+        for (Kirolari kirolari : txirrindulari) {
+            if (duatletak.contains(kirolari)) {
+                System.out.println(kirolari.getIzena() + " " + kirolari.getAdina());
+            }
+        }
+
+        System.out.println("*****************************IGERILARI*******************************");
+        for (Kirolari kirolari : igerilari) {
+            if (duatletak.contains(kirolari)) {
+                System.out.println(kirolari.getIzena() + " " + kirolari.getAdina());
+            }
+        }
+
+    }
+
+
     void triatleta(){
         HashSet<Kirolari> guztiak = korrikalari;
         guztiak.retainAll(txirrindulari);
         guztiak.retainAll(igerilari);
 
-        /*ArrayList<Kirolari> kirolariak = new ArrayList<>();
-        ArrayList<Kirolari> txirrindulariak = new ArrayList<>();
-        ArrayList<Kirolari> igerilariak = new ArrayList<>();
-
-        for (Kirolari kirolari: guztiak){
-            if (kirolari.getEspezialitatea1() == Espezialitate.KORRIKALARI){
-                kirolariak.add(kirolari);
-            } else if (kirolari.getEspezialitatea1() == Espezialitate.TXIRRINDULARI) {
-                txirrindulariak.add(kirolari);
-            }else {
-                igerilariak.add(kirolari);
-            }
-        }*/
 
 
         System.out.println("*****************************KORRIKALARI*****************************");

@@ -3,7 +3,7 @@ public class Main {
 
         Txapelketa t1 = new Txapelketa();
 
-        Kirolari k1 = new Kirolari("Manolo", 20, Espezialitate.KORRIKALARI);
+        //Kirolari k1 = new Kirolari("Manolo", 20, Espezialitate.KORRIKALARI);
         Kirolari k2 = new Kirolari("Manuel", 25, Espezialitate.KORRIKALARI);
         Kirolari k3 = new Kirolari("Karlas", 230, Espezialitate.KORRIKALARI);
 
@@ -18,7 +18,7 @@ public class Main {
 
 
 
-        t1.gehituKirolari(k1);
+        //t1.gehituKirolari(k1);
         t1.gehituKirolari(k2);
         t1.gehituKirolari(k3);
         t1.gehituKirolari(tx1);
@@ -37,7 +37,11 @@ public class Main {
 
         t1.erakutsi();*/
 
-        t1.triatleta();
+        //t1.triatleta();
+
+        t1.duatleta();
+
+
 
 
     }
