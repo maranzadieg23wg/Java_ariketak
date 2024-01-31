@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Txapelketa {
@@ -79,6 +80,43 @@ public class Txapelketa {
 
         System.out.println("*****************************IGERILARI*******************************");
         for (Kirolari kirolari: igerilari) {
+            System.out.println(kirolari.getIzena() + " "+kirolari.getAdina());
+        }
+
+    }
+
+    void triatleta(){
+        HashSet<Kirolari> guztiak = korrikalari;
+        guztiak.retainAll(txirrindulari);
+        guztiak.retainAll(igerilari);
+
+        /*ArrayList<Kirolari> kirolariak = new ArrayList<>();
+        ArrayList<Kirolari> txirrindulariak = new ArrayList<>();
+        ArrayList<Kirolari> igerilariak = new ArrayList<>();
+
+        for (Kirolari kirolari: guztiak){
+            if (kirolari.getEspezialitatea1() == Espezialitate.KORRIKALARI){
+                kirolariak.add(kirolari);
+            } else if (kirolari.getEspezialitatea1() == Espezialitate.TXIRRINDULARI) {
+                txirrindulariak.add(kirolari);
+            }else {
+                igerilariak.add(kirolari);
+            }
+        }*/
+
+
+        System.out.println("*****************************KORRIKALARI*****************************");
+        for (Kirolari kirolari: guztiak) {
+            System.out.println(kirolari.getIzena() + " "+kirolari.getAdina());
+        }
+
+        System.out.println("*****************************TXIRRINDULARI***************************");
+        for (Kirolari kirolari: guztiak) {
+            System.out.println(kirolari.getIzena() + " "+kirolari.getAdina());
+        }
+
+        System.out.println("*****************************IGERILARI*******************************");
+        for (Kirolari kirolari: guztiak) {
             System.out.println(kirolari.getIzena() + " "+kirolari.getAdina());
         }
 
