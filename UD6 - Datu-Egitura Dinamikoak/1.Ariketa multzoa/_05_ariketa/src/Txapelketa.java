@@ -109,24 +109,43 @@ public class Txapelketa {
         duatletak.removeIf(kirolari -> korrikalari.contains(kirolari) && txirrindulari.contains(kirolari) && igerilari.contains(kirolari));
 
         System.out.println("*****************************KORRIKALARI*****************************");
+        boolean korri =false;
         for (Kirolari kirolari : korrikalari) {
             if (duatletak.contains(kirolari)) {
                 System.out.println(kirolari.getIzena() + " " + kirolari.getAdina());
+                korri = true;
             }
+        }
+
+        if (!korri){
+            System.out.println("Ez dago duatletarik atletismoan");
         }
 
         System.out.println("*****************************TXIRRINDULARI***************************");
+        boolean txirri = false;
         for (Kirolari kirolari : txirrindulari) {
             if (duatletak.contains(kirolari)) {
                 System.out.println(kirolari.getIzena() + " " + kirolari.getAdina());
+                txirri = true;
             }
         }
 
+        if (!txirri){
+            System.out.println("Ez dago duatletarik txirrindularitzan");
+        }
+
         System.out.println("*****************************IGERILARI*******************************");
+        boolean iger = false;
         for (Kirolari kirolari : igerilari) {
             if (duatletak.contains(kirolari)) {
                 System.out.println(kirolari.getIzena() + " " + kirolari.getAdina());
+
+                iger = true;
             }
+        }
+
+        if (!iger){
+            System.out.println("Ez dago duatletarik igeriketan");
         }
 
     }
@@ -144,14 +163,24 @@ public class Txapelketa {
             System.out.println(kirolari.getIzena() + " "+kirolari.getAdina());
         }
 
+        if (guztiak.size()==0){
+            System.out.println("Ez dago triatletarik");
+        }
+
         System.out.println("*****************************TXIRRINDULARI***************************");
         for (Kirolari kirolari: guztiak) {
             System.out.println(kirolari.getIzena() + " "+kirolari.getAdina());
+        }
+        if (guztiak.size()==0){
+            System.out.println("Ez dago triatletarik");
         }
 
         System.out.println("*****************************IGERILARI*******************************");
         for (Kirolari kirolari: guztiak) {
             System.out.println(kirolari.getIzena() + " "+kirolari.getAdina());
+        }
+        if (guztiak.size()==0){
+            System.out.println("Ez dago triatletarik");
         }
 
     }
