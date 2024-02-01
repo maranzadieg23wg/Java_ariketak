@@ -3,11 +3,11 @@ public class Main {
 
 
 
-        System.out.println(ZatiZero.main(8,2));
+        ZatiZero.main();
 
-        System.out.println(ZatiZero.main(0,2));
+        ZatiZero.main();
 
-        System.out.println(ZatiZero.main(8,0));
+        ZatiZero.main();
 
 
 

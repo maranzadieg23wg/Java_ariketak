@@ -1,13 +1,22 @@
+import java.util.Scanner;
+
 public class ZatiZero {
 
+    Scanner sc = new Scanner(System.in);
 
 
-    static float main(int z1, int z2){
+    static void main(){
+        Scanner sc = new Scanner(System.in);
+
         try {
-            return z1/z2;
+            int z1 = sc.nextInt();
+            int z2 = sc.nextInt();
+
+            System.out.println(z1/z2);
         }catch (ArithmeticException e){
-            System.out.println("ERROREA. Zati zero");
+            System.err.println("ERROREA. Zati zero");
+        }catch (Exception e){
+            System.err.println("Zenbakiak sartu behar dira, ez letrak");
         }
-        return 0;
     }
 }
