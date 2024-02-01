@@ -14,9 +14,9 @@ public class ZatiZero {
 
             System.out.println(z1/z2);
         }catch (ArithmeticException e){
-            System.out.println("ERROREA. Zati zero");
+            System.err.println("ERROREA. Zati zero");
         }catch (Exception e){
-            System.out.println("Zenbakiak sartu behar dira, ez letrak");
+            System.err.println("Zenbakiak sartu behar dira, ez letrak");
         }
     }
 }
