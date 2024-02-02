@@ -102,12 +102,8 @@ public class Zatiki {
     int sinplifikatu(int era1, int era2){
 
         //System.out.println(era1 + " / "+era2);
-            while (era1 != 0 || era2 != 0){
-                if (era1 < era2){
-                    int change = era2;
-                    era2 = era1;
-                    era1 = change;
-                }
+            while (era1 != 0){
+
 
                 if (era2 !=0){
                     int temp =  era1 % era2;
@@ -115,7 +111,13 @@ public class Zatiki {
                     era1 = era2;
                     era2 = temp;
                 }else {
-                    return era1;
+                    if (era1<0){
+                        return era1*-1;
+
+                    }else {
+                        return era1;
+                    }
+
                 }
 
 

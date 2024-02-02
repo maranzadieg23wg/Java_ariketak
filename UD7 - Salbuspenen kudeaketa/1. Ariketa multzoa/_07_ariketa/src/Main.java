@@ -4,7 +4,7 @@ public class Main {
 
 
 
-        Zatiki z1 = new Zatiki(2, 7);
+        Zatiki z1 = new Zatiki(2, -7);
 
         Zatiki z2 = new Zatiki(3, 9);
 
