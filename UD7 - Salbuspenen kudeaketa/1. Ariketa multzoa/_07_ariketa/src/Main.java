@@ -1,10 +1,10 @@
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ZatikiSalbuespena {
 
 
 
 
-        Zatiki z1 = new Zatiki(2, -7);
+        Zatiki z1 = new Zatiki(2, 0);
 
         Zatiki z2 = new Zatiki(3, 9);
 

@@ -8,7 +8,12 @@ public class Zatiki {
         this.zatitzailea =1;
     }
 
-    public Zatiki(int zatikizuna, int zatitzailea) {
+
+    public Zatiki(int zatikizuna, int zatitzailea)throws ZatikiSalbuespena {
+
+        if (zatitzailea==0){
+            throw new ZatikiSalbuespena("Ezin da zatitzaile bezala zero duen zatikia sortu");
+        }
         this.zatikizuna = zatikizuna;
         this.zatitzailea = zatitzailea;
     }
@@ -17,7 +22,7 @@ public class Zatiki {
         return zatikizuna +" / "+zatitzailea;
     }
 
-    Zatiki batu(Zatiki zatiki){
+    Zatiki batu(Zatiki zatiki) throws ZatikiSalbuespena {
         int zatikizuna1 = zatiki.getZatikizuna();
         int zatitzailea1 = zatiki.getZatitzailea();
 
@@ -38,7 +43,7 @@ public class Zatiki {
         //System.out.println(era1/sinpli +" / "+era2/sinpli);
     }
 
-    Zatiki kendu(Zatiki zatiki){
+    Zatiki kendu(Zatiki zatiki) throws ZatikiSalbuespena {
         int zatikizuna1 = zatiki.getZatikizuna();
         int zatitzailea1 = zatiki.getZatitzailea();
 
@@ -59,7 +64,7 @@ public class Zatiki {
         //System.out.println(era1/sinpli +" / "+era2/sinpli);
     }
 
-    Zatiki bider(Zatiki zatiki){
+    Zatiki bider(Zatiki zatiki) throws ZatikiSalbuespena {
 
         int zatikizuna1 = zatiki.getZatikizuna();
         int zatitzailea1 = zatiki.getZatitzailea();
@@ -79,7 +84,7 @@ public class Zatiki {
         //System.out.println(era1/sinpli +" / "+era2/sinpli);
     }
 
-    Zatiki zati(Zatiki zatiki){
+    Zatiki zati(Zatiki zatiki) throws ZatikiSalbuespena {
 
         int zatikizuna1 = zatiki.getZatikizuna();
         int zatitzailea1 = zatiki.getZatitzailea();
