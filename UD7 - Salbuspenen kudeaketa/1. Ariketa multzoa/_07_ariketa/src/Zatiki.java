@@ -11,11 +11,18 @@ public class Zatiki {
 
     public Zatiki(int zatikizuna, int zatitzailea)throws ZatikiSalbuespena {
 
-        if (zatitzailea==0){
-            throw new ZatikiSalbuespena("Ezin da zatitzaile bezala zero duen zatikia sortu");
+        try {
+            if (zatitzailea==0){
+                throw new ZatikiSalbuespena("Ezin da zatitzaile bezala zero duen zatikia sortu");
+            }
+            this.zatikizuna = zatikizuna;
+            this.zatitzailea = zatitzailea;
+        }catch (ZatikiSalbuespena e) {
+            System.err.println("Errorea bat gertatu da: " + e.getMessage());
+            this.zatikizuna = 0;
+            this.zatitzailea =0;
         }
-        this.zatikizuna = zatikizuna;
-        this.zatitzailea = zatitzailea;
+
     }
 
     public String toString(){
@@ -23,42 +30,63 @@ public class Zatiki {
     }
 
     Zatiki batu(Zatiki zatiki) throws ZatikiSalbuespena {
-        int zatikizuna1 = zatiki.getZatikizuna();
-        int zatitzailea1 = zatiki.getZatitzailea();
+        try {
+            int zatikizuna1 = zatiki.getZatikizuna();
+            int zatitzailea1 = zatiki.getZatitzailea();
 
-        int era1 = zatikizuna1 * this.zatitzailea;
-        int era2 = zatikizuna * zatitzailea1;
-        int behekoa = zatitzailea1*zatitzailea;
+            int era1 = zatikizuna1 * this.zatitzailea;
+            int era2 = zatikizuna * zatitzailea1;
+            int behekoa = zatitzailea1*zatitzailea;
 
-        int guztira = era1+era2;
+            int guztira = era1+era2;
 
-        int sinpli = sinplifikatu(era1, era2);
+            if (behekoa == 0) {
+                throw new ZatikiSalbuespena("Eragiketa honen emaitzak baliozkoa ez de zatiki bat sortzen du");
+            }
 
-        guztira = guztira /sinpli;
-        behekoa = behekoa /sinpli;
+            int sinpli = sinplifikatu(era1, era2);
 
-        return new Zatiki(guztira, behekoa);
+            guztira = guztira /sinpli;
+            behekoa = behekoa /sinpli;
+
+            return new Zatiki(guztira, behekoa);
+        }catch (ZatikiSalbuespena e) {
+            System.err.println("Errorea bat gertatu da: " + e.getMessage());
+            return new Zatiki(1, 1);
+        }
+
 
 
         //System.out.println(era1/sinpli +" / "+era2/sinpli);
     }
 
     Zatiki kendu(Zatiki zatiki) throws ZatikiSalbuespena {
-        int zatikizuna1 = zatiki.getZatikizuna();
-        int zatitzailea1 = zatiki.getZatitzailea();
+        try {
+            int zatikizuna1 = zatiki.getZatikizuna();
+            int zatitzailea1 = zatiki.getZatitzailea();
 
-        int era1 = zatikizuna1 * this.zatitzailea;
-        int era2 = zatikizuna * zatitzailea1;
-        int behekoa = zatitzailea1*zatitzailea;
+            int era1 = zatikizuna1 * this.zatitzailea;
+            int era2 = zatikizuna * zatitzailea1;
+            int behekoa = zatitzailea1*zatitzailea;
 
-        int guztira = era1-era2;
+            int guztira = era1-era2;
 
-        int sinpli = sinplifikatu(era1, era2);
 
-        guztira = guztira /sinpli;
-        behekoa = behekoa /sinpli;
+            if (behekoa == 0) {
+                throw new ZatikiSalbuespena("Eragiketa honen emaitza baliozkoa ez da zatiki bat sortzen du");
+            }
 
-        return new Zatiki(guztira, behekoa);
+            int sinpli = sinplifikatu(era1, era2);
+
+            guztira = guztira /sinpli;
+            behekoa = behekoa /sinpli;
+
+            return new Zatiki(guztira, behekoa);
+        }catch (ZatikiSalbuespena e) {
+            System.err.println("Errorea bat gertatu da: " + e.getMessage());
+            return new Zatiki(1, 1);
+        }
+
 
 
         //System.out.println(era1/sinpli +" / "+era2/sinpli);
@@ -66,19 +94,30 @@ public class Zatiki {
 
     Zatiki bider(Zatiki zatiki) throws ZatikiSalbuespena {
 
-        int zatikizuna1 = zatiki.getZatikizuna();
-        int zatitzailea1 = zatiki.getZatitzailea();
+        try {
+            int zatikizuna1 = zatiki.getZatikizuna();
+            int zatitzailea1 = zatiki.getZatitzailea();
 
-        int goiko = zatikizuna1 * this.zatikizuna;
-        int behekoa = zatitzailea1*zatitzailea;
+            int goiko = zatikizuna1 * this.zatikizuna;
+            int behekoa = zatitzailea1*zatitzailea;
 
 
-        int sinpli = sinplifikatu(goiko, behekoa);
+            if (behekoa == 0) {
+                throw new ZatikiSalbuespena("Eragiketa honen emaitzak baliozkoa ez de zatiki bat sortzen du");
+            }
 
-        goiko = goiko /sinpli;
-        behekoa = behekoa /sinpli;
 
-        return new Zatiki(goiko, behekoa);
+            int sinpli = sinplifikatu(goiko, behekoa);
+
+            goiko = goiko /sinpli;
+            behekoa = behekoa /sinpli;
+
+            return new Zatiki(goiko, behekoa);
+        }catch (ZatikiSalbuespena e) {
+            System.err.println("Errorea bat gertatu da: " + e.getMessage());
+            return new Zatiki(1, 1);
+        }
+
 
 
         //System.out.println(era1/sinpli +" / "+era2/sinpli);
@@ -86,19 +125,31 @@ public class Zatiki {
 
     Zatiki zati(Zatiki zatiki) throws ZatikiSalbuespena {
 
-        int zatikizuna1 = zatiki.getZatikizuna();
-        int zatitzailea1 = zatiki.getZatitzailea();
+        try {
+            int zatikizuna1 = zatiki.getZatikizuna();
+            int zatitzailea1 = zatiki.getZatitzailea();
 
-        int goiko = zatikizuna * zatitzailea1;
-        int behekoa = zatikizuna1*zatitzailea;
+            int goiko = zatikizuna * zatitzailea1;
+            int behekoa = zatikizuna1*zatitzailea;
 
 
-        int sinpli = sinplifikatu(goiko, behekoa);
+            if (behekoa == 0) {
+                throw new ZatikiSalbuespena("Eragiketa honen emaitzak baliozkoa ez de zatiki bat sortzen du");
+            }
 
-        goiko = goiko /sinpli;
-        behekoa = behekoa /sinpli;
 
-        return new Zatiki(goiko, behekoa);
+            int sinpli = sinplifikatu(goiko, behekoa);
+
+            goiko = goiko /sinpli;
+            behekoa = behekoa /sinpli;
+
+            return new Zatiki(goiko, behekoa);
+        }catch (ZatikiSalbuespena e) {
+            System.err.println("Errorea bat gertatu da: " + e.getMessage());
+            return new Zatiki(1, 1);
+        }
+
+
 
 
         //System.out.println(era1/sinpli +" / "+era2/sinpli);
