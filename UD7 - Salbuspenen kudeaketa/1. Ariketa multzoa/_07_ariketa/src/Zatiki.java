@@ -4,8 +4,8 @@ public class Zatiki {
     private int zatitzailea;
 
     public Zatiki() {
-        this.zatikizuna = 1;
-        this.zatitzailea =1;
+        this.zatikizuna = 0;
+        this.zatitzailea =0;
     }
 
 
@@ -52,7 +52,7 @@ public class Zatiki {
             return new Zatiki(guztira, behekoa);
         }catch (ZatikiSalbuespena e) {
             System.err.println("Errorea bat gertatu da: " + e.getMessage());
-            return new Zatiki(1, 1);
+            return new Zatiki();
         }
 
 
@@ -84,7 +84,7 @@ public class Zatiki {
             return new Zatiki(guztira, behekoa);
         }catch (ZatikiSalbuespena e) {
             System.err.println("Errorea bat gertatu da: " + e.getMessage());
-            return new Zatiki(1, 1);
+            return new Zatiki();
         }
 
 
@@ -115,7 +115,7 @@ public class Zatiki {
             return new Zatiki(goiko, behekoa);
         }catch (ZatikiSalbuespena e) {
             System.err.println("Errorea bat gertatu da: " + e.getMessage());
-            return new Zatiki(1, 1);
+            return new Zatiki();
         }
 
 
@@ -146,7 +146,7 @@ public class Zatiki {
             return new Zatiki(goiko, behekoa);
         }catch (ZatikiSalbuespena e) {
             System.err.println("Errorea bat gertatu da: " + e.getMessage());
-            return new Zatiki(1, 1);
+            return new Zatiki();
         }
 
 
