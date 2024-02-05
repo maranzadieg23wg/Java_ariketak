@@ -1,26 +1,29 @@
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PelikulaSalbuespena {
 
 
 
-        Pelikula p1 = new Pelikula("Beyond the fog", 2023, 142);
+        Pelikula p1 = new Pelikula("Beyond the fog", 0, 142);
 
-        Pelikula p2 = new Pelikula("Poor thinks", 2024, 150);
+        /*Pelikula p2 = new Pelikula("Poor thinks", 2024, 150);
 
-        Pelikula p3 = new Pelikula("En nombre de la tierra", 2023, 200);
+        Pelikula p3 = new Pelikula("En nombre de la tierra", 2023, 200);*/
+
 
         Zinema z1 = new Zinema("Prinzipe", 5);
 
+        System.out.println(p1.toString());
+
         z1.gehituPelikula(p1);
-        z1.gehituPelikula(p2,3);
-        z1.gehituPelikula(p3);
+        //z1.gehituPelikula(p2,3);
+        //z1.gehituPelikula(p3);
 
 
-        /*z1.erakutsi();
+        z1.erakutsi();
 
-        z1.ezabatuPelikula("Poor thinks");
+        /*z1.ezabatuPelikula("Poor thinks");
 
         z1.erakutsi();
 
@@ -40,8 +43,8 @@ public class Main {
         */
 
 
-        ArrayList<Pelikula> gutxiago = z1.motzagoakBaino(140);
-        System.out.println(gutxiago);
+        /*ArrayList<Pelikula> gutxiago = z1.motzagoakBaino(140);
+        System.out.println(gutxiago);*/
 
 
 
