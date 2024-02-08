@@ -151,8 +151,14 @@ public class Main {
 
                 Langile l2 = proba.get(0);
 
-                F1.remove(taldeak);
-                return F1;
+                Langile l1 = new Langile(talde, talde, 0, null);
+
+                if (l1.equals(l2)){
+                    F1.remove(taldeak);
+                    return F1;
+                }
+
+
 
 
 
