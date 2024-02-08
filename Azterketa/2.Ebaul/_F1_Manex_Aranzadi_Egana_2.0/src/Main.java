@@ -234,12 +234,6 @@ public class Main {
 
                     }
 
-                    if (p>3){
-                        throw new F1Exception("Piloto geheigi");
-                    }
-                    if (z>1){
-                        throw new F1Exception("Zuzendari geheigi");
-                    }
 
                     System.out.print("Izena: ");
                     String izena = sc.nextLine();
@@ -250,6 +244,15 @@ public class Main {
                     System.out.print("Kargua: ");
                     String borratu = sc.nextLine();
                     Kargu kargu = Kargu.valueOf(sc.nextLine());
+
+                    if (p>3 && kargu.equals(Kargu.piloto)){
+                        throw new F1Exception("Piloto geheigi");
+                    }
+                    if (z>1 && kargu.equals(Kargu.zuzendari)){
+                        throw new F1Exception("Zuzendari geheigi");
+                    }
+
+
 
                     Langile l3 = new Langile(izena, abizena, adina, kargu);
                     proba.add(l3);
