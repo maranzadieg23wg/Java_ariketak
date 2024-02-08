@@ -6,7 +6,7 @@ public class Langile {
     enum kargua{
         piloto,
         zuzendari,
-        teknikari
+        ingeniaria
     }
 
     private String izena;
@@ -37,5 +37,15 @@ public class Langile {
 
     public Langile.kargua getKargua() {
         return kargua;
+    }
+
+    @Override
+    public String toString() {
+        return "Langile{" +
+                "izena='" + izena + '\'' +
+                ", abizena='" + abizena + '\'' +
+                ", adina=" + adina +
+                ", kargua=" + kargua +
+                '}';
     }
 }
