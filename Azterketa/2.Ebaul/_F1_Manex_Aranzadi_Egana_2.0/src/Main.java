@@ -20,6 +20,8 @@ public class Main {
                 System.out.println("3: Ezabatu talde bat");
                 System.out.println("4: Gehitu langile bat");
                 System.out.println("5: Aldatu langile bat talde batetik");
+                System.out.println("6: Bukatu programa");
+
 
                 z = sc.nextInt();
 
@@ -78,24 +80,31 @@ public class Main {
 
                 ArrayList<Langile> proba = taldeak;
 
-                for (Langile l : proba) {
+                Langile l5 = proba.get(0);
+                Langile l1 = new Langile(talde, talde, 0, null);
 
-                    if (l.getKargu()!=null && txapuza!=1){
-                        if (zein == 1 && l.getKargu().equals(Kargu.piloto)) {
-                            System.out.println(l);
+                if (l5.equals(l1)){
+                    for (Langile l : proba) {
 
-                        } else if (zein == 2 && l.getKargu().equals(Kargu.ingeniari)) {
-                            System.out.println(l);
+                        if (l.getKargu()!=null && txapuza!=1){
+                            if (zein == 1 && l.getKargu().equals(Kargu.piloto)) {
+                                System.out.println(l);
 
-                        } else if (zein == 3 && l.getKargu().equals(Kargu.zuzendari)) {
-                            System.out.println(l);
+                            } else if (zein == 2 && l.getKargu().equals(Kargu.ingeniari)) {
+                                System.out.println(l);
 
+                            } else if (zein == 3 && l.getKargu().equals(Kargu.zuzendari)) {
+                                System.out.println(l);
+
+                            }
                         }
+                        txapuza++;
+
+
                     }
-                    txapuza++;
-
-
                 }
+
+
 
             }
         }else {
