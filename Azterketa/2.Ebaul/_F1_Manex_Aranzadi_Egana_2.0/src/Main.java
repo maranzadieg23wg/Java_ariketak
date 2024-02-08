@@ -39,7 +39,8 @@ public class Main {
                         gehituLangile(F1);
                         break;
                     case 5:
-                        aldatuLangile(F1);
+
+                        F1=aldatuLangile(F1);
                         break;
                     default:
                         System.out.println("Sartutako zenbakiak ez du ezer egiten");
@@ -274,16 +275,21 @@ public class Main {
 
     }
 
-    public static ArrayList aldatuLangile(ArrayList<ArrayList<Langile>> F1) throws F1Exception {
+    public static ArrayList<ArrayList<Langile>> aldatuLangile(ArrayList<ArrayList<Langile>> F1) throws F1Exception {
+
 
         Scanner sc = new Scanner(System.in);
 
+
         System.out.print("Izena: ");
         String izena = sc.nextLine();
+
         System.out.print("Abizena: ");
         String abizena = sc.nextLine();
+
         System.out.print("Adina: ");
         int adina = sc.nextInt();
+
         System.out.print("Kargua: ");
         String borratu = sc.nextLine();
         Kargu kargu = Kargu.valueOf(sc.nextLine());
@@ -292,82 +298,68 @@ public class Main {
         System.out.print("Zein taldetan dago? ");
         String taldea = sc.nextLine();
 
+
         System.out.print("Zein taldera mugitu nahi da? ");
         String taldea1 = sc.nextLine();
+
 
         Langile l1 = new Langile(taldea, taldea, 0, null);
         Langile l5 = new Langile(taldea1, taldea1, 0, null);
 
+
         Langile l2 = new Langile(izena, abizena, adina, kargu);
 
-        if (taldeaExistitu(F1, taldea)&&taldeaExistitu(F1, taldea1)){
 
-            ArrayList<Langile> aldaketak = new ArrayList<>();
+        if (taldeaExistitu(F1, taldea) && taldeaExistitu(F1, taldea1)) {
 
-            Iterator<ArrayList<Langile>> iterator1 = F1.iterator();
-
-            while (iterator1.hasNext()){
-                ArrayList<Langile> proba = iterator1.next();
-
-                if (proba.get(0).equals(l1)){
-
-                    /*for (Langile l: proba){
-                        if (l2.equals(l)){
-                            proba.remove(l);
-                            F1.remove(proba);
-                            F1.add(proba);
-
-                        }
-                    }*/
-                    Iterator<Langile> iterator = proba.iterator();
-                    while (iterator.hasNext()) {
-                        Langile l = iterator.next();
-                        if (l2.equals(l)) {
-                            proba.remove(l);
-                            F1.remove(proba);
-                            F1.add(proba);
-                        }
-                    }
+            ArrayList<ArrayList<Langile>> aldaketak = new ArrayList<>();
 
 
-
-                }
-
-                if (proba.get(0).equals(l5)){
-
-                    Iterator<Langile> iterator = proba.iterator();
-                    while (iterator.hasNext()) {
-                        Langile l = iterator.next();
-                        if (l2.equals(l)) {
-                            proba.add(l);
-                            F1.remove(proba);
-                            F1.add(proba);
-                        }
-                    }
-                    /*for (Langile l: proba){
-                        if (l2.equals(l)){
-                            proba.add(l);
-                            F1.remove(proba);
-                            F1.add(proba);
-
-                        }
-                    }*/
+            for (ArrayList<Langile> proba : F1) {
 
 
+                if (proba.get(0).equals(l1)) {
+
+                    ArrayList<Langile> probaAldatu = new ArrayList<>(proba);
+                    probaAldatu.remove(l2);
+                    aldaketak.add(probaAldatu);
+
+
+                } else if (proba.get(0).equals(l5)) {
+
+                    ArrayList<Langile> probaAldatuta = new ArrayList<>(proba);
+                    probaAldatuta.add(l2);
+                    aldaketak.add(probaAldatuta);
+
+
+                } else {
+                    aldaketak.add(proba);
                 }
 
             }
 
 
+            return aldaketak;
 
 
-        }else {
-            throw new F1Exception("Sartutako taldea ez dago listan");
+        } else {
+
+            if (!taldeaExistitu(F1, taldea)){
+                throw new F1Exception("Sartutako taldea ez dago listan "+taldea);
+            } else if (!taldeaExistitu(F1, taldea1)) {
+                throw new F1Exception("Sartutako taldea ez dago listan "+taldea1);
+            }else {
+                throw new F1Exception("Sartutako bi taldeak ez daude listan");
+            }
+
         }
 
-        return F1;
+
 
     }
+
+
+
 
 
 
