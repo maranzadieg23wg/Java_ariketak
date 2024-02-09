@@ -174,11 +174,11 @@ public class Main {
                 }
             }
 
-            if (z>1){
+            if (z>1 && l.getKargua().equals(Langile.kargua.zuzendari)){
                 throw new F1Exception("Zuzendari nahikoa daude: "+z);
             }
 
-            if (p>3){
+            if (p>3 && l.getKargua().equals(Langile.kargua.piloto)){
                 throw new F1Exception("Piloto nahikoak daude: "+p);
             }
 
