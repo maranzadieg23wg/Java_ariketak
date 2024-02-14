@@ -54,7 +54,7 @@ public class Main {
 
     }
 
-    public static HashMap<String, HashMap<Integer, Langile>> erakutsi(HashMap<String, HashMap<Integer, Langile>> F1) throws F1Exception {
+    public static void erakutsi(HashMap<String, HashMap<Integer, Langile>> F1) throws F1Exception {
 
         Scanner sc = new Scanner(System.in);
 
@@ -96,7 +96,6 @@ public class Main {
             throw new F1Exception(talde+ "taldea ez dago listan");
         }
 
-        return F1;
 
     }
 
