@@ -4,43 +4,48 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args){
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Lehen fitxategiaren izena: ");
-        String fitxategia1 = sc.nextLine();
-        System.out.println("Bigarren fitxategiaren izena: ");
-        String fitxategia2 = sc.nextLine();
-        System.out.println("Hirugarren fitxategiaren izena: ");
-        String fitxategia3 = sc.nextLine();
+
 
         try {
-        BufferedReader f1 = new BufferedReader(new FileReader(".\\fitxategiak\\"+fitxategia1));
+        BufferedReader f1 = new BufferedReader(new FileReader(".\\fitxategiak\\"+args[0]));
         //BufferedReader f2 = new BufferedReader(new FileReader(".\\fitxategiak\\fitx2.txt"));
         //BufferedReader f3 = new BufferedReader(new FileReader(".\\fitxategiak\\fitx3.txt"));
 
 
 
-        BufferedWriter w2 = new BufferedWriter(new FileWriter(".\\fitxategiak\\"+fitxategia2));
-        BufferedWriter w3 = new BufferedWriter(new FileWriter(".\\fitxategiak\\"+fitxategia3));
+        BufferedWriter w2 = new BufferedWriter(new FileWriter(".\\fitxategiak\\"+args[1]));
 
 
-        String line;
-        int zenbat =0;
-        while ((line = f1.readLine()) != null) {
+        int urrengoa = f1.read();
+        while (urrengoa!= -1) {
 
-            //System.out.println(line);
+            //System.out.println(urrengoa);
 
-            w2.write(line);
-            w2.newLine();
-            if (zenbat<20){
-                w3.write(line);
-                w3.newLine();
-            }
+            w2.write(urrengoa);
 
-            zenbat++;
+
+            urrengoa = f1.read();
+
+        }
+
+
+        w2.close();
+
+
+        f1 = new BufferedReader(new FileReader(".\\fitxategiak\\"+args[0]));
+        BufferedWriter w3 = new BufferedWriter(new FileWriter(".\\fitxategiak\\"+args[2]));
+
+        char[]karaktereak = new char[20];
+        int charKopu = f1.read(karaktereak);
+
+        while (charKopu !=-1){
+            w3.write(karaktereak);
+            karaktereak = new char[20];
+            charKopu = f1.read(karaktereak);
+            //System.out.println(charKopu);
         }
 
         f1.close();
-        w2.close();
         w3.close();
 
     } catch (IOException e) {
