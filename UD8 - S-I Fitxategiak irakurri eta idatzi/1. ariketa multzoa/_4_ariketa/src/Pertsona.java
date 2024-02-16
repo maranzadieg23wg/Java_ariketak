@@ -8,4 +8,16 @@ public class Pertsona {
         this.telefonoa = telefonoa;
         this.herria = herria;
     }
+
+    public String getIzena() {
+        return izena;
+    }
+
+    public String getTelefonoa() {
+        return telefonoa;
+    }
+
+    public String getHerria() {
+        return herria;
+    }
 }

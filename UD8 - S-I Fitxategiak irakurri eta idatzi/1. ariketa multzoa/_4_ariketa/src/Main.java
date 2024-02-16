@@ -3,20 +3,17 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) {
-
-        try {
-            BufferedReader f1 = new BufferedReader(new FileReader(".\\fitxategiak\\pertsona.txt"));
+    public static void main(String[] args) throws IOException {
 
 
+        AgendaKudeatzaile agenda = new AgendaKudeatzaile("agenda.txt");
 
+        agenda.erakutsi();
 
+        Pertsona pertsona1 = new Pertsona("Manolo", "123123123123", "Sevilla");
+        agenda.gehituPertsona(pertsona1);
+        agenda.erakutsi();
 
-
-
-        }catch (IOException e){
-            System.err.println("Fitxategia ez da aurkitu");
-        }
 
 
 
