@@ -1,6 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
@@ -10,19 +8,27 @@ public class Main {
 
             BufferedWriter w1 = new BufferedWriter(new FileWriter(".\\fitxategiak\\fitx1.txt"));
 
-            Scanner sc = new Scanner(System.in);
+
 
             System.out.print("Zenbat lerro: ");
-            int zenbat = sc.nextInt();
-            sc.nextLine();
+            BufferedReader zenbat1 = new BufferedReader(new InputStreamReader(System.in));
+
+            int zenbat = Integer.parseInt(String.valueOf(zenbat1.readLine()));
 
             System.out.println("Hasi idazten");
             for (int i =0;i<zenbat;i++){
-                String mezua = sc.nextLine();
+
+                String mezua = String.valueOf(zenbat1.readLine());
                 String alderantziz = "";
 
                 for (int e =mezua.length()-1;e>=0;e--){
                     alderantziz= alderantziz + mezua.charAt(e);
+                }
+
+                if (alderantziz.length()>30){
+
+                    alderantziz=alderantziz.substring(0, 30);
+
                 }
 
                 w1.write(alderantziz);
