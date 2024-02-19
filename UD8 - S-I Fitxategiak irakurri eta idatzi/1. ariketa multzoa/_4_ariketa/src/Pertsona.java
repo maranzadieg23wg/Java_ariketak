@@ -1,9 +1,9 @@
 public class Pertsona {
     private String izena;
-    private String telefonoa;
+    private long telefonoa;
     private String herria;
 
-    public Pertsona(String izena, String telefonoa, String herria) {
+    public Pertsona(String izena, long telefonoa, String herria) {
         this.izena = izena;
         this.telefonoa = telefonoa;
         this.herria = herria;
@@ -13,11 +13,20 @@ public class Pertsona {
         return izena;
     }
 
-    public String getTelefonoa() {
+    public long getTelefonoa() {
         return telefonoa;
     }
 
     public String getHerria() {
         return herria;
+    }
+
+    @Override
+    public String toString() {
+        return "Pertsona{" +
+                "izena='" + izena + '\'' +
+                ", telefonoa='" + telefonoa + '\'' +
+                ", herria='" + herria + '\'' +
+                '}';
     }
 }
