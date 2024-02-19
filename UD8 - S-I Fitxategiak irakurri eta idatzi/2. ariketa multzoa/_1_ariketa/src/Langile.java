@@ -1,4 +1,6 @@
-public class Langile {
+import java.io.Serializable;
+
+public class Langile implements Serializable {
 
     private String izena;
     private int soldata;

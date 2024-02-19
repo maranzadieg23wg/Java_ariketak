@@ -1,4 +1,6 @@
-public class Mugikor {
+import java.io.Serializable;
+
+public class Mugikor implements Serializable {
 
     private long telefonoa;
     private int bateria;
