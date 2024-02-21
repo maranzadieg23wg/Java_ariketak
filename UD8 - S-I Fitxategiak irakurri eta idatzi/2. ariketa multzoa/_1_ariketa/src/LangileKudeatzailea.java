@@ -5,44 +5,77 @@ public class LangileKudeatzailea {
 
     private String izena; //← Langilearen datuak serializatuta dagoen fitxategia da
 
+    private String telIzena; // ← Langileen telefonoak gorde egingo den lista.
+
     public LangileKudeatzailea(String izena) {
         this.izena = izena;
     }
 
-    void gordeLangileak(ArrayList<Langile> langileak) throws IOException {
+    void gordeLangileak(ArrayList<Langile> langileak){
 
         FileOutputStream f1 = null;
         ObjectOutputStream steam = null;
 
 
-        f1 = new FileOutputStream(".\\Fitxategiak\\Langilea\\"+izena+".dat");
+        try{
+            f1 = new FileOutputStream(".\\Fitxategiak\\Langilea\\"+izena+".dat");
 
-        steam = new ObjectOutputStream(f1);
+            steam = new ObjectOutputStream(f1);
+        } catch (FileNotFoundException e) {
+            System.err.println("Ezin izan da aurkitu \\Langilea\\"+izena+".dat fitxategia");
+        } catch (IOException e) {
+            System.err.println("Arazo general bat gertatu egin da.");
+        }
+
+
 
         for (Langile langile : langileak) {
-            steam.writeObject(langile);
+            try {
+                steam.writeObject(langile);
+            }catch (IOException e) {
+                System.err.println("Ezin izan da "+langile.getIzena()+" langilearen datuak gorde fitxategian.");
+            }
         }
-        steam.writeObject(null);
 
-        f1.close();
+        try {
+            steam.writeObject(null);
 
-        steam.close();
+            f1.close();
+
+            steam.close();
+        } catch (IOException e) {
+            System.err.println("Ezin izan dira itxi fitxategiak bertan datuak gorde al izateko.");
+        }
+
 
     }
 
-    private ArrayList<Langile> erakutsi() throws IOException, ClassNotFoundException {
+    private ArrayList<Langile> erakutsi() {
 
         FileInputStream f1 = null;
         ObjectInputStream steam = null;
 
         ArrayList<Langile> lista= new ArrayList<>();
 
-        f1 = new FileInputStream(".\\Fitxategiak\\Langilea\\"+izena+".dat");
-        steam = new ObjectInputStream(f1);
+
+        try {
+            f1 = new FileInputStream(".\\Fitxategiak\\Langilea\\"+izena+".dat");
+            steam = new ObjectInputStream(f1);
+        }catch (IOException e){
+            System.err.println("Ezin izan da aurkitu \\Langilea\\"+izena+".dat fitxategia");
+        }
+
 
         Langile langile = new Langile("???", 0, null);
         while (langile != null){
-            langile = (Langile)steam.readObject();
+
+            try {
+                langile = (Langile)steam.readObject();
+            } catch (IOException e) {
+                System.err.println("Ezin izan da "+langile.getIzena()+" langilearen datuak ongi irakurri");
+            } catch (ClassNotFoundException e) {
+                System.err.println("Fitxategian dagoen datua ez da Langile motakoa.");
+            }
 
             if (langile != null){
                 lista.add(langile);
@@ -53,7 +86,7 @@ public class LangileKudeatzailea {
 
     }
 
-    void erakutsiLangileak() throws IOException, ClassNotFoundException {
+    void erakutsiLangileak(){
 
         ArrayList<Langile> lista = erakutsi();
         for (Langile langile: lista) {
@@ -62,16 +95,28 @@ public class LangileKudeatzailea {
 
     }
 
-    Langile bilatuLangilea (String izena) throws IOException, ClassNotFoundException {
+    Langile bilatuLangilea (String izena){
         FileInputStream f1 = null;
         ObjectInputStream steam = null;
 
-        f1 = new FileInputStream(".\\Fitxategiak\\Langilea\\"+this.izena+".dat");
-        steam = new ObjectInputStream(f1);
+        try {
+            f1 = new FileInputStream(".\\Fitxategiak\\Langilea\\"+this.izena+".dat");
+            steam = new ObjectInputStream(f1);
+        }catch (IOException e){
+            System.err.println("Ezin izan da aurkitu \\Langilea\\"+izena+".dat fitxategia");
+        }
+
 
         Langile langile = new Langile("???", 0, null);
         while (langile != null){
-            langile = (Langile)steam.readObject();
+
+            try {
+                langile = (Langile)steam.readObject();
+            } catch (IOException e) {
+                System.err.println("Ezin izan da "+langile.getIzena()+" langilearen datuak ongi irakurri");
+            } catch (ClassNotFoundException e) {
+            System.err.println("Fitxategian dagoen datua ez da Langile motakoa.");
+                }
 
             if (langile != null && langile.getIzena().equals(izena)){
                 return langile;
@@ -83,44 +128,68 @@ public class LangileKudeatzailea {
         return null;
     }
 
-    void sortuMugikorrenFitxategia (String izena) throws ClassNotFoundException, IOException {
+    void sortuMugikorrenFitxategia (String izena){
         FileInputStream f1 = null;
         ObjectInputStream steam = null;
 
         FileOutputStream f2 = null;
         ObjectOutputStream steamP = null;
 
-        f2 = new FileOutputStream(".\\Fitxategiak\\Telefonoa\\"+izena+".dat");
+        try {
+            f2 = new FileOutputStream(".\\Fitxategiak\\Telefonoa\\"+izena+".dat");
+            steamP = new ObjectOutputStream(f2);
+        }catch (IOException e){
+            System.err.println("Ezin izan da ireki \\Telefonoa\\"+izena+".dat fitxategia.");
+        }
 
-        steamP = new ObjectOutputStream(f2);
+        try{
+            f1 = new FileInputStream(".\\Fitxategiak\\Langilea\\"+this.izena+".dat");
+            steam = new ObjectInputStream(f1);
+        }catch (IOException e){
+            System.err.println("Ezin izan da ireki \\Langilea\\"+this.izena+".dat fitxategia.");
+        }
 
-        f1 = new FileInputStream(".\\Fitxategiak\\Langilea\\"+this.izena+".dat");
-        steam = new ObjectInputStream(f1);
 
         Langile langile = new Langile("???", 0, null);
         while (langile != null){
-            langile = (Langile)steam.readObject();
+            try{
+                langile = (Langile)steam.readObject();
+            }catch (ClassNotFoundException | IOException e){
+                System.err.println("Saiatzen den fitxategia irakurtzen, bertan dauden langieak ez dira Langile klasekoak");
+            }
 
             if (langile != null){
                 Mugikor mugikor = langile.getMugikor();
-                steamP.writeObject(mugikor);
-                System.out.println(mugikor);
+                try {
+                    steamP.writeObject(mugikor);
+
+                }catch (IOException e){
+                    System.err.println("Ezin izan da idatzi telefonoen datuak \\Telefonoa\\\\\"+izena+\".dat fitxategia.");
+                }
+                // System.out.println(mugikor); //← erakusteko zein datu dauden gehitzen.
             }
         }
 
-        steamP.writeObject(null);
+        try {
+            steamP.writeObject(null);
 
-        f1.close();
+            f1.close();
 
-        steam.close();
+            steam.close();
 
 
-        f2.close();
+            f2.close();
 
-        steamP.close();
+            steamP.close();
+        } catch (IOException e) {
+            System.err.println("Ezin izan dira itzi Langile eta Telefonoen fitxategiak");
+        }
+
+        telIzena = izena;
+
     }
 
-    void lanEgin() throws IOException, ClassNotFoundException {
+    void lanEgin(){
 
         ArrayList<Langile> lista = erakutsi();
 
@@ -134,6 +203,7 @@ public class LangileKudeatzailea {
 
 
         gordeLangileak(list);
+        sortuMugikorrenFitxategia(this.telIzena);
 
     }
 }
