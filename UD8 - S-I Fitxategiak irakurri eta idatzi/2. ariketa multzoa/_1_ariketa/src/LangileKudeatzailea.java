@@ -18,7 +18,10 @@ public class LangileKudeatzailea {
 
         steam = new ObjectOutputStream(f1);
 
-        steam.writeObject(langieak[1]);
+        for (Langile langile : langieak) {
+            steam.writeObject(langile);
+        }
+        steam.writeObject(null);
 
         steam.close();
 
