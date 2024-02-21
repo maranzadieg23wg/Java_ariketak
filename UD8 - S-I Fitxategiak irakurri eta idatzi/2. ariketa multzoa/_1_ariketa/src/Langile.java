@@ -37,5 +37,11 @@ public class Langile implements Serializable {
         mugikor.deitu(minutu);
     }
 
+    public String getIzena() {
+        return izena;
+    }
 
+    public Mugikor getMugikor() {
+        return mugikor;
+    }
 }

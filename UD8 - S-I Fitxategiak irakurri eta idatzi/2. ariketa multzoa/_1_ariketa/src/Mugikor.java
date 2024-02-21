@@ -23,13 +23,19 @@ public class Mugikor implements Serializable {
     }
 
     void kargatu(int bateria){
-        setBateria(bateria);
+        if (this.bateria + bateria<=100){
+            setBateria(this.bateria+bateria);
+        }
     }
 
     void deitu(int minutu){
         int bateria = getBateria();
 
-        setBateria(minutu*2-bateria);
+        int berria = bateria-minutu*2;
+        if (berria <0){
+            berria =0;
+        }
+        setBateria(berria);
     }
 
     private void setBateria(int bateria) {
