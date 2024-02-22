@@ -1,4 +1,4 @@
-public class CD extends DiskoOptikoa{
+public class CD extends DiskoOptikoa implements Diskoa{
 
 
     public CD(double edukiera, String unitatea, int okupatutakoPortz) {
@@ -12,21 +12,31 @@ public class CD extends DiskoOptikoa{
 
     @Override
     public void grabatu(double kantitatea) {
-        System.out.println("CD dispositiboa grabatzen");
+        if (birgrabagarria){
+            System.out.println("CD dispositiboa grabatzen");
 
-        double libre = okupatutakoPortz*edukiera/100;
+            double libre = okupatutakoPortz*edukiera/100;
 
-        if (libre<kantitatea){
-            System.err.println("Ezin da grabatu diskoan. Libre daude: "+libre);
+            if (libre<kantitatea){
+                System.err.println("Ezin da grabatu diskoan. Libre daude: "+libre);
+            }else {
+
+                libre-=kantitatea;
+
+                double guztira = edukiera-libre;
+
+                okupatutakoPortz = (int) ((int)guztira*100/edukiera);
+
+
+            }
         }else {
-
-            libre-=kantitatea;
-
-            double guztira = edukiera-libre;
-
-            okupatutakoPortz = (int) ((int)guztira*100/edukiera);
-
-
+            System.err.println("Disko mota hau ezin da birgrabatu");
         }
+
+    }
+
+    @Override
+    public void biratu() {
+        System.out.println("CD dispositiboa 210 rpm abiaduran biratzen du");
     }
 }
