@@ -12,26 +12,37 @@ public class CD extends DiskoOptikoa implements Diskoa{
 
     @Override
     public void grabatu(double kantitatea) {
-        if (birgrabagarria){
-            System.out.println("CD dispositiboa grabatzen");
+        try{
+            if (birgrabagarria){
+                System.out.println("CD dispositiboa grabatzen");
 
-            double libre = okupatutakoPortz*edukiera/100;
+                double libre = okupatutakoPortz*edukiera/100;
 
-            if (libre<kantitatea){
-                System.err.println("Ezin da grabatu diskoan. Libre daude: "+libre);
+                try {
+                    if (libre<kantitatea){
+                        throw new Errorea("Ezin da grabatu diskoan. Libre daude: "+libre);
+                    }else {
+
+                        libre-=kantitatea;
+
+                        double guztira = edukiera-libre;
+
+                        okupatutakoPortz = (int) ((int)guztira*100/edukiera);
+
+
+                    }
+                }catch (Errorea e){
+                    System.err.println(e.getMessage());
+                }
+
             }else {
-
-                libre-=kantitatea;
-
-                double guztira = edukiera-libre;
-
-                okupatutakoPortz = (int) ((int)guztira*100/edukiera);
-
-
+                throw new Errorea("Disko mota hau ezin da birgrabatu");
             }
-        }else {
-            System.err.println("Disko mota hau ezin da birgrabatu");
+
+        }catch (Errorea e){
+            System.err.println(e.getMessage());
         }
+
 
     }
 
