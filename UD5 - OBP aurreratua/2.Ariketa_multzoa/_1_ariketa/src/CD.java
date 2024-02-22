@@ -1,8 +1,8 @@
 public class CD extends DiskoOptikoa implements Diskoa{
 
 
-    public CD(double edukiera, String unitatea, int okupatutakoPortz) {
-        super(edukiera, unitatea, okupatutakoPortz, true);
+    public CD(double edukiera) {
+        super(edukiera, "MB", 0, true);
     }
 
     @Override
@@ -16,7 +16,8 @@ public class CD extends DiskoOptikoa implements Diskoa{
             if (birgrabagarria){
                 System.out.println("CD dispositiboa grabatzen");
 
-                double libre = okupatutakoPortz*edukiera/100;
+                double libre = (100-okupatutakoPortz)*edukiera/100;
+                //System.out.println(libre);
 
                 try {
                     if (libre<kantitatea){

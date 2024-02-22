@@ -1,8 +1,8 @@
 public class DVD extends DiskoOptikoa implements Diskoa{
 
 
-    public DVD(double edukiera, String unitatea, int okupatutakoPortz) {
-        super(edukiera, unitatea, okupatutakoPortz, true);
+    public DVD(double edukiera) {
+        super(edukiera, "GB", 0, true);
     }
 
     @Override
@@ -11,40 +11,41 @@ public class DVD extends DiskoOptikoa implements Diskoa{
     }
 
     public void grabatu(double kantitatea) {
-        try{
-            if (birgrabagarria){
+        try {
+            if (birgrabagarria) {
                 System.out.println("DVD dispositiboa grabatzen");
 
-                double libre = okupatutakoPortz*edukiera/100;
+                double libre = (100-okupatutakoPortz)*edukiera/100;
 
                 try {
-                    if (libre<kantitatea){
-                        throw new Errorea("Ezin da grabatu diskoan. Libre daude: "+libre);
-                    }else {
+                    if (libre < kantitatea) {
+                        throw new Errorea("Ezin da grabatu diskoan. Libre daude: " + libre);
+                    } else {
 
-                        libre-=kantitatea;
+                        libre -= kantitatea;
 
-                        double guztira = edukiera-libre;
+                        double guztira = edukiera - libre;
 
-                        okupatutakoPortz = (int) ((int)guztira*100/edukiera);
+                        okupatutakoPortz = (int) ((int) guztira * 100 / edukiera);
 
 
                     }
-                }catch (Errorea e){
+                } catch (Errorea e) {
                     System.err.println(e.getMessage());
                 }
 
-            }else {
+            } else {
                 throw new Errorea("Disko mota hau ezin da birgrabatu");
             }
 
-        }catch (Errorea e){
+        } catch (Errorea e) {
             System.err.println(e.getMessage());
         }
 
+    }
 
-        @Override
+    @Override
     public void biratu() {
-        System.out.println("DVD dispositiboa 500 rpm abiaduran biratzen du");
+        System.out.println("DVD dispositiboa 580 rpm abiaduran biratzen du");
     }
 }
