@@ -45,38 +45,60 @@ public class Main {
 
     public static ArrayList<Integer> banatu(ArrayList<Integer>lista){
 
+        ArrayList<Integer> l1 = new ArrayList<>();
+        ArrayList<Integer> l2 = new ArrayList<>();
+        ArrayList<Integer> l0 = new ArrayList<>();
         int luzeera = lista.size();
         //System.out.println(luzeera);
-        if (luzeera >1){
-            ArrayList<Integer> l1 = new ArrayList<>();
-            ArrayList<Integer> l2 = new ArrayList<>();
+        if (luzeera >=1){
+
             for (int i =0;i<lista.size();i++){
                 if (i<luzeera/2){
                     l1.add(lista.get(i));
-                    System.out.print("l1: "+lista.get(i)+" ");
+                    //System.out.print("l1: "+lista.get(i)+" ");
                 }else {
                     l2.add(lista.get(i));
-                    System.out.print("l2: "+lista.get(i)+" ");
+                    //System.out.print("l2: "+lista.get(i)+" ");
                 }
             }
-            System.out.println(" ");
+            //System.out.println(" ");
             banatu(l1);
             banatu(l2);
+            l0 = batu(l1, l2);
+
+        }else {
+            l0.add(lista.get(0));
         }
 
-
-
-
-
-
-
-        return lista;
-
-
-
-
+        return l0;
 
     }
+
+    public static ArrayList<Integer> batu (ArrayList<Integer>l1, ArrayList<Integer>l2){
+        ArrayList<Integer> l0 = new ArrayList<>();
+
+        while (!l1.isEmpty() && !l2.isEmpty()){
+            if (l1.get(0)<= l2.get(0)){
+                l0.add(l1.get(0));
+                l1.remove(0);
+            }else {
+                l0.add(l2.get(0));
+                l2.remove(0);
+
+            }
+        }
+
+        if (l1.size()>0){
+            l0.addAll(l1);
+        }
+        if (l2.size()>0){
+            l0.addAll(l2);
+        }
+
+        return l0;
+    }
+
+
 
     public static ArrayList<Integer>aldatu(int p1, int p2,ArrayList<Integer>lista){
         int z1 = lista.get(p1);
