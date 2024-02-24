@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         Instant hasiera = Instant.now();
-        ArrayList<Integer> lista = random(7);
+        ArrayList<Integer> lista = random(5000000);
 
         erakutsi(lista);
 
@@ -37,11 +37,9 @@ public class Main {
 
     public static ArrayList<Integer> ordenatu(ArrayList<Integer> lista){
 
-        banatu(lista);
-
-
-        return lista;
+        return banatu(lista);
     }
+
 
     public static ArrayList<Integer> banatu(ArrayList<Integer>lista){
 
@@ -50,7 +48,7 @@ public class Main {
         ArrayList<Integer> l0 = new ArrayList<>();
         int luzeera = lista.size();
         //System.out.println(luzeera);
-        if (luzeera >=1){
+        if (luzeera >=2){
 
             for (int i =0;i<lista.size();i++){
                 if (i<luzeera/2){
@@ -62,12 +60,13 @@ public class Main {
                 }
             }
             //System.out.println(" ");
-            banatu(l1);
-            banatu(l2);
+            l1 = banatu(l1);
+            l2 = banatu(l2);
             l0 = batu(l1, l2);
 
         }else {
-            l0.add(lista.get(0));
+
+            l0.addAll(lista);
         }
 
         return l0;
