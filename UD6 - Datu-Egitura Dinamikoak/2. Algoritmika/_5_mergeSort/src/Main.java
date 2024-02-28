@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         Instant hasiera = Instant.now();
-        ArrayList<Integer> lista = random(5000000);
+        ArrayList<Integer> lista = random(50000);
 
         erakutsi(lista);
 
