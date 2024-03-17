@@ -24,6 +24,7 @@ private JPanel behekoPanel, goikoPanel, eskubikoPanel, ezkerrekoPanel;
         beheko();
         eskubiko();
         goiko();
+        ezkerreko();
 
 
         erakutsi();
@@ -43,8 +44,10 @@ private JPanel behekoPanel, goikoPanel, eskubikoPanel, ezkerrekoPanel;
         frame.setPreferredSize(new Dimension(x, y));
     }
     void erakutsi(){
+        frame.add(ezkerrekoPanel, BorderLayout.WEST);
+
         frame.add(behekoPanel, BorderLayout.SOUTH);
-        frame.add(behekoPanel, BorderLayout.WEST);
+        //frame.add(behekoPanel, BorderLayout.WEST);
 
         frame.add(eskubikoPanel, BorderLayout.EAST);
         frame.add(goikoPanel, BorderLayout.NORTH);
@@ -56,8 +59,8 @@ private JPanel behekoPanel, goikoPanel, eskubikoPanel, ezkerrekoPanel;
         behekoPanel = new JPanel();
         botoia1 = new JButton("Botoia 1");
         botoia2 = new JButton("Botoia 2");
-        behekoPanel.setLayout(new GridLayout(1, 10));
-        behekoPanel.setLayout(new FlowLayout());
+        FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
+        behekoPanel.setLayout(flowLayout);
         behekoPanel.setBackground(Color.blue);
 
         behekoPanel.add(botoia1);
@@ -92,6 +95,13 @@ private JPanel behekoPanel, goikoPanel, eskubikoPanel, ezkerrekoPanel;
 
         goikoPanel.add(chex1);
         goikoPanel.add(chex2);
+
+    }
+
+    void ezkerreko(){
+        ezkerrekoPanel = new JPanel();
+
+        ezkerrekoPanel.setBackground(Color.red);
 
     }
 }
