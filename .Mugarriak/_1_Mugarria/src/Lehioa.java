@@ -12,6 +12,7 @@ private JButton botoia1, botoia2;
 private JRadioButton radio1, radio2, radio3;
 private JCheckBox chex1, chex2;
 private JPanel behekoPanel, goikoPanel, eskubikoPanel, ezkerrekoPanel;
+private ImageIcon irudia;
 
 
     public Lehioa(String izena, int x, int y) {
@@ -98,10 +99,15 @@ private JPanel behekoPanel, goikoPanel, eskubikoPanel, ezkerrekoPanel;
 
     }
 
-    void ezkerreko(){
+    void ezkerreko() {
         ezkerrekoPanel = new JPanel();
-
+        JLabel i1 = new JLabel();
+        ImageIcon irudia = new ImageIcon("irudia/TheDarkSideOfTheMon.png");
+        ezkerrekoPanel.setLayout(new GridLayout(2, 4));
+        i1.setIcon(irudia);
+        i1.setPreferredSize(new Dimension(500, 100));
+        ezkerrekoPanel.add(i1);
         ezkerrekoPanel.setBackground(Color.red);
-
     }
+
 }
