@@ -10,8 +10,8 @@ public class Index {
 
 
     private JFrame frame;
-    private JPanel menua, menua2;
-    private JButton buttonLogin, buttonSingUp, pelikulak, aktoreak, zuzendariak, produktorak, laguntza, myList;
+    private JPanel menua, menua2, erdikoa;
+    private JButton buttonLogin, buttonSingUp, botoiak;
     private JTextField bilatu;
     private JList<String> aukerak;
 
@@ -23,8 +23,13 @@ public class Index {
         this.y = y;
         this.izena = izena;
 
+        lista = new String[]{"Pelikulak", "aktoreak", "zuzendariak", "laguntza", "myList"};
+
+
         sortuLehoia();
         menua();
+        menua2();
+        erdikoa();
 
 
 
@@ -40,14 +45,25 @@ public class Index {
         frame.setPreferredSize(new Dimension(x, y));
     }
 
-    void erakutsi(){
+    void erakutsi() {
+        frame.setLayout(new BorderLayout());
 
-        frame.add(menua, BorderLayout.NORTH);
+        JPanel menuak = new JPanel(); //← Kontenedore bat sortzen dugu
+        menuak.setLayout(new BoxLayout(menuak, BoxLayout.Y_AXIS));
 
+        menuak.add(menua);
+        menuak.add(menua2);
+
+        frame.add(menuak, BorderLayout.NORTH);
+
+        frame.add(erdikoa, BorderLayout.CENTER);
+        //frame.add(centerPanel, BorderLayout.CENTER);
 
         frame.pack();
         frame.setVisible(true);
     }
+
+
 
     void menua(){
 
@@ -80,6 +96,101 @@ public class Index {
 
         menua.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
 
+
+
+    }
+
+    void menua2(){
+
+        menua2 = new JPanel();
+
+        GridLayout gridLayout = new GridLayout(1, lista.length+2+2+1);
+
+        menua2.setLayout(gridLayout);
+
+
+        menua2.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+
+        for (int i =0;i< lista.length;i++){
+            String b = lista[i];
+            botoiak = new JButton(b);
+
+            menua2.add(botoiak);
+        }
+        menua2.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+
+        aukerak = new JList<>(lista);
+        menua2.add(aukerak);
+
+        bilatu = new JTextField("Search");
+        menua2.add(bilatu);
+
+
+        menua2.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+
+
+    }
+
+
+    void erdikoa(){
+        erdikoa = new JPanel();
+
+        int aktoreKop = 6;
+
+        int peliKop = 6;
+
+        GridLayout gridLayout = new GridLayout(4, aktoreKop+2);
+
+        erdikoa.setLayout(gridLayout);
+
+        erdikoa.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+
+
+        //↓ Gehitzeko pelikulak textua
+        String peli = "Pelikulak";
+        JLabel peliLabel = new JLabel(peli);
+
+        erdikoa.add(peliLabel);
+        for (int i =0;i<peliKop;i++){
+            erdikoa.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+        }
+        for (int i =0;i<peliKop;i++){
+            ImageIcon originalIcon = new ImageIcon("irudiak/pelikula/"+i+".png");
+
+            Image img = originalIcon.getImage();
+            Image img1 = img.getScaledInstance(125, 100, Image.SCALE_SMOOTH);
+            ImageIcon thedark = new ImageIcon(img1);
+
+            JLabel label = new JLabel();
+            label.setIcon(thedark);
+
+            erdikoa.add(label);
+        }
+
+
+        //↓ Gehitzeko aktoreak textua
+        String akto = "Aktoreak";
+        JLabel aktoLabel = new JLabel(akto);
+
+
+        erdikoa.add(aktoLabel);
+        for (int i =0;i<aktoreKop;i++){
+            erdikoa.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+        }
+        for (int i =0;i<aktoreKop;i++){
+            ImageIcon originalIcon = new ImageIcon("irudiak/aktore/"+i+".png");
+
+            Image img = originalIcon.getImage();
+            Image img1 = img.getScaledInstance(125, 100, Image.SCALE_SMOOTH);
+            ImageIcon thedark = new ImageIcon(img1);
+
+            JLabel label = new JLabel();
+            label.setIcon(thedark);
+
+            erdikoa.add(label);
+        }
+
+        erdikoa.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
 
 
     }
