@@ -1,5 +1,10 @@
+import index.Index;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+
+        Index i1 = new Index(1500, 800, "zinema");
+
     }
 }
