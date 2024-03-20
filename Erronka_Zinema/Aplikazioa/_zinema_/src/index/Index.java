@@ -17,6 +17,8 @@ public class Index {
 
     private String[] lista;
 
+    private CardLayout menuLista;
+
 
     public Index(int x, int y, String izena) {
         this.x = x;
@@ -135,11 +137,13 @@ public class Index {
     void erdikoa(){
         erdikoa = new JPanel();
 
-        int aktoreKop = 6;
+        int peliKop = 7;
 
-        int peliKop = 6;
+        int aktoreKop = 7;
 
-        GridLayout gridLayout = new GridLayout(4, aktoreKop+2);
+
+
+        GridLayout gridLayout = new GridLayout(4, aktoreKop+2+1);
 
         erdikoa.setLayout(gridLayout);
 
@@ -155,10 +159,10 @@ public class Index {
             erdikoa.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
         }
         for (int i =0;i<peliKop;i++){
-            ImageIcon originalIcon = new ImageIcon("irudiak/pelikula/"+i+".png");
+            ImageIcon originalIcon = new ImageIcon("irudiak/pelikula/"+i+".jpg");
 
             Image img = originalIcon.getImage();
-            Image img1 = img.getScaledInstance(125, 100, Image.SCALE_SMOOTH);
+            Image img1 = img.getScaledInstance(130, 200, Image.SCALE_SMOOTH);
             ImageIcon thedark = new ImageIcon(img1);
 
             JLabel label = new JLabel();
@@ -178,10 +182,10 @@ public class Index {
             erdikoa.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
         }
         for (int i =0;i<aktoreKop;i++){
-            ImageIcon originalIcon = new ImageIcon("irudiak/aktore/"+i+".png");
+            ImageIcon originalIcon = new ImageIcon("irudiak/aktore/"+i+".jpg");
 
             Image img = originalIcon.getImage();
-            Image img1 = img.getScaledInstance(125, 100, Image.SCALE_SMOOTH);
+            Image img1 = img.getScaledInstance(130, 200, Image.SCALE_SMOOTH);
             ImageIcon thedark = new ImageIcon(img1);
 
             JLabel label = new JLabel();
