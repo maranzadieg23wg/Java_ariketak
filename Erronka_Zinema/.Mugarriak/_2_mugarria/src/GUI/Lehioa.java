@@ -3,6 +3,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Lehioa extends JFrame implements ActionListener {
 
@@ -88,8 +92,11 @@ public class Lehioa extends JFrame implements ActionListener {
             scrola = new JScrollPane(textua); //← Scrola sortu
             scrola.setBounds(10,50,400,300);
 
+            scrola.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+            scrola.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-            //textua.setVerticalAlignment(JTextField.TOP);
+
+
             menua.add(scrola);
 
             itzi = new JButton("Close");
@@ -103,11 +110,32 @@ public class Lehioa extends JFrame implements ActionListener {
         public void actionPerformed(ActionEvent e){
             if (e.getSource() == garbitu) {
                 textua.setText("");
+
             } else if (e.getSource() == itzi) {
+
                 System.exit(0);
+
             }else if (e.getSource() == lista) {
+
                 String selectedOption = (String) lista.getSelectedItem();
-                textua.append(selectedOption + "\n");
+
+                try {
+
+                    BufferedReader r1 = new BufferedReader(new FileReader("Fitxategiak\\"+selectedOption));
+                    StringBuilder string = new StringBuilder();
+
+                    String line;
+                    while ((line = r1.readLine()) != null) {
+                        string.append(line).append("\n");
+                    }
+                    textua.setText(string.toString());
+                    r1.close();
+
+                } catch (FileNotFoundException ex) {
+                    System.err.println(selectedOption+" fitxategia ezin izan da aurkitu");
+                } catch (IOException ex) {
+                    System.err.println(selectedOption+" fitxategia ezin izan da ongi itxi");
+                }
             }
 
         }
