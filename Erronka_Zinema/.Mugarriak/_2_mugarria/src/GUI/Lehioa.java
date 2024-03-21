@@ -62,6 +62,7 @@ public class Lehioa {
             lista.addItem("Berdea");
             lista.addItem("Horia");
 
+            lista.setPreferredSize(new Dimension(200, 25));
             menua.add(lista);
 
             garbitu = new JButton("Clear");
