@@ -1,5 +1,9 @@
+import GUI.Lehioa;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+
+        Lehioa e = new Lehioa("Manex", 800, 700);
     }
 }
