@@ -13,6 +13,7 @@ public class Lehioa {
     private JPanel menua;
     private JComboBox<String> lista;
     private JButton garbitu;
+    private JTextField textua;
     
         public Lehioa(String izena, int x, int y){
 
@@ -66,7 +67,9 @@ public class Lehioa {
             garbitu = new JButton("Clear");
             menua.add(garbitu);
 
-
+            textua = new JTextField();
+            textua.setPreferredSize(new Dimension(300, 300));
+            menua.add(textua);
 
 
         }
