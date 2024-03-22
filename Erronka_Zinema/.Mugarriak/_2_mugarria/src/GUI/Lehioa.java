@@ -64,7 +64,7 @@ public class Lehioa extends JFrame implements ActionListener {
             //GridLayout gridLayout = new GridLayout(1,2);
             //menua.setLayout(gridLayout);
 
-            menua.setBackground(Color.CYAN);
+            //menua.setBackground(Color.CYAN);
 
 
             lista = new JComboBox<String>();
