@@ -16,7 +16,7 @@ public class Lehioa extends JFrame implements ActionListener {
 
 
     private JFrame frame;
-    private JPanel menua;
+    private JPanel menua, menua2;
     private JComboBox<String> lista;
     private JButton garbitu, itzi;
     private JTextArea textua;
@@ -31,6 +31,7 @@ public class Lehioa extends JFrame implements ActionListener {
             sortuLehioa();
 
             menua();
+            menua2();
 
             erakutsi();
 
@@ -45,7 +46,9 @@ public class Lehioa extends JFrame implements ActionListener {
         }
 
         void erakutsi(){
-            frame.add(menua);
+            frame.add(menua, BorderLayout.WEST);
+            frame.add(menua2, BorderLayout.EAST);
+
 
 
             frame.pack();
@@ -79,35 +82,31 @@ public class Lehioa extends JFrame implements ActionListener {
             garbitu.addActionListener(this);
             menua.add(garbitu);
 
-
-
-
-
-
-            textua = new JTextArea();
-            textua.setPreferredSize(new Dimension(400, 600));
-
-            textua.setLineWrap(true);
-
-            scrola = new JScrollPane(textua); //← Scrola sortu
-            scrola.setBounds(10,50,400,300);
-
-            scrola.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-            scrola.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-
-
-
-            menua.add(scrola);
-
-            itzi = new JButton("Close");
-            itzi.addActionListener(this);
-            menua.add(itzi);
-
-
-
         }
 
-        public void actionPerformed(ActionEvent e){
+    public void menua2() {
+        menua2 = new JPanel();
+        menua2.setLayout(new BorderLayout());
+
+        textua = new JTextArea();
+        textua.setLineWrap(true);
+        textua.setPreferredSize(new Dimension(488, 600));
+
+        JScrollPane scrola = new JScrollPane(textua);
+        scrola.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        scrola.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+        menua2.add(scrola, BorderLayout.CENTER);
+
+        itzi = new JButton("Close");
+        itzi.addActionListener(this);
+        itzi.setPreferredSize(new Dimension(2, 20));
+
+        menua2.add(itzi, BorderLayout.SOUTH);
+    }
+
+
+    public void actionPerformed(ActionEvent e){
             if (e.getSource() == garbitu) {
                 textua.setText("");
 
@@ -132,8 +131,11 @@ public class Lehioa extends JFrame implements ActionListener {
                     r1.close();
 
                 } catch (FileNotFoundException ex) {
+                    JOptionPane.showMessageDialog(null, (selectedOption+" fitxategia ezin izan da aurkitu"), "Error: 404", JOptionPane.ERROR_MESSAGE);
                     System.err.println(selectedOption+" fitxategia ezin izan da aurkitu");
                 } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, (selectedOption+" fitxategia ezin izan da ongi itxi"), "Error: 808", JOptionPane.ERROR_MESSAGE);
+
                     System.err.println(selectedOption+" fitxategia ezin izan da ongi itxi");
                 }
             }
