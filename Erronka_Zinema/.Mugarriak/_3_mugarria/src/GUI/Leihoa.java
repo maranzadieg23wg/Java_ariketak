@@ -66,7 +66,14 @@ public class Leihoa extends JFrame implements ActionListener {
 
         listaIrudiak = new JComboBox<>();
         for (String izenak : lista){
-            listaIrudiak.addItem(izenak);
+
+            //Konprobatu irudi bat den a la ez.
+            int z = izenak.length();
+            String formatua = izenak.substring(z-3, z);
+            if (formatua.equals(".jpg") || formatua.equals(".png")){
+                listaIrudiak.addItem(izenak);
+            }
+
         }
         listaIrudiak.addActionListener(this);
         menua.add(listaIrudiak);
