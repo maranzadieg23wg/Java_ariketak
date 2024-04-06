@@ -50,7 +50,7 @@ public class Leihoa extends JFrame implements ActionListener {
     void erakutsi(){
 
         frame.add(menua, BorderLayout.WEST);
-        
+
         //frame.add(menua2, BorderLayout.EAST);
 
 
@@ -98,12 +98,17 @@ public class Leihoa extends JFrame implements ActionListener {
 
         menua.add(listaIrudiak);
 
-        /*ImageIcon originalIcon = new ImageIcon(karpeta1+"\\"+listaIrudiak);
+        //↓ Irudia
+        JLabel irudiak = new JLabel(); //← Irudia hemen exarriko dugu.
+        menua.add(irudiak);
+
+        //↓ Lehenengo irudia exartzen dugu
+        ImageIcon originalIcon = new ImageIcon(karpeta1+"\\"+listaIrudiak.getItemAt(0));
         Image img = originalIcon.getImage();
         Image img1 = img.getScaledInstance(125, 100, Image.SCALE_SMOOTH);
         ImageIcon theDark = new ImageIcon(img1);
-        JLabel label = new JLabel();
-        label.setIcon(theDark);
+        irudiak.setIcon(theDark);
+
         menua.add(label);*/
 
 
@@ -116,6 +121,21 @@ public class Leihoa extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == listaIrudiak){
+            irudia_berritu(e);
+        } else if (e.getSource() == gorde) {
 
+        }
+    }
+
+    void irudia_berritu(ActionEvent e){ //← Ezartzen dugu irudi berria
+        JComboBox<String> lista = (JComboBox<String>) e.getSource(); //← Lortzen dugu irudien lista guztia
+        String path = (String) lista.getSelectedItem(); //← Lortzen dugu aukeratu egin dugun irudiaren izena.
+        ImageIcon originalIcon = new ImageIcon(karpeta1+"\\"+path); //← Irudia aukeratu
+        //↓Irudiaren tamaina ezarri
+        Image img = originalIcon.getImage();
+        Image img1 = img.getScaledInstance(125, 100, Image.SCALE_SMOOTH);
+
+        ((JLabel) menua.getComponent(1)).setIcon(new ImageIcon(img1)); //← Ezartzen dugu irudi berria.
     }
 }
