@@ -4,7 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Leihoa extends JFrame implements ActionListener {
 
@@ -45,8 +50,22 @@ public class Leihoa extends JFrame implements ActionListener {
     void sortuLehioa(){
         frame = new JFrame(izena);
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e){
+                itxi();
+            }
+        });
+
+        //this.setVisible(true);
+        frame.pack();
+
         frame.setPreferredSize(new Dimension(x, y));
+    }
+
+    void itxi(){
+        JOptionPane.showMessageDialog(null, "Agur!", "Manex Aranzadi Egaña", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
     }
 
     void erakutsi(){
