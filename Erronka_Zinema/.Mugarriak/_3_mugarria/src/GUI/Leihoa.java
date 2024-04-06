@@ -18,6 +18,7 @@ public class Leihoa extends JFrame implements ActionListener {
     private JComboBox<String> listaIrudiak;
     private JTextArea textua;
     private String karpeta1;
+    private JCheckBox gorde;
 
 
     public Leihoa(String izena, int x, int y){
@@ -109,7 +110,9 @@ public class Leihoa extends JFrame implements ActionListener {
         ImageIcon theDark = new ImageIcon(img1);
         irudiak.setIcon(theDark);
 
-        menua.add(label);*/
+        //↓ Check Box a gehitu.
+        gorde = new JCheckBox("Save your comment", true);
+        menua.add(gorde);
 
 
     }
