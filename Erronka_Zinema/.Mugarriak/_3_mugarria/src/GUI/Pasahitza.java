@@ -10,7 +10,7 @@ public class Pasahitza {
         String name = JOptionPane.showInputDialog("Input password");
         if (name.equals("damocles")){
             System.out.println("logeatuta");
-            new Leihoa("Manex Aranzadi", 800, 600);
+            new Leihoa("Manex Aranzadi", 700, 600);
         }
 
     }
