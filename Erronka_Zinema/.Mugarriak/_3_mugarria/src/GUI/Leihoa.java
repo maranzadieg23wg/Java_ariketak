@@ -30,6 +30,7 @@ public class Leihoa extends JFrame implements ActionListener {
 
         sortuLehioa();
         irudiakList();
+
         menua();
         menua2();
 
@@ -49,6 +50,7 @@ public class Leihoa extends JFrame implements ActionListener {
     void erakutsi(){
 
         frame.add(menua, BorderLayout.WEST);
+        
         //frame.add(menua2, BorderLayout.EAST);
 
 
@@ -56,7 +58,7 @@ public class Leihoa extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 
-    void irudiakList(){
+    void irudiakList(){ //← Irakurtzen dugu dauden fitxategi guztiak IMG karpetan.
         File karpeta = new File(karpeta1);
 
         if (karpeta.exists() && karpeta.isDirectory()){
@@ -66,11 +68,10 @@ public class Leihoa extends JFrame implements ActionListener {
         }
     }
 
-    void menua(){
-        menua = new JPanel();
+    JComboBox<String> irudiakAukeratu(JComboBox<String> list){ //← Aukeratzen ditugu IMG karpetan dauden irudi guztiak bukatzen dutenak .jpg edo .png-en.
+        list = new JComboBox<>();
 
-        //System.out.println(1);
-        listaIrudiak = new JComboBox<>();
+
         for (String izenak : lista){
 
             //Konprobatu irudi bat den a la ez.
@@ -78,27 +79,38 @@ public class Leihoa extends JFrame implements ActionListener {
             String formatua = izenak.substring(z-4, z);
             //System.out.println("Formatua: "+formatua);
             if (formatua.equals(".jpg") || formatua.equals(".png")){
-                listaIrudiak.addItem(izenak);
-                //System.out.println("izenak: "+izenak);
+                list.addItem(izenak);
+                System.out.println("izenak: "+izenak);
             }
 
         }
-        listaIrudiak.addActionListener(this);
+
+        return list;
+    }
+
+    void menua(){ //← Ezkerreko menua sortu egiten dugu.
+        menua = new JPanel();
+
+        //↓ Irudien desplegablea sortu egiten dugu.
+        listaIrudiak = irudiakAukeratu(listaIrudiak); //← Gehitzen ditugu JComboBox<String>-era aurkitu diren irudi guztiak
+
+        listaIrudiak.addActionListener(this); // ← Aldatzen denean baloreren bat, hemendik lortu al dugu ezarri den balore berria.
+
         menua.add(listaIrudiak);
 
-        ImageIcon originalIcon = new ImageIcon(karpeta1+"\\"+listaIrudiak);
+        /*ImageIcon originalIcon = new ImageIcon(karpeta1+"\\"+listaIrudiak);
         Image img = originalIcon.getImage();
         Image img1 = img.getScaledInstance(125, 100, Image.SCALE_SMOOTH);
         ImageIcon theDark = new ImageIcon(img1);
         JLabel label = new JLabel();
         label.setIcon(theDark);
-        menua.add(label);
+        menua.add(label);*/
 
 
     }
 
     void menua2(){
-        menua = new JPanel();
+        menua2 = new JPanel();
 
     }
 
