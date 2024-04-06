@@ -19,6 +19,7 @@ public class Leihoa extends JFrame implements ActionListener {
     private JTextArea textua;
     private String karpeta1;
     private JCheckBox gorde;
+    private JButton save;
 
 
     public Leihoa(String izena, int x, int y){
@@ -120,13 +121,14 @@ public class Leihoa extends JFrame implements ActionListener {
         //gorde.setAlignmentX(Component.CENTER_ALIGNMENT);
         menua.add(gorde);
 
+
         //↓Zonalde txuri bat gehitu
         JPanel txuria = new JPanel();
         txuria.setPreferredSize(new Dimension(250, 30));
         menua.add(txuria);
 
         //↓Gorde botoia gehitu
-        JButton save = new JButton("SAVE");
+        save = new JButton("SAVE");
         save.addActionListener(this);
         save.setAlignmentX(Component.CENTER_ALIGNMENT);
         //save.setAlignmentY(Component.RIGHT_ALIGNMENT);
@@ -164,7 +166,15 @@ public class Leihoa extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == listaIrudiak){
             irudia_berritu(e);
-        } else if (e.getSource() == gorde) {
+        } else if (e.getSource() == save) {
+            boolean egia = gorde.isSelected();
+            if (egia){
+                try {
+                    gehituMezua(e);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
 
         }
     }
@@ -178,5 +188,36 @@ public class Leihoa extends JFrame implements ActionListener {
         Image img1 = img.getScaledInstance(200, 225, Image.SCALE_SMOOTH);
 
         ((JLabel) menua.getComponent(1)).setIcon(new ImageIcon(img1)); //← Ezartzen dugu irudi berria.
+    }
+
+    void gehituMezua(ActionEvent e) throws IOException {
+        JTextArea te = (JTextArea) menua2.getComponent(1);
+        String textua = te.getText();
+        System.out.println(textua);
+
+        BufferedWriter w1 = null;
+
+        JComboBox<String> lista = (JComboBox<String>) menua.getComponent(0);
+        String path = (String) lista.getSelectedItem();
+        //System.out.println(path);
+        String izena = path.substring(0, path.length()-4);
+        System.out.println(izena);
+
+
+        try{
+
+
+            w1 = new BufferedWriter(new FileWriter("Comments\\"+izena+".txt", true));
+            w1.newLine();
+
+            w1.write(path+": "+textua);
+            w1.close();
+
+
+        }catch (IOException a){
+            System.err.println("Arazo bat egon da idaztean fitxategian");
+        }finally {
+            w1.close();
+        }
     }
 }
