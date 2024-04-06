@@ -91,7 +91,7 @@ public class Leihoa extends JFrame implements ActionListener {
 
     void menua(){ //← Ezkerreko menua sortu egiten dugu.
         menua = new JPanel();
-        menua.setBackground(Color.red);
+        //menua.setBackground(Color.red);
         menua.setPreferredSize(new Dimension(300, 500));
 
         //↓ Irudien desplegablea sortu egiten dugu.
@@ -99,13 +99,13 @@ public class Leihoa extends JFrame implements ActionListener {
 
         listaIrudiak.addActionListener(this); // ← Aldatzen denean baloreren bat, hemendik lortu al dugu ezarri den balore berria.
 
-        listaIrudiak.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //listaIrudiak.setAlignmentX(Component.CENTER_ALIGNMENT);
         listaIrudiak.setPreferredSize(new Dimension(200, 25));
         menua.add(listaIrudiak);
 
         //↓ Irudia
         JLabel irudiak = new JLabel(); //← Irudia hemen exarriko dugu.
-        irudiak.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //irudiak.setAlignmentX(Component.CENTER_ALIGNMENT);
         menua.add(irudiak);
 
         //↓ Lehenengo irudia exartzen dugu
@@ -117,9 +117,21 @@ public class Leihoa extends JFrame implements ActionListener {
 
         //↓ Check Box a gehitu.
         gorde = new JCheckBox("Save your comment", true);
-        gorde.setAlignmentX(Component.CENTER_ALIGNMENT); //
+        //gorde.setAlignmentX(Component.CENTER_ALIGNMENT);
         menua.add(gorde);
 
+        //↓Zonalde txuri bat gehitu
+        JPanel txuria = new JPanel();
+        txuria.setPreferredSize(new Dimension(250, 30));
+        menua.add(txuria);
+
+        //↓Gorde botoia gehitu
+        JButton save = new JButton("SAVE");
+        save.addActionListener(this);
+        save.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //save.setAlignmentY(Component.RIGHT_ALIGNMENT);
+
+        menua.add(save);
 
 
 
@@ -129,13 +141,17 @@ public class Leihoa extends JFrame implements ActionListener {
         menua2 = new JPanel();
         menua2.setPreferredSize(new Dimension(300, 500));
 
+        JPanel txuria = new JPanel();
+        txuria.setPreferredSize(new Dimension(250, 250));
+        menua2.add(txuria);
 
-        
-        menua2.setBackground(Color.blue);
+
+
+        //menua2.setBackground(Color.blue);
 
         JTextArea textua = new JTextArea();
         textua.setLineWrap(true);
-        textua.setPreferredSize(new Dimension(200, 20));
+        textua.setPreferredSize(new Dimension(165, 32));
         textua.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         menua2.add(textua);
