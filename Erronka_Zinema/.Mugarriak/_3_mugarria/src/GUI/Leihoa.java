@@ -52,7 +52,7 @@ public class Leihoa extends JFrame implements ActionListener {
 
         frame.add(menua, BorderLayout.WEST);
 
-        //frame.add(menua2, BorderLayout.EAST);
+        frame.add(menua2, BorderLayout.EAST);
 
 
         frame.pack();
@@ -91,34 +91,56 @@ public class Leihoa extends JFrame implements ActionListener {
 
     void menua(){ //← Ezkerreko menua sortu egiten dugu.
         menua = new JPanel();
+        menua.setBackground(Color.red);
+        menua.setPreferredSize(new Dimension(300, 500));
 
         //↓ Irudien desplegablea sortu egiten dugu.
         listaIrudiak = irudiakAukeratu(listaIrudiak); //← Gehitzen ditugu JComboBox<String>-era aurkitu diren irudi guztiak
 
         listaIrudiak.addActionListener(this); // ← Aldatzen denean baloreren bat, hemendik lortu al dugu ezarri den balore berria.
 
+        listaIrudiak.setAlignmentX(Component.CENTER_ALIGNMENT);
+        listaIrudiak.setPreferredSize(new Dimension(200, 25));
         menua.add(listaIrudiak);
 
         //↓ Irudia
         JLabel irudiak = new JLabel(); //← Irudia hemen exarriko dugu.
+        irudiak.setAlignmentX(Component.CENTER_ALIGNMENT);
         menua.add(irudiak);
 
         //↓ Lehenengo irudia exartzen dugu
         ImageIcon originalIcon = new ImageIcon(karpeta1+"\\"+listaIrudiak.getItemAt(0));
         Image img = originalIcon.getImage();
-        Image img1 = img.getScaledInstance(125, 100, Image.SCALE_SMOOTH);
+        Image img1 = img.getScaledInstance(200, 225, Image.SCALE_SMOOTH);
         ImageIcon theDark = new ImageIcon(img1);
         irudiak.setIcon(theDark);
 
         //↓ Check Box a gehitu.
         gorde = new JCheckBox("Save your comment", true);
+        gorde.setAlignmentX(Component.CENTER_ALIGNMENT); //
         menua.add(gorde);
+
+
 
 
     }
 
     void menua2(){
         menua2 = new JPanel();
+        menua2.setPreferredSize(new Dimension(300, 500));
+
+
+        
+        menua2.setBackground(Color.blue);
+
+        JTextArea textua = new JTextArea();
+        textua.setLineWrap(true);
+        textua.setPreferredSize(new Dimension(200, 20));
+        textua.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        menua2.add(textua);
+
+
 
     }
 
@@ -137,7 +159,7 @@ public class Leihoa extends JFrame implements ActionListener {
         ImageIcon originalIcon = new ImageIcon(karpeta1+"\\"+path); //← Irudia aukeratu
         //↓Irudiaren tamaina ezarri
         Image img = originalIcon.getImage();
-        Image img1 = img.getScaledInstance(125, 100, Image.SCALE_SMOOTH);
+        Image img1 = img.getScaledInstance(200, 225, Image.SCALE_SMOOTH);
 
         ((JLabel) menua.getComponent(1)).setIcon(new ImageIcon(img1)); //← Ezartzen dugu irudi berria.
     }
