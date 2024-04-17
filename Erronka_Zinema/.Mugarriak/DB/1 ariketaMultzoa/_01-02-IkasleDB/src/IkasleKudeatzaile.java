@@ -1,7 +1,5 @@
-import org.mariadb.*;
 import org.mariadb.jdbc.Connection;
 import org.mariadb.jdbc.Statement;
-import org.mariadb.jdbc.client.result.ResultSetMetaData;
 
 
 import java.sql.*;
@@ -16,7 +14,7 @@ public class IkasleKudeatzaile {
     public IkasleKudeatzaile() throws ClassNotFoundException, SQLException {
 
         Class.forName("org.mariadb.jdbc.Driver");
-        conn = (Connection) DriverManager.getConnection("jdbc:mariadb://localhost:3306/ikasleDB", "irakasle", "pasahitza");
+        conn = (Connection) DriverManager.getConnection("jdbc:mariadb://localhost:3306/IkasleDB", "root", "root");
 
         ikasleLortu();
         ikastaroLortu();
@@ -24,12 +22,12 @@ public class IkasleKudeatzaile {
     }
 
     private void ikasleLortu() throws SQLException {
-        String sql = "select * from ikaselak";
+        String sql = "select * from Ikasleak";
         Statement kontsulta = conn.createStatement();
         ResultSet emaitza = kontsulta.executeQuery(sql);
         while (emaitza.next())
         {
-            Ikasle ikasle = new Ikasle(emaitza.getInt("Id"), emaitza.getString("Izena"), emaitza.getString("Herria"), emaitza.getLong("Telefonoa"), emaitza.getDate("JaiotzeData"), emaitza.getInt("IkastaroKodea"));
+            Ikasle ikasle = new Ikasle(emaitza.getString("Id"), emaitza.getString("Izena"), emaitza.getString("Herria"), emaitza.getLong("Telefonoa"), emaitza.getDate("JaiotzeData"), emaitza.getInt("IkastaroKodea"));
 
             ikasleLista.add(ikasle);
 
@@ -37,7 +35,7 @@ public class IkasleKudeatzaile {
     }
 
     private void ikastaroLortu() throws SQLException {
-        String sql = "select * from ikastaroak";
+        String sql = "select * from Ikastaroak";
         Statement kontsulta = conn.createStatement();
         ResultSet emaitza = kontsulta.executeQuery(sql);
         while (emaitza.next())
@@ -53,14 +51,14 @@ public class IkasleKudeatzaile {
         return ikasleLista;
     }
 
-    Ikasle bilatuIkasle(int id){
+    Ikasle bilatuIkasle(String id){
 
         for (Ikasle ikasle : ikasleLista){
 
 
-            int id1 = ikasle.getId();
+            String id1 = ikasle.getId();
 
-            if (id == id1){
+            if (id.equals(id1)){
                 return ikasle;
             }
 
@@ -71,12 +69,82 @@ public class IkasleKudeatzaile {
 
     }
 
-    void ezabatuIkaslea(int id){
-        
+    void ezabatuIkaslea(String id) throws SQLException {
+
+        Ikasle ikasle = bilatuIkasle(id);
+
+        if (ikasle !=null){
+            String sql = "DELETE FROM Ikasleak WHERE Id = "+id;
+            Statement kontsulta = conn.createStatement();
+            ResultSet emaitza = kontsulta.executeQuery(sql);
+            ikasleLortu();
+
+        }
+
+    }
+
+    void gehituIkaslea(Ikasle ikaslea) throws SQLException {
+        String id = ikaslea.getId();
+        String izena = ikaslea.getIzena();
+        String herria = ikaslea.getHerria();
+        long telefonoa = ikaslea.getTelefonoa();
+        java.sql.Date jaiotzeData = ikaslea.getJaiotzeData();
+        int ikastaroKodea = ikaslea.getIkastaroKodea();
+
+        String sql = "insert into Ikasleak values ("+id+", "+izena +", "+herria+", "+telefonoa+", "+jaiotzeData+", "+ikastaroKodea+")";
+        Statement kontsulta = conn.createStatement();
+        ResultSet emaitza = kontsulta.executeQuery(sql);
+        ikasleLortu();
+
+    }
+
+    void modifikatuIkaslea(String id) throws SQLException {
+        Ikasle ikasle = bilatuIkasle(id);
+
+        if (ikasle != null){
+            Ikasle ik = new Ikasle(ikasle);
+
+
+            String id1 = ik.getId();
+            String izena = ik.getIzena();
+            String herria = ik.getHerria();
+            long telefonoa = ik.getTelefonoa();
+            java.sql.Date jaiotzeData = ik.getJaiotzeData();
+            int ikastaroKodea = ik.getIkastaroKodea();
+
+            String sql = "update Ikasleak set (Id ="+id1+", Izena ="+izena +", Herria ="+herria+", Telefonoa ="+telefonoa+", JaiotzeData ="+jaiotzeData+", IkastaroKodea ="+ikastaroKodea+" where Id ="+id+")";
+            Statement kontsulta = conn.createStatement();
+            ResultSet emaitza = kontsulta.executeQuery(sql);
+            ikasleLortu();
+
+        }
+    }
+
+    void erakutsiIkastaroa(String id){
+        Ikasle ikasle = bilatuIkasle(id);
+
+        if (ikasle != null){
+
+            int ikastaroKodea = ikasle.getIkastaroKodea();
+
+            for (Ikastaro ikastaro : ikastaroLista){
+
+                    int id1 = ikastaro.getId();
+
+                    if (ikastaroKodea == id1){
+                        System.out.println(ikastaro.toString());
+                        break;
+                    }
+
+            }
+
+        }
     }
 
 
-    public void itxi(Connection conn) {
+
+
+    public void itxi() {
         try {
             conn.close();
             System.out.println("Datu-basetik deskonektatuta.");

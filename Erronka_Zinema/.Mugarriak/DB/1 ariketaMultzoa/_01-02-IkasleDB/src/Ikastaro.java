@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Ikastaro {
 
     private int id;
@@ -11,6 +13,19 @@ public class Ikastaro {
         this.orduak = orduak;
     }
 
+    public Ikastaro() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("ID: ");
+        this.id = sc.nextInt();
+        sc.nextInt();
+
+        System.out.print("Izena: ");
+        this.izena = sc.nextLine();
+
+        System.out.print("Orduak: ");
+        this.orduak = sc.nextInt();
+    }
+
     @Override
     public String toString() {
         return "Ikastaro{" +
@@ -18,5 +33,9 @@ public class Ikastaro {
                 ", izena='" + izena + '\'' +
                 ", orduak=" + orduak +
                 '}';
+    }
+
+    public int getId() {
+        return id;
     }
 }
