@@ -26,19 +26,19 @@ time.sleep(denbora)
 
 inputName = web.find_element("xpath", "/html/body/div[13]/div/div/div/div[1]/div/div/div/form/div/div/div[1]/input")
 inputName.click()
-inputName.send_keys("Manex")
+inputName.send_keys("Sebas")
 
 inputSecondName = web.find_element("xpath", "/html/body/div[13]/div/div/div/div[1]/div/div/div/form/div/div/div[2]/input")
 inputSecondName.click()
-inputSecondName.send_keys("Aranzadi")
+inputSecondName.send_keys("Manuel")
 
 inputEmail = web.find_element("xpath", "/html/body/div[13]/div/div/div/div[1]/div/div/div/form/div/div/div[3]/input")
 inputEmail.click()
-inputEmail.send_keys("manexae@gmail.com")
+inputEmail.send_keys("gmail@gmail.com")
 
 inputEmail2 = web.find_element("xpath", "/html/body/div[13]/div/div/div/div[1]/div/div/div/form/div/div/div[4]/input")
 inputEmail2.click()
-inputEmail2.send_keys("manexae@gmail.com")
+inputEmail2.send_keys("gmail@gmail.com")
 
 jarraitu2 = web.find_element("xpath", "/html/body/div[13]/div/div/div/div[2]/div[4]/div/div[2]")
 jarraitu2.click()
