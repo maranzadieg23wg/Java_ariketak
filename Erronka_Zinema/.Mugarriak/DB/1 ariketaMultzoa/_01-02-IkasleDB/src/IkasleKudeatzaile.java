@@ -91,9 +91,10 @@ public class IkasleKudeatzaile {
         java.sql.Date jaiotzeData = ikaslea.getJaiotzeData();
         int ikastaroKodea = ikaslea.getIkastaroKodea();
 
-        String sql = "insert into Ikasleak values ("+id+", "+izena +", "+herria+", "+telefonoa+", "+jaiotzeData+", "+ikastaroKodea+")";
+        String sql = "INSERT INTO Ikasleak VALUES ('" + id + "', '" + izena + "', '" + herria + "', '" + telefonoa + "', '" + jaiotzeData + "', " + ikastaroKodea + ")";
         Statement kontsulta = conn.createStatement();
-        ResultSet emaitza = kontsulta.executeQuery(sql);
+        int aldatuFilak = kontsulta.executeUpdate(sql);
+
         ikasleLortu();
 
     }
@@ -112,7 +113,7 @@ public class IkasleKudeatzaile {
             java.sql.Date jaiotzeData = ik.getJaiotzeData();
             int ikastaroKodea = ik.getIkastaroKodea();
 
-            String sql = "update Ikasleak set (Id ="+id1+", Izena ="+izena +", Herria ="+herria+", Telefonoa ="+telefonoa+", JaiotzeData ="+jaiotzeData+", IkastaroKodea ="+ikastaroKodea+" where Id ="+id+")";
+            String sql = "update Ikasleak set Id ="+id1+", Izena ="+izena +", Herria ="+herria+", Telefonoa ="+telefonoa+", JaiotzeData ="+jaiotzeData+", IkastaroKodea ="+ikastaroKodea+" where Id ="+id;
             Statement kontsulta = conn.createStatement();
             ResultSet emaitza = kontsulta.executeQuery(sql);
             ikasleLortu();
