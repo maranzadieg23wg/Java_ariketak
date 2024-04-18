@@ -15,6 +15,7 @@ public class IkasleKudeatzaile {
 
         Class.forName("org.mariadb.jdbc.Driver");
         conn = (Connection) DriverManager.getConnection("jdbc:mariadb://localhost:3306/IkasleDB", "root", "root");
+        System.out.println();
 
         ikasleLortu();
         ikastaroLortu();
