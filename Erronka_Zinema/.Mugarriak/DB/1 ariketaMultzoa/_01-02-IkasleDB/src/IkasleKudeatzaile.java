@@ -75,9 +75,10 @@ public class IkasleKudeatzaile {
         Ikasle ikasle = bilatuIkasle(id);
 
         if (ikasle !=null){
-            String sql = "DELETE FROM Ikasleak WHERE Id = "+id;
-            Statement kontsulta = conn.createStatement();
-            ResultSet emaitza = kontsulta.executeQuery(sql);
+            String sql = "DELETE FROM Ikasleak WHERE Id = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+            preparedStatement.executeUpdate();
             ikasleLortu();
 
         }

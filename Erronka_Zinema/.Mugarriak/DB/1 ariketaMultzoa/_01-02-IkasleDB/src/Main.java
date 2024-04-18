@@ -28,6 +28,8 @@ public class Main {
 
 
 
+
+        //ku.ezabatuIkaslea("KKK");
         ku.ikasleakIkusi();
 
         ku.itxi();
