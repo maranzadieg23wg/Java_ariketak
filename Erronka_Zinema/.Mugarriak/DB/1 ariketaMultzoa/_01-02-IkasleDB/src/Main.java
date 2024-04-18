@@ -10,11 +10,21 @@ public class Main {
 
         IkasleKudeatzaile ku = new IkasleKudeatzaile();
 
-        System.out.println(ku.bilatuIkasle("CCC"));
+        /*System.out.println(ku.bilatuIkasle("CCC"));
 
         ku.modifikatuIkaslea("CCC");
 
-        System.out.println(ku.bilatuIkasle("CCC"));
+        System.out.println(ku.bilatuIkasle("CCC"));*/
+
+
+        //ku.erakutsiIkastaroa("BBB");
+
+
+
+        /*Ikasle ikasle = new Ikasle();
+
+        //ku.gehituIkaslea(ikasle);
+        System.out.println(ku.bilatuIkasle("KKK"));*/
 
 
         ku.itxi();
