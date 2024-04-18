@@ -27,6 +27,9 @@ public class Main {
         System.out.println(ku.bilatuIkasle("KKK"));*/
 
 
+
+        ku.ikasleakIkusi();
+
         ku.itxi();
     }
 }
