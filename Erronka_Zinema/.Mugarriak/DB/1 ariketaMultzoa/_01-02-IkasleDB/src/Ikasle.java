@@ -25,7 +25,7 @@ public class Ikasle {
         Scanner sc = new Scanner(System.in);
         System.out.print("ID: ");
         this.id = sc.nextLine();
-        sc.nextInt();
+        //sc.nextInt();
 
         System.out.print("Izena: ");
         this.izena = sc.nextLine();
@@ -35,7 +35,7 @@ public class Ikasle {
 
         System.out.print("Telefonoa: ");
         this.telefonoa = sc.nextInt();
-        sc.nextInt();
+        sc.nextLine();
 
         System.out.print("Jaiotze Data: ");
         jaiotzeData = Date.valueOf(sc.nextLine());
@@ -48,7 +48,7 @@ public class Ikasle {
         Scanner sc = new Scanner(System.in);
         System.out.print("ID["+ikasle.getId()+"]: ");
         this.id = sc.nextLine();
-        sc.nextInt();
+        //sc.nextInt();
 
         System.out.print("Izena["+ikasle.getIzena()+"]: ");
         this.izena = sc.nextLine();
@@ -58,7 +58,7 @@ public class Ikasle {
 
         System.out.print("Telefonoa["+ikasle.getTelefonoa()+"]: ");
         this.telefonoa = sc.nextInt();
-        sc.nextInt();
+        sc.nextLine();
 
         System.out.print("Jaiotze Data["+ikasle.getJaiotzeData()+"]: ");
         jaiotzeData = Date.valueOf(sc.nextLine());
