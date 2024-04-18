@@ -38,16 +38,16 @@ public class Main {
 
         // Completar los campos de nombre, apellidos, email y confirmar email
         WebElement nombreField = driver.findElement(By.cssSelector("input[placeholder='Nombre']"));
-        nombreField.sendKeys("Manex");
+        nombreField.sendKeys("Manuel");
 
         WebElement apellidosField = driver.findElement(By.cssSelector("input[placeholder='Apellidos']"));
-        apellidosField.sendKeys("Aranzadi Egaña");
+        apellidosField.sendKeys("Sebas");
 
         WebElement emailField = driver.findElement(By.cssSelector("input[placeholder='Email']"));
-        emailField.sendKeys("manexae@gmail.com");
+        emailField.sendKeys("gmail@gmail.com");
 
         WebElement confirmarEmailField = driver.findElement(By.cssSelector("input[placeholder='Confirmar email']"));
-        confirmarEmailField.sendKeys("manexae@gmail.com");
+        confirmarEmailField.sendKeys("gmail@gmail.com");
 
         // Hacer clic en el botón con el ID especificado
         WebElement checkoutButton1 = driver.findElement(By.id("checkout-btn"));
@@ -64,7 +64,7 @@ public class Main {
         codigoSeguridadField.sendKeys("432");
 
         WebElement titularTarjetaField = driver.findElement(By.cssSelector("input[placeholder='J.Smith']"));
-        titularTarjetaField.sendKeys("manexae");
+        titularTarjetaField.sendKeys("sebas");
 
         // Hacer clic en el segundo botón de checkout
         WebElement checkoutButton2 = driver.findElement(By.id("checkout-btn"));
