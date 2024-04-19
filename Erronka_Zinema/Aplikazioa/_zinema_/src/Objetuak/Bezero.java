@@ -8,15 +8,15 @@ public class Bezero {
     String emaila;
     String erabiltzaileIzena;
     String pasahitza;
-    int ikusitakoListaID;
+    IkusitakoLista ikusitakoLista;
 
-    public Bezero(int idErabiltzailea, String izena, String abizena, String emaila, String erabiltzaileIzena, String pasahitza, int ikusitakoListaID) {
+    public Bezero(int idErabiltzailea, String izena, String abizena, String emaila, String erabiltzaileIzena) {
         this.idErabiltzailea = idErabiltzailea;
         this.izena = izena;
         this.abizena = abizena;
         this.emaila = emaila;
         this.erabiltzaileIzena = erabiltzaileIzena;
-        this.pasahitza = pasahitza;
-        this.ikusitakoListaID = ikusitakoListaID;
+
+
     }
 }
