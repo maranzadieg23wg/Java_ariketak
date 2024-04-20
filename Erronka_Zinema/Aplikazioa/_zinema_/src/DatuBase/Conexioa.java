@@ -234,7 +234,14 @@ public class Conexioa {
             conn = DriverManager.getConnection("jdbc:oracle:thin:@" + ipa + ":1521:" + DBIzena, username, pasahitza);
             System.out.println("Konexioa eginda");
         }catch (SQLException e){
-            System.out.println("Ezin izan da konexioa egin");
+
+            System.err.println("Ezin izan da konexioa egin");
+            //System.out.println(e.getErrorCode());
+            if (e.getErrorCode() == 12541){
+                System.err.println(e.getErrorCode()+": ez da aurkitu TNS-a");
+            }
+
+
         }
 
     }
