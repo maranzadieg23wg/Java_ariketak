@@ -1,12 +1,16 @@
 package DatuBase;
 import Objetuak.Bezero;
+import Objetuak.IkusitakoLista;
+import Objetuak.Pelikulak;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Conexioa {
 
-    String ipa = "10.14.4.122";
+    //String ipa = "10.14.4.122";
+    String ipa = "192.168.1.60";
     String DBIzena = "ORCLCDB";
     String username = "taldea3";
     String pasahitza = "batbihiru";
