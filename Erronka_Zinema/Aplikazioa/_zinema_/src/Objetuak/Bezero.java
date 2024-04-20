@@ -19,4 +19,8 @@ public class Bezero {
 
 
     }
+
+    public int getIdErabiltzailea() {
+        return idErabiltzailea;
+    }
 }

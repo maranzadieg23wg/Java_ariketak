@@ -24,4 +24,19 @@ public class Pelikulak {
         this.idEstrenaldia = idEstrenaldia;
         this.idZuzendaria = idZuzendaria;
     }
+
+    @Override
+    public String toString() {
+        return "Pelikulak{" +
+                "IDPelikula=" + IDPelikula +
+                ", tituloa='" + tituloa + '\'' +
+                ", generoa='" + generoa + '\'' +
+                ", irabaziak=" + irabaziak +
+                ", aurrekontua=" + aurrekontua +
+                ", trailera='" + trailera + '\'' +
+                ", irudia='" + irudia + '\'' +
+                ", idEstrenaldia=" + idEstrenaldia +
+                ", idZuzendaria=" + idZuzendaria +
+                '}';
+    }
 }
