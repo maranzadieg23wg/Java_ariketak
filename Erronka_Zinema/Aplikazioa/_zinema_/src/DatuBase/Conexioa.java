@@ -20,6 +20,10 @@ public class Conexioa {
     Scanner sc;
 
 
+    Bezero bezero;
+    ArrayList<IkusitakoLista> ikusitakoPelikulak;
+
+
     public Conexioa() throws SQLException {
         sc = new Scanner(System.in);
 
