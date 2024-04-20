@@ -135,6 +135,7 @@ public class Conexioa {
             int rowsAffected = kontsulta2.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Erabiltzailea ongi sortu egin da.");
+                saioaHasi();
             } else {
                 System.err.println("Errore bat gertatu da erabiltzailea sortzean.");
             }
