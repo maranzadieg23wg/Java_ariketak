@@ -79,6 +79,8 @@ public class Conexioa {
 
     }
 
+    //*******************************SORTU KONTUA ******************************
+
     void sortuKontua() throws SQLException {
         sc.nextLine();
         System.out.println("-----------KONTUA SORTU-----------");
@@ -147,6 +149,8 @@ public class Conexioa {
 
     }
 
+    //***************************************SAIOA HASI****************************************
+
     void saioaHasi() throws SQLException {
         sc.nextLine();
         System.out.println("-----------SAIOA HASI-----------");
@@ -207,6 +211,8 @@ public class Conexioa {
         }
     }
 
+    //***********************************Ikusteko Pelikula Lista****************************************************
+    //************************************* AZKENEKOAK***********************************************
     int azkenekoID() throws SQLException {
         String sql = "select * from ERABILTZAILEAK WHERE ID_ERABILTZAILEA =(SELECT MAX(ID_ERABILTZAILEA) FROM ERABILTZAILEAK)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -219,6 +225,7 @@ public class Conexioa {
     }
 
 
+    //************************KONEXIOA*********************************
 
     void konexiaEgin(){
 
