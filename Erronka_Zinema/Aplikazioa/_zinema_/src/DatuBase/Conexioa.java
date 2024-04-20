@@ -125,7 +125,7 @@ public class Conexioa {
 
             String sql2 = "Insert into ERABILTZAILEAK values (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement kontsulta2 = conn.prepareStatement(sql2);
-            kontsulta2.setString(1, azkenekoID());
+            kontsulta2.setInt(1, azkenekoID());
             kontsulta2.setString(2, izena);
             kontsulta2.setString(3, abizena);
             kontsulta2.setString(4, emaila);
@@ -175,7 +175,9 @@ public class Conexioa {
             String abizena = emaitza.getString("ABIZENA");
             String email = emaitza.getString("EMAILA");
             String erabiltzaile = emaitza.getString("ERABILTZAILEA");
-            Bezero bezero = new Bezero(idErabiltzailea, izena, abizena, email, erabiltzaile);
+            this.bezero = new Bezero(idErabiltzailea, izena, abizena, email, erabiltzaile);
+
+
         } else {
             System.err.println(emaila + " erabiltzailearekin kontu bat ez dago existitzen");
         }
@@ -212,10 +214,98 @@ public class Conexioa {
         }
     }
 
+
+    Pelikulak pelikulaLortu() throws SQLException {
+        return pelikulaLortu(-1);
+    }
+
+    Pelikulak pelikulaLortu(int aukera) throws SQLException {
+
+        if (aukera == -1){
+            int azkenP = azkenekoPelikula();
+
+            aukera = (int) (Math.random() * azkenP)+1;
+        }
+
+
+        String sql = "select * from FILMAK where (erabiltzailea = ?)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setString(1, String.valueOf(aukera));
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        return pelikulaObjetua(emaitza);
+
+    }
+
+
+
+    Pelikulak pelikulaObjetua(ResultSet pel) throws SQLException {
+
+
+        int IDPelikula = pel.getInt("IDPelikula");
+        String tituloa = pel.getString("tituloa");
+        String generoa = pel.getString("generoa");
+        int irabaziak = pel.getInt("irabaziak");
+        int aurrekontua = pel.getInt("aurrekontua");
+        String trailera = pel.getString("trailera");
+        String irudia = pel.getString("irudia");
+        int idEstrenaldia = pel.getInt("idEstrenaldia");
+        int idZuzendaria = pel.getInt("idZuzendaria");
+        return new Pelikulak(IDPelikula, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, idEstrenaldia, idZuzendaria);
+
+
+    }
+
+
     //***********************************Ikusteko Pelikula Lista****************************************************
+
+    void ikusitakoPelikulak() throws SQLException {
+
+        String sql = "select * from IKUSITAKOLISTA where (id_erabiltzailea = ?)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setString(1, String.valueOf(bezero.getIdErabiltzailea()));
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        while (emaitza.next()){
+            IkusitakoLista list = ikusitakoListaLortu(emaitza);
+
+            ikusitakoPelikulak.add(list);
+        }
+
+    }
+
+
+    IkusitakoLista ikusitakoListaLortu(ResultSet pel) throws SQLException {
+        int IDPelikula = pel.getInt("ID_filma");
+        int ikusita = pel.getInt("ikusita");
+        int ikusteko = pel.getInt("ikusteko");
+        float nota = pel.getFloat("nota");
+        int ikusKop = pel.getInt("ikus_kop");
+
+        Pelikulak peli = pelikulaLortu(IDPelikula);
+
+        return new IkusitakoLista(bezero, peli, ikusita, nota, ikusKop);
+
+    }
+
     //************************************* AZKENEKOAK***********************************************
+
     int azkenekoID() throws SQLException {
         String sql = "select * from ERABILTZAILEAK WHERE ID_ERABILTZAILEA =(SELECT MAX(ID_ERABILTZAILEA) FROM ERABILTZAILEAK)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        return emaitza.getInt(1);
+    }
+
+    int azkenekoPelikula() throws SQLException {
+        String sql = "select * from FILMAK WHERE ID_FILMA =(SELECT MAX(ID_FIMLA) FROM FILMAK)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
 
 
