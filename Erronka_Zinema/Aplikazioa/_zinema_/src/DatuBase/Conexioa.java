@@ -47,6 +47,7 @@ public class Conexioa {
             System.out.println("2: Sortu kontua");
             System.out.println("3: Pelikula aleatorio bat lortu");
             System.out.println("4: Ikusi ikusitako lista");
+            System.out.println("5: Gehitu ikusitako pelikula bat");
             System.out.println("0: Itxi");
 
             aukera = sc.nextInt();
@@ -68,8 +69,16 @@ public class Conexioa {
 
                 case 4:
                     ikusitakoPelikulak();
+
+                    for (IkusitakoLista ikusi: ikusitakoPelikulak) {
+                        System.out.println(ikusi);
+                    }
                     break;
 
+                case 5:
+
+                    gehituIkusitakoPeli(101, 1, 8.5F, 4);
+                    break;
 
                 case 0:
                     aukera =0;
