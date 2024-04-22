@@ -231,14 +231,19 @@ public class Conexioa {
 
         if (aukera == -1){
             int azkenP = azkenekoPelikula();
+            int lehenP = lehenengoPelikula();
 
-            aukera = (int) (Math.random() * azkenP)+1;
+            aukera = (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
         }
 
 
-        String sql = "select * from FILMAK where (erabiltzailea = ?)";
+
+
+
+        String sql = "SELECT * FROM FILMAK WHERE ID_FILMA = ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
-        kontsulta.setString(1, String.valueOf(aukera));
+        kontsulta.setInt(1, aukera);
+
 
 
         ResultSet emaitza = kontsulta.executeQuery();
