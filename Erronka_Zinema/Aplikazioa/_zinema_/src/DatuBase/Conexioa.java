@@ -411,10 +411,10 @@ public class Conexioa {
 
             int rowsAffected = kontsulta.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("Gehitu egin da pelikua");
+                System.out.println("Aldatu egin da zure listako informazioa");
 
             } else {
-                System.err.println("Errore bat gertatu da gehitzean pelikula");
+                System.err.println("Errore bat gertatu da aldatzean informazioa");
             }
 
 
