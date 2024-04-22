@@ -232,6 +232,19 @@ public class Conexioa {
     }
 
 
+    Pelikulak pelikulaLortu(String izena) throws SQLException {
+
+        String sql = "SELECT * FROM FILMAK WHERE TITULUA = ?";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setString(1, izena);
+
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        return pelikulaObjetua(emaitza);
+    }
+
     Pelikulak pelikulaLortu() throws SQLException {
         return pelikulaLortu(-1);
     }
