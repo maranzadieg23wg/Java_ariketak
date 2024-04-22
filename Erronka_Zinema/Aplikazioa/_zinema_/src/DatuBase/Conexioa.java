@@ -78,7 +78,8 @@ public class Conexioa {
                 case 5:
 
                     //gehituIkusitakoPeli(101, 1, 8.5F, 4);
-                    notaAldatu(101, 1, 9, 6);
+                    //notaAldatu(101, 1, 9, 6);
+                    //listatikanBorratu(101);
                     break;
 
                 case 0:
@@ -428,6 +429,35 @@ public class Conexioa {
 
     }
 
+    void listatikanBorratu(int IDPeli) throws SQLException {
+
+
+        if (listanDago(IDPeli)){
+
+            String sql = "delete from IKUSITAKOLISTA where ID_ERABILTZAILE = ? and ID_FILMA = ?";
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setInt(1, bezero.getIdErabiltzailea());
+            kontsulta.setInt(2, IDPeli);
+
+
+            int rowsAffected = kontsulta.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Borratu egin da zure listatikan");
+
+            } else {
+                System.err.println("Errore bat gertatu da borratzean zure listatikan");
+            }
+
+
+
+        }else {
+            System.err.println(IDPeli+" ez dago listan");
+        }
+
+
+
+
+    }
 
 
 
