@@ -337,6 +337,64 @@ public class Conexioa {
 
     }
 
+
+
+    void gehituIkusitakoPeli(int IDPeli, int ikusita, float nota, int ikusKop) throws SQLException {
+
+
+        if (!listanDago(IDPeli)){
+
+            String sql = "Insert into IKUSITAKOLISTA values (?, ?, ?, ?, ?)";
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setInt(1, bezero.getIdErabiltzailea());
+            kontsulta.setInt(2, IDPeli);
+            kontsulta.setInt(3, ikusita);
+            kontsulta.setFloat(4, nota);
+            kontsulta.setInt(5, ikusKop);
+
+            int rowsAffected = kontsulta.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Gehitu egin da pelikua");
+
+            } else {
+                System.err.println("Errore bat gertatu da gehitzean pelikula");
+            }
+
+
+
+        }else {
+            System.err.println(IDPeli+" listan dago");
+        }
+
+
+
+
+    }
+
+
+    boolean listanDago(int IDPeli) throws SQLException {
+
+        String sql = "select * from IKUSITAKOLISTA where (id_erabiltzaile = ? and ID_FILMA = ?)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setString(1, String.valueOf(bezero.getIdErabiltzailea()));
+        kontsulta.setString(2, String.valueOf(IDPeli));
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        if (emaitza.next()){
+            return true;
+        }else {
+            return false;
+        }
+
+
+
+
+    }
+
+
+
+
     //************************************* AZKENEKOAK***********************************************
 
     int azkenekoID() throws SQLException {
@@ -383,6 +441,8 @@ public class Conexioa {
         //System.out.println("Azkenekoa: "+azkenekoPelikula);
         return lehenengoPeli;
     }
+
+
 
 
 
