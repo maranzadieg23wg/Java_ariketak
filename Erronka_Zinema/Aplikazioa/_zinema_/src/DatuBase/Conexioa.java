@@ -21,7 +21,7 @@ public class Conexioa {
 
 
     Bezero bezero;
-    ArrayList<IkusitakoLista> ikusitakoPelikulak;
+    ArrayList<IkusitakoLista> ikusitakoPelikulak = new ArrayList<>();
 
 
     public Conexioa() throws SQLException {
