@@ -279,19 +279,24 @@ public class Conexioa {
 
     //***********************************Ikusteko Pelikula Lista****************************************************
 
-    void ikusitakoPelikulak() throws SQLException {
+    void ikusitakoPelikulak(){
 
-        String sql = "select * from IKUSITAKOLISTA where (id_erabiltzailea = ?)";
-        PreparedStatement kontsulta = conn.prepareStatement(sql);
-        kontsulta.setString(1, String.valueOf(bezero.getIdErabiltzailea()));
+        try {
+            String sql = "select * from IKUSITAKOLISTA where (id_erabiltzaile = ?)";
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setString(1, String.valueOf(bezero.getIdErabiltzailea()));
 
-        ResultSet emaitza = kontsulta.executeQuery();
+            ResultSet emaitza = kontsulta.executeQuery();
 
-        while (emaitza.next()){
-            IkusitakoLista list = ikusitakoListaLortu(emaitza);
+            while (emaitza.next()){
+                IkusitakoLista list = ikusitakoListaLortu(emaitza);
 
-            ikusitakoPelikulak.add(list);
+                ikusitakoPelikulak.add(list);
+            }
+        }catch (SQLException e){
+            System.err.println("Ez da saioa hasi, orduan, ezin da ikusi ikusitako lista");
         }
+
 
     }
 
