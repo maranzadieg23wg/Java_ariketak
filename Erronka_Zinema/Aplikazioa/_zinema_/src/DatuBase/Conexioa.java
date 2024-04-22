@@ -175,13 +175,15 @@ public class Conexioa {
         ResultSet emaitza = kontsulta.executeQuery();
 
         if (emaitza.next()) {
-            System.out.println("Saioa hasita");
-            int idErabiltzailea = emaitza.getInt("ID_ERABILTZAILEA");
+
+            int idErabiltzailea = emaitza.getInt("ID_ERABILTZAILE");
             String izena = emaitza.getString("IZENA");
             String abizena = emaitza.getString("ABIZENA");
             String email = emaitza.getString("EMAILA");
             String erabiltzaile = emaitza.getString("ERABILTZAILEA");
             this.bezero = new Bezero(idErabiltzailea, izena, abizena, email, erabiltzaile);
+
+            System.out.println("Saioa hasita");
 
 
         } else {
