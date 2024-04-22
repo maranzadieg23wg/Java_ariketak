@@ -42,6 +42,7 @@ public class Conexioa {
         int aukera = 1;
         while (aukera !=0){
 
+
             System.out.println("1: Saioa hasi");
             System.out.println("2: Sortu kontua");
             System.out.println("3: Pelikula aleatorio bat lortu");
@@ -53,22 +54,31 @@ public class Conexioa {
             switch (aukera){
                 case 1:
                     saioaHasi();
+                    break;
 
 
                 case 2:
                     sortuKontua();
+                    break;
 
                 case 3:
-                    pelikulaLortu();
+                    System.out.println(pelikulaLortu());
+                    break;
+
 
                 case 4:
                     ikusitakoPelikulak();
+                    break;
 
 
                 case 0:
                     aukera =0;
+                    break;
                 default:
                     System.out.println("Sartu duzun zenbakiak ez du balio");
+                    break;
+
+
             }
 
 
