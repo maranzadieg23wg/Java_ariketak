@@ -77,7 +77,8 @@ public class Conexioa {
 
                 case 5:
 
-                    gehituIkusitakoPeli(101, 1, 8.5F, 4);
+                    //gehituIkusitakoPeli(101, 1, 8.5F, 4);
+                    notaAldatu(101, 1, 9, 6);
                     break;
 
                 case 0:
@@ -387,6 +388,39 @@ public class Conexioa {
             return true;
         }else {
             return false;
+        }
+
+
+
+
+    }
+
+
+    void notaAldatu(int IDPeli, int ikusita, float nota, int ikusKop) throws SQLException {
+
+
+        if (listanDago(IDPeli)){
+
+            String sql = "update IKUSITAKOLISTA set IKUSITA =?, nota =?, ikus_kop=? where ID_ERABILTZAILE = ? and ID_FILMA = ?";
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setInt(4, bezero.getIdErabiltzailea());
+            kontsulta.setInt(5, IDPeli);
+            kontsulta.setInt(1, ikusita);
+            kontsulta.setFloat(2, nota);
+            kontsulta.setInt(3, ikusKop);
+
+            int rowsAffected = kontsulta.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Gehitu egin da pelikua");
+
+            } else {
+                System.err.println("Errore bat gertatu da gehitzean pelikula");
+            }
+
+
+
+        }else {
+            System.err.println(IDPeli+" ez dago listan");
         }
 
 
