@@ -317,26 +317,50 @@ public class Conexioa {
     //************************************* AZKENEKOAK***********************************************
 
     int azkenekoID() throws SQLException {
-        String sql = "select * from ERABILTZAILEAK WHERE ID_ERABILTZAILEA =(SELECT MAX(ID_ERABILTZAILEA) FROM ERABILTZAILEAK)";
+        String sql = "SELECT ID_ERABILTZAILE FROM ERABILTZAILEAK WHERE ID_ERABILTZAILE = (SELECT MAX(ID_ERABILTZAILE) FROM ERABILTZAILEAK)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
-
-
 
         ResultSet emaitza = kontsulta.executeQuery();
 
-        return emaitza.getInt(1);
+        int azkenekoID = 0;
+        if (emaitza.next()) {
+            azkenekoID = emaitza.getInt(1);
+        }
+
+        return azkenekoID;
     }
+
 
     int azkenekoPelikula() throws SQLException {
-        String sql = "select * from FILMAK WHERE ID_FILMA =(SELECT MAX(ID_FIMLA) FROM FILMAK)";
+        String sql = "SELECT ID_FILMA FROM FILMAK WHERE ID_FILMA = (SELECT MAX(ID_FILMA) FROM FILMAK)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
-
-
 
         ResultSet emaitza = kontsulta.executeQuery();
 
-        return emaitza.getInt(1);
+        int azkenekoPelikula = 0;
+        if (emaitza.next()) {
+            azkenekoPelikula = emaitza.getInt(1);
+        }
+
+        //System.out.println("Azkenekoa: "+azkenekoPelikula);
+        return azkenekoPelikula;
     }
+
+    int lehenengoPelikula() throws SQLException {
+        String sql = "SELECT ID_FILMA FROM FILMAK WHERE ID_FILMA = (SELECT MIN(ID_FILMA) FROM FILMAK)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        int lehenengoPeli = 0;
+        if (emaitza.next()) {
+            lehenengoPeli = emaitza.getInt(1);
+        }
+
+        //System.out.println("Azkenekoa: "+azkenekoPelikula);
+        return lehenengoPeli;
+    }
+
 
 
     //************************KONEXIOA*********************************
