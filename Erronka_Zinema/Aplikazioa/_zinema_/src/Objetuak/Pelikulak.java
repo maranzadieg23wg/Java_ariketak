@@ -5,15 +5,15 @@ public class Pelikulak {
     int IDPelikula;
     String tituloa;
     String generoa;
-    int irabaziak;
-    int aurrekontua;
+    long irabaziak;
+    long aurrekontua;
     String trailera;
     String irudia;
     int idEstrenaldia;
     int idZuzendaria;
 
 
-    public Pelikulak(int IDPelikula, String tituloa, String generoa, int irabaziak, int aurrekontua, String trailera, String irudia, int idEstrenaldia, int idZuzendaria) {
+    public Pelikulak(int IDPelikula, String tituloa, String generoa, long irabaziak, long aurrekontua, String trailera, String irudia, int idEstrenaldia, int idZuzendaria) {
         this.IDPelikula = IDPelikula;
         this.tituloa = tituloa;
         this.generoa = generoa;
