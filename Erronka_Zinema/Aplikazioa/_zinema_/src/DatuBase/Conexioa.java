@@ -316,6 +316,7 @@ public class Conexioa {
                 ikusitakoPelikulak.add(list);
             }
         }catch (SQLException e){
+            //System.err.println("e: "+e.getErrorCode());
             System.err.println("Ez da saioa hasi, orduan, ezin da ikusi ikusitako lista");
         }
 
@@ -326,7 +327,7 @@ public class Conexioa {
     IkusitakoLista ikusitakoListaLortu(ResultSet pel) throws SQLException {
         int IDPelikula = pel.getInt("ID_filma");
         int ikusita = pel.getInt("ikusita");
-        int ikusteko = pel.getInt("ikusteko");
+        //int ikusteko = pel.getInt("ikusteko");
         float nota = pel.getFloat("nota");
         int ikusKop = pel.getInt("ikus_kop");
 
