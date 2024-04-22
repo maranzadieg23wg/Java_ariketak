@@ -133,9 +133,9 @@ public class Conexioa {
 
 
 
-            String sql2 = "Insert into ERABILTZAILEAK values (?, ?, ?, ?, ?, ?, ?)";
+            String sql2 = "Insert into ERABILTZAILEAK values (?, ?, ?, ?, ?, ?, null)";
             PreparedStatement kontsulta2 = conn.prepareStatement(sql2);
-            kontsulta2.setInt(1, azkenekoID());
+            kontsulta2.setInt(1, azkenekoID()+1);
             kontsulta2.setString(2, izena);
             kontsulta2.setString(3, abizena);
             kontsulta2.setString(4, emaila);
