@@ -386,10 +386,10 @@ public class Conexioa {
     void konexioaItxi(){
 
         try {
-            System.out.println("Konexioa izten");
+            System.out.println("Konexioa itxita");
             conn.close();
         }catch (SQLException e){
-            System.err.println("Ezin izan da konexioa izti.");
+            System.err.println("Ezin izan da konexioa itxi.");
         }
 
     }
