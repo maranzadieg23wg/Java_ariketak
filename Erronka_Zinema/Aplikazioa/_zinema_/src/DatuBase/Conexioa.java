@@ -303,6 +303,8 @@ public class Conexioa {
 
     void ikusitakoPelikulak(){
 
+        ikusitakoPelikulak.clear();
+
         try {
             String sql = "select * from IKUSITAKOLISTA where (id_erabiltzaile = ?)";
             PreparedStatement kontsulta = conn.prepareStatement(sql);
