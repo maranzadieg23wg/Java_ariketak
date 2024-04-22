@@ -251,16 +251,21 @@ public class Conexioa {
 
     Pelikulak pelikulaObjetua(ResultSet pel) throws SQLException {
 
+        if (!pel.next()) {
+            return null;
+        }
 
-        int IDPelikula = pel.getInt("IDPelikula");
-        String tituloa = pel.getString("tituloa");
-        String generoa = pel.getString("generoa");
-        int irabaziak = pel.getInt("irabaziak");
-        int aurrekontua = pel.getInt("aurrekontua");
-        String trailera = pel.getString("trailera");
-        String irudia = pel.getString("irudia");
-        int idEstrenaldia = pel.getInt("idEstrenaldia");
-        int idZuzendaria = pel.getInt("idZuzendaria");
+
+        int IDPelikula = pel.getInt("ID_FILMA");
+        String tituloa = pel.getString("TITULUA");
+        String generoa = pel.getString("GENEROA");
+        long irabaziak = pel.getLong("IRABAZIAK");
+        long aurrekontua = pel.getLong("AURREKONTUAK");
+        String trailera = pel.getString("TRAILERRAK");
+        String irudia = pel.getString("IRUDIA");
+        int idEstrenaldia = pel.getInt("ID_ESTREINALDIA");
+        int idZuzendaria = pel.getInt("ID_FILM_ZUZENDARIA");
+
         return new Pelikulak(IDPelikula, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, idEstrenaldia, idZuzendaria);
 
 
