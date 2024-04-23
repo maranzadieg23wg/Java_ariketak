@@ -43,9 +43,7 @@ public class Konexioa {
             while (emaitza.next()){
                 Argazkilari argazkilari = argazkilariObejetua(emaitza);
 
-                if (!listanDago(argazkilari)){
-                    list.add(argazkilari);
-                }
+                gehituArgazkilari(argazkilari);
 
             }
 
@@ -64,14 +62,20 @@ public class Konexioa {
 
             ResultSet emaitza = kontsulta.executeQuery();
 
+
             while (emaitza.next()){
+
+
+
                 Argazkia argazkia = argazkiaObjetua(emaitza);
+
 
                 for (Argazkilari arga : list){
                     if (arga.getID() == argazkia.getIDArgazkilari()){
                         arga.gehituArgazki(argazkia);
                     }
                 }
+
 
 
 
@@ -103,9 +107,7 @@ public class Konexioa {
 
     Argazkilari argazkilariObejetua(ResultSet pel) throws SQLException {
 
-        if (!pel.next()) {
-            return null;
-        }
+
 
 
         int IDArgazkilari = pel.getInt("IdArgazkilari");
@@ -119,17 +121,16 @@ public class Konexioa {
     }
     Argazkia argazkiaObjetua(ResultSet pel) throws SQLException {
 
-        if (!pel.next()) {
-            return null;
-        }
 
 
-        int IdArgazki = pel.getInt("IdArgazki");
-        String izenburua = pel.getString("Izenburua");
-        Date data = pel.getDate("Data");
-        String fitxategia = pel.getString("Fitxategia");
-        int bistaratzeKop = pel.getInt("BistaratzeKop");
-        int idArgazkilaria = pel.getInt("IdArgazkilari");
+
+        int IdArgazki = pel.getInt(1);
+        String izenburua = pel.getString(2);
+        Date data = Date.valueOf(pel.getString(3));
+        String fitxategia = pel.getString(4);
+        int bistaratzeKop = pel.getInt(5);
+        int idArgazkilaria = pel.getInt(6);
+
 
 
         return new Argazkia(IdArgazki, izenburua, data, fitxategia, bistaratzeKop, idArgazkilaria);
