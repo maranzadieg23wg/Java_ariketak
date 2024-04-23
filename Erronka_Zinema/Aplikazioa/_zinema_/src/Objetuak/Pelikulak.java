@@ -9,6 +9,7 @@ public class Pelikulak {
     long aurrekontua;
     String trailera;
     String irudia;
+    String irudiaLokalki;
     int idEstrenaldia;
     int idZuzendaria;
 
@@ -38,5 +39,17 @@ public class Pelikulak {
                 ", idEstrenaldia=" + idEstrenaldia +
                 ", idZuzendaria=" + idZuzendaria +
                 '}';
+    }
+
+    public void setirudiaLokalki(String irudiaLokalki) {
+        this.irudiaLokalki = irudiaLokalki;
+    }
+
+    public String getIrudiaLokalki() {
+        return irudiaLokalki;
+    }
+
+    public String getIrudia() {
+        return irudia;
     }
 }
