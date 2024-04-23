@@ -252,11 +252,50 @@ public class Index {
             JLabel label = new JLabel();
             label.setIcon(thedark);
 
-            erdikoa.add(label);
+            pelikulak.add(label);
         }
 
-        erdikoa.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+    }
+
+    JLabel irudiak(String url, int x, int y){
+        ImageIcon originalIcon = new ImageIcon(url);
+
+        Image img = originalIcon.getImage();
+        Image img1 = img.getScaledInstance(x, y, Image.SCALE_SMOOTH);
+        ImageIcon thedark = new ImageIcon(img1);
+
+        JLabel label = new JLabel();
+        label.setIcon(thedark);
+        return label;
+    }
+
+    Pelikulak pelikulaAleatorio() throws SQLException {
+        Conexioa con = new Conexioa();
+
+        Pelikulak pel = con.pelikulaLortu();
+
+        con.konexioaItxi();
+
+        String url = pel.getIrudia();
+
+        IrudiakDeskargatu irudiakDeskargatu = new IrudiakDeskargatu(url,"./irudiak/pelikula");
+
+        pel.setirudiaLokalki(irudiakDeskargatu.getFitxategiarenIzena());
 
 
+        //System.out.println(pel.getIrudiaLokalki());
+        return pel;
+    }
+
+    void pelikulaAukeratuta(MouseEvent e){
+        Pelikulak pel = pelikulaList.get(e.getSource());
+        System.out.println(pel);
+    }
+
+    JLabel zuriaZatia (int luzeera){
+        JLabel zuria = new JLabel();
+        zuria.setPreferredSize(new Dimension(luzeera, 30));
+
+        return zuria;
     }
 }
