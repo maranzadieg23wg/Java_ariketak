@@ -1,4 +1,5 @@
 package DatuBase;
+import Objetuak.Aktoreak;
 import Objetuak.Bezero;
 import Objetuak.IkusitakoLista;
 import Objetuak.Pelikulak;
@@ -460,9 +461,72 @@ public class Conexioa {
 
     }
 
+    //************************************AKTOREAK*****************************************************
+
+    public Aktoreak aktoreaLortu(String izena, String abizena) throws SQLException {
+
+        String sql = "SELECT * FROM AKTOREAK WHERE Izena = ? and ABIZENA =?";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setString(1, izena);
+        kontsulta.setString(1, abizena);
 
 
-    //************************************* AZKENEKOAK***********************************************
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        return aktoreakObjetua(emaitza);
+    }
+
+    public Aktoreak aktoreaLortu() throws SQLException {
+        return aktoreaLortu(-1);
+    }
+
+    public Aktoreak aktoreaLortu(int aukera) throws SQLException {
+
+        if (aukera == -1){
+            int azkenP = azkenekoAktorea();
+            int lehenP = lehenengoAktorea();
+
+            aukera = (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
+        }
+
+
+
+
+
+        String sql = "SELECT * FROM AKTOREAK WHERE AKTOREAK = ?";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setInt(1, aukera);
+
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        return aktoreakObjetua(emaitza);
+
+    }
+
+    Aktoreak aktoreakObjetua(ResultSet pel) throws SQLException {
+
+        if (!pel.next()) {
+            return null;
+        }
+
+
+        int ID_AKTOREA = pel.getInt("ID_AKTOREA");
+        String IZENA = pel.getString("IZENA");
+        String ABIZENA = pel.getString("ABIZENA");
+        String JAIOTZE_DATA = pel.getString("JAIOTZE_DATA");
+        String NAZIONALITATEA = pel.getString("NAZIONALITATEA");
+        String EMAILA = pel.getString("EMAILA");
+        String TELEFONOA = pel.getString("TELEFONOA");
+        String IRUDIA = pel.getString("IRUDIA");
+
+
+        return new Aktoreak(ID_AKTOREA, IZENA, ABIZENA, JAIOTZE_DATA, NAZIONALITATEA, EMAILA, TELEFONOA, IRUDIA);
+    }
+
+        //************************************* AZKENEKOAK***********************************************
 
     int azkenekoID() throws SQLException {
         String sql = "SELECT ID_ERABILTZAILE FROM ERABILTZAILEAK WHERE ID_ERABILTZAILE = (SELECT MAX(ID_ERABILTZAILE) FROM ERABILTZAILEAK)";
@@ -507,6 +571,37 @@ public class Conexioa {
 
         //System.out.println("Azkenekoa: "+azkenekoPelikula);
         return lehenengoPeli;
+    }
+
+
+    int azkenekoAktorea() throws SQLException {
+        String sql = "SELECT ID_AKTOREA FROM AKTOREAK WHERE ID_FILMA = (SELECT MAX(ID_AKTOREA) FROM AKTOREAK)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        int azkenekoAktorea = 0;
+        if (emaitza.next()) {
+            azkenekoAktorea = emaitza.getInt(1);
+        }
+
+        //System.out.println("Azkenekoa: "+azkenekoAktorea);
+        return azkenekoAktorea;
+    }
+
+    int lehenengoAktorea() throws SQLException {
+        String sql = "SELECT ID_AKTOREA FROM AKTOREAK WHERE ID_FILMA = (SELECT MIN(ID_AKTOREA) FROM AKTOREAK)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        int lehenengoAktorea = 0;
+        if (emaitza.next()) {
+            lehenengoAktorea = emaitza.getInt(1);
+        }
+
+        //System.out.println("Azkenekoa: "+lehenengoAktorea);
+        return lehenengoAktorea;
     }
 
 
