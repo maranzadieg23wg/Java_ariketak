@@ -51,5 +51,13 @@ public class Argazkilari {
         return ID;
     }
 
-
+    @Override
+    public String toString() {
+        return "Argazkilari{" +
+                "ID=" + ID +
+                ", izena='" + izena + '\'' +
+                ", saritua=" + saritua +
+                ", list=" + list +
+                '}';
+    }
 }

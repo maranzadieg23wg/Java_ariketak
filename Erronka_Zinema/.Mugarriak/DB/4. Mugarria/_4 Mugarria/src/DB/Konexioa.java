@@ -35,7 +35,7 @@ public class Konexioa {
         list.clear();
 
         try {
-            String sql = "select * from ARGAZKILARI";
+            String sql = "select * from Argazkilari";
             PreparedStatement kontsulta = conn.prepareStatement(sql);
 
             ResultSet emaitza = kontsulta.executeQuery();
@@ -59,7 +59,7 @@ public class Konexioa {
 
     void lortuIrudiak(){
         try {
-            String sql = "select * from ARGAZKIAK";
+            String sql = "select * from Argazkiak";
             PreparedStatement kontsulta = conn.prepareStatement(sql);
 
             ResultSet emaitza = kontsulta.executeQuery();
@@ -153,7 +153,7 @@ public class Konexioa {
     void konexiaEgin(){
 
         try {
-            conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/IkasleDB", "root", "root");
+            conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/ArgazkilariDB", "root", "root");
             System.out.println("Konexioa eginda");
         }catch (SQLException e){
 

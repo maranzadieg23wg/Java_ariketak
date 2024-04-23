@@ -37,4 +37,17 @@ public class Argazkia {
     public int getIDArgazkilari() {
         return IDArgazkilari;
     }
+
+
+    @Override
+    public String toString() {
+        return "Argazkia{" +
+                "ID=" + ID +
+                ", izena='" + izena + '\'' +
+                ", data=" + data +
+                ", url='" + url + '\'' +
+                ", IDArgazkilari=" + IDArgazkilari +
+                ", bistaratzeKop=" + bistaratzeKop +
+                '}';
+    }
 }
