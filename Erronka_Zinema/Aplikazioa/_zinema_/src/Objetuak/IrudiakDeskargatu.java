@@ -12,13 +12,10 @@ public class IrudiakDeskargatu {
     String fitxategiarenIzena;
     public static String irudiaDeskargatu(String urlString, String directorioDestino) {
         try {
-            // Crear una URL desde la cadena proporcionada
             URL url = new URL(urlString);
 
-            // Abrir una conexión a la URL
             InputStream inputStream = url.openStream();
 
-            // Crear un flujo de salida para guardar la imagen
             String fitxategiaIzena = urlString.substring(urlString.lastIndexOf('/') + 1);
             String fitxategiaNonGorde = directorioDestino + File.separator + fitxategiaIzena;
             OutputStream outputStream = new FileOutputStream(fitxategiaNonGorde);

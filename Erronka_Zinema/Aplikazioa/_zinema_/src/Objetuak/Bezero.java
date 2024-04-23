@@ -1,5 +1,13 @@
 package Objetuak;
 
+
+
+/**
+ * Erabiltzen da sortzeko Bezero objetua, honekin autentifikatu egiten da eta lortu daitezke
+ * ikusitako pelikulak
+ * @author Manex Aranzadi Egaña
+ * */
+
 public class Bezero {
 
     int idErabiltzailea;
@@ -20,6 +28,8 @@ public class Bezero {
 
     }
 
+    /**
+     * Lortzeko erabiltzailea ID-a eta honekin, eskaerak egin datu baseari*/
     public int getIdErabiltzailea() {
         return idErabiltzailea;
     }
