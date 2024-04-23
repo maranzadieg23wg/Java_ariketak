@@ -171,52 +171,76 @@ public class Index {
     }
 
 
-    void erdikoa(){
-        erdikoa = new JPanel();
+    void pelikulak() throws SQLException {
+
+        peliTitul = new JPanel();
+        pelikulak = new JPanel();
 
         int peliKop = 7;
-
-        int aktoreKop = 7;
-
-
-
-        GridLayout gridLayout = new GridLayout(4, aktoreKop+2+1);
-
-        erdikoa.setLayout(gridLayout);
-
-        erdikoa.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
 
 
         //↓ Gehitzeko pelikulak textua
         String peli = "Pelikulak";
         JLabel peliLabel = new JLabel(peli);
 
-        erdikoa.add(peliLabel);
+        peliTitul.add(peliLabel);
+
+        pelikulak.add(peliTitul);
+
+
+        //GridLayout gridLayout = new GridLayout(4, aktoreKop+2+1);
+
+        //erdikoa.setLayout(gridLayout);
+
+        pelikulak.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+
+
+
+
         for (int i =0;i<peliKop;i++){
-            erdikoa.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+
+
+            Pelikulak pel = pelikulaAleatorio();
+            JLabel irudia = irudiak(pel.getIrudiaLokalki(), 130, 200);
+            if (pelikulaList.containsKey(irudia)){
+                System.out.println(i);
+                i--;
+            }else {
+                irudia.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        pelikulaAukeratuta(e);
+
+                    }
+                });
+
+                pelikulak.add(irudia); //← Nola sortu irudiak
+
+                pelikulaList.put(irudia, pel);
+            }
+
+
+
         }
-        for (int i =0;i<peliKop;i++){
-            ImageIcon originalIcon = new ImageIcon("irudiak/pelikula/"+i+".jpg");
-
-            Image img = originalIcon.getImage();
-            Image img1 = img.getScaledInstance(130, 200, Image.SCALE_SMOOTH);
-            ImageIcon thedark = new ImageIcon(img1);
-
-            JLabel label = new JLabel();
-            label.setIcon(thedark);
-
-            erdikoa.add(label);
-        }
 
 
+
+        pelikulak.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+
+
+
+
+    }
+
+    void aktoreak(){
+        int aktoreKop = 7;
         //↓ Gehitzeko aktoreak textua
         String akto = "Aktoreak";
         JLabel aktoLabel = new JLabel(akto);
 
 
-        erdikoa.add(aktoLabel);
+        pelikulak.add(aktoLabel);
         for (int i =0;i<aktoreKop;i++){
-            erdikoa.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+            pelikulak.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
         }
         for (int i =0;i<aktoreKop;i++){
             ImageIcon originalIcon = new ImageIcon("irudiak/aktore/"+i+".jpg");
