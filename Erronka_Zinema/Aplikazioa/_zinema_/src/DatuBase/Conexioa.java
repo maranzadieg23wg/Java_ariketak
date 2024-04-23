@@ -8,6 +8,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Datu basearekin konexioa egiteko erabiltzen den objetua.
+ * @author Manex Aranzadi Egaña
+ */
+
 public class Conexioa {
 
     String ipa = "10.14.4.122";
@@ -40,6 +45,10 @@ public class Conexioa {
 
     }
 
+    /**
+     * Interface graficoa erabili gabe hematen du aukera erabiltzeko programa. Ikusteko zure lista, sortu kontu bat eta abar.
+     * @throws SQLException
+     */
     void menua() throws SQLException {
         int aukera = 1;
         while (aukera !=0){
@@ -104,6 +113,12 @@ public class Conexioa {
 
     //*******************************SORTU KONTUA ******************************
 
+    /**
+     * Kontua sortzeko erabiltzen den funtzioa da
+     * Sartu behar den informazioa da, emaila, pasahitza, izena, abizena, erabiltzailea
+     *      * <blockquote>{@code sortuKontua("taldea3@gmail, 123, taldea3, zubiri, taldea3");}</blockquote>
+     * @throws SQLException
+     */
     void sortuKontua() throws SQLException {
         sc.nextLine();
         System.out.println("-----------KONTUA SORTU-----------");
@@ -205,6 +220,13 @@ public class Conexioa {
     }
 
 
+    /**
+     * Email bat sartzen, honek begiratzen ea ezistitu egiten den a la ez.
+     * <blockquote>{@code ezistitzenDaEmail("taldea3@gmail.com");}</blockquote>
+     * @param email
+     * @return true or false
+     * @throws SQLException
+     */
     boolean ezistitzenDaEmail(String email) throws SQLException {
         String sql = "select * from ERABILTZAILEAK where (emaila = ?)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -220,6 +242,13 @@ public class Conexioa {
         }
     }
 
+    /**
+     * Begiratzen du ea ezistitzen den erabiltzailea, eskaera bat eginez datu basera
+     * <blockquote>{@code ezistitzenDaErabiltzailea(taldea3);}</blockquote>
+     * @param Erabiltzailea
+     * @return
+     * @throws SQLException
+     */
     boolean ezistitzenDaErabiltzailea(String Erabiltzailea) throws SQLException {
         String sql = "select * from ERABILTZAILEAK where (erabiltzailea = ?)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -236,6 +265,13 @@ public class Conexioa {
     }
 
 
+    /**
+     * Pelikula bate izena sartuta, honek lortzen duena da honen informazio guztia eta pasatzen dio pelikulaObjetuari, honek bueltatzeko pelikula objetua honen datu guztiekin.
+     * <blockquote>{@code pelikulaLortu("Beyond the fog");}</blockquote>
+     * @param izena
+     * @return Pelikula
+     * @throws SQLException
+     */
     public Pelikulak pelikulaLortu(String izena) throws SQLException {
 
         String sql = "SELECT * FROM FILMAK WHERE TITULUA = ?";
@@ -249,10 +285,26 @@ public class Conexioa {
         return pelikulaObjetua(emaitza);
     }
 
+    /**
+     * deitzen zaionean funtzioari sartu gabe pelikularen ID-a, -1 ID-a esartzen zaio, esan nahi duela pelikula bat aleatorioki aukeratzea.
+     * Orduan deitzen zaio beste funtzioari bai jasotzen duela ID-a eta denez -1, generatu egingo du ID-bat seudoaleatorioki.
+     * <blockquote>{@code pelikulaLortu();}</blockquote>
+     * @return Pelikula
+     * @throws SQLException
+     */
     public Pelikulak pelikulaLortu() throws SQLException {
         return pelikulaLortu(-1);
     }
 
+    /**
+     * jasotzen du ID bat eta honekin bilatzen du datu basean bere informazio guztia.
+     * Informazioa jaso ondoren, deitzen dio beste funtzio bateri eta honek bilakatzen du informazio hori objetu batean eta au bueltatu egiten du.
+     * Sartzen bazaio -1 ID, honek egingo duna izango da, generatu beste ID bat, kontuan artuta zein den lehenengo ID-a eta azkena. Horretarako deitu egiten dio {@code azkenekoPelikula()} eta {@code lehenengoPelikula()}
+     * <blockquote>{@code pelikulaLortu(101);}</blockquote>
+     * @param aukera
+     * @return Pelikula
+     * @throws SQLException
+     */
     public Pelikulak pelikulaLortu(int aukera) throws SQLException {
 
         if (aukera == -1){
@@ -279,6 +331,14 @@ public class Conexioa {
     }
 
 
+    /**
+     * Funtzio honen bitartez lortzen duguna da sortzea Pelikula objetu bat jaso ondoren ResultSet bat.
+     * Utzi baldin badago bueltatu egingo du null objetua, bestela bueltatu egiten du Pelikula objetua.
+     * <blockquote>{@code pelikulaObjetua(emaitza);}</blockquote>
+     * @param pel
+     * @return
+     * @throws SQLException
+     */
 
     Pelikulak pelikulaObjetua(ResultSet pel) throws SQLException {
 
@@ -305,6 +365,11 @@ public class Conexioa {
 
     //***********************************Ikusteko Pelikula Lista****************************************************
 
+    /**
+     * ArrayList batean sartu egiten dira ikusi egin diren pelikula guztia eta hauen notak.
+     * Horretarako, deitzen den bakoitzean ikusteko ez direla errepikatzen, garbitu egiten dira eta ondoren sortu egiten dira objetuak {@code ikusitakoListaLortu(emaitza)} funtzioaren bitartez
+     * <blockquote>{@code ikusitakoPelikulak();}</blockquote>
+     */
     void ikusitakoPelikulak(){
 
         ikusitakoPelikulak.clear();
@@ -329,7 +394,13 @@ public class Conexioa {
 
     }
 
-
+    /**
+     * Jaso egiten da Oraclek bidaltzen duen erantzuna eta honek ateratzen dio behar duen informazioa sortzeko objetua eta ondoren bueltatzen du obejtua.
+     * <blockquote>{@code ikusitakoListaLortu(emaitza);}</blockquote>
+     * @param pel
+     * @return IkusitakoLista
+     * @throws SQLException
+     */
     IkusitakoLista ikusitakoListaLortu(ResultSet pel) throws SQLException {
         int IDPelikula = pel.getInt("ID_filma");
         int ikusita = pel.getInt("ikusita");
@@ -344,7 +415,17 @@ public class Conexioa {
     }
 
 
-
+    /**
+     * Datu basean gehitzeko ikusi egin duzun pelikula berri bat eta honen nota.
+     * Honetarako jaso egiten dira, ikusten diren parametroak.
+     * Baina lehenik eta behin begiratzen da {@code listanDago} funtzioaren bitartez, ea sartzen ari den pelikula listan dagoen eta bezeroaren ID-daukan.
+     * <blockquote>{@code gehituIkusitakoPeli(101, 1, 9, 4);}</blockquote>
+     * @param IDPeli
+     * @param ikusita ikusita badago 1 jarriko da, bestela 0;
+     * @param nota float modukoa da, zenbakiaren ondoren f jarri behar da;
+     * @param ikusKop
+     * @throws SQLException
+     */
     void gehituIkusitakoPeli(int IDPeli, int ikusita, float nota, int ikusKop) throws SQLException {
 
 
@@ -377,7 +458,14 @@ public class Conexioa {
 
     }
 
-
+    /**
+     * Begiratzeko ea dagoen listan pelikula bat, begiratzen ea pelikula horrekin eta erabiltzailearen ID-arekin {@code bezero.getIdErabiltzailea()}.
+     * Emaitzan daturen bat badago bueltatu egingo du True bestela False
+     * <blockquote>{@code listanDago(101);}</blockquote>
+     * @param IDPeli
+     * @return True False
+     * @throws SQLException
+     */
     boolean listanDago(int IDPeli) throws SQLException {
 
         String sql = "select * from IKUSITAKOLISTA where (id_erabiltzaile = ? and ID_FILMA = ?)";
@@ -398,7 +486,17 @@ public class Conexioa {
 
     }
 
-
+    /**
+     * Ikusitako pelikula bateri nahi bazaio aldatu daturen bat.
+     * Lehenik eta behin begiratzen da {@code listanDago(101)} funtzioaren bitartez ea dagoen listan, baldin badago {@code update} bat egiten da datu berriekin.
+     * Lortu egiten da bezeroaren ID erabiltzen {@code bezero.getIdErabiltzailea()}
+     * <blockquote>{@code notaAldatu(101, 1, 10, 6);}</blockquote>
+     * @param IDPeli
+     * @param ikusita 1 = ikusita, 0 = ez ikusita
+     * @param nota
+     * @param ikusKop
+     * @throws SQLException
+     */
     void notaAldatu(int IDPeli, int ikusita, float nota, int ikusKop) throws SQLException {
 
 
@@ -430,6 +528,16 @@ public class Conexioa {
 
 
     }
+
+
+    /**
+     * Borratzeko zure listatikan pelikula bat nahiago dena ez egotea bertan.
+     * <p>Erabiltzen da {@code listanDago(IDPeli)} funtzioa ikusteko ea dagoen listan</p>
+     * Lortzeko bezeroaren ID-a erabiltzen da {@code bezero.getIdErabiltzailea()}
+     *<blockquote>{@code listatikanBorratu(101);}</blockquote>
+     * @param IDPeli
+     * @throws SQLException
+     */
 
     void listatikanBorratu(int IDPeli) throws SQLException {
 
@@ -463,6 +571,15 @@ public class Conexioa {
 
     //************************************AKTOREAK*****************************************************
 
+    /**
+     * Lortzeko aktore objetu bat, honen izena eta abizena jasotzen dira.
+     * Hauen bitartez, lortzen diren datu guztiak datu basetikan bidaltzen dira {@code aktoreakObjetua(emaitza)} funtziora hauek bueltatzeko objetua.
+     * <blockquote>{@code aktoreaLortu("Anya", "Taylor-joy");}</blockquote>
+     * @param izena
+     * @param abizena
+     * @return
+     * @throws SQLException
+     */
     public Aktoreak aktoreaLortu(String izena, String abizena) throws SQLException {
 
         String sql = "SELECT * FROM AKTOREAK WHERE Izena = ? and ABIZENA =?";
@@ -477,10 +594,25 @@ public class Conexioa {
         return aktoreakObjetua(emaitza);
     }
 
+    /**
+     * Lortzeko aktore bat aleatorioki aukeratzen du, deitzen diolako {@code aktoreaLortu(-1)} funtzioari eta honek bueltatu egingo du aktore bat aleatorioki aukeratuta
+     * <blockquote>{@code aktoreaLortu();}</blockquote>
+     * @return
+     * @throws SQLException
+     */
+
     public Aktoreak aktoreaLortu() throws SQLException {
         return aktoreaLortu(-1);
     }
 
+    /**
+     * Aktore baten ID-a erabiltzen lortzen dugu bere informazioa eta hau bidaltzen da {@code aktoreakObjetua(emaitza)} funtziora bueltatzeko Aktoreak objetu bat.
+     * Jasotzen badu -1 ID bezala, generatu egingo du ID bat seudoaleatorioki kontuan artzen zein den lehenengo ID-a eta azkenekoa, honetarako erabiltzen dira {@code azkenekoAktorea()} eta {@code lehenengoAktorea()}
+     * <blockquote>{@code aktoreaLortu(-1);}</blockquote>
+     * @param aukera
+     * @return Aktoreak
+     * @throws SQLException
+     */
     public Aktoreak aktoreaLortu(int aukera) throws SQLException {
 
         if (aukera == -1){
@@ -506,6 +638,14 @@ public class Conexioa {
 
     }
 
+    /**
+     * Jasotzen ditu beste funtzioek jaso duten Oracle DB-ren erantzuna eta hau analizatu egiten du sortzeko {@code Aktoreak} klase bat eta hau itzuli.
+     * <blockquote>{@code aktoreakObjetua(emaitza);}</blockquote>
+     * @param pel
+     * @return Aktoreak
+     * @throws SQLException
+     */
+
     Aktoreak aktoreakObjetua(ResultSet pel) throws SQLException {
 
         if (!pel.next()) {
@@ -526,8 +666,16 @@ public class Conexioa {
         return new Aktoreak(ID_AKTOREA, IZENA, ABIZENA, JAIOTZE_DATA, NAZIONALITATEA, EMAILA, TELEFONOA, IRUDIA);
     }
 
+
+
         //************************************* AZKENEKOAK***********************************************
 
+    /**
+     * Erabiltzaileen azkeneko ID-a edo handiena itzultzen du.
+     * <blockquote>{@code azkenekoID();}</blockquote>
+     * @return azkenekoID;
+     * @throws SQLException
+     */
     int azkenekoID() throws SQLException {
         String sql = "SELECT ID_ERABILTZAILE FROM ERABILTZAILEAK WHERE ID_ERABILTZAILE = (SELECT MAX(ID_ERABILTZAILE) FROM ERABILTZAILEAK)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -543,6 +691,12 @@ public class Conexioa {
     }
 
 
+    /**
+     * Azkeneko pelikularen ID-a edo handiena itzultzen du.
+     * <blockquote>{@code azkenekoPelikula();}</blockquote>
+     * @return azkenekoID;
+     * @throws SQLException
+     */
     int azkenekoPelikula() throws SQLException {
         String sql = "SELECT ID_FILMA FROM FILMAK WHERE ID_FILMA = (SELECT MAX(ID_FILMA) FROM FILMAK)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -558,6 +712,12 @@ public class Conexioa {
         return azkenekoPelikula;
     }
 
+    /**
+     * Bueltatu egiten du pelikulen lehenego ID-a edo txikiena.
+     * <blockquote>{@code lehenengoPelikula();}</blockquote>
+     * @return
+     * @throws SQLException
+     */
     int lehenengoPelikula() throws SQLException {
         String sql = "SELECT ID_FILMA FROM FILMAK WHERE ID_FILMA = (SELECT MIN(ID_FILMA) FROM FILMAK)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -574,6 +734,12 @@ public class Conexioa {
     }
 
 
+    /**
+     * Azkeneko aktorearen ID-a edo handiena itzultzen du.
+     * <blockquote>{@code azkenekoAktorea();}</blockquote>
+     * @return
+     * @throws SQLException
+     */
     int azkenekoAktorea() throws SQLException {
         String sql = "SELECT ID_AKTOREA FROM AKTOREAK WHERE ID_FILMA = (SELECT MAX(ID_AKTOREA) FROM AKTOREAK)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -588,6 +754,13 @@ public class Conexioa {
         //System.out.println("Azkenekoa: "+azkenekoAktorea);
         return azkenekoAktorea;
     }
+
+    /**
+     * Lehenengo aktorearen ID-a itzultzen edo txikiena.
+     * <blockquote>{@code lehenengoAktorea();}</blockquote>
+     * @return
+     * @throws SQLException
+     */
 
     int lehenengoAktorea() throws SQLException {
         String sql = "SELECT ID_AKTOREA FROM AKTOREAK WHERE ID_FILMA = (SELECT MIN(ID_AKTOREA) FROM AKTOREAK)";
@@ -610,6 +783,10 @@ public class Conexioa {
 
     //************************KONEXIOA*********************************
 
+    /**
+     * Datu basera konektatzeko konexioa ireki behar dugu, eta horretarako erabiltzen da funtzio hau.
+     * <blockquote>{@code konexioaEgin();}</blockquote>
+     */
     void konexiaEgin(){
 
         try {
@@ -628,6 +805,10 @@ public class Conexioa {
 
     }
 
+    /**
+     * Datu basearekin izteko konexioa erabiliko genuke funtzio hau.
+     * <blockquote>{@code konexioaItxi();}</blockquote>
+     */
     public void konexioaItxi(){
 
         try {
