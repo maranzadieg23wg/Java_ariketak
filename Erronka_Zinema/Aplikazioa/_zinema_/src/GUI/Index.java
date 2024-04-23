@@ -70,9 +70,18 @@ public class Index {
         menuak.add(menua);
         menuak.add(menua2);
 
+
+        JPanel erdi = new JPanel();
+        erdi.setLayout(new BoxLayout(erdi, BoxLayout.Y_AXIS));
+
+        erdi.add(peliTitul);
+        erdi.add(pelikulak);
+        //erdi.add(aktoreTitul);
+        //erdi.add(aktoreak);
+
         frame.add(menuak, BorderLayout.NORTH);
 
-        frame.add(erdikoa, BorderLayout.CENTER);
+        frame.add(erdi, BorderLayout.CENTER);
         //frame.add(centerPanel, BorderLayout.CENTER);
 
         frame.pack();
@@ -85,18 +94,21 @@ public class Index {
 
         menua = new JPanel();
 
-        GridLayout gridLayout = new GridLayout(1, 4);
+        //GridLayout gridLayout = new GridLayout(1, 4);
 
-        menua.setLayout(gridLayout);
+        //menua.setLayout(gridLayout);
 
         menua.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
 
 
-        String izena = "zinema";
+        String izena = "Enigma";
         JLabel label = new JLabel(izena);
 
         menua.add(label);
 
+
+
+        menua.add(zuriaZatia(800));
 
         //↓Botoiak
         buttonLogin = new JButton("Login");
@@ -104,6 +116,7 @@ public class Index {
 
         buttonLogin.setPreferredSize(new Dimension(80, 30));
         buttonSingUp.setPreferredSize(new Dimension(80, 30));
+
 
 
 
@@ -120,9 +133,9 @@ public class Index {
 
         menua2 = new JPanel();
 
-        GridLayout gridLayout = new GridLayout(1, lista.length+2+2+1);
+        //GridLayout gridLayout = new GridLayout(1, lista.length+2+2+1);
 
-        menua2.setLayout(gridLayout);
+        //menua2.setLayout(gridLayout);
 
 
         menua2.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
