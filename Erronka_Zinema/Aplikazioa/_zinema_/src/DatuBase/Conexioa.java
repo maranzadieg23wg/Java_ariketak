@@ -30,8 +30,8 @@ public class Conexioa {
         konexiaEgin();
 
         
-        menua();
-        konexioaItxi();
+        //menua();
+        //konexioaItxi();
 
 
 
@@ -235,7 +235,7 @@ public class Conexioa {
     }
 
 
-    Pelikulak pelikulaLortu(String izena) throws SQLException {
+    public Pelikulak pelikulaLortu(String izena) throws SQLException {
 
         String sql = "SELECT * FROM FILMAK WHERE TITULUA = ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -248,11 +248,11 @@ public class Conexioa {
         return pelikulaObjetua(emaitza);
     }
 
-    Pelikulak pelikulaLortu() throws SQLException {
+    public Pelikulak pelikulaLortu() throws SQLException {
         return pelikulaLortu(-1);
     }
 
-    Pelikulak pelikulaLortu(int aukera) throws SQLException {
+    public Pelikulak pelikulaLortu(int aukera) throws SQLException {
 
         if (aukera == -1){
             int azkenP = azkenekoPelikula();
@@ -533,7 +533,7 @@ public class Conexioa {
 
     }
 
-    void konexioaItxi(){
+    public void konexioaItxi(){
 
         try {
             System.out.println("Konexioa itxita");
