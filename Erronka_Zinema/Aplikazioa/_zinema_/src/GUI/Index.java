@@ -1,6 +1,16 @@
 package GUI;
+import DatuBase.Conexioa;
+import Objetuak.IrudiakDeskargatu;
+import Objetuak.Pelikulak;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.HashMap;
 
 public class Index {
 
