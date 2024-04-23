@@ -1,4 +1,5 @@
 import DB.Konexioa;
+import GUI.Index;
 import Objetuak.Argazkilari;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ public class Main {
         }
 
         conn.konexioaItxi();
+
+
+        Index index = new Index("Manex", 800, 600);
 
 
     }

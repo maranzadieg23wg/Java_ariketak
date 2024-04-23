@@ -50,4 +50,16 @@ public class Argazkia {
                 ", bistaratzeKop=" + bistaratzeKop +
                 '}';
     }
+
+    public String getIzena() {
+        return izena;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }

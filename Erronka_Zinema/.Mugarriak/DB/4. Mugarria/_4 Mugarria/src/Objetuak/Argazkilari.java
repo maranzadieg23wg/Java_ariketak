@@ -1,5 +1,6 @@
 package Objetuak;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -59,5 +60,13 @@ public class Argazkilari {
                 ", saritua=" + saritua +
                 ", list=" + list +
                 '}';
+    }
+
+    public String getIzena() {
+        return izena;
+    }
+
+    public ArrayList<Argazkia> getList() {
+        return list;
     }
 }
