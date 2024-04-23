@@ -17,7 +17,7 @@ public class Argazkilari {
         list = new ArrayList<>();
     }
 
-    void gehituArgazki(Argazkia argazki){
+    public void gehituArgazki(Argazkia argazki){
 
         if (!argazkiaDauka(argazki)){
             list.add(argazki);
@@ -46,4 +46,10 @@ public class Argazkilari {
     public int hashCode() {
         return Objects.hash(ID, izena, list);
     }
+
+    public int getID() {
+        return ID;
+    }
+
+
 }

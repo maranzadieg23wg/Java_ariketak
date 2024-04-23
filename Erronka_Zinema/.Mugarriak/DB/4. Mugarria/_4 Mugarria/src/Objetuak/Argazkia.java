@@ -9,13 +9,15 @@ public class Argazkia {
     private String izena;
     private Date data;
     private String url;
+    private int IDArgazkilari;
     private int bistaratzeKop;
 
-    public Argazkia(int ID, String izena, Date data, String url, int bistaratzeKop) {
+    public Argazkia(int ID, String izena, Date data, String url, int bistaratzeKop, int IDArgazkilari) {
         this.ID = ID;
         this.izena = izena;
         this.data = data;
         this.url = url;
+        this.IDArgazkilari = IDArgazkilari;
         this.bistaratzeKop = bistaratzeKop;
     }
 
@@ -30,5 +32,9 @@ public class Argazkia {
     @Override
     public int hashCode() {
         return Objects.hash(ID, izena, data, url, bistaratzeKop);
+    }
+
+    public int getIDArgazkilari() {
+        return IDArgazkilari;
     }
 }
