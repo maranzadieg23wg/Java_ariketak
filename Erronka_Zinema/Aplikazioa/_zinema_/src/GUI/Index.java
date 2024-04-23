@@ -178,6 +178,7 @@ public class Index {
 
         int peliKop = 7;
 
+        
 
         //↓ Gehitzeko pelikulak textua
         String peli = "Pelikulak";
