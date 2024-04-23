@@ -1,5 +1,9 @@
 package Objetuak;
 
+/**
+ * Objetu honen bitartez, lortzen dugu jakitea zein nota heman dion bezero batek pelikula konkretu bateri
+ * @author Manex Aranzadi Egaña
+ */
 public class IkusitakoLista {
 
     Bezero bezero;
