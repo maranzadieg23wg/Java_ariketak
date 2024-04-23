@@ -20,28 +20,32 @@ public class Index {
 
 
     private JFrame frame;
-    private JPanel menua, menua2, erdikoa;
+    private JPanel menua, menua2, pelikulak, aktoreak, peliTitul, aktoreTitul;
     private JButton buttonLogin, buttonSingUp, botoiak;
     private JTextField bilatu;
     private JList<String> aukerak;
 
     private String[] lista;
 
+    private HashMap <JLabel, Pelikulak> pelikulaList;
+
     private CardLayout menuLista;
 
 
-    public Index(int x, int y, String izena) {
+    public Index(int x, int y, String izena) throws SQLException {
         this.x = x;
         this.y = y;
         this.izena = izena;
 
         lista = new String[]{"Pelikulak", "aktoreak", "zuzendariak", "laguntza", "myList"};
 
+        pelikulaList = new HashMap<>();
+
 
         sortuLehoia();
         menua();
         menua2();
-        erdikoa();
+        pelikulak();
 
 
 
