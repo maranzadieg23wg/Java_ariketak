@@ -146,12 +146,22 @@ public class Index {
 
             menua2.add(botoiak);
         }
+
+        menua2.add(zuriaZatia(450));
+
         menua2.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
 
-        aukerak = new JList<>(lista);
+        Choice aukerak = new Choice();
+        for (int i =0;i< lista.length;i++){
+            String b = lista[i];
+
+
+            aukerak.add(b);
+        }
         menua2.add(aukerak);
 
         bilatu = new JTextField("Search");
+        bilatu.setPreferredSize(new Dimension(250, 30));
         menua2.add(bilatu);
 
 
