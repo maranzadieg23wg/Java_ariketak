@@ -1,5 +1,10 @@
 package Objetuak;
 
+/**
+ * Erabiltzen da pelikula bat jasotzen denean datu basetikan, hemen dauden datuekin betetzen da.
+ * @author Manex Aranzadi Egaña
+ */
+
 public class Pelikulak {
 
     int IDPelikula;
@@ -41,13 +46,21 @@ public class Pelikulak {
                 '}';
     }
 
+    /**
+     * Lokalean zein karpetan eta zein izenarekin ezartzeko balio du*/
     public void setirudiaLokalki(String irudiaLokalki) {
         this.irudiaLokalki = irudiaLokalki;
     }
 
+    /**
+     * Lortzen dugu non gorde egin den lokalki.
+     * Irudiak ./img/pelikulak karpetan gorde egiten dira*/
     public String getIrudiaLokalki() {
         return irudiaLokalki;
     }
+
+    /**
+     * Online nun dagoen gordeta irudia bueltatzen du.*/
 
     public String getIrudia() {
         return irudia;
