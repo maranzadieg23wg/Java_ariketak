@@ -1,6 +1,7 @@
 package GUI;
 import DatuBase.Conexioa;
 import Objetuak.Aktoreak;
+import Objetuak.Bezero;
 import Objetuak.IrudiakDeskargatu;
 import Objetuak.Pelikulak;
 
@@ -34,6 +35,9 @@ public class Index {
     private CardLayout menuLista;
 
 
+    private Bezero bezero;
+
+
     public Index(int x, int y, String izena) throws SQLException {
         this.x = x;
         this.y = y;
@@ -43,6 +47,8 @@ public class Index {
 
         pelikulaList = new HashMap<>();
         aktoreList = new HashMap<>();
+
+
 
 
         sortuLehoia();
@@ -123,6 +129,18 @@ public class Index {
         buttonLogin.setPreferredSize(new Dimension(80, 30));
         buttonSingUp.setPreferredSize(new Dimension(80, 30));
 
+
+
+        buttonLogin.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    logetu();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            }
+        });
 
 
 
@@ -363,5 +381,14 @@ public class Index {
         zuria.setPreferredSize(new Dimension(luzeera, 30));
 
         return zuria;
+    }
+
+
+    void logetu() throws SQLException {
+
+        this.bezero = SaioaHasi.saioaHasi();
+
+
+
     }
 }

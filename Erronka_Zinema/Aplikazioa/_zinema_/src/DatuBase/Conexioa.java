@@ -231,7 +231,7 @@ public class Conexioa {
 
     //***************************************SAIOA HASI****************************************
 
-    void saioaHasi(String email, String pasahitza) throws SQLException {
+    public boolean saioaHasi(String email, String pasahitza) throws SQLException {
 
         String pasahitzaHash = String.valueOf(pasahitza.hashCode());
 
@@ -252,10 +252,12 @@ public class Conexioa {
             this.bezero = new Bezero(idErabiltzailea, izena, abizena, emaila, erabiltzaile);
 
             System.out.println("Saioa hasita");
+            return true;
 
 
         } else {
             System.err.println(email + " datu basean ez dago erabiltzailerik datu hauekin");
+            return false;
         }
     }
     void saioaHasi() throws SQLException {
@@ -286,9 +288,11 @@ public class Conexioa {
             System.out.println("Saioa hasita");
 
 
+
         } else {
             System.err.println(emaila + " erabiltzailearekin kontu bat ez dago existitzen");
         }
+
     }
 
 
@@ -893,6 +897,7 @@ public class Conexioa {
     }
 
 
-
-
+    public Bezero getBezero() {
+        return bezero;
+    }
 }
