@@ -109,7 +109,10 @@ public class Index {
 
     void menua(){
 
+
+
         menua = new JPanel();
+
 
         aukera1 = new JPanel();
         aukera2 = new JPanel();
@@ -285,6 +288,9 @@ public class Index {
 
                 pelikulaList.put(irudia, pel);
             }
+
+
+
 
 
 

@@ -10,16 +10,30 @@ public class IrudiakDeskargatu {
     String karpeta;
 
     String fitxategiarenIzena;
-    public static String irudiaDeskargatu(String urlString, String directorioDestino) {
+    public static String irudiaDeskargatu(String urlString, String bukaerakoKarpeta) {
         try {
             URL url = new URL(urlString);
 
             InputStream inputStream = url.openStream();
 
-            String fitxategiaIzena = urlString.substring(urlString.lastIndexOf('/') + 1);
-            String fitxategiaNonGorde = directorioDestino + File.separator + fitxategiaIzena;
-            OutputStream outputStream = new FileOutputStream(fitxategiaNonGorde);
+            BufferedReader br1 = new BufferedReader(new FileReader("./fitxategiak/cache/irudiak"));
 
+            String fitxategiaIzena = urlString.substring(urlString.lastIndexOf('/') + 1);
+            String fitxategiaNonGorde = bukaerakoKarpeta + File.separator + fitxategiaIzena;
+
+            //fitxategiaNonGorde = fitxategiaNonGorde.replace("\\", "/");
+
+            String line;
+            while ((line = br1.readLine()) !=null){
+                if (line.equals(fitxategiaNonGorde)){
+                    System.out.println(fitxategiaNonGorde);
+                    br1.close();
+                    return fitxategiaNonGorde;
+                }
+            }
+            br1.close();
+
+            OutputStream outputStream = new FileOutputStream(fitxategiaNonGorde);
 
             byte[] buffer = new byte[2048];
             int luzeera;
@@ -28,8 +42,16 @@ public class IrudiakDeskargatu {
             }
 
 
+
             inputStream.close();
             outputStream.close();
+
+
+            BufferedWriter bw1 = new BufferedWriter(new FileWriter("./fitxategiak/cache/irudiak", true));
+            bw1.write(fitxategiaNonGorde);
+            bw1.newLine();
+
+            bw1.close();
 
             return fitxategiaNonGorde;
         } catch (IOException e) {
