@@ -23,6 +23,7 @@ public class Index {
 
     private JFrame frame;
     private JPanel menua, menua2, pelikulak, aktoreak, peliTitul, aktoreTitul;
+    private JPanel aukera1, aukera2;
     private JButton buttonLogin, buttonSingUp, botoiak;
     private JTextField bilatu;
     private JList<String> aukerak;
@@ -33,6 +34,9 @@ public class Index {
     private HashMap <JLabel, Aktoreak> aktoreList;
 
     private CardLayout menuLista;
+
+    private String izn;
+    JLabel peliLabel;
 
 
     private Bezero bezero;
@@ -49,6 +53,7 @@ public class Index {
         aktoreList = new HashMap<>();
 
 
+        this.bezero = null;
 
 
         sortuLehoia();
@@ -106,6 +111,9 @@ public class Index {
 
         menua = new JPanel();
 
+        aukera1 = new JPanel();
+        aukera2 = new JPanel();
+
         //GridLayout gridLayout = new GridLayout(1, 4);
 
         //menua.setLayout(gridLayout);
@@ -121,6 +129,7 @@ public class Index {
 
 
         menua.add(zuriaZatia(800));
+
 
         //↓Botoiak
         buttonLogin = new JButton("Login");
@@ -142,10 +151,44 @@ public class Index {
             }
         });
 
+        buttonSingUp.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    kontuaSortu();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            }
+        });
 
 
-        menua.add(buttonLogin);
-        menua.add(buttonSingUp);
+
+        aukera1.add(buttonLogin);
+        aukera1.add(buttonSingUp);
+
+
+        //System.out.println(this.bezero.getErabiltzaileIzena());
+        JPanel bezIzena = new JPanel();
+
+        izn = "proba";
+        if (bezero !=null){
+            izn = this.bezero.getErabiltzaileIzena();
+        }
+
+        peliLabel = new JLabel(izn);
+
+        bezIzena.add(peliLabel);
+
+        aukera2.add(bezIzena);
+
+
+        aukera1.setVisible(true);
+        aukera2.setVisible(false);
+
+        menua.add(aukera1);
+        menua.add(aukera2);
+
 
         menua.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
 
@@ -389,6 +432,21 @@ public class Index {
         this.bezero = SaioaHasi.saioaHasi();
 
 
+
+        izn = bezero.getErabiltzaileIzena();
+        peliLabel.setText(izn);
+        aukera1.setVisible(false);
+        aukera2.setVisible(true);
+        menua();
+
+
+    }
+
+    void kontuaSortu() throws SQLException {
+
+        this.bezero = KontuaSortu.kontuaSortu();
+
+        menua();
 
     }
 }
