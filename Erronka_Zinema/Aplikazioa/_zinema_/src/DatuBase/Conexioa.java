@@ -120,7 +120,7 @@ public class Conexioa {
      * @throws SQLException
      */
 
-    void sortuKontua(String email, String pasahitza, String izena, String abizena, String erabiltzailea) throws SQLException {
+    public boolean sortuKontua(String email, String pasahitza, String izena, String abizena, String erabiltzailea) throws SQLException {
 
 
         int pasahitzaHash = pasahitza.hashCode();
@@ -131,11 +131,14 @@ public class Conexioa {
         //ezistitzenDa(emaila);
 
         if (ezistitzenDaEmail(email)){
+
             System.err.println(email+" erabiltzailearekin kontu bat existitzen da");
+            return false;
         }else {
 
             if (ezistitzenDaErabiltzailea(erabiltzailea)){
                 System.err.println(erabiltzailea+" erabiltzailea dagoenekoa badago.");
+                return false;
             }
 
 
@@ -154,9 +157,11 @@ public class Conexioa {
             int rowsAffected = kontsulta2.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Erabiltzailea ongi sortu egin da.");
+                return true;
 
             } else {
                 System.err.println("Errore bat gertatu da erabiltzailea sortzean.");
+                return false;
             }
 
         }
