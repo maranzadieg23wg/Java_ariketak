@@ -1,5 +1,6 @@
 package GUI;
 import DatuBase.Conexioa;
+import Objetuak.Aktoreak;
 import Objetuak.IrudiakDeskargatu;
 import Objetuak.Pelikulak;
 
@@ -28,6 +29,7 @@ public class Index {
     private String[] lista;
 
     private HashMap <JLabel, Pelikulak> pelikulaList;
+    private HashMap <JLabel, Aktoreak> aktoreList;
 
     private CardLayout menuLista;
 
@@ -40,12 +42,14 @@ public class Index {
         lista = new String[]{"Pelikulak", "aktoreak", "zuzendariak", "laguntza", "myList"};
 
         pelikulaList = new HashMap<>();
+        aktoreList = new HashMap<>();
 
 
         sortuLehoia();
         menua();
         menua2();
         pelikulak();
+        aktoreak();
 
 
 
@@ -76,6 +80,8 @@ public class Index {
 
         erdi.add(peliTitul);
         erdi.add(pelikulak);
+        erdi.add(aktoreTitul);
+        erdi.add(aktoreak);
         //erdi.add(aktoreTitul);
         //erdi.add(aktoreak);
 
@@ -232,29 +238,65 @@ public class Index {
 
     }
 
-    void aktoreak(){
-        int aktoreKop = 7;
-        //↓ Gehitzeko aktoreak textua
+    void aktoreak() throws SQLException {
+
+        aktoreTitul = new JPanel();
+        aktoreak = new JPanel();
+
+        int aktoKop = 7;
+
+
+
+        //↓ Gehitzeko pelikulak textua
         String akto = "Aktoreak";
         JLabel aktoLabel = new JLabel(akto);
 
+        aktoreTitul.add(aktoLabel);
 
-        pelikulak.add(aktoLabel);
-        for (int i =0;i<aktoreKop;i++){
-            pelikulak.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+        aktoreak.add(aktoreTitul);
+
+
+        //GridLayout gridLayout = new GridLayout(4, aktoreKop+2+1);
+
+        //erdikoa.setLayout(gridLayout);
+
+        aktoreak.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+
+
+
+
+        for (int i =0;i<aktoKop;i++){
+
+
+            Aktoreak akt = aktoreAleatorio();
+            //System.out.println(akt.getIrudiaLokalki());
+            JLabel irudia = irudiak(akt.getIrudiaLokalki(), 130, 200);
+            if (aktoreList.containsKey(irudia)){
+                System.out.println(i);
+                i--;
+            }else {
+                irudia.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        aktoreaAukeratu(e);
+
+                    }
+                });
+
+                aktoreak.add(irudia); //← Nola sortu irudiak
+
+                aktoreList.put(irudia, akt);
+            }
+
+
+
         }
-        for (int i =0;i<aktoreKop;i++){
-            ImageIcon originalIcon = new ImageIcon("irudiak/aktore/"+i+".jpg");
 
-            Image img = originalIcon.getImage();
-            Image img1 = img.getScaledInstance(130, 200, Image.SCALE_SMOOTH);
-            ImageIcon thedark = new ImageIcon(img1);
 
-            JLabel label = new JLabel();
-            label.setIcon(thedark);
 
-            pelikulak.add(label);
-        }
+        aktoreak.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
+
+
+
 
     }
 
@@ -288,9 +330,32 @@ public class Index {
         return pel;
     }
 
+    Aktoreak aktoreAleatorio() throws SQLException {
+        Conexioa con = new Conexioa();
+
+        Aktoreak akt = con.aktoreaLortu();
+
+        con.konexioaItxi();
+
+        String url = akt.getIrudia();
+
+        IrudiakDeskargatu irudiakDeskargatu = new IrudiakDeskargatu(url,"./irudiak/aktore");
+
+        akt.setirudiaLokalki(irudiakDeskargatu.getFitxategiarenIzena());
+
+
+        //System.out.println(pel.getIrudiaLokalki());
+        return akt;
+    }
+
     void pelikulaAukeratuta(MouseEvent e){
         Pelikulak pel = pelikulaList.get(e.getSource());
         System.out.println(pel);
+    }
+
+    void aktoreaAukeratu(MouseEvent e){
+        Aktoreak akto = aktoreList.get(e.getSource());
+        System.out.println(akto);
     }
 
     JLabel zuriaZatia (int luzeera){

@@ -35,5 +35,18 @@ public class Aktoreak {
         return irudia;
     }
 
-
+    @Override
+    public String toString() {
+        return "Aktoreak{" +
+                "id_aktora=" + id_aktora +
+                ", izena='" + izena + '\'' +
+                ", abizena='" + abizena + '\'' +
+                ", jaiotze_Data='" + jaiotze_Data + '\'' +
+                ", nazionalitatea='" + nazionalitatea + '\'' +
+                ", emaila='" + emaila + '\'' +
+                ", telefonoa='" + telefonoa + '\'' +
+                ", irudia='" + irudia + '\'' +
+                ", irudiaLokalki='" + irudiaLokalki + '\'' +
+                '}';
+    }
 }

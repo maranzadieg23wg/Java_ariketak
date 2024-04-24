@@ -626,7 +626,7 @@ public class Conexioa {
 
 
 
-        String sql = "SELECT * FROM AKTOREAK WHERE AKTOREAK = ?";
+        String sql = "SELECT * FROM AKTOREAK WHERE ID_AKTOREA = ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setInt(1, aukera);
 
