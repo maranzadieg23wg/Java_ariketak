@@ -119,6 +119,51 @@ public class Conexioa {
      *      * <blockquote>{@code sortuKontua("taldea3@gmail, 123, taldea3, zubiri, taldea3");}</blockquote>
      * @throws SQLException
      */
+
+    void sortuKontua(String email, String pasahitza, String izena, String abizena, String erabiltzailea) throws SQLException {
+
+
+        int pasahitzaHash = pasahitza.hashCode();
+        pasahitza = null;
+
+
+        //Begiratu ea existitzen den
+        //ezistitzenDa(emaila);
+
+        if (ezistitzenDaEmail(email)){
+            System.err.println(email+" erabiltzailearekin kontu bat existitzen da");
+        }else {
+
+            if (ezistitzenDaErabiltzailea(erabiltzailea)){
+                System.err.println(erabiltzailea+" erabiltzailea dagoenekoa badago.");
+            }
+
+
+
+
+
+            String sql2 = "Insert into ERABILTZAILEAK values (?, ?, ?, ?, ?, ?, null)";
+            PreparedStatement kontsulta2 = conn.prepareStatement(sql2);
+            kontsulta2.setInt(1, azkenekoID()+1);
+            kontsulta2.setString(2, izena);
+            kontsulta2.setString(3, abizena);
+            kontsulta2.setString(4, email);
+            kontsulta2.setString(5, erabiltzailea);
+            kontsulta2.setInt(6, pasahitzaHash);
+
+            int rowsAffected = kontsulta2.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Erabiltzailea ongi sortu egin da.");
+
+            } else {
+                System.err.println("Errore bat gertatu da erabiltzailea sortzean.");
+            }
+
+        }
+
+
+
+    }
     void sortuKontua() throws SQLException {
         sc.nextLine();
         System.out.println("-----------KONTUA SORTU-----------");
