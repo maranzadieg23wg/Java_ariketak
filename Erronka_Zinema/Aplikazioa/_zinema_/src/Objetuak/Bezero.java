@@ -33,4 +33,8 @@ public class Bezero {
     public int getIdErabiltzailea() {
         return idErabiltzailea;
     }
+
+    public String getErabiltzaileIzena() {
+        return erabiltzaileIzena;
+    }
 }
