@@ -231,6 +231,33 @@ public class Conexioa {
 
     //***************************************SAIOA HASI****************************************
 
+    void saioaHasi(String email, String pasahitza) throws SQLException {
+
+        String pasahitzaHash = String.valueOf(pasahitza.hashCode());
+
+        String sql = "select * from ERABILTZAILEAK where emaila = ? and pasahitza = ?";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setString(1, email);
+        kontsulta.setString(2, pasahitzaHash);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        if (emaitza.next()) {
+
+            int idErabiltzailea = emaitza.getInt("ID_ERABILTZAILE");
+            String izena = emaitza.getString("IZENA");
+            String abizena = emaitza.getString("ABIZENA");
+            String emaila = emaitza.getString("EMAILA");
+            String erabiltzaile = emaitza.getString("ERABILTZAILEA");
+            this.bezero = new Bezero(idErabiltzailea, izena, abizena, emaila, erabiltzaile);
+
+            System.out.println("Saioa hasita");
+
+
+        } else {
+            System.err.println(email + " datu basean ez dago erabiltzailerik datu hauekin");
+        }
+    }
     void saioaHasi() throws SQLException {
         sc.nextLine();
         System.out.println("-----------SAIOA HASI-----------");
