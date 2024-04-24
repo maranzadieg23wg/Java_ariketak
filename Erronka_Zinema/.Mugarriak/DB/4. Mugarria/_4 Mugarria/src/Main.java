@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Konexioa conn = new Konexioa();
+        /*Konexioa conn = new Konexioa();
 
         ArrayList<Argazkilari> lista = conn.getList();
 
@@ -16,7 +16,7 @@ public class Main {
             System.out.println(arha);
         }
 
-        conn.konexioaItxi();
+        conn.konexioaItxi();*/
 
 
         Index index = new Index("Manex", 800, 600);
