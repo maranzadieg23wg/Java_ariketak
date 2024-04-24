@@ -17,6 +17,8 @@ public class Konexioa {
 
     private Connection conn;
 
+    private static boolean bai = false;
+
     private ArrayList<Argazkilari> list;
 
 
@@ -134,6 +136,37 @@ public class Konexioa {
 
 
         return new Argazkia(IdArgazki, izenburua, data, fitxategia, bistaratzeKop, idArgazkilaria);
+
+
+    }
+
+    public void eguneratu(int id) throws SQLException {
+
+        String sql = "SELECT BistarateKop FROM Argazkiak WHERE IDArgazkia = ?";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setInt(1, id);
+
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+        emaitza.next();
+
+
+
+        int zenbat = emaitza.getInt("BistarateKop");
+        if (bai){
+            zenbat++;
+
+            String sql1 = "update Argazkiak set BistarateKop =? WHERE IDArgazkia = ?";
+            PreparedStatement kontsulta2 = conn.prepareStatement(sql1);
+            kontsulta2.setInt(2, id);
+            kontsulta2.setInt(1, zenbat);
+
+            int rowsAffected = kontsulta2.executeUpdate();
+            bai = false;
+        }else {
+            bai = true;
+        }
 
 
     }

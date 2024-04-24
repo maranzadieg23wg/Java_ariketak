@@ -62,4 +62,8 @@ public class Argazkia {
     public String getUrl() {
         return url;
     }
+
+    public int getID() {
+        return ID;
+    }
 }

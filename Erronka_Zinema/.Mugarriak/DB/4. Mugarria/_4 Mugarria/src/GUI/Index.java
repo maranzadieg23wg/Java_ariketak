@@ -3,6 +3,7 @@ package GUI;
 import DB.Konexioa;
 import Objetuak.Argazkia;
 import Objetuak.Argazkilari;
+import org.jdesktop.swingx.JXDatePicker;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -11,10 +12,14 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 public class Index extends JFrame implements ItemListener{
     ArrayList<String> modelData = new ArrayList<>();
+    ArrayList<Argazkia> a;
     DefaultListModel<String> model = new DefaultListModel<>();
     String url = "";
     JLabel irudia;
@@ -24,6 +29,7 @@ public class Index extends JFrame implements ItemListener{
     private int y;
     private String izena;
 
+    JXDatePicker data;
 
     private ArrayList<Argazkilari> list;
 
@@ -107,6 +113,15 @@ public class Index extends JFrame implements ItemListener{
         menua.add(temp);
 
 
+
+        data = new JXDatePicker();
+
+
+        temp2.add(data);
+        menua.add(temp2);
+
+
+
         modelData = new ArrayList<>();
         model = new DefaultListModel<>();
         jlist = new JList(model);
@@ -116,24 +131,40 @@ public class Index extends JFrame implements ItemListener{
                 url = (String) jlist.getSelectedValue();
                 System.out.println(url);
                 irudia = irudiak("./IMG/"+url+".jpg", 100,100);
-                temp3.removeAll(); 
+                temp3.removeAll();
                 temp3.add(irudia);
                 temp3.revalidate();
                 temp3.repaint();
+
+                for (Argazkia b : a){
+                    if (b.getIzena().equals(url)){
+
+                        try {
+                            eguneratu(b);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Date d = b.getData();
+                        data.setDate(d);
+
+                    }
+                }
             }
         });
 
 
 
 
-        temp2.add(jlist);
-        menua.add(temp2);
+        //temp2.add(jlist);
+        menua.add(jlist);
 
         url = "";
         irudia = irudiak("./IMG/"+url+".jpg", 100,100);
 
         temp3.add(irudia);
         menua.add(temp3);
+
+
 
 
     }
@@ -153,7 +184,11 @@ public class Index extends JFrame implements ItemListener{
 
             for (Argazkilari argazkilari : list){
                 if (argazkilari.getIzena().equals(e.getItem())){
-                    ArrayList<Argazkia> a = argazkilari.getList();
+                    /*if (a.isEmpty()){
+                        a.clear();
+                    }*/
+
+                    a = argazkilari.getList();
 
                     modelData.clear();
                     model.clear();
@@ -181,5 +216,13 @@ public class Index extends JFrame implements ItemListener{
         JLabel label = new JLabel();
         label.setIcon(thedark);
         return label;
+    }
+
+    void eguneratu(Argazkia argazkia) throws SQLException {
+
+        Konexioa conn = new Konexioa();
+        conn.eguneratu(argazkia.getID());
+        conn.konexioaItxi();
+
     }
 }
