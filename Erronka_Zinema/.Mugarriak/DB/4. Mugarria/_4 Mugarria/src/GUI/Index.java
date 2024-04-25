@@ -23,6 +23,7 @@ public class Index extends JFrame implements ItemListener{
     DefaultListModel<String> model = new DefaultListModel<>();
     String url = "";
     JLabel irudia;
+    boolean bai;
 
 
     private int x;
@@ -49,6 +50,7 @@ public class Index extends JFrame implements ItemListener{
         this.izena = izena;
 
 
+        bai = false;
 
         sortuLehioa();
         konexioa();
