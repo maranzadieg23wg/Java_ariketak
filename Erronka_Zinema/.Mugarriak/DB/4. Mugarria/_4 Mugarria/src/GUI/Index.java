@@ -145,7 +145,8 @@ public class Index extends JFrame implements ItemListener{
                             throw new RuntimeException(e);
                         }
                         Date d = b.getData();
-                        data.setDate(d);
+
+                        //data.setDate(d); //Data eguneratu
 
                     }
                 }
@@ -195,7 +196,13 @@ public class Index extends JFrame implements ItemListener{
                     jlist.clearSelection();
 
                     for (Argazkia argazkia : a){
-                        modelData.add(argazkia.getIzena());
+                        if (data.getDate() != null){
+                            int diferentzia = argazkia.getData().compareTo(data.getDate());
+                            if (diferentzia>0){
+                                modelData.add(argazkia.getIzena());
+                            }
+                        }
+
                     }
                     eguneratuLista();
 
