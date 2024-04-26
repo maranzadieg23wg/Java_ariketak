@@ -327,7 +327,7 @@ public class Conexioa {
      * Begiratzen du ea ezistitzen den erabiltzailea, eskaera bat eginez datu basera
      * <blockquote>{@code ezistitzenDaErabiltzailea(taldea3);}</blockquote>
      * @param Erabiltzailea
-     * @return
+     * @return Boolean
      * @throws SQLException
      */
     boolean ezistitzenDaErabiltzailea(String Erabiltzailea) throws SQLException {
@@ -666,7 +666,7 @@ public class Conexioa {
         String sql = "SELECT * FROM AKTOREAK WHERE Izena = ? and ABIZENA =?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, izena);
-        kontsulta.setString(1, abizena);
+        kontsulta.setString(2, abizena);
 
 
 
