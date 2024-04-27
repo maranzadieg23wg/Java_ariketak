@@ -1,10 +1,9 @@
 package DatuBase;
 
 import Objetuak.Aktoreak;
+import Objetuak.Bezero;
 import Objetuak.Pelikulak;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,14 +15,42 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConexioaTest {
 
-    Conexioa conn = new Conexioa();
+    private static Conexioa conn;
+
+
+
+
+    @BeforeAll
+    @DisplayName("Ireki konexioa datu basearekin")
+    static void konexioaIreki() throws SQLException {
+        conn = new Conexioa();
+    }
+
+    @AfterAll
+    @DisplayName("Itxi konexioa datu basearekin")
+    static void konexioaItxi(){
+        conn.konexioaItxi();
+    }
 
     ConexioaTest() throws SQLException {
     }
 
 
     @Test
-    void sortuKontua() {
+    @DisplayName("Erabiltzailea sortu")
+    void sortuKontua() throws SQLException {
+        boolean kontuaSortuta = conn.sortuKontua("NIGHTWISH@gmail.com", "123", "NIGHT", "NIGHTWISH ", "NIGHTWISH ");
+        assertTrue(kontuaSortuta, "[-] Erabiltzailea ez da ongi sortu");
+
+        erabiltzaileaBorratu();
+    }
+
+    @Test
+    @DisplayName("Erabiltzailea borratu")
+    void erabiltzaileaBorratu() throws SQLException {
+        Bezero bezero = conn.getBezero();
+        int borratuta = conn.erabiltzaileaBorratu(bezero);
+        assertEquals(1, borratuta, "[-] Erabiltzailea ezin izan da borratu");
     }
 
 
@@ -67,14 +94,13 @@ class ConexioaTest {
     }
 
 
-    @Test
     @RepeatedTest(3)
     @DisplayName("Pelikula lortu")
     void testPelikulaLortu() throws SQLException {
         assertNotNull(conn.pelikulaLortu(), "[-] Ezin izan da pelikula bat lortu");
     }
 
-    @Test
+
     @RepeatedTest(3)
     @DisplayName("Jurasic Park Pelikula lortu ID bitartez")
     void jurasicTtestPelikulaLortu() throws SQLException {
@@ -82,7 +108,7 @@ class ConexioaTest {
         assertEquals(conn.pelikulaLortu(101), jurasic, "[-] Ezin izan da Jurasic Park pelikula lortu");
     }
 
-    @Test
+
     @RepeatedTest(3)
     @DisplayName("Jurasic Park Pelikula lortu izenaren bitartez")
     void jurasicTestPelikulaLortu() throws SQLException {
@@ -113,14 +139,14 @@ class ConexioaTest {
     void listatikanBorratu() {
     }
 
-    @Test
+
     @RepeatedTest(3)
     @DisplayName("Aktore bat aleatorioko lortu")
     void aktoreaLortu() throws SQLException {
         assertNotNull(conn.aktoreaLortu(), "[-] Ezin izan da akto bat lortu");
     }
 
-    @Test
+
     @RepeatedTest(3)
     @DisplayName("Lortu aktore bat ID-aren bitartez")
     void testAktoreaLortu() throws SQLException {
@@ -128,7 +154,7 @@ class ConexioaTest {
         assertEquals(aktorea, conn.aktoreaLortu(110), "[-] Aktorea ez da berbera");
     }
 
-    @Test
+
     @RepeatedTest(3)
     @DisplayName("Lortu aktore bat Izenaren-aren bitartez")
     void testAktoreaLortuString() throws SQLException {
@@ -138,34 +164,41 @@ class ConexioaTest {
 
 
     @Test
-    void azkenekoID() {
+    @DisplayName("Bezeroen azkeneko ID-a")
+    void azkenekoID() throws SQLException {
+        int azkeneko = conn.azkenekoID();
+
+        assertEquals(3, azkeneko, "[-] Lortu den ID-a ez da azkenekoa erabiltzailearena");
+
     }
 
     @Test
-    void azkenekoPelikula() {
+    @DisplayName("Azkeneko pelikularen ID-a")
+    void azkenekoPelikula() throws SQLException {
+        int azkeneko = conn.azkenekoPelikula();
+        assertEquals(120, azkeneko, "[-] Lortu den ID-a ez da azkeneko pelikularena");
     }
 
     @Test
-    void lehenengoPelikula() {
+    @DisplayName("Lehenengo pelikularen ID-a")
+    void lehenengoPelikula() throws SQLException {
+        int lehenengoa = conn.lehenengoPelikula();
+        assertEquals(101, lehenengoa, "[-] Lortu den ID-a ez da lehenengo pelikularena");
     }
 
     @Test
-    void azkenekoAktorea() {
+    @DisplayName("Azkeneko aktorea lortu")
+    void azkenekoAktorea() throws SQLException {
+        int azkenekoa = conn.azkenekoAktorea();
+        assertEquals(110, azkenekoa, "[-] Ez da lortu azkeneko aktorea");
     }
 
     @Test
-    void lehenengoAktorea() {
+    @DisplayName("Lehenengo aktorea lortu")
+    void lehenengoAktorea() throws SQLException {
+        int lehenegoa = conn.lehenengoAktorea();
+        assertEquals(101, lehenegoa, "[-] Ez da lortu lehenengo aktorea");
     }
 
-    @Test
-    void konexiaEgin() {
-    }
 
-    @Test
-    void konexioaItxi() {
-    }
-
-    @Test
-    void getBezero() {
-    }
 }

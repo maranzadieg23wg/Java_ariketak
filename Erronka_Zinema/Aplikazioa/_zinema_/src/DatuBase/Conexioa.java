@@ -234,6 +234,22 @@ public class Conexioa {
 
     }
 
+    /**
+     * Erabiltzailea borratzeko erabiltzen da
+     * @param bezero
+     * @return Integer
+     * @throws SQLException
+     */
+    int erabiltzaileaBorratu(Bezero bezero) throws SQLException {
+        int id = bezero.getIdErabiltzailea();
+
+        String sql = "Delete from ERABILTZAILEAK where IDErabiltzailea = ?";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setInt (1, id);
+
+        return kontsulta.executeUpdate();
+    }
+
     //***************************************SAIOA HASI****************************************
 
     public boolean saioaHasi(String email, String pasahitza) throws SQLException {
