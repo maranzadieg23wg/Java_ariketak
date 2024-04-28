@@ -234,6 +234,22 @@ public class Conexioa {
 
     }
 
+    /**
+     * Erabiltzailea borratzeko erabiltzen da
+     * @param bezero
+     * @return Integer
+     * @throws SQLException
+     */
+    int erabiltzaileaBorratu(Bezero bezero) throws SQLException {
+        int id = bezero.getIdErabiltzailea();
+
+        String sql = "Delete from ERABILTZAILEAK where IDErabiltzailea = ?";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setInt (1, id);
+
+        return kontsulta.executeUpdate();
+    }
+
     //***************************************SAIOA HASI****************************************
 
     public boolean saioaHasi(String email, String pasahitza) throws SQLException {
@@ -327,7 +343,7 @@ public class Conexioa {
      * Begiratzen du ea ezistitzen den erabiltzailea, eskaera bat eginez datu basera
      * <blockquote>{@code ezistitzenDaErabiltzailea(taldea3);}</blockquote>
      * @param Erabiltzailea
-     * @return
+     * @return Boolean
      * @throws SQLException
      */
     boolean ezistitzenDaErabiltzailea(String Erabiltzailea) throws SQLException {
@@ -666,7 +682,7 @@ public class Conexioa {
         String sql = "SELECT * FROM AKTOREAK WHERE Izena = ? and ABIZENA =?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, izena);
-        kontsulta.setString(1, abizena);
+        kontsulta.setString(2, abizena);
 
 
 

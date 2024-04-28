@@ -1,5 +1,7 @@
 package Objetuak;
 
+import java.util.Objects;
+
 public class Aktoreak {
 
     private int id_aktora;
@@ -48,5 +50,18 @@ public class Aktoreak {
                 ", irudia='" + irudia + '\'' +
                 ", irudiaLokalki='" + irudiaLokalki + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Aktoreak aktoreak = (Aktoreak) o;
+        return id_aktora == aktoreak.id_aktora && Objects.equals(izena, aktoreak.izena) && Objects.equals(abizena, aktoreak.abizena) && Objects.equals(jaiotze_Data, aktoreak.jaiotze_Data) && Objects.equals(nazionalitatea, aktoreak.nazionalitatea) && Objects.equals(emaila, aktoreak.emaila) && Objects.equals(telefonoa, aktoreak.telefonoa) && Objects.equals(irudia, aktoreak.irudia) && Objects.equals(irudiaLokalki, aktoreak.irudiaLokalki);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_aktora, izena, abizena, jaiotze_Data, nazionalitatea, emaila, telefonoa, irudia, irudiaLokalki);
     }
 }

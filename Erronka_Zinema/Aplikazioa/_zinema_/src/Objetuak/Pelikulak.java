@@ -1,5 +1,7 @@
 package Objetuak;
 
+import java.util.Objects;
+
 /**
  * Erabiltzen da pelikula bat jasotzen denean datu basetikan, hemen dauden datuekin betetzen da.
  * @author Manex Aranzadi Egaña
@@ -41,6 +43,7 @@ public class Pelikulak {
                 ", aurrekontua=" + aurrekontua +
                 ", trailera='" + trailera + '\'' +
                 ", irudia='" + irudia + '\'' +
+                ", irudiaLokalki='" + irudiaLokalki + '\'' +
                 ", idEstrenaldia=" + idEstrenaldia +
                 ", idZuzendaria=" + idZuzendaria +
                 '}';
@@ -64,5 +67,18 @@ public class Pelikulak {
 
     public String getIrudia() {
         return irudia;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pelikulak pelikulak = (Pelikulak) o;
+        return IDPelikula == pelikulak.IDPelikula && irabaziak == pelikulak.irabaziak && aurrekontua == pelikulak.aurrekontua && idEstrenaldia == pelikulak.idEstrenaldia && idZuzendaria == pelikulak.idZuzendaria && Objects.equals(tituloa, pelikulak.tituloa) && Objects.equals(generoa, pelikulak.generoa) && Objects.equals(trailera, pelikulak.trailera) && Objects.equals(irudia, pelikulak.irudia) && Objects.equals(irudiaLokalki, pelikulak.irudiaLokalki);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(IDPelikula, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, irudiaLokalki, idEstrenaldia, idZuzendaria);
     }
 }
