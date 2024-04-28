@@ -18,6 +18,6 @@ class BezeroTest {
     @Test
     @DisplayName("Erabiltzailearen izena egokia den konprobatu egiten da.")
     void getErabiltzaileIzena() {
-        assertEquals("NIGHT", bezero.getErabiltzaileIzena(), "[-]Lortu egin den izena ez da berbera");
+        assertEquals("NIGHTWISH", bezero.getErabiltzaileIzena(), "[-]Lortu egin den izena ez da berbera");
     }
 }

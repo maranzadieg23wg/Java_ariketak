@@ -43,6 +43,7 @@ public class Pelikulak {
                 ", aurrekontua=" + aurrekontua +
                 ", trailera='" + trailera + '\'' +
                 ", irudia='" + irudia + '\'' +
+                ", irudiaLokalki='" + irudiaLokalki + '\'' +
                 ", idEstrenaldia=" + idEstrenaldia +
                 ", idZuzendaria=" + idZuzendaria +
                 '}';

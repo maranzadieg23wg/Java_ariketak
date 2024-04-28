@@ -1,6 +1,7 @@
 package Objetuak;
 
 
+import java.util.Objects;
 
 /**
  * Erabiltzen da sortzeko Bezero objetua, honekin autentifikatu egiten da eta lortu daitezke
@@ -36,5 +37,18 @@ public class Bezero {
 
     public String getErabiltzaileIzena() {
         return erabiltzaileIzena;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bezero bezero = (Bezero) o;
+        return idErabiltzailea == bezero.idErabiltzailea && Objects.equals(izena, bezero.izena) && Objects.equals(abizena, bezero.abizena) && Objects.equals(emaila, bezero.emaila) && Objects.equals(erabiltzaileIzena, bezero.erabiltzaileIzena) && Objects.equals(pasahitza, bezero.pasahitza) && Objects.equals(ikusitakoLista, bezero.ikusitakoLista);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idErabiltzailea, izena, abizena, emaila, erabiltzaileIzena, pasahitza, ikusitakoLista);
     }
 }
