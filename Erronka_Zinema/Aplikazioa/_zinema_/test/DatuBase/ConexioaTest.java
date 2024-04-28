@@ -4,6 +4,8 @@ import Objetuak.Aktoreak;
 import Objetuak.Bezero;
 import Objetuak.Pelikulak;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -101,11 +103,13 @@ class ConexioaTest {
     }
 
 
-    @RepeatedTest(3)
+    @ParameterizedTest
+    @CsvFileSource(resources = {"./test/DatuBase/test/Film.csv"})
     @DisplayName("Jurasic Park Pelikula lortu ID bitartez")
-    void jurasicTtestPelikulaLortu() throws SQLException {
-        Pelikulak jurasic = new Pelikulak(101, "Jurassic Park", "Acci�n/Aventura", 900000000,63000000, "https://www.youtube.com/watch?v=lc0UehYemQA", "https://hips.hearstapps.com/hmg-prod/images/1202186-copia-64f056b7a8612.jpg", 19930611, 201);
-        assertEquals(conn.pelikulaLortu(101), jurasic, "[-] Ezin izan da Jurasic Park pelikula lortu");
+    void jurasicTtestPelikulaLortu(int id, String tituloa, String generoa, long irabaziak, long aurrekontua, String trailera, String irudia, int estrenaldia, int zuzendaria) throws SQLException {
+
+        Pelikulak jurasic = new Pelikulak(id, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, estrenaldia, zuzendaria);
+        assertEquals(conn.pelikulaLortu(id), jurasic, "[-] Ezin izan da Jurasic Park pelikula lortu");
     }
 
 
