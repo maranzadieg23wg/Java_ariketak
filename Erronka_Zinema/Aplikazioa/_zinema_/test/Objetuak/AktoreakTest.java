@@ -16,7 +16,7 @@ class AktoreakTest {
         getIrudiaLokalki();
     }
 
-    @Test
+
     @DisplayName("Konprobatu ea irudiak berberak diren")
     void getIrudiaLokalki() {
         String url = aktorea.getIrudiaLokalki();

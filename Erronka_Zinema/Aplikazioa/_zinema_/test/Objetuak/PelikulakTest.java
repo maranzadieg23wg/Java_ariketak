@@ -20,12 +20,12 @@ class PelikulakTest {
         getIrudiaLokalki();
     }
 
-    @Test
+
     @DisplayName("Ikusi ea lokalki dagoen irudiaren URl egokia den")
     void getIrudiaLokalki() {
 
 
-
+        //System.out.println(jurasic.getIrudiaLokalki());
         assertEquals("Park.jpg", jurasic.getIrudiaLokalki(), "[-]Lokalki dagoen gordetako URL-a ez da egokia");
     }
 

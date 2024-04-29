@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BezeroTest {
 
-    Bezero bezero =new Bezero(1,"NIGHT", "WISH", "NIGHTWISH@gmail.com", "NIGHTWISH ");
+    Bezero bezero =new Bezero(1,"NIGHT", "WISH", "NIGHTWISH@gmail.com", "NIGHTWISH");
 
     @Test
     @DisplayName("Erabiltzailearen ID-a egokia den konprobatu egiten da.")
@@ -18,6 +18,6 @@ class BezeroTest {
     @Test
     @DisplayName("Erabiltzailearen izena egokia den konprobatu egiten da.")
     void getErabiltzaileIzena() {
-        assertEquals("NIGHTWISH", bezero.getErabiltzaileIzena(), "[-]Lortu egin den izena ez da berbera");
+        assertEquals("NIGHTWISH", bezero.getErabiltzaileIzena().toString(), "[-]Lortu egin den izena ez da berbera");
     }
 }
