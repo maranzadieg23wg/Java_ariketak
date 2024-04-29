@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author Manex Aranzadi Egaña
  */
 
-public class Conexioa {
+public class Konexioa {
 
     String ipa = "10.14.4.122";
     //String ipa = "192.168.1.60";
@@ -30,7 +30,7 @@ public class Conexioa {
     ArrayList<IkusitakoLista> ikusitakoPelikulak = new ArrayList<>();
 
 
-    public Conexioa() throws SQLException {
+    public Konexioa() throws SQLException {
         sc = new Scanner(System.in);
 
         konexiaEgin();

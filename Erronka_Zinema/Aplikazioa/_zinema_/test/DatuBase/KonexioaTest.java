@@ -1,23 +1,19 @@
 package DatuBase;
 
 import Objetuak.Aktoreak;
-import Objetuak.Bezero;
 import Objetuak.Pelikulak;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.*;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ConexioaTest {
+class KonexioaTest {
 
-    private static Conexioa conn;
+    private static Konexioa conn;
 
 
 
@@ -25,7 +21,7 @@ class ConexioaTest {
     @BeforeAll
     @DisplayName("Ireki konexioa datu basearekin")
     static void konexioaIreki() throws SQLException {
-        conn = new Conexioa();
+        conn = new Konexioa();
     }
 
     @AfterAll
@@ -34,7 +30,7 @@ class ConexioaTest {
         conn.konexioaItxi();
     }
 
-    ConexioaTest() throws SQLException {
+    KonexioaTest() throws SQLException {
     }
 
 

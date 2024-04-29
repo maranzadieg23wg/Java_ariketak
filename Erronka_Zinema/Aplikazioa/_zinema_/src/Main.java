@@ -1,6 +1,4 @@
-import DatuBase.Conexioa;
 import GUI.Index;
-import GUI.SaioaHasi;
 
 import java.sql.SQLException;
 

@@ -1,5 +1,5 @@
 package GUI;
-import DatuBase.Conexioa;
+import DatuBase.Konexioa;
 import Objetuak.Aktoreak;
 import Objetuak.Bezero;
 import Objetuak.IrudiakDeskargatu;
@@ -7,8 +7,6 @@ import Objetuak.Pelikulak;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -380,7 +378,7 @@ public class Index {
     }
 
     Pelikulak pelikulaAleatorio() throws SQLException {
-        Conexioa con = new Conexioa();
+        Konexioa con = new Konexioa();
 
         Pelikulak pel = con.pelikulaLortu();
 
@@ -398,7 +396,7 @@ public class Index {
     }
 
     Aktoreak aktoreAleatorio() throws SQLException {
-        Conexioa con = new Conexioa();
+        Konexioa con = new Konexioa();
 
         Aktoreak akt = con.aktoreaLortu();
 

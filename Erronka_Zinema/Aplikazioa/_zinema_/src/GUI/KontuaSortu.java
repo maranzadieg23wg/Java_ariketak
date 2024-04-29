@@ -1,6 +1,6 @@
 package GUI;
 
-import DatuBase.Conexioa;
+import DatuBase.Konexioa;
 import Objetuak.Bezero;
 
 import javax.swing.*;
@@ -28,7 +28,7 @@ public class KontuaSortu {
         int option = JOptionPane.showConfirmDialog(null, message, "Kontua sortu", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
 
-            Conexioa conn = new Conexioa();
+            Konexioa conn = new Konexioa();
             String email = emaila.getText();
             String pas = pasahitza.getText();
             String ize = izena.getText();
