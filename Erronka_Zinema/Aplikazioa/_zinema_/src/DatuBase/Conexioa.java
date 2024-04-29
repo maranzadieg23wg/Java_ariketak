@@ -838,7 +838,7 @@ public class Conexioa {
      * @throws SQLException
      */
     int azkenekoAktorea() throws SQLException {
-        String sql = "SELECT ID_AKTOREA FROM AKTOREAK WHERE ID_FILMA = (SELECT MAX(ID_AKTOREA) FROM AKTOREAK)";
+        String sql = "SELECT ID_AKTOREA FROM AKTOREAK WHERE ID_AKTOREA = (SELECT MAX(ID_AKTOREA) FROM AKTOREAK)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
 
         ResultSet emaitza = kontsulta.executeQuery();

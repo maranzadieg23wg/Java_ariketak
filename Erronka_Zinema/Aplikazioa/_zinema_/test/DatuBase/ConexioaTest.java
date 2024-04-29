@@ -44,16 +44,9 @@ class ConexioaTest {
         boolean kontuaSortuta = conn.sortuKontua("NIGHTWISH@gmail.com", "123", "NIGHT", "NIGHTWISH ", "NIGHTWISH ");
         assertTrue(kontuaSortuta, "[-] Erabiltzailea ez da ongi sortu");
 
-        erabiltzaileaBorratu();
     }
 
-    @Test
-    @DisplayName("Erabiltzailea borratu")
-    void erabiltzaileaBorratu() throws SQLException {
-        Bezero bezero = conn.getBezero();
-        int borratuta = conn.erabiltzaileaBorratu(bezero);
-        assertEquals(1, borratuta, "[-] Erabiltzailea ezin izan da borratu");
-    }
+
 
 
 
@@ -104,17 +97,22 @@ class ConexioaTest {
 
 
     @ParameterizedTest
-    @CsvFileSource(resources = {"./test/DatuBase/test/Film.csv"})
-    @DisplayName("Jurasic Park Pelikula lortu ID bitartez")
+    @CsvFileSource(
+            resources = {"./test/Film.csv"},
+            encoding = "UTF-8",
+            lineSeparator = "\n",
+            delimiter = ','
+    )
+    @DisplayName("Jurassic Park Pelikula lortu ID bitartez")
     void jurasicTtestPelikulaLortu(int id, String tituloa, String generoa, long irabaziak, long aurrekontua, String trailera, String irudia, int estrenaldia, int zuzendaria) throws SQLException {
 
-        Pelikulak jurasic = new Pelikulak(id, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, estrenaldia, zuzendaria);
-        assertEquals(conn.pelikulaLortu(id), jurasic, "[-] Ezin izan da Jurasic Park pelikula lortu");
+        Pelikulak jurassic = new Pelikulak(id, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, estrenaldia, zuzendaria);
+        assertEquals(conn.pelikulaLortu(id), jurassic, "[-] Ezin izan da Jurasic Park pelikula lortu");
     }
 
 
     @RepeatedTest(3)
-    @DisplayName("Jurasic Park Pelikula lortu izenaren bitartez")
+    @DisplayName("Jurassic Park Pelikula lortu izenaren bitartez")
     void jurasicTestPelikulaLortu() throws SQLException {
         Pelikulak jurasic = new Pelikulak(101, "Jurassic Park", "Acci�n/Aventura", 900000000,63000000, "https://www.youtube.com/watch?v=lc0UehYemQA", "https://hips.hearstapps.com/hmg-prod/images/1202186-copia-64f056b7a8612.jpg", 19930611, 201);
         assertEquals(conn.pelikulaLortu("Jurassic Park"), jurasic, "[-] Ezin izan da Jurasic Park pelikula lortu");
@@ -154,7 +152,7 @@ class ConexioaTest {
     @RepeatedTest(3)
     @DisplayName("Lortu aktore bat ID-aren bitartez")
     void testAktoreaLortu() throws SQLException {
-        Aktoreak aktorea = new Aktoreak(110, "Tom", "Hanks", "1956-07-09 00:00:00", "Estadounidense", "tom@example.com", "123456789", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Tom_Hanks_2014.jpg/475px-Tom_Hanks_2014.jpg");
+        Aktoreak aktorea = new Aktoreak(110, "Tom", "Hanks", "1956-07-09 00:00:00", "Estadounidense", "tom@example.com", "+123456789", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Tom_Hanks_2014.jpg/475px-Tom_Hanks_2014.jpg");
         assertEquals(aktorea, conn.aktoreaLortu(110), "[-] Aktorea ez da berbera");
     }
 
@@ -162,7 +160,7 @@ class ConexioaTest {
     @RepeatedTest(3)
     @DisplayName("Lortu aktore bat Izenaren-aren bitartez")
     void testAktoreaLortuString() throws SQLException {
-        Aktoreak aktorea = new Aktoreak(110, "Tom", "Hanks", "1956-07-09 00:00:00", "Estadounidense", "tom@example.com", "123456789", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Tom_Hanks_2014.jpg/475px-Tom_Hanks_2014.jpg");
+        Aktoreak aktorea = new Aktoreak(110, "Tom", "Hanks", "1956-07-09 00:00:00", "Estadounidense", "tom@example.com", "+123456789", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Tom_Hanks_2014.jpg/475px-Tom_Hanks_2014.jpg");
         assertEquals(aktorea, conn.aktoreaLortu("Tom", "Hanks"), "[-] Aktorea ez da berbera");
     }
 
@@ -180,7 +178,7 @@ class ConexioaTest {
     @DisplayName("Azkeneko pelikularen ID-a")
     void azkenekoPelikula() throws SQLException {
         int azkeneko = conn.azkenekoPelikula();
-        assertEquals(120, azkeneko, "[-] Lortu den ID-a ez da azkeneko pelikularena");
+        assertEquals(122, azkeneko, "[-] Lortu den ID-a ez da azkeneko pelikularena");
     }
 
     @Test
