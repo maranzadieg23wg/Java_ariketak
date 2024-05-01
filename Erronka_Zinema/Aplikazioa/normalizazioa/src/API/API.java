@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 public class API {
 
+    //https://developer.themoviedb.org/reference/search-movie
 
     private static String api = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YWE0ZjRhMDgzZTMyZjg4MjM5ZmYzZGE3NjVlNmQyOCIsInN1YiI6IjY2MzIyYmFiMDA2YjAxMDEyZDFkMTZiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jPQm_oheJ0dTUtVu8vSXEwrpAdZjyC8aHkf53CDsTIo";
 
@@ -20,49 +21,115 @@ public class API {
 
 
 
-    static Response pelikulaLortu(String izena) throws IOException {
+    static Response pelikulaLortu(String izena){
 
-        izena=izena.replace(" ", "%20");
+        try {
+            izena=izena.replace(" ", "%20");
 
-        izena = izena.replace(":", "%3A");
-
-
-        Request request = new Request.Builder()
-                .url("https://api.themoviedb.org/3/search/movie?query="+izena+"&include_adult=false&language=en-US&page=1")
-                .get()
-                .addHeader("accept", "application/json")
-                .addHeader("Authorization", api)
-                .build();
+            izena = izena.replace(":", "%3A");
 
 
-        Response erantzuna = client.newCall(request).execute();
+            Request request = new Request.Builder()
+                    .url("https://api.themoviedb.org/3/search/movie?query="+izena+"&include_adult=false&language=en-US&page=1")
+                    .get()
+                    .addHeader("accept", "application/json")
+                    .addHeader("Authorization", api)
+                    .build();
 
-        if (!erantzuna.isSuccessful()) {
-            throw new IOException("Unexpected code " + erantzuna);
+
+            Response erantzuna = client.newCall(request).execute();
+
+            if (!erantzuna.isSuccessful()) {
+                throw new IOException("Unexpected code " + erantzuna);
+            }
+
+            return erantzuna;
+        }catch (Exception e){
+            return null;
         }
 
-        return erantzuna;
+
+    }
+
+    public static int pelikulaID(String izena) throws IOException {
+        try {
+            Response erantzuna = pelikulaLortu(izena);
+
+            String eran = erantzuna.body().string();
+
+            JSONObject json =  new JSONObject(eran);
+
+            JSONArray results = json.getJSONArray("results");
+
+            JSONObject movie = results.getJSONObject(0);
+
+            int posterPath = movie.getInt("id");
+
+            return posterPath;
+        }catch (Exception e){
+            return 0;
+        }
 
     }
 
     public static String pelikulaIMG (String izena) throws IOException {
-        Response erantzuna = pelikulaLortu(izena);
+        try {
+            Response erantzuna = pelikulaLortu(izena);
 
-        String eran = erantzuna.body().string();
+            String eran = erantzuna.body().string();
 
-        JSONObject json =  new JSONObject(eran);
+            JSONObject json =  new JSONObject(eran);
 
-        JSONArray results = json.getJSONArray("results");
+            JSONArray results = json.getJSONArray("results");
 
-        JSONObject movie = results.getJSONObject(0);
+            JSONObject movie = results.getJSONObject(0);
 
-        String posterPath = movie.getString("poster_path");
+            String posterPath = movie.getString("poster_path");
 
-        posterPath = "http://image.tmdb.org/t/p/w500"+posterPath;
-        return posterPath;
+            posterPath = "http://image.tmdb.org/t/p/w500"+posterPath;
+            return posterPath;
+        }catch (Exception e){
+            return null;
+        }
 
 
     }
+
+    public static String pelikulaTrailer (String izena) throws IOException {
+
+        try {
+            int id = pelikulaID(izena);
+
+
+            Request request = new Request.Builder()
+                    .url("https://api.themoviedb.org/3/movie/"+id+"/videos?language=en-US")
+                    .get()
+                    .addHeader("accept", "application/json")
+                    .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YWE0ZjRhMDgzZTMyZjg4MjM5ZmYzZGE3NjVlNmQyOCIsInN1YiI6IjY2MzIyYmFiMDA2YjAxMDEyZDFkMTZiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jPQm_oheJ0dTUtVu8vSXEwrpAdZjyC8aHkf53CDsTIo")
+                    .build();
+
+            Response erantzuna = client.newCall(request).execute();
+
+            String eran = erantzuna.body().string();
+
+            JSONObject json =  new JSONObject(eran);
+
+            JSONArray results = json.getJSONArray("results");
+
+            JSONObject movie = results.getJSONObject(0);
+
+            String posterPath = movie.getString("key");
+
+            posterPath = "https://www.youtube.com/watch?v="+posterPath;
+
+            return posterPath;
+        }catch (Exception e){
+            return null;
+        }
+
+    }
+
+
 
 
 
