@@ -15,7 +15,7 @@ public class API {
     //https://developer.themoviedb.org/reference/search-movie
     //https://www.kaggle.com/datasets/alessandrolobello/the-ultimate-film-statistics-dataset-for-ml?resource=download
 
-    private static String api = "winrar";
+    private static String api = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YWE0ZjRhMDgzZTMyZjg4MjM5ZmYzZGE3NjVlNmQyOCIsInN1YiI6IjY2MzIyYmFiMDA2YjAxMDEyZDFkMTZiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jPQm_oheJ0dTUtVu8vSXEwrpAdZjyC8aHkf53CDsTIo";
 
     private static final OkHttpClient client = new OkHttpClient();
 
@@ -52,10 +52,22 @@ public class API {
 
     }
 
-    public static int pelikulaID(String izena) throws IOException {
-        try {
-            Response erantzuna = pelikulaLortu(izena);
+    public static Response zuzendariaLortu(String izena) throws IOException {
+        izena = izena.replace(" ", "%20");
+        OkHttpClient client = new OkHttpClient();
 
+        Request request = new Request.Builder()
+                .url("https://api.themoviedb.org/3/search/person?query="+izena+"&include_adult=false&language=en-US&page=1")
+                .get()
+                .addHeader("accept", "application/json")
+                .addHeader("Authorization", api)
+                .build();
+
+        return client.newCall(request).execute();
+    }
+
+    public static JSONObject jsonLortu(Response erantzuna) throws IOException {
+        try {
             String eran = erantzuna.body().string();
 
             JSONObject json =  new JSONObject(eran);
@@ -64,8 +76,19 @@ public class API {
 
             JSONObject movie = results.getJSONObject(0);
 
-            int posterPath = movie.getInt("id");
+            return movie;
+        }catch (Exception e){
+            return null;
+        }
 
+
+    }
+
+    public static int pelikulaID(String izena) throws IOException {
+        try {
+            JSONObject movie = jsonLortu(pelikulaLortu(izena));
+
+            int posterPath = movie.getInt("id");
             return posterPath;
         }catch (Exception e){
             return 0;

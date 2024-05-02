@@ -1,12 +1,15 @@
 import API.API;
 import DB.Konexioa;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
 
+        //URLGehitu();
+        aktoreak();
 
 
 
@@ -16,12 +19,16 @@ public class Main {
 
     static void aktoreak() throws SQLException {
 
+        int zenbat =0;
+        int guztira = 4381;
+
+
         Konexioa conn = new Konexioa();
         String csvFile = "fitxategiak/csv/datuakAldatuta.csv";
-        String fimak = "fitxategiak/csv/filmak.csv";
-        String zuzendariak = "fitxategiak/csv/zuzendaria.csv";
-        String zuzenduta = "fitxategiak/csv/zuzenduta.csv";
-        String estren = "fitxategiak/csv/estrenaldia.csv";
+        String fimak = "fitxategiak/csv/final/filmak.csv";
+        String zuzendariak = "fitxategiak/csv/final/zuzendaria.csv";
+        String zuzenduta = "fitxategiak/csv/final/zuzenduta.csv";
+        String estren = "fitxategiak/csv/final/estrenaldia.csv";
         String line = "";
         String csvSeparator = ",";
 
@@ -34,14 +41,42 @@ public class Main {
 
             br.readLine();
 
+
+            /*int pelikula = 0;
+            int zuzendaria = 0;
+            int estrenadia = 0;*/
+
             while ((line = br.readLine()) != null){
+
+                /*pelikula++;
+                zuzendaria++;
+                estrenadia++;*/
 
                 int pelikula = conn.azkenekoPelikula() +1;
                 int zuzendaria = conn.azkenekoZuzendaria() +1;
                 int estrenadia = conn.azkenekoEstrenaldia() +1;
 
 
-                String[] data = line.split(csvSeparator); //← Sartu egin den CSV lerroko datuak separatuta
+                StringBuilder sb = new StringBuilder();
+                boolean withinQuotes = false;
+                for (char c : line.toCharArray()) {
+                    if (c == '"') {
+                        withinQuotes = !withinQuotes;
+                    }
+                    if (withinQuotes && c == ',') {
+                        sb.append(';');
+                    } else {
+                        sb.append(c);
+                    }
+                }
+
+
+
+                String[] data = sb.toString().split(csvSeparator); //← Sartu egin den CSV lerroko datuak separatuta
+
+                for (int i = 0; i < data.length; i++) {
+                    System.out.println(data[i]);
+                }
 
                 String izena = data[0];
                 String estrenaldi = data[1];
@@ -55,7 +90,23 @@ public class Main {
                 String trailer = data[15];
 
 
-                film.write(pelikula);
+                String gender ="";
+                String zuzIMG ="";
+                JSONObject zuz = API.jsonLortu(API.zuzendariaLortu(zuzendariIzena));
+                if (zuz !=null){
+                    int gener = zuz.getInt("gender");
+
+                    if (gener ==2){
+                        gender = "Man";
+                    }else {
+                        gender ="Woman";
+                    }
+
+                    zuzIMG = "http://image.tmdb.org/t/p/w500"+zuz.get("profile_path");
+                }
+
+
+                film.write(pelikula+"");
                 film.write(csvSeparator);
                 film.write(izena);
                 film.write(csvSeparator);
@@ -65,45 +116,74 @@ public class Main {
                 film.write(csvSeparator);
                 film.write(kostua);
                 film.write(csvSeparator);
-                film.write(zuzendaria);
+                film.write(zuzendaria+"");
                 film.write(csvSeparator);
-                film.write(estrenadia);
+                film.write(estrenadia+"");
                 film.write(csvSeparator);
                 film.write(poster);
                 film.write(csvSeparator);
                 film.write(trailer);
                 film.newLine();
 
-                zuzendari.write(zuzendaria);
+                zuzendari.write(zuzendaria+"");
                 zuzendari.write(csvSeparator);
-                String[] li = zuzendariIzena.split(" ");
-                zuzendari.write(li[0]);
-                zuzendari.write(csvSeparator);
-                zuzendari.write(li[1]);
+
+
+                if (zuzendariIzena.equals("-")){
+                    zuzendari.write(zuzendariIzena);
+                    zuzendari.write(csvSeparator);
+                }else if (!zuzendariIzena.contains(" ")){
+                    zuzendari.write(zuzendariIzena);
+                    zuzendari.write(csvSeparator);
+                } else if (zuzendariIzena.contains("\\")) {
+                    zuzendari.write(zuzendariIzena);
+                    zuzendari.write(csvSeparator);
+                } else {
+                    String[] li = zuzendariIzena.split(" ");
+                    zuzendari.write(li[0]);
+                    zuzendari.write(csvSeparator);
+                    zuzendari.write(li[1]);
+                    zuzendari.write(csvSeparator);
+                }
                 zuzendari.write(zuzendariAdina);
+                zuzendari.write(csvSeparator);
+                zuzendari.write(gender);
+                zuzendari.write(csvSeparator);
+                zuzendari.write(zuzIMG);
                 zuzendari.newLine();
 
-                estrenaldia.write(estrenadia);
+                estrenaldia.write(estrenadia+"");
                 estrenaldia.write(csvSeparator);
                 estrenaldia.write(estrenaldi);
                 estrenaldia.write(csvSeparator);
                 estrenaldia.write("EEUU");
                 estrenaldia.write(csvSeparator);
-                estrenaldia.write(pelikula);
+                estrenaldia.write(pelikula+"");
                 estrenaldia.newLine();
 
-                zuzendu.write(pelikula);
+                zuzendu.write(pelikula+"");
                 zuzendu.write(csvSeparator);
-                zuzendu.write(zuzendaria);
+                zuzendu.write(zuzendaria+"");
                 zuzendu.newLine();
 
 
+
+                zenbat++;
+                System.out.println(izena);
+                System.out.println(zuzendariIzena);
+                System.out.println(zuzIMG);
+                System.out.println("%"+zenbat*100/guztira);
+                System.out.println("-------------------------------------------------");
 
 
 
 
             }
 
+            film.close();
+            zuzendari.close();
+            estrenaldia.close();
+            zuzendu.close();
 
 
         }catch (FileNotFoundException e) {
@@ -152,10 +232,15 @@ public class Main {
                 if (poster !=null){
                     bw.write(poster);
                     bw.write(csvSeparator);
+                }else {
+                    bw.write("-");
+                    bw.write(csvSeparator);
                 }
 
                 if (trailer !=null){
                     bw.write(trailer);
+                }else {
+                    bw.write("-");
                 }
 
                 bw.newLine();
