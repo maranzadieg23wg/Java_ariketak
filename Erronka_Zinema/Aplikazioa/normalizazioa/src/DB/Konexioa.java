@@ -1,8 +1,6 @@
 package DB;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,6 +31,52 @@ public class Konexioa {
 
 
 
+    }
+
+
+    public int azkenekoPelikula() throws SQLException {
+        String sql = "SELECT ID_FILMA FROM FILMAK WHERE ID_FILMA = (SELECT MAX(ID_FILMA) FROM FILMAK)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        int azkenekoPelikula = 0;
+        if (emaitza.next()) {
+            azkenekoPelikula = emaitza.getInt(1);
+        }
+
+        //System.out.println("Azkenekoa: "+azkenekoPelikula);
+        return azkenekoPelikula;
+    }
+
+    public int azkenekoZuzendaria() throws SQLException {
+        String sql = "SELECT ID_FILM_ZUZENDARIA FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA = (SELECT MAX(ID_FILM_ZUZENDARIA) FROM FILM_ZUZENDARIA)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        int azkenekoPelikula = 0;
+        if (emaitza.next()) {
+            azkenekoPelikula = emaitza.getInt(1);
+        }
+
+        //System.out.println("Azkenekoa: "+azkenekoPelikula);
+        return azkenekoPelikula;
+    }
+
+    public int azkenekoEstrenaldia() throws SQLException {
+        String sql = "SELECT ID_ESTRENALDIA FROM ESTREINALDIAK WHERE ID_ESTRENALDIA = (SELECT MAX(ID_ESTRENALDIA) FROM ESTREINALDIAK)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        int azkenekoPelikula = 0;
+        if (emaitza.next()) {
+            azkenekoPelikula = emaitza.getInt(1);
+        }
+
+        //System.out.println("Azkenekoa: "+azkenekoPelikula);
+        return azkenekoPelikula;
     }
 
 
