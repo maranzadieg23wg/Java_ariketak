@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) throws IOException, SQLException {
@@ -19,6 +20,7 @@ public class Main {
 
     static void aktoreak() throws SQLException {
 
+        HashMap<String, Integer> zuzendariLista = new HashMap<>();
         int zenbat =0;
         int guztira = 4381;
 
@@ -41,20 +43,20 @@ public class Main {
 
             br.readLine();
 
-
-            /*int pelikula = 0;
+            /*int pelikula = conn.azkenekoPelikula();
+            int zuzendaria = conn.azkenekoZuzendaria();
+            int estrenadia = conn.azkenekoEstrenaldia();*/
+            int pelikula = 0;
             int zuzendaria = 0;
-            int estrenadia = 0;*/
+            int estrenadia = 0;
 
             while ((line = br.readLine()) != null){
 
-                /*pelikula++;
+                pelikula++;
                 zuzendaria++;
-                estrenadia++;*/
+                estrenadia++;
 
-                int pelikula = conn.azkenekoPelikula() +1;
-                int zuzendaria = conn.azkenekoZuzendaria() +1;
-                int estrenadia = conn.azkenekoEstrenaldia() +1;
+
 
 
                 StringBuilder sb = new StringBuilder();
@@ -90,6 +92,8 @@ public class Main {
                 String trailer = data[15];
 
 
+
+
                 String gender ="";
                 String zuzIMG ="";
                 JSONObject zuz = API.jsonLortu(API.zuzendariaLortu(zuzendariIzena));
@@ -116,7 +120,13 @@ public class Main {
                 film.write(csvSeparator);
                 film.write(kostua);
                 film.write(csvSeparator);
-                film.write(zuzendaria+"");
+
+                if (zuzendariLista.containsKey(zuzendariIzena)){
+                    film.write(zuzendariLista.get(zuzendariIzena));
+                    zuzendaria--;
+                }else {
+                    film.write(zuzendaria+"");
+                }
                 film.write(csvSeparator);
                 film.write(estrenadia+"");
                 film.write(csvSeparator);
@@ -125,32 +135,37 @@ public class Main {
                 film.write(trailer);
                 film.newLine();
 
-                zuzendari.write(zuzendaria+"");
-                zuzendari.write(csvSeparator);
+
+                if (!zuzendariLista.containsKey(zuzendariIzena)){
+                    zuzendari.write(zuzendaria+"");
+                    zuzendari.write(csvSeparator);
 
 
-                if (zuzendariIzena.equals("-")){
-                    zuzendari.write(zuzendariIzena);
+                    if (zuzendariIzena.equals("-")){
+                        zuzendari.write(zuzendariIzena);
+                        zuzendari.write(csvSeparator);
+                    }else if (!zuzendariIzena.contains(" ")){
+                        zuzendari.write(zuzendariIzena);
+                        zuzendari.write(csvSeparator);
+                    } else if (zuzendariIzena.contains("\\")) {
+                        zuzendari.write(zuzendariIzena);
+                        zuzendari.write(csvSeparator);
+                    } else {
+                        String[] li = zuzendariIzena.split(" ");
+                        zuzendari.write(li[0]);
+                        zuzendari.write(csvSeparator);
+                        zuzendari.write(li[1]);
+                        zuzendari.write(csvSeparator);
+                    }
+                    zuzendari.write(zuzendariAdina);
                     zuzendari.write(csvSeparator);
-                }else if (!zuzendariIzena.contains(" ")){
-                    zuzendari.write(zuzendariIzena);
+                    zuzendari.write(gender);
                     zuzendari.write(csvSeparator);
-                } else if (zuzendariIzena.contains("\\")) {
-                    zuzendari.write(zuzendariIzena);
-                    zuzendari.write(csvSeparator);
-                } else {
-                    String[] li = zuzendariIzena.split(" ");
-                    zuzendari.write(li[0]);
-                    zuzendari.write(csvSeparator);
-                    zuzendari.write(li[1]);
-                    zuzendari.write(csvSeparator);
+                    zuzendari.write(zuzIMG);
+                    zuzendari.newLine();
+                    zuzendariLista.put(zuzendariIzena, zuzendaria);
                 }
-                zuzendari.write(zuzendariAdina);
-                zuzendari.write(csvSeparator);
-                zuzendari.write(gender);
-                zuzendari.write(csvSeparator);
-                zuzendari.write(zuzIMG);
-                zuzendari.newLine();
+
 
                 estrenaldia.write(estrenadia+"");
                 estrenaldia.write(csvSeparator);
@@ -163,7 +178,11 @@ public class Main {
 
                 zuzendu.write(pelikula+"");
                 zuzendu.write(csvSeparator);
-                zuzendu.write(zuzendaria+"");
+                if (zuzendariLista.containsKey(zuzendariIzena)){
+                    zuzendu.write(zuzendariLista.get(zuzendariIzena)+"");
+                }else {
+                    zuzendu.write(zuzendaria+"");
+                }
                 zuzendu.newLine();
 
 
@@ -184,6 +203,8 @@ public class Main {
             zuzendari.close();
             estrenaldia.close();
             zuzendu.close();
+            film.close();
+
 
 
         }catch (FileNotFoundException e) {
