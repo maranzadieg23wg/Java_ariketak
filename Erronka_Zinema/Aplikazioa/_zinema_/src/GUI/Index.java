@@ -436,7 +436,7 @@ public class Index {
         this.bezero = SaioaHasi.saioaHasi();
 
 
-
+        //assert bezero != null;
         izn = bezero.getErabiltzaileIzena();
         peliLabel.setText(izn);
         aukera1.setVisible(false);

@@ -4,6 +4,10 @@ import Objetuak.Bezero;
 import Objetuak.IkusitakoLista;
 import Objetuak.Pelikulak;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -123,7 +127,7 @@ public class Konexioa {
     public boolean sortuKontua(String email, String pasahitza, String izena, String abizena, String erabiltzailea) throws SQLException {
 
 
-        int pasahitzaHash = pasahitza.hashCode();
+        String pasahitzaHash = sha256(pasahitza);
         pasahitza = null;
 
 
@@ -152,7 +156,7 @@ public class Konexioa {
             kontsulta2.setString(3, abizena);
             kontsulta2.setString(4, email);
             kontsulta2.setString(5, erabiltzailea);
-            kontsulta2.setInt(6, pasahitzaHash);
+            kontsulta2.setString(6, pasahitzaHash);
 
             int rowsAffected = kontsulta2.executeUpdate();
             if (rowsAffected > 0) {
@@ -176,7 +180,7 @@ public class Konexioa {
         String emaila = sc.nextLine();
         System.out.print("Pasahitza: ");
         String pasahitza = sc.nextLine();
-        int pasahitzaHash = pasahitza.hashCode();
+        String pasahitzaHash = sha256(pasahitza);
         pasahitza = null;
 
 
@@ -218,7 +222,7 @@ public class Konexioa {
             kontsulta2.setString(3, abizena);
             kontsulta2.setString(4, emaila);
             kontsulta2.setString(5, erabiltzailea);
-            kontsulta2.setInt(6, pasahitzaHash);
+            kontsulta2.setString(6, pasahitzaHash);
 
             int rowsAffected = kontsulta2.executeUpdate();
             if (rowsAffected > 0) {
@@ -254,7 +258,7 @@ public class Konexioa {
 
     public boolean saioaHasi(String email, String pasahitza) throws SQLException {
 
-        String pasahitzaHash = String.valueOf(pasahitza.hashCode());
+        String pasahitzaHash = sha256(pasahitza);
 
         String sql = "select * from ERABILTZAILEAK where emaila = ? and pasahitza = ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -288,7 +292,7 @@ public class Konexioa {
         String emaila = sc.nextLine();
         System.out.print("Pasahitza: ");
         String pasahitza = sc.nextLine();
-        String pasahitzaHash = String.valueOf(pasahitza.hashCode());
+        String pasahitzaHash = sha256(pasahitza);
 
         String sql = "select * from ERABILTZAILEAK where emaila = ? and pasahitza = ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -875,6 +879,18 @@ public class Konexioa {
     }
 
 
+    public static String sha256(String text) {
+        try {
+            var messageDigest = MessageDigest.getInstance("SHA-256");
+            var hash = messageDigest.digest(text.getBytes(StandardCharsets.UTF_8));
+
+            return String.format("%064x", new BigInteger(1, hash));
+        }
+        catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
 

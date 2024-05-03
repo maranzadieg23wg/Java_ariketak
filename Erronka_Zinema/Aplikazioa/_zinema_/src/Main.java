@@ -1,3 +1,4 @@
+import DatuBase.Konexioa;
 import GUI.Index;
 
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ public class Main {
 
         //Conexioa c1 = new Conexioa();
 
+        //System.out.println(Konexioa.sha256("123"));
 
 
     }
