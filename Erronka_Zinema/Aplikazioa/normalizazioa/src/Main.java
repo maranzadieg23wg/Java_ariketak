@@ -3,8 +3,12 @@ import DB.Konexioa;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class Main {
     public static void main(String[] args) throws IOException, SQLException {
@@ -43,12 +47,12 @@ public class Main {
 
             br.readLine();
 
-            /*int pelikula = conn.azkenekoPelikula();
+            int pelikula = conn.azkenekoPelikula();
             int zuzendaria = conn.azkenekoZuzendaria();
-            int estrenadia = conn.azkenekoEstrenaldia();*/
-            int pelikula = 0;
+            int estrenadia = conn.azkenekoEstrenaldia();
+            /*int pelikula = 0;
             int zuzendaria = 0;
-            int estrenadia = 0;
+            int estrenadia = 0;*/
 
             while ((line = br.readLine()) != null){
 
@@ -122,7 +126,7 @@ public class Main {
                 film.write(csvSeparator);
 
                 if (zuzendariLista.containsKey(zuzendariIzena)){
-                    film.write(zuzendariLista.get(zuzendariIzena));
+                    film.write(zuzendariLista.get(zuzendariIzena)+"");
                     zuzendaria--;
                 }else {
                     film.write(zuzendaria+"");
@@ -169,7 +173,10 @@ public class Main {
 
                 estrenaldia.write(estrenadia+"");
                 estrenaldia.write(csvSeparator);
-                estrenaldia.write(estrenaldi);
+                LocalDate dataa = LocalDate.parse(estrenaldi);
+                String dataOngi = dataa.format(DateTimeFormatter.ofPattern("yy-MMM-dd", Locale.ENGLISH).withLocale(Locale.ENGLISH)).toUpperCase();
+                //System.err.println(dataOngi);
+                estrenaldia.write(dataOngi);
                 estrenaldia.write(csvSeparator);
                 estrenaldia.write("EEUU");
                 estrenaldia.write(csvSeparator);

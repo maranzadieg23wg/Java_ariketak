@@ -15,7 +15,7 @@ public class API {
     //https://developer.themoviedb.org/reference/search-movie
     //https://www.kaggle.com/datasets/alessandrolobello/the-ultimate-film-statistics-dataset-for-ml?resource=download
 
-    private static String api = "Winrar";
+    private static String api = "winrar";
 
     private static final OkHttpClient client = new OkHttpClient();
 

@@ -65,7 +65,7 @@ public class Konexioa {
     }
 
     public int azkenekoEstrenaldia() throws SQLException {
-        String sql = "SELECT ID_ESTRENALDIA FROM ESTREINALDIAK WHERE ID_ESTRENALDIA = (SELECT MAX(ID_ESTRENALDIA) FROM ESTREINALDIAK)";
+        String sql = "SELECT ID_ESTREINALDIA FROM ESTREINALDIAK WHERE ID_ESTREINALDIA = (SELECT MAX(ID_ESTREINALDIA) FROM ESTREINALDIAK)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
 
         ResultSet emaitza = kontsulta.executeQuery();
