@@ -260,10 +260,11 @@ public class Konexioa {
 
         String pasahitzaHash = sha256(pasahitza);
 
-        String sql = "select * from ERABILTZAILEAK where emaila = ? and pasahitza = ?";
+        String sql = "select * from ERABILTZAILEAK where (emaila = ? or erabiltzailea = ?) and pasahitza = ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, email);
-        kontsulta.setString(2, pasahitzaHash);
+        kontsulta.setString(2, email);
+        kontsulta.setString(3, pasahitzaHash);
 
         ResultSet emaitza = kontsulta.executeQuery();
 
@@ -294,10 +295,11 @@ public class Konexioa {
         String pasahitza = sc.nextLine();
         String pasahitzaHash = sha256(pasahitza);
 
-        String sql = "select * from ERABILTZAILEAK where emaila = ? and pasahitza = ?";
+        String sql = "select * from ERABILTZAILEAK where (emaila = ? or erabiltzailea = ?) and pasahitza = ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, emaila);
-        kontsulta.setString(2, pasahitzaHash);
+        kontsulta.setString(2, emaila);
+        kontsulta.setString(3, pasahitzaHash);
 
         ResultSet emaitza = kontsulta.executeQuery();
 
