@@ -120,11 +120,15 @@ public class Konexioa {
     /**
      * Kontua sortzeko erabiltzen den funtzioa da
      * Sartu behar den informazioa da, emaila, pasahitza, izena, abizena, erabiltzailea
+     * 0: kontua ongi sortu egin da
+     * 1: emaila erabilita dago
+     * 2: erabiltzailea erabilita dago
+     * 3: beste arazo bat gertatu da
      *      * <blockquote>{@code sortuKontua("taldea3@gmail, 123, taldea3, zubiri, taldea3");}</blockquote>
      * @throws SQLException
      */
 
-    public boolean sortuKontua(String email, String pasahitza, String izena, String abizena, String erabiltzailea) throws SQLException {
+    public int sortuKontua(String email, String pasahitza, String izena, String abizena, String erabiltzailea) throws SQLException {
 
 
         String pasahitzaHash = sha256(pasahitza);
@@ -137,12 +141,12 @@ public class Konexioa {
         if (ezistitzenDaEmail(email)){
 
             System.err.println(email+" erabiltzailearekin kontu bat existitzen da");
-            return false;
+            return 1;
         }else {
 
             if (ezistitzenDaErabiltzailea(erabiltzailea)){
                 System.err.println(erabiltzailea+" erabiltzailea dagoenekoa badago.");
-                return false;
+                return 2;
             }
 
 
@@ -161,11 +165,11 @@ public class Konexioa {
             int rowsAffected = kontsulta2.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Erabiltzailea ongi sortu egin da.");
-                return true;
+                return 0;
 
             } else {
                 System.err.println("Errore bat gertatu da erabiltzailea sortzean.");
-                return false;
+                return 3;
             }
 
         }

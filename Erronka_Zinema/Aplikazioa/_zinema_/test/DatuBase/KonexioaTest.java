@@ -37,8 +37,8 @@ class KonexioaTest {
     @Test
     @DisplayName("Erabiltzailea sortu")
     void sortuKontua() throws SQLException {
-        boolean kontuaSortuta = conn.sortuKontua("NIGHTWISH@gmail.com", "123", "NIGHT", "NIGHTWISH ", "NIGHTWISH ");
-        assertTrue(kontuaSortuta, "[-] Erabiltzailea ez da ongi sortu");
+        int kontuaSortuta = conn.sortuKontua("NIGHTWISH@gmail.com", "123", "NIGHT", "NIGHTWISH ", "NIGHTWISH ");
+        assertEquals(1,kontuaSortuta, "[-] Erabiltzailea ez da ongi sortu");
 
     }
 
