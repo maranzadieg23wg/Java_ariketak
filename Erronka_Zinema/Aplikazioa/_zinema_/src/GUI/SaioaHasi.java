@@ -10,7 +10,7 @@ public class SaioaHasi {
 
 
     public static Bezero saioaHasi() throws SQLException {
-        
+
         while (true){
             JTextField emaila = new JTextField();
             JTextField pasahitza = new JPasswordField();

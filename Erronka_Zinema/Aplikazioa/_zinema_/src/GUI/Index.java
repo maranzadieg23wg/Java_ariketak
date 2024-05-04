@@ -172,7 +172,7 @@ public class Index {
         //System.out.println(this.bezero.getErabiltzaileIzena());
         JPanel bezIzena = new JPanel();
 
-        izn = "proba";
+        izn = "";
         if (bezero !=null){
             izn = this.bezero.getErabiltzaileIzena();
         }
@@ -437,11 +437,13 @@ public class Index {
 
 
         //assert bezero != null;
-        izn = bezero.getErabiltzaileIzena();
-        peliLabel.setText(izn);
-        aukera1.setVisible(false);
-        aukera2.setVisible(true);
-        menua();
+        if (bezero!=null){
+            izn = bezero.getErabiltzaileIzena();
+            peliLabel.setText(izn);
+            aukera1.setVisible(false);
+            aukera2.setVisible(true);
+            menua();
+        }
 
 
     }
@@ -450,7 +452,9 @@ public class Index {
 
         this.bezero = KontuaSortu.kontuaSortu();
 
+        if (bezero !=null){
         menua();
+        }
 
     }
 }

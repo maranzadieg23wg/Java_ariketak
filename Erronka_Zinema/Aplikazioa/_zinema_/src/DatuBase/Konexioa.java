@@ -259,7 +259,34 @@ public class Konexioa {
     }
 
     //***************************************SAIOA HASI****************************************
+    public boolean saioaHasiHash(String email, String pasahitza) throws SQLException {
 
+        String sql = "select * from ERABILTZAILEAK where (emaila = ? or erabiltzailea = ?) and pasahitza = ?";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setString(1, email);
+        kontsulta.setString(2, email);
+        kontsulta.setString(3, pasahitza);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        if (emaitza.next()) {
+
+            int idErabiltzailea = emaitza.getInt("ID_ERABILTZAILE");
+            String izena = emaitza.getString("IZENA");
+            String abizena = emaitza.getString("ABIZENA");
+            String emaila = emaitza.getString("EMAILA");
+            String erabiltzaile = emaitza.getString("ERABILTZAILEA");
+            this.bezero = new Bezero(idErabiltzailea, izena, abizena, emaila, erabiltzaile);
+
+            System.out.println("Saioa hasita");
+            return true;
+
+
+        } else {
+            System.err.println(email + " datu basean ez dago erabiltzailerik datu hauekin");
+            return false;
+        }
+    }
     public boolean saioaHasi(String email, String pasahitza) throws SQLException {
 
         String pasahitzaHash = sha256(pasahitza);
