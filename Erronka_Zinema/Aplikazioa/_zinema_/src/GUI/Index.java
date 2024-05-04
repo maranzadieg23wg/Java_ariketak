@@ -4,11 +4,15 @@ import Objetuak.Aktoreak;
 import Objetuak.Bezero;
 import Objetuak.IrudiakDeskargatu;
 import Objetuak.Pelikulak;
+import Objetuak.cookies.Cookie;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 
@@ -35,6 +39,8 @@ public class Index {
 
     private String izn;
     JLabel peliLabel;
+
+    Choice menulist;
 
 
     private Bezero bezero;
@@ -105,7 +111,7 @@ public class Index {
 
 
 
-    void menua(){
+    void menua() throws SQLException {
 
 
 
@@ -170,7 +176,7 @@ public class Index {
 
 
         //System.out.println(this.bezero.getErabiltzaileIzena());
-        JPanel bezIzena = new JPanel();
+        /*JPanel bezIzena = new JPanel();
 
         izn = "";
         if (bezero !=null){
@@ -181,7 +187,9 @@ public class Index {
 
         bezIzena.add(peliLabel);
 
-        aukera2.add(bezIzena);
+        aukera2.add(bezIzena);*/
+
+
 
 
         aukera1.setVisible(true);
@@ -193,6 +201,8 @@ public class Index {
 
         menua.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
 
+
+        cook();
 
 
     }
@@ -438,8 +448,12 @@ public class Index {
 
         //assert bezero != null;
         if (bezero!=null){
-            izn = bezero.getErabiltzaileIzena();
-            peliLabel.setText(izn);
+            /*izn = bezero.getErabiltzaileIzena();
+            peliLabel.setText(izn);*/
+
+
+            saioMenua();
+
             aukera1.setVisible(false);
             aukera2.setVisible(true);
             menua();
@@ -457,4 +471,53 @@ public class Index {
         }
 
     }
+
+    void cook() throws SQLException {
+        bezero = Cookie.saioCookie();
+
+        if (bezero !=null){
+            logetu();
+        }
+    }
+
+
+    void saioMenua(){
+        menulist = new Choice();
+
+        menulist.add(bezero.getErabiltzaileIzena());
+        menulist.add("Konfigurazioa");
+        menulist.add("Saioa itzi");
+
+        menulist.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String aukera = menulist.getSelectedItem();
+
+
+                    if (aukera.equals(bezero.getErabiltzaileIzena())) {
+                        System.out.println(bezero);
+                    } else if (aukera.equals("Konfigurazioa")) {
+                        System.out.println("Konfigurazioa egiten dago");
+                    } else if (aukera.equals("Saioa itzi")) {
+                        try {
+                            Cookie.borratuCache();
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null, "Arazo bat gertatu egin da saioa izteko momentuan", "Saioa itzi", JOptionPane.ERROR_MESSAGE);
+                        }
+
+                        bezero = null;
+
+
+                    } else {
+                        System.out.println("Aukeratu egin den aukera ez da ezistitzen");
+                    }
+                }
+            }
+
+        });
+
+
+
+    }
+
 }
