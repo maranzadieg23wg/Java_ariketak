@@ -1,5 +1,7 @@
 package GUI;
 import DatuBase.Konexioa;
+import GUI.LogIn.KontuaSortu;
+import GUI.LogIn.SaioaHasi;
 import Objetuak.Aktoreak;
 import Objetuak.Bezero;
 import Objetuak.IrudiakDeskargatu;
@@ -140,7 +142,7 @@ public class Index {
 
         //↓Botoiak
         buttonLogin = new JButton("Login");
-        buttonSingUp = new JButton("SingUp");
+        buttonSingUp = new JButton("SignUp");
 
         buttonLogin.setPreferredSize(new Dimension(80, 30));
         buttonSingUp.setPreferredSize(new Dimension(80, 30));
@@ -443,7 +445,10 @@ public class Index {
 
     void logetu() throws SQLException {
 
-        this.bezero = SaioaHasi.saioaHasi();
+        if (this.bezero ==null){
+            this.bezero = SaioaHasi.saioaHasi();
+        }
+
 
 
         //assert bezero != null;
@@ -456,7 +461,7 @@ public class Index {
 
             aukera1.setVisible(false);
             aukera2.setVisible(true);
-            menua();
+            //menua();
         }
 
 
@@ -476,12 +481,15 @@ public class Index {
         bezero = Cookie.saioCookie();
 
         if (bezero !=null){
+            System.out.println(bezero);
             logetu();
+            //saioMenua();
         }
     }
 
 
     void saioMenua(){
+        aukera2.removeAll();
         menulist = new Choice();
 
         menulist.add(bezero.getErabiltzaileIzena());
@@ -506,6 +514,8 @@ public class Index {
                         }
 
                         bezero = null;
+                        aukera2.setVisible(false);
+                        aukera1.setVisible(true);
 
 
                     } else {
@@ -515,6 +525,8 @@ public class Index {
             }
 
         });
+
+        aukera2.add(menulist);
 
 
 
