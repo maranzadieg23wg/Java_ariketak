@@ -23,6 +23,8 @@ public class Aktoreak {
         this.emaila = emaila;
         this.telefonoa = telefonoa;
         this.irudia = irudia;
+
+        lokalIrudia();
     }
 
     public void setirudiaLokalki(String irudiaLokalki) {
@@ -63,5 +65,11 @@ public class Aktoreak {
     @Override
     public int hashCode() {
         return Objects.hash(id_aktora, izena, abizena, jaiotze_Data, nazionalitatea, emaila, telefonoa, irudia, irudiaLokalki);
+    }
+
+    public void lokalIrudia(){
+        IrudiakDeskargatu irudiakDeskargatu = new IrudiakDeskargatu(irudia,"./irudiak/aktore");
+
+        setirudiaLokalki(irudiakDeskargatu.getFitxategiarenIzena());
     }
 }

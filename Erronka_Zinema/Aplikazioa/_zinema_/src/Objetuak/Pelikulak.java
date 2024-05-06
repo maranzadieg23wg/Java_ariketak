@@ -31,6 +31,8 @@ public class Pelikulak {
         this.irudia = irudia;
         this.idEstrenaldia = idEstrenaldia;
         this.idZuzendaria = idZuzendaria;
+
+        lokalIrudia();
     }
 
     @Override
@@ -80,5 +82,12 @@ public class Pelikulak {
     @Override
     public int hashCode() {
         return Objects.hash(IDPelikula, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, irudiaLokalki, idEstrenaldia, idZuzendaria);
+    }
+
+
+    public void lokalIrudia(){
+        IrudiakDeskargatu irudiakDeskargatu = new IrudiakDeskargatu(irudia,"./irudiak/pelikula");
+
+        setirudiaLokalki(irudiakDeskargatu.getFitxategiarenIzena());
     }
 }
