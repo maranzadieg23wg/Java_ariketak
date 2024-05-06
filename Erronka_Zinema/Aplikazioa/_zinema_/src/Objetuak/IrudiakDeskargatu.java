@@ -56,7 +56,7 @@ public class IrudiakDeskargatu {
             return fitxategiaNonGorde;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return "irudiak/errorIrudia/image_not_available.png";
         }
     }
 
