@@ -3,12 +3,9 @@ package Objetuak.cookies;
 import DatuBase.Konexioa;
 import Objetuak.Bezero;
 
-import javax.swing.*;
 import java.io.*;
-import java.sql.SQLException;
 
 public class Cookie {
-
     public static Bezero saioCookie(){
 
 
@@ -19,6 +16,8 @@ public class Cookie {
             while ((line = br1.readLine()) !=null){
                 String[] saio = line.split(":");
 
+                //System.out.println(saio[0]+":"+saio[1]);
+
                 Konexioa conn = new Konexioa();
 
                 boolean bai = conn.saioaHasiHash(saio[0], saio[1]);
@@ -26,8 +25,7 @@ public class Cookie {
                 if (bai){
                     return conn.getBezero();
                 }else {
-                    BufferedWriter bw1 = new BufferedWriter(new FileWriter("./fitxategiak/cookies/saioa", false));
-                    bw1.write(saio[0]+":"+saio[1]);
+
                     return null;
                 }
             }

@@ -4,6 +4,9 @@ import Objetuak.Bezero;
 import Objetuak.IkusitakoLista;
 import Objetuak.Pelikulak;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -309,6 +312,15 @@ public class Konexioa {
             this.bezero = new Bezero(idErabiltzailea, izena, abizena, emaila, erabiltzaile);
 
             System.out.println("Saioa hasita");
+
+            try{
+                BufferedWriter bw1 = new BufferedWriter(new FileWriter("./fitxategiak/cookies/saioa", false));
+                bw1.write(email+":"+pasahitzaHash);
+                bw1.close();
+            }catch (IOException e){
+                System.err.println("Arazo bat egon da cokian idaztean datuak.");
+            }
+
             return true;
 
 
