@@ -20,4 +20,6 @@ class BezeroTest {
     void getErabiltzaileIzena() {
         assertEquals("NIGHTWISH", bezero.getErabiltzaileIzena().toString(), "[-]Lortu egin den izena ez da berbera");
     }
+
+
 }
