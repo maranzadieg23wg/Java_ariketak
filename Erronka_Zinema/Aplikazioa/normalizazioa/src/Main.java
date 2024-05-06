@@ -14,8 +14,10 @@ public class Main {
     public static void main(String[] args) throws IOException, SQLException {
 
         //URLGehitu();
-        aktoreak();
+        //aktoreak();
 
+        Konexioa conn = new Konexioa();
+        conn.pelLortu();
 
 
 

@@ -1,9 +1,12 @@
 package API;
 
+import DB.Konexioa;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -129,7 +132,7 @@ public class API {
                     .url("https://api.themoviedb.org/3/movie/"+id+"/videos?language=en-US")
                     .get()
                     .addHeader("accept", "application/json")
-                    .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YWE0ZjRhMDgzZTMyZjg4MjM5ZmYzZGE3NjVlNmQyOCIsInN1YiI6IjY2MzIyYmFiMDA2YjAxMDEyZDFkMTZiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jPQm_oheJ0dTUtVu8vSXEwrpAdZjyC8aHkf53CDsTIo")
+                    .addHeader("Authorization", api)
                     .build();
 
             Response erantzuna = client.newCall(request).execute();
@@ -150,6 +153,61 @@ public class API {
         }catch (Exception e){
             return null;
         }
+
+    }
+
+    public static void gehituAkt(int id, int azkenID, int idLokal) throws IOException, SQLException {
+
+        int zenbat = 7;
+
+        Request request = new Request.Builder()
+                .url("https://api.themoviedb.org/3/movie/"+id+"/credits?language=en-US")
+                .get()
+                .addHeader("accept", "application/json")
+                .addHeader("Authorization", api)
+                .build();
+
+        Response erantzuna = client.newCall(request).execute();
+
+        String eran = erantzuna.body().string();
+
+        JSONObject json =  new JSONObject(eran);
+
+        JSONArray results = json.getJSONArray("cast");
+
+        for (int i =0;i<zenbat;i++){
+            JSONObject movie = results.getJSONObject(i);
+
+            String izena = movie.getString("name");
+            int gender = movie.getInt("gender");
+
+            String pertsonaia = movie.getString("character");
+
+            String url = "http://image.tmdb.org/t/p/w500"+movie.getString("profile_path");
+
+            String[] izAbz = izena.split(" ");
+
+            int aktoreId = Konexioa.aktoreaDago(izAbz[0], izAbz[1]);
+
+            azkenID++;
+
+            if (aktoreId == -1){
+                Konexioa.gehituAktorea(azkenID, izAbz[0], izAbz[1],gender, url);
+            }else {
+                aktoreId--;
+            }
+
+            Konexioa.lanEGin(idLokal, aktoreId, pertsonaia);
+
+
+
+
+
+
+
+        }
+
+
 
     }
 
