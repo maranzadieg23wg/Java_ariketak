@@ -32,17 +32,14 @@ public class Index {
     private JPanel aukera1, aukera2;
     private JButton buttonLogin, buttonSingUp, botoiak;
     private JTextField bilatu;
-    private JList<String> aukerak;
+
 
     private String[] lista;
 
     private HashMap <JLabel, Pelikulak> pelikulaList;
     private HashMap <JLabel, Aktoreak> aktoreList;
 
-    private CardLayout menuLista;
 
-    private String izn;
-    JLabel peliLabel;
 
     Choice menulist;
 
