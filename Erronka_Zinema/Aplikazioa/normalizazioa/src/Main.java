@@ -16,7 +16,7 @@ public class Main {
         //URLGehitu();
         aktoreak();
 
-
+        //https://developer.themoviedb.org/reference/movie-credits
 
 
     }
