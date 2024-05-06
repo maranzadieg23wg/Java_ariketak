@@ -1,5 +1,6 @@
 package GUI;
 import DatuBase.Konexioa;
+import GUI.LogIn.Konfigurazioa;
 import GUI.LogIn.KontuaSortu;
 import GUI.LogIn.SaioaHasi;
 import Objetuak.Aktoreak;
@@ -16,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Index {
@@ -277,34 +279,22 @@ public class Index {
 
 
 
+        for (Pelikulak pel : peliList(peliKop)){
 
-        for (int i =0;i<peliKop;i++){
-
-
-            Pelikulak pel = pelikulaAleatorio();
             JLabel irudia = irudiak(pel.getIrudiaLokalki(), 130, 200);
-            if (pelikulaList.containsKey(irudia)){
-                System.out.println(i);
-                i--;
-            }else {
-                irudia.addMouseListener(new MouseAdapter() {
-                    public void mouseClicked(MouseEvent e) {
-                        pelikulaAukeratuta(e);
+            pelikulaList.put(irudia, pel);
+            irudia.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
 
-                    }
-                });
+                    pelikulaAukeratuta(e);
 
-                pelikulak.add(irudia); //← Nola sortu irudiak
+                }
+            });
 
-                pelikulaList.put(irudia, pel);
-            }
-
-
-
-
-
-
+            pelikulak.add(irudia); //← Nola sortu irudiak
         }
+
+
 
 
 
@@ -342,30 +332,18 @@ public class Index {
 
 
 
-        for (int i =0;i<aktoKop;i++){
+        for (Aktoreak akt : aktoList(aktoKop)){
 
-
-            Aktoreak akt = aktoreAleatorio();
-            //System.out.println(akt.getIrudiaLokalki());
             JLabel irudia = irudiak(akt.getIrudiaLokalki(), 130, 200);
-            if (aktoreList.containsKey(irudia)){
-                System.out.println(i);
-                i--;
-            }else {
-                irudia.addMouseListener(new MouseAdapter() {
-                    public void mouseClicked(MouseEvent e) {
-                        aktoreaAukeratu(e);
+            aktoreList.put(irudia, akt);
+            irudia.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    aktoreaAukeratu(e);
 
-                    }
-                });
+                }
+            });
 
-                aktoreak.add(irudia); //← Nola sortu irudiak
-
-                aktoreList.put(irudia, akt);
-            }
-
-
-
+            aktoreak.add(irudia); //← Nola sortu irudiak
         }
 
 
@@ -387,6 +365,30 @@ public class Index {
         JLabel label = new JLabel();
         label.setIcon(thedark);
         return label;
+    }
+
+    ArrayList<Pelikulak> peliList(int zenbat){
+
+        try {
+            Konexioa conn = new Konexioa();
+
+            return conn.pelikulaList(zenbat);
+        }catch (SQLException e){
+            return null;
+        }
+
+    }
+
+    ArrayList<Aktoreak> aktoList(int zenbat){
+
+        try {
+            Konexioa conn = new Konexioa();
+
+            return conn.aktoreList(zenbat);
+        }catch (SQLException e){
+            return null;
+        }
+
     }
 
     Pelikulak pelikulaAleatorio() throws SQLException {
@@ -484,6 +486,13 @@ public class Index {
             System.out.println(bezero);
             logetu();
             //saioMenua();
+        }else {
+            try {
+                Cookie.borratuCache();
+            }catch (IOException e){
+                System.err.println("cook: ezin izan da borratu cachea");
+            }
+
         }
     }
 
@@ -506,6 +515,7 @@ public class Index {
                         System.out.println(bezero);
                     } else if (aukera.equals("Konfigurazioa")) {
                         System.out.println("Konfigurazioa egiten dago");
+                        Konfigurazioa.datuakAldatu(bezero);
                     } else if (aukera.equals("Saioa itzi")) {
                         try {
                             Cookie.borratuCache();
