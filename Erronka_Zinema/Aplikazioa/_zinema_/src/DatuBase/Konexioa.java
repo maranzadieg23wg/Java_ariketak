@@ -33,7 +33,7 @@ public class Konexioa {
     Scanner sc;
 
 
-    Bezero bezero;
+    private static Bezero bezero;
     ArrayList<IkusitakoLista> ikusitakoPelikulak = new ArrayList<>();
 
 
@@ -261,6 +261,41 @@ public class Konexioa {
         return kontsulta.executeUpdate();
     }
 
+    public void erabiltzaileaAldatu(int id, String email, String pas, String izena, String abizena, String era){
+        pas = sha256(pas);
+
+        try {
+            String sql = "update ERABILTZAILEAK set izena =?, abizena =?, emaila=?, erabiltzailea=?, pasahitza =? where ID_ERABILTZAILE = ?";
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setString(1, izena);
+            kontsulta.setString(2, abizena);
+            kontsulta.setString(3, email);
+            kontsulta.setString(4, era);
+            kontsulta.setString(5, pas);
+            kontsulta.setInt(6, id);
+
+            int rowsAffected = kontsulta.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Aldatu egin da erabiltzailearen datuak");
+
+            } else {
+                System.err.println("Errore bat gertatu da aldatzean informazioa");
+            }
+        }catch (SQLException e){
+            System.err.println("Ezin izan da aldatu erabiltzailearen datuak");
+            System.err.println("Message: "+e.getErrorCode());
+        }
+
+        try {
+            saioaHasi(era, pas);
+        }catch (SQLException e){
+            System.err.println("Ezin izan da saioa hasi");
+            System.err.println(e.getErrorCode());
+        }
+
+
+    }
+
     //***************************************SAIOA HASI****************************************
     public boolean saioaHasiHash(String email, String pasahitza) throws SQLException {
 
@@ -292,42 +327,48 @@ public class Konexioa {
     }
     public boolean saioaHasi(String email, String pasahitza) throws SQLException {
 
-        String pasahitzaHash = sha256(pasahitza);
+        try {
+            String pasahitzaHash = sha256(pasahitza);
 
-        String sql = "select * from ERABILTZAILEAK where (emaila = ? or erabiltzailea = ?) and pasahitza = ?";
-        PreparedStatement kontsulta = conn.prepareStatement(sql);
-        kontsulta.setString(1, email);
-        kontsulta.setString(2, email);
-        kontsulta.setString(3, pasahitzaHash);
+            String sql = "select * from ERABILTZAILEAK where (emaila = ? or erabiltzailea = ?) and pasahitza = ?";
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setString(1, email);
+            kontsulta.setString(2, email);
+            kontsulta.setString(3, pasahitzaHash);
 
-        ResultSet emaitza = kontsulta.executeQuery();
+            ResultSet emaitza = kontsulta.executeQuery();
 
-        if (emaitza.next()) {
+            if (emaitza.next()) {
 
-            int idErabiltzailea = emaitza.getInt("ID_ERABILTZAILE");
-            String izena = emaitza.getString("IZENA");
-            String abizena = emaitza.getString("ABIZENA");
-            String emaila = emaitza.getString("EMAILA");
-            String erabiltzaile = emaitza.getString("ERABILTZAILEA");
-            this.bezero = new Bezero(idErabiltzailea, izena, abizena, emaila, erabiltzaile);
+                int idErabiltzailea = emaitza.getInt("ID_ERABILTZAILE");
+                String izena = emaitza.getString("IZENA");
+                String abizena = emaitza.getString("ABIZENA");
+                String emaila = emaitza.getString("EMAILA");
+                String erabiltzaile = emaitza.getString("ERABILTZAILEA");
+                this.bezero = new Bezero(idErabiltzailea, izena, abizena, emaila, erabiltzaile);
 
-            System.out.println("Saioa hasita");
+                System.out.println("Saioa hasita");
 
-            try{
-                BufferedWriter bw1 = new BufferedWriter(new FileWriter("./fitxategiak/cookies/saioa", false));
-                bw1.write(email+":"+pasahitzaHash);
-                bw1.close();
-            }catch (IOException e){
-                System.err.println("Arazo bat egon da cokian idaztean datuak.");
+                try{
+                    BufferedWriter bw1 = new BufferedWriter(new FileWriter("./fitxategiak/cookies/saioa", false));
+                    bw1.write(email+":"+pasahitzaHash);
+                    bw1.close();
+                }catch (IOException e){
+                    System.err.println("Arazo bat egon da cokian idaztean datuak.");
+                }
+
+                return true;
+
+
+            } else {
+                System.err.println(email + " datu basean ez dago erabiltzailerik datu hauekin");
+                return false;
             }
-
-            return true;
-
-
-        } else {
-            System.err.println(email + " datu basean ez dago erabiltzailerik datu hauekin");
+        }catch (SQLException e){
+            System.err.println("Arazo bat gertatu egin da saioa aztean");
             return false;
         }
+
     }
     void saioaHasi() throws SQLException {
         sc.nextLine();
@@ -373,7 +414,7 @@ public class Konexioa {
      * @return true or false
      * @throws SQLException
      */
-    boolean ezistitzenDaEmail(String email) throws SQLException {
+    public boolean ezistitzenDaEmail(String email) throws SQLException {
         String sql = "select * from ERABILTZAILEAK where (emaila = ?)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, email);
@@ -395,7 +436,7 @@ public class Konexioa {
      * @return Boolean
      * @throws SQLException
      */
-    boolean ezistitzenDaErabiltzailea(String Erabiltzailea) throws SQLException {
+    public boolean ezistitzenDaErabiltzailea(String Erabiltzailea) throws SQLException {
         String sql = "select * from ERABILTZAILEAK where (erabiltzailea = ?)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, Erabiltzailea);
@@ -460,19 +501,26 @@ public class Konexioa {
             aukera = (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
         }
 
+        try{
+            String sql = "SELECT * FROM FILMAK WHERE ID_FILMA = ?";
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setInt(1, aukera);
+
+
+
+            ResultSet emaitza = kontsulta.executeQuery();
+
+            return pelikulaObjetua(emaitza);
+        }catch (SQLException e){
+            return null;
+        }
 
 
 
 
-        String sql = "SELECT * FROM FILMAK WHERE ID_FILMA = ?";
-        PreparedStatement kontsulta = conn.prepareStatement(sql);
-        kontsulta.setInt(1, aukera);
 
 
 
-        ResultSet emaitza = kontsulta.executeQuery();
-
-        return pelikulaObjetua(emaitza);
 
     }
 
@@ -506,6 +554,35 @@ public class Konexioa {
         return new Pelikulak(IDPelikula, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, idEstrenaldia, idZuzendaria);
 
 
+    }
+
+    public ArrayList<Pelikulak> pelikulaList(int zenbat){
+
+        ArrayList <Pelikulak> list = new ArrayList<>();
+
+        for (int i =0;i<zenbat;i++){
+            try{
+                list.add(pelikulaLortu());
+            }catch (SQLException e){
+                System.err.println("Ezin izan da listara gehitu pelikula");
+            }
+        }
+
+        return list;
+    }
+
+    public ArrayList<Aktoreak> aktoreList(int zenbat){
+        ArrayList <Aktoreak> list = new ArrayList<>();
+
+        for (int i =0;i<zenbat;i++){
+            try{
+                list.add(aktoreaLortu());
+            }catch (SQLException e){
+                System.err.println("Ezin izan da listara gehitu aktorea");
+            }
+        }
+
+        return list;
     }
 
 
