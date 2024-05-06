@@ -39,6 +39,18 @@ public class Bezero {
         return erabiltzaileIzena;
     }
 
+    public String getIzena() {
+        return izena;
+    }
+
+    public String getAbizena() {
+        return abizena;
+    }
+
+    public String getEmaila() {
+        return emaila;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
