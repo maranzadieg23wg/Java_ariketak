@@ -1,4 +1,4 @@
-package GUI;
+package GUI.LogIn;
 
 import DatuBase.Konexioa;
 import Objetuak.Bezero;

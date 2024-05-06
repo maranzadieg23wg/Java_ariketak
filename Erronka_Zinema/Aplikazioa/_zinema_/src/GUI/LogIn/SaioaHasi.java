@@ -1,4 +1,4 @@
-package GUI;
+package GUI.LogIn;
 
 import DatuBase.Konexioa;
 import Objetuak.Bezero;
@@ -33,7 +33,7 @@ public class SaioaHasi {
                     } else {
                         JOptionPane.showMessageDialog(null, "Erabiltzailea edo pasaitza ez dira egokiak.", "Datuak gaizki sartuta", JOptionPane.ERROR_MESSAGE);
 
-                        System.out.println("login failed");
+                        System.err.println("login failed");
 
                     }
                 } else {
