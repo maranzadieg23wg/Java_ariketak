@@ -3,6 +3,8 @@ package DB;
 import API.API;
 import okhttp3.Response;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -102,38 +104,48 @@ public class Konexioa {
 
     public void pelLortu(){
         try {
+            int lehenengoa = 3126;
+            int azkenekoa = 7503;
 
-            String sql = "select ID_FILMA,TITULUA from FILMAK";
-
-            PreparedStatement kontsulta = conn.prepareStatement(sql);
-
-            ResultSet emaitza = kontsulta.executeQuery();
-            int azkenID = azkenekoAktorea();
-
-            while (emaitza.next()){
-
-                azkenID++;
-
-                int idLokal = emaitza.getInt(1);
-                String izena = emaitza.getString(2);
+            int ze=0;
+            for (int i = lehenengoa;i<azkenekoa;i++){
+                String sql = "SELECT ID_FILMA, TITULUA FROM FILMAK WHERE ID_FILMA =?";
+                PreparedStatement kontsulta = conn.prepareStatement(sql);
+                kontsulta.setInt(1, i);
 
 
-                int pelID = idPelikula(izena);
+                ResultSet emaitza = kontsulta.executeQuery();
+                int azkenID = azkenekoAktorea();
 
-                API.gehituAkt(pelID, azkenID, idLokal);
 
-                azkenID = azkenekoAktorea();
+                while (emaitza.next()) {
+                    ze++;
+                    azkenID++;
+                    int idLokal = emaitza.getInt(1);
+                    String izena = emaitza.getString(2);
 
+                    System.out.print("ID: " + idLokal+"  ");
+                    System.out.println("Pelikula: " + izena);
+
+                    int pelID = idPelikula(izena);
+
+                    API.gehituAkt(pelID, azkenID, idLokal);
+
+                    azkenID = azkenekoAktorea();
+
+                    //Thread.sleep(2*1000);
+                }
+                konexioaItxi();
+                konexiaEgin();
             }
 
-        }catch (SQLException e){
-            System.out.println(e.getErrorCode());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+            System.out.println(ze);
+        } catch (SQLException | IOException e){
+            System.out.println(e.getMessage());
         }
-
-
     }
+
 
     public int idPelikula(String izena) throws IOException {
         return API.pelikulaID(izena);
@@ -141,58 +153,111 @@ public class Konexioa {
 
 
     public static int aktoreaDago(String izena, String abizena) throws SQLException {
-        String sql = "select * from aktoreak where izena =?, abizena=?";
+        String sql = "select * from aktoreak where izena =? and abizena=?";
+
 
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, izena);
         kontsulta.setString(2, abizena);
 
         ResultSet emaitza = kontsulta.executeQuery();
+
+
         if (emaitza.next()){
-            return emaitza.getInt("ID");
+            return emaitza.getInt("ID_AKTOREA");
         }else {
             return -1;
         }
     }
 
-    public static void gehituAktorea(int id, String izena, String abizena, int generoa, String URL) throws SQLException {
-        String generoaa ="";
-        if (generoa ==1){
-            generoaa = "Emakumea";
-        }else if (generoa ==2){
-            generoaa = "Gizonezkoa";
-        }else {
-            generoaa = "Non-Binari";
-        }
+    public static void gehituAktorea(int id, String izena, String abizena, int generoa, String URL){
+
+        try {
+            String generoaa ="";
+            if (generoa ==1){
+                generoaa = "Emakumea";
+            }else if (generoa ==2){
+                generoaa = "Gizonezkoa";
+            }else {
+                generoaa = "Non-Binari";
+            }
 
 
-        String email = izena+abizena+"@"+domeinua();
-        String tel = telefonoZenbakiak();
+            String email = izena+abizena+"@"+domeinua();
+            String tel = telefonoZenbakiak();
 
-        String sql = "inser into aktoreak values (?,?,?,?,?,?,?)";
+
+       /* String sql = "insert into aktoreak values (?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setInt(1, id);
         kontsulta.setString(2, izena);
         kontsulta.setString(3, abizena);
-        kontsulta.setString(4, generoaa);
-        kontsulta.setString(5, email);
-        kontsulta.setString(6, tel);
-        kontsulta.setString(7, URL);
+        kontsulta.setString(4, null);
+        kontsulta.setString(5, null);
+        kontsulta.setString(6, email);
+        kontsulta.setString(7, tel);
+        kontsulta.setString(8, null);
+        kontsulta.setString(9, null);
+        kontsulta.setString(10, URL);
 
         int rowsAffected = kontsulta.executeUpdate();
+
+
 
         if (rowsAffected > 0) {
             System.out.println("Gehitu egin da "+izena+" "+abizena);
 
         } else {
             System.err.println("Ezin izan da gehitu "+izena+" "+abizena);
+        }*/
+            String csvSeparator = ",";
+            String csvFile = "fitxategiak/csv/aktoreak.csv";
+            BufferedWriter aktoreak = new BufferedWriter(new FileWriter(csvFile, true));
+
+
+            aktoreak.write(id+"");
+            aktoreak.write(csvSeparator);
+            aktoreak.write(izena);
+            aktoreak.write(csvSeparator);
+            if (abizena ==null){
+                aktoreak.write("-");
+            }else {
+                aktoreak.write(abizena);
+            }
+            aktoreak.write(csvSeparator);
+            aktoreak.write("-");
+            aktoreak.write(csvSeparator);
+            aktoreak.write("_");
+            aktoreak.write(csvSeparator);
+            aktoreak.write(email);
+            aktoreak.write(csvSeparator);
+            aktoreak.write(tel+"");
+            aktoreak.write(csvSeparator);
+            aktoreak.write("-");
+            aktoreak.write(csvSeparator);
+            aktoreak.write("_");
+            aktoreak.write(csvSeparator);
+            if (URL ==null){
+                aktoreak.write("-");
+            }else {
+                aktoreak.write(URL);
+            }
+            aktoreak.newLine();
+
+            aktoreak.close();
+        }catch (IOException e){
+            System.out.println(e.getMessage());
         }
+
+
 
 
     }
 
-    public static void lanEGin(int id, int idAkt, String pertso) throws SQLException {
-        String sql = "inser into lanEgin du values (?,?,?)";
+    public static void lanEGin(int id, int idAkt, String pertso)   {
+
+        try {
+            /*String sql = "insert into PELIKULETANLANEGIN values (?,?,?)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setInt(1, id);
         kontsulta.setInt(2, idAkt);
@@ -205,7 +270,23 @@ public class Konexioa {
 
         } else {
             System.err.println("Ezin izan da gehitu "+pertso);
+        }*/
+            String csvSeparator = ",";
+            String csvFile = "fitxategiak/csv/pelikulanLanEgin.csv";
+            BufferedWriter aktoreak = new BufferedWriter(new FileWriter(csvFile, true));
+
+            aktoreak.write(id+"");
+            aktoreak.write(csvSeparator);
+            aktoreak.write(idAkt+"");
+            aktoreak.write(csvSeparator);
+            aktoreak.write(pertso);
+            aktoreak.newLine();
+
+            aktoreak.close();
+        }catch (IOException e){
+            System.out.println(e.getMessage());
         }
+
 
 
     }

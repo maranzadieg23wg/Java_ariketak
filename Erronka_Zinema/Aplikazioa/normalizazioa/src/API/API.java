@@ -18,7 +18,7 @@ public class API {
     //https://developer.themoviedb.org/reference/search-movie
     //https://www.kaggle.com/datasets/alessandrolobello/the-ultimate-film-statistics-dataset-for-ml?resource=download
 
-    private static String api = "winrar";
+    private static String api = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2YWE0ZjRhMDgzZTMyZjg4MjM5ZmYzZGE3NjVlNmQyOCIsInN1YiI6IjY2MzIyYmFiMDA2YjAxMDEyZDFkMTZiMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jPQm_oheJ0dTUtVu8vSXEwrpAdZjyC8aHkf53CDsTIo";
 
     private static final OkHttpClient client = new OkHttpClient();
 
@@ -137,6 +137,7 @@ public class API {
 
             Response erantzuna = client.newCall(request).execute();
 
+
             String eran = erantzuna.body().string();
 
             JSONObject json =  new JSONObject(eran);
@@ -156,56 +157,88 @@ public class API {
 
     }
 
-    public static void gehituAkt(int id, int azkenID, int idLokal) throws IOException, SQLException {
+    public static void gehituAkt(int peliID, int azkenID, int idLokal){
 
-        int zenbat = 7;
+        try{
+            int zenbat = 7;
 
-        Request request = new Request.Builder()
-                .url("https://api.themoviedb.org/3/movie/"+id+"/credits?language=en-US")
-                .get()
-                .addHeader("accept", "application/json")
-                .addHeader("Authorization", api)
-                .build();
+            Request request = new Request.Builder()
+                    .url("https://api.themoviedb.org/3/movie/"+peliID+"/credits?language=en-US")
+                    .get()
+                    .addHeader("accept", "application/json")
+                    .addHeader("Authorization", api)
+                    .build();
 
-        Response erantzuna = client.newCall(request).execute();
+            Response erantzuna = client.newCall(request).execute();
 
-        String eran = erantzuna.body().string();
 
-        JSONObject json =  new JSONObject(eran);
+            String eran = erantzuna.body().string();
 
-        JSONArray results = json.getJSONArray("cast");
+            JSONObject json =  new JSONObject(eran);
 
-        for (int i =0;i<zenbat;i++){
-            JSONObject movie = results.getJSONObject(i);
+            JSONArray results = json.getJSONArray("cast");
 
-            String izena = movie.getString("name");
-            int gender = movie.getInt("gender");
+            for (int i = 0; i < zenbat && i < results.length(); i++) {
 
-            String pertsonaia = movie.getString("character");
+                JSONObject movie = results.getJSONObject(i);
 
-            String url = "http://image.tmdb.org/t/p/w500"+movie.getString("profile_path");
+                String izena = movie.getString("name");
+                int gender = movie.getInt("gender");
 
-            String[] izAbz = izena.split(" ");
+                String pertsonaia = movie.getString("character");
+                String url ="";
+                if (movie.isNull("profile_path")) {
+                    url = null;
+                } else {
+                    url = "http://image.tmdb.org/t/p/w500" + movie.getString("profile_path");
+                }
 
-            int aktoreId = Konexioa.aktoreaDago(izAbz[0], izAbz[1]);
 
-            azkenID++;
 
-            if (aktoreId == -1){
-                Konexioa.gehituAktorea(azkenID, izAbz[0], izAbz[1],gender, url);
-            }else {
-                aktoreId--;
+                String[] izAbz = izena.split(" ");
+
+                int aktoreId =0;
+
+                if (izAbz.length ==1){
+                    aktoreId = Konexioa.aktoreaDago(izAbz[0], null);
+                }else {
+                    aktoreId = Konexioa.aktoreaDago(izAbz[0], izAbz[1]);
+                }
+
+
+                azkenID++;
+
+
+                if (aktoreId == -1){
+
+                    if (izAbz.length==1){
+                        Konexioa.gehituAktorea(azkenID, izAbz[0], null,gender, url);
+                    }else {
+                        Konexioa.gehituAktorea(azkenID, izAbz[0], izAbz[1],gender, url);
+                    }
+
+
+                    Konexioa.lanEGin(azkenID, idLokal, pertsonaia);
+
+                }else {
+                    azkenID--;
+                    Konexioa.lanEGin(aktoreId, idLokal, pertsonaia);
+                }
+
+
+
+
+
+
+
+
+
+
             }
-
-            Konexioa.lanEGin(idLokal, aktoreId, pertsonaia);
-
-
-
-
-
-
-
+        }catch (IOException| SQLException e){
+            System.out.println(e.getMessage());
         }
+
 
 
 
