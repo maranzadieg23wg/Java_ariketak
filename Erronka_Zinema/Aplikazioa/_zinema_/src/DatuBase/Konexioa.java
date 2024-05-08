@@ -42,7 +42,7 @@ public class Konexioa {
 
         konexiaEgin();
 
-        
+
         //menua();
         //konexioaItxi();
 
@@ -891,7 +891,7 @@ public class Konexioa {
 
 
 
-        //************************************* AZKENEKOAK***********************************************
+    //************************************* AZKENEKOAK***********************************************
 
     /**
      * Erabiltzaileen azkeneko ID-a edo handiena itzultzen du.
