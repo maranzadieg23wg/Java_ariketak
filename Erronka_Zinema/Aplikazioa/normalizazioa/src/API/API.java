@@ -157,6 +157,7 @@ public class API {
 
     }
 
+
     public static void gehituAkt(int peliID, int azkenID, int idLokal){
 
         try{
@@ -176,65 +177,68 @@ public class API {
 
             JSONObject json =  new JSONObject(eran);
 
-            JSONArray results = json.getJSONArray("cast");
+            if (json.has("cast")){
+                JSONArray results = json.getJSONArray("cast");
 
-            for (int i = 0; i < zenbat && i < results.length(); i++) {
+                for (int i = 0; i < zenbat && i < results.length(); i++) {
 
-                JSONObject movie = results.getJSONObject(i);
+                    JSONObject movie = results.getJSONObject(i);
 
-                String izena = movie.getString("name");
-                int gender = movie.getInt("gender");
+                    String izena = movie.getString("name");
+                    int gender = movie.getInt("gender");
 
-                String pertsonaia = movie.getString("character");
-                String url ="";
-                if (movie.isNull("profile_path")) {
-                    url = null;
-                } else {
-                    url = "http://image.tmdb.org/t/p/w500" + movie.getString("profile_path");
-                }
-
-
-
-                String[] izAbz = izena.split(" ");
-
-                int aktoreId =0;
-
-                if (izAbz.length ==1){
-                    aktoreId = Konexioa.aktoreaDago(izAbz[0], null);
-                }else {
-                    aktoreId = Konexioa.aktoreaDago(izAbz[0], izAbz[1]);
-                }
-
-
-                azkenID++;
-
-
-                if (aktoreId == -1){
-
-                    if (izAbz.length==1){
-                        Konexioa.gehituAktorea(azkenID, izAbz[0], null,gender, url);
-                    }else {
-                        Konexioa.gehituAktorea(azkenID, izAbz[0], izAbz[1],gender, url);
+                    String pertsonaia = movie.getString("character");
+                    String url ="";
+                    if (movie.isNull("profile_path")) {
+                        url = null;
+                    } else {
+                        url = "http://image.tmdb.org/t/p/w500" + movie.getString("profile_path");
                     }
 
 
-                    Konexioa.lanEGin(azkenID, idLokal, pertsonaia);
 
-                }else {
-                    azkenID--;
-                    Konexioa.lanEGin(aktoreId, idLokal, pertsonaia);
+                    String[] izAbz = izena.split(" ");
+
+                    int aktoreId =0;
+
+                    if (izAbz.length ==1){
+                        aktoreId = Konexioa.aktoreaDago(izAbz[0], null);
+                    }else {
+                        aktoreId = Konexioa.aktoreaDago(izAbz[0], izAbz[1]);
+                    }
+
+
+                    Konexioa.aktoZ++;
+
+
+
+                    if (aktoreId == -1){
+
+                        if (izAbz.length==1){
+                            Konexioa.gehituAktorea(Konexioa.aktoZ, izAbz[0], null,gender, url);
+                        }else {
+                            Konexioa.gehituAktorea(Konexioa.aktoZ, izAbz[0], izAbz[1],gender, url);
+                        }
+
+
+                        Konexioa.lanEGin(Konexioa.aktoZ, idLokal, pertsonaia);
+
+                    }else {
+                        Konexioa.aktoZ--;
+                        Konexioa.lanEGin(aktoreId, idLokal, pertsonaia);
+                    }
+
+
+
+
+
+
+
+
+
                 }
-
-
-
-
-
-
-
-
-
-
             }
+
         }catch (IOException| SQLException e){
             System.out.println(e.getMessage());
         }

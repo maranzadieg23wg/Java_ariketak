@@ -102,12 +102,16 @@ public class Konexioa {
     }
 
 
+    public static int aktoZ =0;
     public void pelLortu(){
         try {
             int lehenengoa = 3126;
+            //int lehenengoa = 6793;
             int azkenekoa = 7503;
 
             int ze=0;
+            aktoZ =1;
+
             for (int i = lehenengoa;i<azkenekoa;i++){
                 String sql = "SELECT ID_FILMA, TITULUA FROM FILMAK WHERE ID_FILMA =?";
                 PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -115,12 +119,12 @@ public class Konexioa {
 
 
                 ResultSet emaitza = kontsulta.executeQuery();
-                int azkenID = azkenekoAktorea();
+
 
 
                 while (emaitza.next()) {
                     ze++;
-                    azkenID++;
+
                     int idLokal = emaitza.getInt(1);
                     String izena = emaitza.getString(2);
 
@@ -129,14 +133,17 @@ public class Konexioa {
 
                     int pelID = idPelikula(izena);
 
-                    API.gehituAkt(pelID, azkenID, idLokal);
+                    API.gehituAkt(pelID, aktoZ, idLokal);
 
-                    azkenID = azkenekoAktorea();
+
 
                     //Thread.sleep(2*1000);
                 }
-                konexioaItxi();
-                konexiaEgin();
+                if (ze%10 ==0){
+                    konexioaItxi();
+                    konexiaEgin();
+                }
+
             }
 
 
