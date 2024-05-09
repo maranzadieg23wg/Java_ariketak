@@ -3,8 +3,11 @@ package DB;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
+import GUI.Borratu;
+import GUI.Irabazi;
 import Objetuak.Argazkia;
 import Objetuak.Argazkilari;
 
@@ -15,21 +18,28 @@ import java.util.ArrayList;
 
 public class Konexioa {
 
-    private Connection conn;
+    private static Connection conn;
 
     private static boolean bai = false;
 
-    private ArrayList<Argazkilari> list;
+    private static ArrayList<Argazkilari> list;
 
+    static HashMap<Integer, Integer> argazkilariHash;
 
 
 
     public Konexioa() {
 
+        argazkilariHash = new HashMap<>();
+
         konexiaEgin();
         list = new ArrayList<>();
 
+
+
         lortuArgazkilariak();
+
+
     }
 
 
@@ -47,6 +57,14 @@ public class Konexioa {
 
                 gehituArgazkilari(argazkilari);
 
+                int id = emaitza.getInt(1);
+                int zenbat =bisitaKop(id);
+                System.out.println("id: "+id);
+                System.out.println("zenbat: "+zenbat);
+                argazkilariHash.put(id, zenbat);
+
+
+
             }
 
             lortuIrudiak();
@@ -56,6 +74,31 @@ public class Konexioa {
         }
     }
 
+    int bisitaKop(int id){
+        try {
+            String sql = "select sum(BistarateKop) from Argazkiak where idArgazkilari =?";
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setInt(1, id);
+
+
+            ResultSet emaitza = kontsulta.executeQuery();
+
+
+            if (emaitza.next()){
+                return emaitza.getInt(1);
+            }else {
+                return -1;
+            }
+
+        }catch (SQLException e){
+            System.out.println(e);
+            System.out.println(e.getErrorCode());
+            return -1;
+        }
+
+
+
+    }
 
     void lortuIrudiak(){
         try {
@@ -169,6 +212,99 @@ public class Konexioa {
         }
 
 
+    }
+
+    static public void irabazi(){
+
+        int zenbat = Irabazi.menua();
+        System.out.println(zenbat);
+        for (Argazkilari argazkilari : list){
+
+            int id = argazkilari.getID();
+
+
+
+            int zen = argazkilariHash.get(id);
+
+            System.out.println("zen"+zen);
+
+            if (zen>=zenbat && zenbat !=-1){
+                try {
+                    String sql = "update Argazkilari set saritua =1 WHERE IdArgazkilari = ?";
+                    PreparedStatement kontsulta = conn.prepareStatement(sql);
+                    kontsulta.setInt(1, id);
+                    int z = kontsulta.executeUpdate();
+                    System.out.println("z: "+z);
+                }catch (SQLException e){
+                    System.out.println(e.getErrorCode());
+                }
+
+            }
+        }
+    }
+
+    public void borratu() throws SQLException {
+        for (Argazkilari argazkilari : list){
+
+            int id = argazkilari.getID();
+
+
+            int zen = argazkilariHash.get(id);
+
+            String sql = "select * from Argazkiak where idArgazkilari =?";
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setInt(1, id);
+
+            ResultSet erantzuna = kontsulta.executeQuery();
+
+
+            while (erantzuna.next()){
+                int zenbat = erantzuna.getInt(5);
+                System.out.println("zenbat: "+zenbat);
+
+                if (zenbat<=0){
+                    boolean borr = Borratu.menua(erantzuna.getString(2));
+                    if (borr){
+                        try {
+                            String sql1 = "DELETE FROM Argazkiak WHERE IdArgazkia = ?";
+                            PreparedStatement kontsulta1 = conn.prepareStatement(sql1);
+                            kontsulta1.setInt(1, erantzuna.getInt(1));
+                            int z=kontsulta1.executeUpdate();
+
+                            System.out.println("z: "+z);
+                        }catch (SQLException e){
+                            System.out.println(e.getErrorCode());
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+        lortuArgazkilariak();
+        borratuArgazkilaro();
+
+    }
+
+    void borratuArgazkilaro() throws SQLException {
+        for (Argazkilari argazkilari : list){
+
+            int id = argazkilari.getID();
+
+
+            int zen = argazkilariHash.get(id);
+
+            if (zen <=0){
+                String sql = "delete from Argazkilari where idArgazkilari = ? and Saritua =0";
+                PreparedStatement kontsulta = conn.prepareStatement(sql);
+                kontsulta.setInt(1, id);
+
+                kontsulta.executeQuery();
+            }
+        }
+
+        lortuArgazkilariak();
     }
 
     //************************Lortu Lista*****************************

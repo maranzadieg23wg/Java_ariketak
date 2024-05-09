@@ -39,7 +39,7 @@ public class Index extends JFrame implements ItemListener{
 
     private JPanel menua;
 
-    private JList jlist;
+    private JList<String> jlist;
     JComboBox<String> combo;
 
 
@@ -126,7 +126,7 @@ public class Index extends JFrame implements ItemListener{
 
         modelData = new ArrayList<>();
         model = new DefaultListModel<>();
-        jlist = new JList(model);
+        jlist = new JList<>(model);
         jlist.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
@@ -184,7 +184,6 @@ public class Index extends JFrame implements ItemListener{
 
 
         if (e.getSource().equals(combo)){
-
             for (Argazkilari argazkilari : list){
                 if (argazkilari.getIzena().equals(e.getItem())){
                     /*if (a.isEmpty()){

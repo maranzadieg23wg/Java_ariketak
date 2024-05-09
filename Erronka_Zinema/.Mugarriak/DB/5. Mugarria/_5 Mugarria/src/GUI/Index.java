@@ -9,13 +9,13 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
 public class Index extends JFrame implements ItemListener{
     ArrayList<String> modelData = new ArrayList<>();
@@ -42,6 +42,7 @@ public class Index extends JFrame implements ItemListener{
     private JList jlist;
     JComboBox<String> combo;
 
+    JButton award, remove;
 
     public Index(String izena, int x, int y){
 
@@ -63,9 +64,9 @@ public class Index extends JFrame implements ItemListener{
 
 
     }
-
+    Konexioa conn;
     void konexioa(){
-        Konexioa conn = new Konexioa();
+        conn = new Konexioa();
         list = conn.getList();
     }
 
@@ -98,10 +99,31 @@ public class Index extends JFrame implements ItemListener{
         JPanel temp2 = new JPanel();
         JPanel temp3 = new JPanel();
 
-        GridLayout l = new GridLayout(2, 2);
+        GridLayout l = new GridLayout(3, 2);
 
 
         menua.setLayout(l);
+
+        award = new JButton("AWARD");
+        award.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                irabazleak();
+            }
+        });
+        menua.add(award);
+
+        remove = new JButton("REMOVE");
+        remove.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    borratu();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });        menua.add(remove);
 
 
         combo = new JComboBox<>();
@@ -183,6 +205,7 @@ public class Index extends JFrame implements ItemListener{
     public void itemStateChanged(ItemEvent e) {
 
 
+
         if (e.getSource().equals(combo)){
 
             for (Argazkilari argazkilari : list){
@@ -211,6 +234,10 @@ public class Index extends JFrame implements ItemListener{
                 }
             }
 
+        } else if (e.getSource().equals(award)) {
+            System.out.println("AWARD");
+        } else if (e.getSource().equals(remove)) {
+            System.out.println("REMOVE");
         }
 
     }
@@ -233,5 +260,13 @@ public class Index extends JFrame implements ItemListener{
         conn.eguneratu(argazkia.getID());
         conn.konexioaItxi();
 
+    }
+
+    void irabazleak(){
+        Konexioa.irabazi();
+    }
+
+    void borratu() throws SQLException {
+        conn.borratu();
     }
 }
