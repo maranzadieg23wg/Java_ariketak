@@ -1,0 +1,19 @@
+CREATE DATABASE IF NOT EXISTS ArgazkilariDB;
+
+USE ArgazkilariDB;
+
+CREATE TABLE Argazkilari (
+    IdArgazkilari INT AUTO_INCREMENT PRIMARY KEY,
+    Izena VARCHAR(255),
+    Saritua BOOLEAN
+);
+
+CREATE TABLE Argazkiak (
+    IdArgazkia INT AUTO_INCREMENT PRIMARY KEY,
+    Izenburua VARCHAR(255),
+    Data DATE,
+    Fitxategia VARCHAR(255),
+    BistarateKop INT,
+    IdArgazkilari INT,
+    FOREIGN KEY (IdArgazkilari) REFERENCES Argazkilari(IdArgazkilari)
+);
