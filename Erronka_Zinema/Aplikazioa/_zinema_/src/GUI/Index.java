@@ -62,13 +62,12 @@ public class Index {
 
 
         sortuLehoia();
-        menua();
-        menua2();
+
+
         pelikulak();
         aktoreak();
-
-
-
+        menua();
+        menua2();
         erakutsi(); //← Azkeneko gauza egin behar dena
 
     }
@@ -81,7 +80,13 @@ public class Index {
         frame.setPreferredSize(new Dimension(x, y));
     }
 
-    void erakutsi() {
+    void erakutsi() throws SQLException {
+
+
+
+
+
+
         frame.setLayout(new BorderLayout());
 
         JPanel menuak = new JPanel(); //← Kontenedore bat sortzen dugu
@@ -131,6 +136,19 @@ public class Index {
 
         String izena = "Enigma";
         JLabel label = new JLabel(izena);
+        label.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+
+
+                try {
+
+                    asierara();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+            }
+        });
 
         menua.add(label);
 
@@ -222,6 +240,12 @@ public class Index {
         for (int i =0;i< lista.length;i++){
             String b = lista[i];
             botoiak = new JButton(b);
+            botoiak.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    menuBotoiak(botoiak.getText());
+
+                }
+            });
 
             menua2.add(botoiak);
         }
@@ -538,5 +562,89 @@ public class Index {
 
 
     }
+
+
+    void menuBotoiak(String izena){
+
+        lista = new String[]{"Pelikulak", "aktoreak", "zuzendariak", "laguntza", "myList"};
+
+        if (izena.equals(lista[0])){
+            menuPelikula();
+        } else if (izena.equals(lista[1])) {
+            menuAktoreak();
+        } else if (izena.equals(lista[2])) {
+            menuZuzendaria();
+        }else if (izena.equals(lista[3])){
+            menuLaguntza();
+        }else if (izena.equals(lista[4])){
+            menuMyList();
+        }else {
+            System.err.println("Arazo bat gertatu egin da, aukeratu egin da aukera bat ez dagoena. menuBotoiak()");
+        }
+
+    }
+
+
+    void menuPelikula(){
+
+    }
+
+    void menuAktoreak(){
+
+    }
+
+    void menuZuzendaria(){
+
+    }
+
+    void menuLaguntza(){
+
+    }
+
+    void menuMyList(){
+
+    }
+
+
+    void asierara() throws SQLException {
+        pelikulak.removeAll();
+
+        ArrayList<Pelikulak> nuevasPelikulak = peliList(7);
+
+        for (Pelikulak pel : nuevasPelikulak) {
+            JLabel irudia = irudiak(pel.getIrudiaLokalki(), 130, 200);
+            pelikulaList.put(irudia, pel);
+            irudia.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    pelikulaAukeratuta(e);
+                }
+            });
+            pelikulak.add(irudia);
+        }
+
+        pelikulak.revalidate();
+        pelikulak.repaint();
+
+
+
+
+        aktoreak.removeAll();
+        ArrayList<Aktoreak> aktoreBerriak = aktoList(7);
+
+        for (Aktoreak akt : aktoreBerriak) {
+            JLabel irudia = irudiak(akt.getIrudiaLokalki(), 130, 200);
+            aktoreList.put(irudia, akt);
+            irudia.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    aktoreaAukeratu(e);;
+                }
+            });
+            aktoreak.add(irudia);
+        }
+
+        aktoreak.revalidate();
+        aktoreak.repaint();
+    }
+
 
 }

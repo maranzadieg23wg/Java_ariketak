@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="_zinema_:jar">
+    <output-path>$USER_HOME$/3D Objects</output-path>
+    <root id="archive" name="_zinema_.jar">
+      <element id="module-output" name="_zinema_" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/ojdbc11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../Connector/ojdbc11.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
