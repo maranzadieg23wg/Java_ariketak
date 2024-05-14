@@ -39,6 +39,8 @@ public class Index {
     private HashMap <JLabel, Pelikulak> pelikulaList;
     private HashMap <JLabel, Aktoreak> aktoreList;
 
+    private JPanel erdi;
+
 
 
     Choice menulist;
@@ -96,7 +98,7 @@ public class Index {
         menuak.add(menua2);
 
 
-        JPanel erdi = new JPanel();
+        erdi = new JPanel();
         erdi.setLayout(new BoxLayout(erdi, BoxLayout.Y_AXIS));
 
         erdi.add(peliTitul);
@@ -607,6 +609,8 @@ public class Index {
 
 
     void asierara() throws SQLException {
+
+        erdi.setVisible(true);
         pelikulak.removeAll();
 
         ArrayList<Pelikulak> nuevasPelikulak = peliList(7);
