@@ -244,7 +244,8 @@ public class Index {
             botoiak = new JButton(b);
             botoiak.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
-                    menuBotoiak(botoiak.getText());
+                    JButton j = (JButton) e.getSource();
+                    menuBotoiak(j.getText());
 
                 }
             });
@@ -568,8 +569,6 @@ public class Index {
 
     void menuBotoiak(String izena){
 
-        lista = new String[]{"Pelikulak", "aktoreak", "zuzendariak", "laguntza", "myList"};
-
         if (izena.equals(lista[0])){
             menuPelikula();
         } else if (izena.equals(lista[1])) {
@@ -588,11 +587,13 @@ public class Index {
 
 
     void menuPelikula(){
-
+        asieraraPel(30,false);
+        asieraraAkto(-1, false);
     }
 
     void menuAktoreak(){
-
+        asieraraPel(-1,false);
+        asieraraAkto(30, false);
     }
 
     void menuZuzendaria(){
@@ -610,10 +611,31 @@ public class Index {
 
     void asierara() throws SQLException {
 
-        erdi.setVisible(true);
+        asieraraPel(7, true);
+        asieraraAkto(7, true);
+
+
+
+
+
+    }
+
+    void asieraraPel(int z, boolean hasiera){
+
+
+        if (z == -1){
+            pelikulak.setVisible(false);
+            peliTitul.setVisible(false);
+        }else if (hasiera){
+            pelikulak.setVisible(true);
+            peliTitul.setVisible(true);
+        }else {
+            pelikulak.setVisible(true);
+            peliTitul.setVisible(false);
+        }
         pelikulak.removeAll();
 
-        ArrayList<Pelikulak> nuevasPelikulak = peliList(7);
+        ArrayList<Pelikulak> nuevasPelikulak = peliList(z);
 
         for (Pelikulak pel : nuevasPelikulak) {
             JLabel irudia = irudiak(pel.getIrudiaLokalki(), 130, 200);
@@ -628,12 +650,24 @@ public class Index {
 
         pelikulak.revalidate();
         pelikulak.repaint();
+    }
 
-
-
-
+    void asieraraAkto(int z, boolean hasiera){
         aktoreak.removeAll();
-        ArrayList<Aktoreak> aktoreBerriak = aktoList(7);
+
+
+        if (z == -1){
+            aktoreak.setVisible(false);
+            aktoreTitul.setVisible(false);
+        }else if (hasiera){
+            aktoreak.setVisible(true);
+            aktoreTitul.setVisible(true);
+        }else {
+            aktoreak.setVisible(true);
+            aktoreTitul.setVisible(false);
+        }
+
+        ArrayList<Aktoreak> aktoreBerriak = aktoList(z);
 
         for (Aktoreak akt : aktoreBerriak) {
             JLabel irudia = irudiak(akt.getIrudiaLokalki(), 130, 200);
