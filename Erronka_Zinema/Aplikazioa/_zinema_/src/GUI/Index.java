@@ -29,7 +29,7 @@ public class Index {
 
 
     private JFrame frame;
-    private JPanel menua, menua2, pelikulak, aktoreak, peliTitul, aktoreTitul;
+    private JPanel menua, menua2, pelikulak, aktoreak, peliTitul, aktoreTitul, zuzendariak;
     private JPanel aukera1, aukera2;
     private JButton buttonLogin, buttonSingUp, botoiak;
     private JTextField bilatu;
@@ -62,7 +62,9 @@ public class Index {
 
         pelikulaList = new HashMap<>();
         aktoreList = new HashMap<>();
+        zuzendariList = new HashMap<>();
 
+        zuzendariak = new JPanel();
 
         this.bezero = null;
 
@@ -109,6 +111,7 @@ public class Index {
         erdi.add(pelikulak);
         erdi.add(aktoreTitul);
         erdi.add(aktoreak);
+        erdi.add(zuzendariak);
         //erdi.add(aktoreTitul);
         //erdi.add(aktoreak);
 
@@ -398,29 +401,56 @@ public class Index {
 
     ArrayList<Pelikulak> peliList(int zenbat){
 
-        try {
-           conn = new Konexioa();
+        if (zenbat !=-1){
+            try {
+                conn = new Konexioa();
 
-            return conn.pelikulaListLortu(zenbat);
-        }catch (SQLException e){
-            return null;
-        }finally {
-            conn.konexioaItxi();
+                return conn.pelikulaListLortu(zenbat);
+            }catch (SQLException e){
+                return null;
+            }finally {
+                conn.konexioaItxi();
+            }
         }
+        return null;
+
+
 
     }
 
     ArrayList<Aktoreak> aktoList(int zenbat){
 
-        try {
-            conn = new Konexioa();
+        if (zenbat !=-1){
+            try {
+                conn = new Konexioa();
 
-            return conn.aktoreLortuLista(zenbat);
-        }catch (SQLException e){
-            return null;
-        }finally {
-            conn.konexioaItxi();
+                return conn.aktoreLortuLista(zenbat);
+            }catch (SQLException e){
+                return null;
+            }finally {
+                conn.konexioaItxi();
+            }
         }
+        return null;
+
+
+    }
+
+    ArrayList<Zuzendariak> zuzList(int zenbat){
+
+        if (zenbat !=-1){
+            try {
+                conn = new Konexioa();
+
+                return conn.zuzendariLortuLista(zenbat);
+            }catch (SQLException e){
+                return null;
+            }finally {
+                conn.konexioaItxi();
+            }
+        }
+        return null;
+
 
     }
 
@@ -468,6 +498,11 @@ public class Index {
     void aktoreaAukeratu(MouseEvent e){
         Aktoreak akto = aktoreList.get(e.getSource());
         System.out.println(akto);
+    }
+
+    void zuzendariaAukeratu(MouseEvent e){
+        Zuzendariak zuz = zuzendariList.get(e.getSource());
+        System.out.println(zuz);
     }
 
     JLabel zuriaZatia (int luzeera){
@@ -598,15 +633,20 @@ public class Index {
     void menuPelikula(){
         asieraraPel(30,false);
         asieraraAkto(-1, false);
+        asieraraZuz(-1, false);
     }
 
     void menuAktoreak(){
         asieraraPel(-1,false);
         asieraraAkto(30, false);
+        asieraraZuz(-1, false);
+
     }
 
     void menuZuzendaria(){
-
+        asieraraPel(-1,false);
+        asieraraAkto(-1, false);
+        asieraraZuz(30, false);
     }
 
     void menuLaguntza(){
@@ -696,6 +736,40 @@ public class Index {
             }
             aktoreak.revalidate();
             aktoreak.repaint();
+        }
+
+
+
+    }
+
+    void asieraraZuz(int z, boolean hasiera){
+        zuzendariak.removeAll();
+
+
+        if (z == -1){
+            zuzendariak.setVisible(false);
+        }else if (hasiera){
+            zuzendariak.setVisible(true);
+        }else {
+            zuzendariak.setVisible(true);
+        }
+
+        ArrayList<Zuzendariak> zuzBerriak = zuzList(z);
+
+        if (zuzBerriak!=null){
+            for (Zuzendariak zuz : zuzBerriak) {
+                //System.out.println(zuz);
+                JLabel irudia = irudiak(zuz.getIrudiaLokalki(), 130, 200);
+                zuzendariList.put(irudia, zuz);
+                irudia.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        zuzendariaAukeratu(e);;
+                    }
+                });
+                zuzendariak.add(irudia);
+            }
+            zuzendariak.revalidate();
+            zuzendariak.repaint();
         }
 
 

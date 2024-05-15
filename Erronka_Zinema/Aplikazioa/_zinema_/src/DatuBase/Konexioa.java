@@ -1,8 +1,5 @@
 package DatuBase;
-import Objetuak.DB.Aktoreak;
-import Objetuak.DB.Bezero;
-import Objetuak.DB.IkusitakoLista;
-import Objetuak.DB.Pelikulak;
+import Objetuak.DB.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -892,6 +889,64 @@ public class Konexioa {
         return  (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
     }
 
+    private int ZuzIDRandom() throws SQLException {
+        int azkenP = azkenekoZuzendaria();
+        int lehenP = lehenengoZuzendaria();
+
+        return  (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
+    }
+
+
+    public ArrayList<Zuzendariak> zuzendariLortuLista(int zenbat) throws SQLException {
+
+        if (zenbat!=-1){
+            ArrayList<Integer> zenbaki = new ArrayList<>();
+            for (int i =0;i<zenbat;i++){
+                zenbaki.add(ZuzIDRandom());
+            }
+
+
+            return zuzendariaLortu(zenbaki);
+        }
+        return null;
+
+    }
+
+    public ArrayList<Zuzendariak> zuzendariaLortu(ArrayList<Integer> zenbaki) throws SQLException {
+        ArrayList<Zuzendariak> lista = new ArrayList<>();
+
+
+        StringBuilder placeholders = new StringBuilder();
+        for (int i = 0; i < zenbaki.size(); i++) {
+            placeholders.append("?,");
+        }
+
+        placeholders.deleteCharAt(placeholders.length() - 1);
+
+        String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA IN (" + placeholders.toString() + ")";
+        //String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA IN (213,223)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+
+        for (int i = 0; i < zenbaki.size(); i++) {
+            kontsulta.setInt(i + 1, zenbaki.get(i));
+            //System.out.println(zenbaki.get(i));
+        }
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+
+
+        while (emaitza.next()){
+
+            //System.out.println(zuzendariObjetua(emaitza));
+            lista.add(zuzendariObjetua(emaitza));
+        }
+
+
+        return lista;
+    }
     /**
      * Aktore baten ID-a erabiltzen lortzen dugu bere informazioa eta hau bidaltzen da {@code aktoreakObjetua(emaitza)} funtziora bueltatzeko Aktoreak objetu bat.
      * Jasotzen badu -1 ID bezala, generatu egingo du ID bat seudoaleatorioki kontuan artzen zein den lehenengo ID-a eta azkenekoa, honetarako erabiltzen dira {@code azkenekoAktorea()} eta {@code lehenengoAktorea()}
@@ -974,6 +1029,25 @@ public class Konexioa {
 
 
         return new Aktoreak(ID_AKTOREA, IZENA, ABIZENA, JAIOTZE_DATA, NAZIONALITATEA, EMAILA, TELEFONOA, IRUDIA);
+    }
+
+    Zuzendariak zuzendariObjetua(ResultSet pel) throws SQLException {
+
+        /*if (!pel.next()) {
+            return null;
+        }*/
+
+
+        int ID_AKTOREA = pel.getInt("ID_FILM_ZUZENDARIA");
+        String IZENA = pel.getString("IZENA");
+        String ABIZENA = pel.getString("ABIZENA");
+        int JAIOTZE_DATA = pel.getInt("JAIOTZE_DATA");
+        String SEXUA = pel.getString("SEXUA");
+        String IRUDIA = pel.getString("IRUDIA");
+        //System.out.println(ID_AKTOREA);
+
+
+        return new Zuzendariak(ID_AKTOREA, IZENA, ABIZENA, JAIOTZE_DATA, SEXUA, IRUDIA);
     }
 
 
@@ -1085,6 +1159,36 @@ public class Konexioa {
 
         //System.out.println("Azkenekoa: "+lehenengoAktorea);
         return lehenengoAktorea;
+    }
+
+    int lehenengoZuzendaria() throws SQLException {
+        String sql = "SELECT ID_FILM_ZUZENDARIA FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA = (SELECT MAX(ID_FILM_ZUZENDARIA) FROM FILM_ZUZENDARIA)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        int lehenengoZuz = 0;
+        if (emaitza.next()) {
+            lehenengoZuz = emaitza.getInt(1);
+        }
+
+        //System.out.println("Azkenekoa: "+lehenengoAktorea);
+        return lehenengoZuz;
+    }
+
+    int azkenekoZuzendaria() throws SQLException {
+        String sql = "SELECT ID_FILM_ZUZENDARIA FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA = (SELECT MIN(ID_FILM_ZUZENDARIA) FROM FILM_ZUZENDARIA)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        int azkenekoZuz = 0;
+        if (emaitza.next()) {
+            azkenekoZuz = emaitza.getInt(1);
+        }
+
+        //System.out.println("Azkenekoa: "+lehenengoAktorea);
+        return azkenekoZuz;
     }
 
 
