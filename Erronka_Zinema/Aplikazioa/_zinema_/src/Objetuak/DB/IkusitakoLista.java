@@ -1,4 +1,4 @@
-package Objetuak;
+package Objetuak.DB;
 
 /**
  * Objetu honen bitartez, lortzen dugu jakitea zein nota heman dion bezero batek pelikula konkretu bateri

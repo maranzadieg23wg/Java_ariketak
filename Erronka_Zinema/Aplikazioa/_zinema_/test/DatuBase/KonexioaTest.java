@@ -1,7 +1,7 @@
 package DatuBase;
 
-import Objetuak.Aktoreak;
-import Objetuak.Pelikulak;
+import Objetuak.DB.Aktoreak;
+import Objetuak.DB.Pelikulak;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;

@@ -3,10 +3,10 @@ import DatuBase.Konexioa;
 import GUI.LogIn.Konfigurazioa;
 import GUI.LogIn.KontuaSortu;
 import GUI.LogIn.SaioaHasi;
-import Objetuak.Aktoreak;
-import Objetuak.Bezero;
+import Objetuak.DB.Aktoreak;
+import Objetuak.DB.Bezero;
 import Objetuak.IrudiakDeskargatu;
-import Objetuak.Pelikulak;
+import Objetuak.DB.Pelikulak;
 import Objetuak.cookies.Cookie;
 
 import javax.swing.*;
@@ -354,9 +354,9 @@ public class Index {
         aktoreak.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
 
 
+        asieraraAkto(aktoKop, true);
 
-
-        for (Aktoreak akt : aktoList(aktoKop)){
+        /*for (Aktoreak akt : aktoList(aktoKop)){
 
             JLabel irudia = irudiak(akt.getIrudiaLokalki(), 130, 200);
             aktoreList.put(irudia, akt);
@@ -368,7 +368,7 @@ public class Index {
             });
 
             aktoreak.add(irudia); //← Nola sortu irudiak
-        }
+        }*/
 
 
 
@@ -408,7 +408,7 @@ public class Index {
         try {
             Konexioa conn = new Konexioa();
 
-            return conn.aktoreList(zenbat);
+            return conn.aktoreLortuLista(zenbat);
         }catch (SQLException e){
             return null;
         }

@@ -1,5 +1,6 @@
 package Objetuak;
 
+import Objetuak.DB.Bezero;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

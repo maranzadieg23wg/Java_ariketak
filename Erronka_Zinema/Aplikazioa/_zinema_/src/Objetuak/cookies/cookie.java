@@ -1,7 +1,7 @@
 package Objetuak.cookies;
 
 import DatuBase.Konexioa;
-import Objetuak.Bezero;
+import Objetuak.DB.Bezero;
 
 import java.io.*;
 

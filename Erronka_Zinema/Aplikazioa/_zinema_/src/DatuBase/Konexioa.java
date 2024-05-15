@@ -1,8 +1,8 @@
 package DatuBase;
-import Objetuak.Aktoreak;
-import Objetuak.Bezero;
-import Objetuak.IkusitakoLista;
-import Objetuak.Pelikulak;
+import Objetuak.DB.Aktoreak;
+import Objetuak.DB.Bezero;
+import Objetuak.DB.IkusitakoLista;
+import Objetuak.DB.Pelikulak;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

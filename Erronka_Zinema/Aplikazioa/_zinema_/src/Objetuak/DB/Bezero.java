@@ -1,4 +1,4 @@
-package Objetuak;
+package Objetuak.DB;
 
 
 import java.util.Objects;

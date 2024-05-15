@@ -1,7 +1,7 @@
 package GUI.LogIn;
 
 import DatuBase.Konexioa;
-import Objetuak.Bezero;
+import Objetuak.DB.Bezero;
 
 import javax.swing.*;
 import java.sql.SQLException;
