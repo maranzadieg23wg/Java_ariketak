@@ -871,9 +871,9 @@ public class Konexioa {
 
     Aktoreak aktoreakObjetua(ResultSet pel) throws SQLException {
 
-        if (!pel.next()) {
+        /*if (!pel.next()) {
             return null;
-        }
+        }*/
 
 
         int ID_AKTOREA = pel.getInt("ID_AKTOREA");
