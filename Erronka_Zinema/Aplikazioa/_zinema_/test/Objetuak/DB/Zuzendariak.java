@@ -1,11 +1,13 @@
 package Objetuak.DB;
 
 import Objetuak.IrudiakDeskargatu;
+import org.junit.jupiter.api.function.Executable;
 
 import java.util.Objects;
 
 public class Zuzendariak {
 
+    public Executable lokalIrudia;
     private int id;
     private String izena;
     private String abizena;
@@ -33,6 +35,10 @@ public class Zuzendariak {
         return irudiaLokalki;
     }
 
+    public org.junit.jupiter.api.function.Executable setIrudiaLokalki(String irudiaLokalki) {
+        this.irudiaLokalki = irudiaLokalki;
+        return null;
+    }
 
     @Override
     public String toString() {
@@ -64,9 +70,5 @@ public class Zuzendariak {
         IrudiakDeskargatu irudiakDeskargatu = new IrudiakDeskargatu(irudia,"./irudiak/zuzendari");
 
         setIrudiaLokalki(irudiakDeskargatu.getFitxategiarenIzena());
-    }
-
-    private void setIrudiaLokalki(String fitxategiarenIzena) {
-        irudiaLokalki = fitxategiarenIzena;
     }
 }
