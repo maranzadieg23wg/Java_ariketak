@@ -856,16 +856,8 @@ public class Konexioa {
      */
     public Aktoreak aktoreaLortu(int aukera) throws SQLException {
 
-        if (aukera == -1){
-            int azkenP = azkenekoAktorea();
-            int lehenP = lehenengoAktorea();
 
-            aukera = (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
-        }
-
-
-
-
+        aukera = aktorIDRandom();
 
         String sql = "SELECT * FROM AKTOREAK WHERE ID_AKTOREA = ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -878,6 +870,37 @@ public class Konexioa {
         return aktoreakObjetua(emaitza);
 
     }
+
+    public ArrayList<Aktoreak> aktoreaLortu(ArrayList<Integer> zenbaki) throws SQLException {
+        ArrayList<Aktoreak> lista = new ArrayList<>();
+
+
+        StringBuilder placeholders = new StringBuilder();
+        for (int i = 0; i < zenbaki.size(); i++) {
+            placeholders.append("?,");
+        }
+
+        placeholders.deleteCharAt(placeholders.length() - 1);
+
+        String sql = "SELECT * FROM AKTOREAK WHERE ID_AKTOREA IN (" + placeholders.toString() + ")";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+
+        for (int i = 0; i < zenbaki.size(); i++) {
+            kontsulta.setInt(i + 1, zenbaki.get(i));
+            //System.out.println(zenbaki.get(i));
+        }
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        while (emaitza.next()){
+            lista.add(aktoreakObjetua(emaitza));
+        }
+
+
+        return lista;
+    }
+
 
     /**
      * Jasotzen ditu beste funtzioek jaso duten Oracle DB-ren erantzuna eta hau analizatu egiten du sortzeko {@code Aktoreak} klase bat eta hau itzuli.
