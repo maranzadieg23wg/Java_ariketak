@@ -828,6 +828,24 @@ public class Konexioa {
         return aktoreaLortu(-1);
     }
 
+    public ArrayList<Aktoreak> aktoreLortuLista(int zenbat) throws SQLException {
+
+        ArrayList<Integer> zenbaki = new ArrayList<>();
+        for (int i =0;i<zenbat;i++){
+            zenbaki.add(aktorIDRandom());
+        }
+
+
+        return aktoreaLortu(zenbaki);
+    }
+
+    private int aktorIDRandom() throws SQLException {
+        int azkenP = azkenekoAktorea();
+        int lehenP = lehenengoAktorea();
+
+        return  (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
+    }
+
     /**
      * Aktore baten ID-a erabiltzen lortzen dugu bere informazioa eta hau bidaltzen da {@code aktoreakObjetua(emaitza)} funtziora bueltatzeko Aktoreak objetu bat.
      * Jasotzen badu -1 ID bezala, generatu egingo du ID bat seudoaleatorioki kontuan artzen zein den lehenengo ID-a eta azkenekoa, honetarako erabiltzen dira {@code azkenekoAktorea()} eta {@code lehenengoAktorea()}
