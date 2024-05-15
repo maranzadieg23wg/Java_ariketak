@@ -1,4 +1,4 @@
-import DatuBase.Konexioa;
+import DatuBase.*;
 import GUI.Index;
 
 import java.sql.SQLException;

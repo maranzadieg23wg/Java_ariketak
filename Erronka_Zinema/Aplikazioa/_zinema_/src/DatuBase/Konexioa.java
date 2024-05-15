@@ -1,8 +1,5 @@
 package DatuBase;
-import Objetuak.Aktoreak;
-import Objetuak.Bezero;
-import Objetuak.IkusitakoLista;
-import Objetuak.Pelikulak;
+import Objetuak.DB.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -42,7 +39,7 @@ public class Konexioa {
 
         konexiaEgin();
 
-        
+
         //menua();
         //konexioaItxi();
 
@@ -483,6 +480,19 @@ public class Konexioa {
         return pelikulaLortu(-1);
     }
 
+    public ArrayList<Pelikulak> pelikulaListLortu(int zenbat) throws SQLException {
+
+        if (zenbat!=-1){
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int i =0;i<zenbat;i++){
+                list.add(pelikulaIDRandom());
+            }
+
+            return pelikulaLortu(list);
+        }
+        return null;
+    }
+
     /**
      * jasotzen du ID bat eta honekin bilatzen du datu basean bere informazio guztia.
      * Informazioa jaso ondoren, deitzen dio beste funtzio bateri eta honek bilakatzen du informazio hori objetu batean eta au bueltatu egiten du.
@@ -495,10 +505,7 @@ public class Konexioa {
     public Pelikulak pelikulaLortu(int aukera) throws SQLException {
 
         if (aukera == -1){
-            int azkenP = azkenekoPelikula();
-            int lehenP = lehenengoPelikula();
-
-            aukera = (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
+            aukera = pelikulaIDRandom();
         }
 
         try{
@@ -515,10 +522,37 @@ public class Konexioa {
             return null;
         }
 
+    }
+
+    public ArrayList<Pelikulak> pelikulaLortu(ArrayList<Integer> zenbakiak) throws SQLException {
+
+        ArrayList<Pelikulak> lista = new ArrayList<>();
 
 
+        StringBuilder placeholders = new StringBuilder();
+        for (int i = 0; i < zenbakiak.size(); i++) {
+            placeholders.append("?,");
+        }
+
+        placeholders.deleteCharAt(placeholders.length() - 1);
+
+        String sql = "SELECT * FROM FILMAK WHERE ID_FILMA IN (" + placeholders.toString() + ")";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
 
 
+        for (int i = 0; i < zenbakiak.size(); i++) {
+            kontsulta.setInt(i + 1, zenbakiak.get(i));
+            //System.out.println(zenbaki.get(i));
+        }
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        while (emaitza.next()){
+            lista.add(pelikulaObjetua(emaitza));
+        }
+
+
+        return lista;
 
 
 
@@ -536,9 +570,6 @@ public class Konexioa {
 
     Pelikulak pelikulaObjetua(ResultSet pel) throws SQLException {
 
-        if (!pel.next()) {
-            return null;
-        }
 
 
         int IDPelikula = pel.getInt("ID_FILMA");
@@ -583,6 +614,14 @@ public class Konexioa {
         }
 
         return list;
+    }
+
+
+    private int pelikulaIDRandom() throws SQLException {
+        int azkenP = azkenekoPelikula();
+        int lehenP = lehenengoPelikula();
+
+        return (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
     }
 
 
@@ -828,6 +867,86 @@ public class Konexioa {
         return aktoreaLortu(-1);
     }
 
+    public ArrayList<Aktoreak> aktoreLortuLista(int zenbat) throws SQLException {
+
+        if (zenbat!=-1){
+            ArrayList<Integer> zenbaki = new ArrayList<>();
+            for (int i =0;i<zenbat;i++){
+                zenbaki.add(aktorIDRandom());
+            }
+
+
+            return aktoreaLortu(zenbaki);
+        }
+        return null;
+
+    }
+
+    private int aktorIDRandom() throws SQLException {
+        int azkenP = azkenekoAktorea();
+        int lehenP = lehenengoAktorea();
+
+        return  (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
+    }
+
+    private int ZuzIDRandom() throws SQLException {
+        int azkenP = azkenekoZuzendaria();
+        int lehenP = lehenengoZuzendaria();
+
+        return  (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
+    }
+
+
+    public ArrayList<Zuzendariak> zuzendariLortuLista(int zenbat) throws SQLException {
+
+        if (zenbat!=-1){
+            ArrayList<Integer> zenbaki = new ArrayList<>();
+            for (int i =0;i<zenbat;i++){
+                zenbaki.add(ZuzIDRandom());
+            }
+
+
+            return zuzendariaLortu(zenbaki);
+        }
+        return null;
+
+    }
+
+    public ArrayList<Zuzendariak> zuzendariaLortu(ArrayList<Integer> zenbaki) throws SQLException {
+        ArrayList<Zuzendariak> lista = new ArrayList<>();
+
+
+        StringBuilder placeholders = new StringBuilder();
+        for (int i = 0; i < zenbaki.size(); i++) {
+            placeholders.append("?,");
+        }
+
+        placeholders.deleteCharAt(placeholders.length() - 1);
+
+        String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA IN (" + placeholders.toString() + ")";
+        //String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA IN (213,223)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+
+        for (int i = 0; i < zenbaki.size(); i++) {
+            kontsulta.setInt(i + 1, zenbaki.get(i));
+            //System.out.println(zenbaki.get(i));
+        }
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+
+
+        while (emaitza.next()){
+
+            //System.out.println(zuzendariObjetua(emaitza));
+            lista.add(zuzendariObjetua(emaitza));
+        }
+
+
+        return lista;
+    }
     /**
      * Aktore baten ID-a erabiltzen lortzen dugu bere informazioa eta hau bidaltzen da {@code aktoreakObjetua(emaitza)} funtziora bueltatzeko Aktoreak objetu bat.
      * Jasotzen badu -1 ID bezala, generatu egingo du ID bat seudoaleatorioki kontuan artzen zein den lehenengo ID-a eta azkenekoa, honetarako erabiltzen dira {@code azkenekoAktorea()} eta {@code lehenengoAktorea()}
@@ -838,16 +957,8 @@ public class Konexioa {
      */
     public Aktoreak aktoreaLortu(int aukera) throws SQLException {
 
-        if (aukera == -1){
-            int azkenP = azkenekoAktorea();
-            int lehenP = lehenengoAktorea();
 
-            aukera = (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
-        }
-
-
-
-
+        aukera = aktorIDRandom();
 
         String sql = "SELECT * FROM AKTOREAK WHERE ID_AKTOREA = ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -861,6 +972,37 @@ public class Konexioa {
 
     }
 
+    public ArrayList<Aktoreak> aktoreaLortu(ArrayList<Integer> zenbaki) throws SQLException {
+        ArrayList<Aktoreak> lista = new ArrayList<>();
+
+
+        StringBuilder placeholders = new StringBuilder();
+        for (int i = 0; i < zenbaki.size(); i++) {
+            placeholders.append("?,");
+        }
+
+        placeholders.deleteCharAt(placeholders.length() - 1);
+
+        String sql = "SELECT * FROM AKTOREAK WHERE ID_AKTOREA IN (" + placeholders.toString() + ")";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+
+        for (int i = 0; i < zenbaki.size(); i++) {
+            kontsulta.setInt(i + 1, zenbaki.get(i));
+            //System.out.println(zenbaki.get(i));
+        }
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        while (emaitza.next()){
+            lista.add(aktoreakObjetua(emaitza));
+        }
+
+
+        return lista;
+    }
+
+
     /**
      * Jasotzen ditu beste funtzioek jaso duten Oracle DB-ren erantzuna eta hau analizatu egiten du sortzeko {@code Aktoreak} klase bat eta hau itzuli.
      * <blockquote>{@code aktoreakObjetua(emaitza);}</blockquote>
@@ -871,9 +1013,9 @@ public class Konexioa {
 
     Aktoreak aktoreakObjetua(ResultSet pel) throws SQLException {
 
-        if (!pel.next()) {
+        /*if (!pel.next()) {
             return null;
-        }
+        }*/
 
 
         int ID_AKTOREA = pel.getInt("ID_AKTOREA");
@@ -889,9 +1031,28 @@ public class Konexioa {
         return new Aktoreak(ID_AKTOREA, IZENA, ABIZENA, JAIOTZE_DATA, NAZIONALITATEA, EMAILA, TELEFONOA, IRUDIA);
     }
 
+    Zuzendariak zuzendariObjetua(ResultSet pel) throws SQLException {
+
+        /*if (!pel.next()) {
+            return null;
+        }*/
 
 
-        //************************************* AZKENEKOAK***********************************************
+        int ID_AKTOREA = pel.getInt("ID_FILM_ZUZENDARIA");
+        String IZENA = pel.getString("IZENA");
+        String ABIZENA = pel.getString("ABIZENA");
+        int JAIOTZE_DATA = pel.getInt("JAIOTZE_DATA");
+        String SEXUA = pel.getString("SEXUA");
+        String IRUDIA = pel.getString("IRUDIA");
+        //System.out.println(ID_AKTOREA);
+
+
+        return new Zuzendariak(ID_AKTOREA, IZENA, ABIZENA, JAIOTZE_DATA, SEXUA, IRUDIA);
+    }
+
+
+
+    //************************************* AZKENEKOAK***********************************************
 
     /**
      * Erabiltzaileen azkeneko ID-a edo handiena itzultzen du.
@@ -998,6 +1159,36 @@ public class Konexioa {
 
         //System.out.println("Azkenekoa: "+lehenengoAktorea);
         return lehenengoAktorea;
+    }
+
+    int lehenengoZuzendaria() throws SQLException {
+        String sql = "SELECT ID_FILM_ZUZENDARIA FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA = (SELECT MAX(ID_FILM_ZUZENDARIA) FROM FILM_ZUZENDARIA)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        int lehenengoZuz = 0;
+        if (emaitza.next()) {
+            lehenengoZuz = emaitza.getInt(1);
+        }
+
+        //System.out.println("Azkenekoa: "+lehenengoAktorea);
+        return lehenengoZuz;
+    }
+
+    int azkenekoZuzendaria() throws SQLException {
+        String sql = "SELECT ID_FILM_ZUZENDARIA FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA = (SELECT MIN(ID_FILM_ZUZENDARIA) FROM FILM_ZUZENDARIA)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        int azkenekoZuz = 0;
+        if (emaitza.next()) {
+            azkenekoZuz = emaitza.getInt(1);
+        }
+
+        //System.out.println("Azkenekoa: "+lehenengoAktorea);
+        return azkenekoZuz;
     }
 
 

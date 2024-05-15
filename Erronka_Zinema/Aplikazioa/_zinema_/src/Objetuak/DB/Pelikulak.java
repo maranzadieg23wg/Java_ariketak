@@ -1,4 +1,6 @@
-package Objetuak;
+package Objetuak.DB;
+
+import Objetuak.IrudiakDeskargatu;
 
 import java.util.Objects;
 

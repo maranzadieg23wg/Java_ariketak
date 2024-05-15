@@ -3,10 +3,11 @@ import DatuBase.Konexioa;
 import GUI.LogIn.Konfigurazioa;
 import GUI.LogIn.KontuaSortu;
 import GUI.LogIn.SaioaHasi;
-import Objetuak.Aktoreak;
-import Objetuak.Bezero;
+import Objetuak.DB.Aktoreak;
+import Objetuak.DB.Bezero;
+import Objetuak.DB.Zuzendariak;
 import Objetuak.IrudiakDeskargatu;
-import Objetuak.Pelikulak;
+import Objetuak.DB.Pelikulak;
 import Objetuak.cookies.Cookie;
 
 import javax.swing.*;
@@ -28,7 +29,7 @@ public class Index {
 
 
     private JFrame frame;
-    private JPanel menua, menua2, pelikulak, aktoreak, peliTitul, aktoreTitul;
+    private JPanel menua, menua2, pelikulak, aktoreak, peliTitul, aktoreTitul, zuzendariak;
     private JPanel aukera1, aukera2;
     private JButton buttonLogin, buttonSingUp, botoiak;
     private JTextField bilatu;
@@ -38,6 +39,9 @@ public class Index {
 
     private HashMap <JLabel, Pelikulak> pelikulaList;
     private HashMap <JLabel, Aktoreak> aktoreList;
+    private HashMap <JLabel, Zuzendariak> zuzendariList;
+
+    private JPanel erdi;
 
 
 
@@ -45,9 +49,11 @@ public class Index {
 
 
     private Bezero bezero;
+    private Konexioa conn;
 
 
     public Index(int x, int y, String izena) throws SQLException {
+        conn = null;
         this.x = x;
         this.y = y;
         this.izena = izena;
@@ -56,19 +62,20 @@ public class Index {
 
         pelikulaList = new HashMap<>();
         aktoreList = new HashMap<>();
+        zuzendariList = new HashMap<>();
 
+        zuzendariak = new JPanel();
 
         this.bezero = null;
 
 
         sortuLehoia();
-        menua();
-        menua2();
+
+
         pelikulak();
         aktoreak();
-
-
-
+        menua();
+        menua2();
         erakutsi(); //← Azkeneko gauza egin behar dena
 
     }
@@ -81,7 +88,13 @@ public class Index {
         frame.setPreferredSize(new Dimension(x, y));
     }
 
-    void erakutsi() {
+    void erakutsi() throws SQLException {
+
+
+
+
+
+
         frame.setLayout(new BorderLayout());
 
         JPanel menuak = new JPanel(); //← Kontenedore bat sortzen dugu
@@ -91,13 +104,14 @@ public class Index {
         menuak.add(menua2);
 
 
-        JPanel erdi = new JPanel();
+        erdi = new JPanel();
         erdi.setLayout(new BoxLayout(erdi, BoxLayout.Y_AXIS));
 
         erdi.add(peliTitul);
         erdi.add(pelikulak);
         erdi.add(aktoreTitul);
         erdi.add(aktoreak);
+        erdi.add(zuzendariak);
         //erdi.add(aktoreTitul);
         //erdi.add(aktoreak);
 
@@ -131,6 +145,19 @@ public class Index {
 
         String izena = "Enigma";
         JLabel label = new JLabel(izena);
+        label.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+
+
+                try {
+
+                    asierara();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+            }
+        });
 
         menua.add(label);
 
@@ -222,6 +249,13 @@ public class Index {
         for (int i =0;i< lista.length;i++){
             String b = lista[i];
             botoiak = new JButton(b);
+            botoiak.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    JButton j = (JButton) e.getSource();
+                    menuBotoiak(j.getText());
+
+                }
+            });
 
             menua2.add(botoiak);
         }
@@ -276,7 +310,8 @@ public class Index {
 
 
 
-        for (Pelikulak pel : peliList(peliKop)){
+        asieraraPel(peliKop, true);
+        /*for (Pelikulak pel : peliList(peliKop)){
 
             JLabel irudia = irudiak(pel.getIrudiaLokalki(), 130, 200);
             pelikulaList.put(irudia, pel);
@@ -289,7 +324,7 @@ public class Index {
             });
 
             pelikulak.add(irudia); //← Nola sortu irudiak
-        }
+        }*/
 
 
 
@@ -327,9 +362,9 @@ public class Index {
         aktoreak.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
 
 
+        asieraraAkto(aktoKop, true);
 
-
-        for (Aktoreak akt : aktoList(aktoKop)){
+        /*for (Aktoreak akt : aktoList(aktoKop)){
 
             JLabel irudia = irudiak(akt.getIrudiaLokalki(), 130, 200);
             aktoreList.put(irudia, akt);
@@ -341,7 +376,7 @@ public class Index {
             });
 
             aktoreak.add(irudia); //← Nola sortu irudiak
-        }
+        }*/
 
 
 
@@ -366,29 +401,60 @@ public class Index {
 
     ArrayList<Pelikulak> peliList(int zenbat){
 
-        try {
-            Konexioa conn = new Konexioa();
+        if (zenbat !=-1){
+            try {
+                conn = new Konexioa();
 
-            return conn.pelikulaList(zenbat);
-        }catch (SQLException e){
-            return null;
+                return conn.pelikulaListLortu(zenbat);
+            }catch (SQLException e){
+                return null;
+            }finally {
+                conn.konexioaItxi();
+            }
         }
+        return null;
+
+
 
     }
 
     ArrayList<Aktoreak> aktoList(int zenbat){
 
-        try {
-            Konexioa conn = new Konexioa();
+        if (zenbat !=-1){
+            try {
+                conn = new Konexioa();
 
-            return conn.aktoreList(zenbat);
-        }catch (SQLException e){
-            return null;
+                return conn.aktoreLortuLista(zenbat);
+            }catch (SQLException e){
+                return null;
+            }finally {
+                conn.konexioaItxi();
+            }
         }
+        return null;
+
 
     }
 
-    Pelikulak pelikulaAleatorio() throws SQLException {
+    ArrayList<Zuzendariak> zuzList(int zenbat){
+
+        if (zenbat !=-1){
+            try {
+                conn = new Konexioa();
+
+                return conn.zuzendariLortuLista(zenbat);
+            }catch (SQLException e){
+                return null;
+            }finally {
+                conn.konexioaItxi();
+            }
+        }
+        return null;
+
+
+    }
+
+    /*Pelikulak pelikulaAleatorio() throws SQLException {
         Konexioa con = new Konexioa();
 
         Pelikulak pel = con.pelikulaLortu();
@@ -422,7 +488,7 @@ public class Index {
 
         //System.out.println(pel.getIrudiaLokalki());
         return akt;
-    }
+    }*/
 
     void pelikulaAukeratuta(MouseEvent e){
         Pelikulak pel = pelikulaList.get(e.getSource());
@@ -432,6 +498,11 @@ public class Index {
     void aktoreaAukeratu(MouseEvent e){
         Aktoreak akto = aktoreList.get(e.getSource());
         System.out.println(akto);
+    }
+
+    void zuzendariaAukeratu(MouseEvent e){
+        Zuzendariak zuz = zuzendariList.get(e.getSource());
+        System.out.println(zuz);
     }
 
     JLabel zuriaZatia (int luzeera){
@@ -538,5 +609,172 @@ public class Index {
 
 
     }
+
+
+    void menuBotoiak(String izena){
+
+        if (izena.equals(lista[0])){
+            menuPelikula();
+        } else if (izena.equals(lista[1])) {
+            menuAktoreak();
+        } else if (izena.equals(lista[2])) {
+            menuZuzendaria();
+        }else if (izena.equals(lista[3])){
+            menuLaguntza();
+        }else if (izena.equals(lista[4])){
+            menuMyList();
+        }else {
+            System.err.println("Arazo bat gertatu egin da, aukeratu egin da aukera bat ez dagoena. menuBotoiak()");
+        }
+
+    }
+
+
+    void menuPelikula(){
+        asieraraPel(30,false);
+        asieraraAkto(-1, false);
+        asieraraZuz(-1, false);
+    }
+
+    void menuAktoreak(){
+        asieraraPel(-1,false);
+        asieraraAkto(30, false);
+        asieraraZuz(-1, false);
+
+    }
+
+    void menuZuzendaria(){
+        asieraraPel(-1,false);
+        asieraraAkto(-1, false);
+        asieraraZuz(30, false);
+    }
+
+    void menuLaguntza(){
+
+    }
+
+    void menuMyList(){
+
+    }
+
+
+    void asierara() throws SQLException {
+
+        asieraraPel(7, true);
+        asieraraAkto(7, true);
+
+
+
+
+
+    }
+
+    void asieraraPel(int z, boolean hasiera){
+
+
+        if (z == -1){
+            pelikulak.setVisible(false);
+            peliTitul.setVisible(false);
+        }else if (hasiera){
+            pelikulak.setVisible(true);
+            peliTitul.setVisible(true);
+        }else {
+            pelikulak.setVisible(true);
+            peliTitul.setVisible(false);
+        }
+        pelikulak.removeAll();
+
+        ArrayList<Pelikulak> newPelikulak = peliList(z);
+        if (newPelikulak != null){
+            for (Pelikulak pel : newPelikulak) {
+                JLabel irudia = irudiak(pel.getIrudiaLokalki(), 130, 200);
+                pelikulaList.put(irudia, pel);
+                irudia.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        pelikulaAukeratuta(e);
+                    }
+                });
+                pelikulak.add(irudia);
+            }
+            pelikulak.revalidate();
+            pelikulak.repaint();
+        }
+
+
+
+    }
+
+    void asieraraAkto(int z, boolean hasiera){
+        aktoreak.removeAll();
+
+
+        if (z == -1){
+            aktoreak.setVisible(false);
+            aktoreTitul.setVisible(false);
+        }else if (hasiera){
+            aktoreak.setVisible(true);
+            aktoreTitul.setVisible(true);
+        }else {
+
+            aktoreak.setVisible(true);
+            aktoreTitul.setVisible(false);
+        }
+
+        ArrayList<Aktoreak> aktoreBerriak = aktoList(z);
+
+        if (aktoreBerriak!=null){
+            for (Aktoreak akt : aktoreBerriak) {
+                //System.out.println(akt);
+                JLabel irudia = irudiak(akt.getIrudiaLokalki(), 130, 200);
+                aktoreList.put(irudia, akt);
+                irudia.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        aktoreaAukeratu(e);;
+                    }
+                });
+                aktoreak.add(irudia);
+            }
+            aktoreak.revalidate();
+            aktoreak.repaint();
+        }
+
+
+
+    }
+
+    void asieraraZuz(int z, boolean hasiera){
+        zuzendariak.removeAll();
+
+
+        if (z == -1){
+            zuzendariak.setVisible(false);
+        }else if (hasiera){
+            zuzendariak.setVisible(true);
+        }else {
+            zuzendariak.setVisible(true);
+        }
+
+        ArrayList<Zuzendariak> zuzBerriak = zuzList(z);
+
+        if (zuzBerriak!=null){
+            for (Zuzendariak zuz : zuzBerriak) {
+                //System.out.println(zuz);
+                JLabel irudia = irudiak(zuz.getIrudiaLokalki(), 130, 200);
+                zuzendariList.put(irudia, zuz);
+                irudia.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        zuzendariaAukeratu(e);;
+                    }
+                });
+                zuzendariak.add(irudia);
+            }
+            zuzendariak.revalidate();
+            zuzendariak.repaint();
+        }
+
+
+
+    }
+
 
 }
