@@ -61,6 +61,7 @@ public class Index {
         zuzendariList = new HashMap<>();
 
         zuzendariak = new JPanel();
+        myListLabel = new JPanel();
 
         this.bezero = null;
 
@@ -108,6 +109,7 @@ public class Index {
         erdi.add(aktoreTitul);
         erdi.add(aktoreak);
         erdi.add(zuzendariak);
+        erdi.add(myListLabel);
         //erdi.add(aktoreTitul);
         //erdi.add(aktoreak);
 
@@ -497,16 +499,25 @@ public class Index {
     }*/
 
     void pelikulaAukeratuta(MouseEvent e){
+
+        menuGarbia();
+
         Pelikulak pel = pelikulaList.get(e.getSource());
         System.out.println(pel);
     }
 
     void aktoreaAukeratu(MouseEvent e){
+
+        menuGarbia();
+
         Aktoreak akto = aktoreList.get(e.getSource());
         System.out.println(akto);
     }
 
     void zuzendariaAukeratu(MouseEvent e){
+
+        menuGarbia();
+
         Zuzendariak zuz = zuzendariList.get(e.getSource());
         System.out.println(zuz);
     }
@@ -668,8 +679,13 @@ public class Index {
         asieraraAkto(-1, false);
         asieraraPel(-1,false);
         asieraraZuz(-1 , false);
+    }
 
-
+    void menuGarbia(){
+        asieraMyList(0, false);
+        asieraraAkto(-1, false);
+        asieraraPel(-1,false);
+        asieraraZuz(-1 , false);
     }
 
 
@@ -679,7 +695,7 @@ public class Index {
         asieraraAkto(7, true);
         asieraraZuz(-1, false);
         asieraMyList(-1, false);
-        
+
     }
 
     void asieraraPel(int z, boolean hasiera){
