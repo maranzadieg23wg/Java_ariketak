@@ -892,7 +892,7 @@ public class Konexioa {
         return  (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
     }
 
-    private int ZuzIDRandom() throws SQLException {
+    int ZuzIDRandom() throws SQLException {
         int azkenP = azkenekoZuzendaria();
         int lehenP = lehenengoZuzendaria();
 
@@ -1167,7 +1167,7 @@ public class Konexioa {
         return lehenengoAktorea;
     }
 
-    int lehenengoZuzendaria() throws SQLException {
+    int azkenekoZuzendaria() throws SQLException {
         String sql = "SELECT ID_FILM_ZUZENDARIA FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA = (SELECT MAX(ID_FILM_ZUZENDARIA) FROM FILM_ZUZENDARIA)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
 
@@ -1182,7 +1182,7 @@ public class Konexioa {
         return lehenengoZuz;
     }
 
-    int azkenekoZuzendaria() throws SQLException {
+    int lehenengoZuzendaria() throws SQLException {
         String sql = "SELECT ID_FILM_ZUZENDARIA FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA = (SELECT MIN(ID_FILM_ZUZENDARIA) FROM FILM_ZUZENDARIA)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
 

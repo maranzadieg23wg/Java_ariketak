@@ -199,5 +199,38 @@ class KonexioaTest {
         assertEquals(0, lehenegoa, "[-] Ez da lortu lehenengo aktorea");
     }
 
+    @Test
+    @DisplayName("Random zuz")
+    void zuzendariRandom() throws SQLException {
+        int z = conn.ZuzIDRandom();
+        assertNotEquals(-1, z, "[-] Lortu den ID-a ez da egokia");
+    }
+
+    @Test
+    @DisplayName("Lehenengo Zuz")
+    void lehenengoZuz() throws SQLException {
+        int z = conn.lehenengoZuzendaria();
+
+        assertEquals(213, z, "[-] Lortu den ID-a ez da lehnenegoa");
+    }
+
+    @Test
+    @DisplayName("Azkeneko Zuz")
+    void azkenekoZuz() throws SQLException {
+        int z = conn.azkenekoZuzendaria();
+
+        assertEquals(2045, z, "[-] Lortu den ID-a ez da azkenekoa");
+    }
+
+
+    @Test
+    @DisplayName("Hash 256")
+    void hashSha256(){
+        String hash = Konexioa.sha256("123");
+        String hash123 = "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3";
+
+        assertEquals(hash123, hash, "[-] Lortu den hash a ez da egokia");
+    }
+
 
 }
