@@ -45,5 +45,11 @@ class PelikulakTest {
         assertEquals(jurasic1, jurasic, "[-]Pelikula objetua ez da egokia");
     }
 
+    @Test
+    @DisplayName("Konprobatu ea ongi begiratzen dituen objetuak")
+    void testHashCode() {
+        assertEquals(805052372, jurasic.hashCode(), "[-]Pelikula objetua ez da egokia");
+    }
+
 
 }

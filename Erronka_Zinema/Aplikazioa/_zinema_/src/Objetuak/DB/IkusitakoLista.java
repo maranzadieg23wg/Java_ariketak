@@ -21,6 +21,10 @@ public class IkusitakoLista {
         this.ikus_kop = ikus_kop;
     }
 
+    public IkusitakoLista() {
+
+    }
+
     @Override
     public String toString() {
         return "IkusitakoLista{" +
@@ -30,4 +34,6 @@ public class IkusitakoLista {
                 ", ikus_kop=" + ikus_kop +
                 '}';
     }
+
+
 }

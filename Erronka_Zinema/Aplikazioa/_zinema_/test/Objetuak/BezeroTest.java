@@ -22,5 +22,36 @@ class BezeroTest {
         assertEquals("NIGHTWISH", bezero.getErabiltzaileIzena().toString(), "[-]Lortu egin den izena ez da berbera");
     }
 
+    @Test
+    @DisplayName("Erabiltzailearen Izena egokia den a la ez ikusten da.")
+    void getIzena() {
+        assertEquals("NIGHT", bezero.getIzena(), "[-]Lortu egin den ID-ak ez da berbera");
+    }
+
+    @Test
+    @DisplayName("Erabiltzailearen abizena egokia den a la ez ikusten da.")
+    void getAbizena() {
+        assertEquals("WISH", bezero.getAbizena(), "[-]Lortu egin den izena ez da berbera");
+    }
+
+    @Test
+    @DisplayName("Erabiltzailearen Emaila egokia den a la ez ikusten da.")
+    void getEmaila() {
+        assertEquals("NIGHTWISH@gmail.com", bezero.getEmaila(), "[-]Lortu egin den ID-ak ez da berbera");
+    }
+
+    @Test
+    @DisplayName("Erabiltzailea berbera da")
+    void equals() {
+        assertEquals(bezero, bezero, "[-]Lortu egin den izena ez da berbera");
+    }
+
+    @Test
+    @DisplayName("Erabiltzailea Hash a egokia da")
+    void hashCode1() {
+
+        assertEquals(-384564386, bezero.hashCode(), "[-]Lortu egin den izena ez da berbera");
+    }
+
 
 }

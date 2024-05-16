@@ -102,6 +102,7 @@ class KonexioaTest {
     @DisplayName("Jurassic Park Pelikula lortu ID bitartez")
     void jurasicTtestPelikulaLortu(int id, String tituloa, String generoa, long irabaziak, long aurrekontua, String trailera, String irudia, int estrenaldia, int zuzendaria) throws SQLException {
 
+        //System.out.println(id);
         Pelikulak jurassic = new Pelikulak(id, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, estrenaldia, zuzendaria);
         assertEquals(conn.pelikulaLortu(id), jurassic, "[-] Ezin izan da Jurasic Park pelikula lortu");
     }
@@ -110,7 +111,7 @@ class KonexioaTest {
     @RepeatedTest(3)
     @DisplayName("Jurassic Park Pelikula lortu izenaren bitartez")
     void jurasicTestPelikulaLortu() throws SQLException {
-        Pelikulak jurasic = new Pelikulak(101, "Jurassic Park", "Acci�n/Aventura", 900000000,63000000, "https://www.youtube.com/watch?v=lc0UehYemQA", "https://hips.hearstapps.com/hmg-prod/images/1202186-copia-64f056b7a8612.jpg", 19930611, 201);
+        Pelikulak jurasic = new Pelikulak(3928, "Jurassic Park", "Action;Adventure;Sci-Fi", 1045573035,63000000, "https://www.youtube.com/watch?v=k8k9GeZCb-8", "http://image.tmdb.org/t/p/w500/b1xCNnyrPebIc7EWNZIa6jhb1Ww.jpg", 814, 268);
         assertEquals(conn.pelikulaLortu("Jurassic Park"), jurasic, "[-] Ezin izan da Jurasic Park pelikula lortu");
     }
 
@@ -148,15 +149,15 @@ class KonexioaTest {
     @RepeatedTest(3)
     @DisplayName("Lortu aktore bat ID-aren bitartez")
     void testAktoreaLortu() throws SQLException {
-        Aktoreak aktorea = new Aktoreak(110, "Tom", "Hanks", "1956-07-09 00:00:00", "Estadounidense", "tom@example.com", "+123456789", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Tom_Hanks_2014.jpg/475px-Tom_Hanks_2014.jpg");
-        assertEquals(aktorea, conn.aktoreaLortu(110), "[-] Aktorea ez da berbera");
+        Aktoreak aktorea = new Aktoreak(25081, "Philip", "Jackson", null, null, "PhilipJackson@gmail.com", "+658311273", "http://image.tmdb.org/t/p/w500/eC7p4UAj6xB4TtQ4cPcIJtubPnw.jpg");
+        assertEquals(aktorea, conn.aktoreaLortu(25081), "[-] Aktorea ez da berbera");
     }
 
 
     @RepeatedTest(3)
     @DisplayName("Lortu aktore bat Izenaren-aren bitartez")
     void testAktoreaLortuString() throws SQLException {
-        Aktoreak aktorea = new Aktoreak(110, "Tom", "Hanks", "1956-07-09 00:00:00", "Estadounidense", "tom@example.com", "+123456789", "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Tom_Hanks_2014.jpg/475px-Tom_Hanks_2014.jpg");
+        Aktoreak aktorea = new Aktoreak(317, "Tom", "Hanks", null, null, "TomHanks@outlook.com", "+897406027", "http://image.tmdb.org/t/p/w500/xndWFsBlClOJFRdhSt4NBwiPq2o.jpg");
         assertEquals(aktorea, conn.aktoreaLortu("Tom", "Hanks"), "[-] Aktorea ez da berbera");
     }
 
@@ -166,7 +167,7 @@ class KonexioaTest {
     void azkenekoID() throws SQLException {
         int azkeneko = conn.azkenekoID();
 
-        assertEquals(3, azkeneko, "[-] Lortu den ID-a ez da azkenekoa erabiltzailearena");
+        assertEquals(4, azkeneko, "[-] Lortu den ID-a ez da azkenekoa erabiltzailearena");
 
     }
 
@@ -174,28 +175,28 @@ class KonexioaTest {
     @DisplayName("Azkeneko pelikularen ID-a")
     void azkenekoPelikula() throws SQLException {
         int azkeneko = conn.azkenekoPelikula();
-        assertEquals(122, azkeneko, "[-] Lortu den ID-a ez da azkeneko pelikularena");
+        assertEquals(7503, azkeneko, "[-] Lortu den ID-a ez da azkeneko pelikularena");
     }
 
     @Test
     @DisplayName("Lehenengo pelikularen ID-a")
     void lehenengoPelikula() throws SQLException {
         int lehenengoa = conn.lehenengoPelikula();
-        assertEquals(101, lehenengoa, "[-] Lortu den ID-a ez da lehenengo pelikularena");
+        assertEquals(3126, lehenengoa, "[-] Lortu den ID-a ez da lehenengo pelikularena");
     }
 
     @Test
     @DisplayName("Azkeneko aktorea lortu")
     void azkenekoAktorea() throws SQLException {
         int azkenekoa = conn.azkenekoAktorea();
-        assertEquals(110, azkenekoa, "[-] Ez da lortu azkeneko aktorea");
+        assertEquals(30453, azkenekoa, "[-] Ez da lortu azkeneko aktorea");
     }
 
     @Test
     @DisplayName("Lehenengo aktorea lortu")
     void lehenengoAktorea() throws SQLException {
         int lehenegoa = conn.lehenengoAktorea();
-        assertEquals(101, lehenegoa, "[-] Ez da lortu lehenengo aktorea");
+        assertEquals(0, lehenegoa, "[-] Ez da lortu lehenengo aktorea");
     }
 
 

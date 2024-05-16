@@ -4,6 +4,7 @@ import DatuBase.Konexioa;
 import Objetuak.DB.Bezero;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 public class KontuaSortu {
 
@@ -59,5 +60,19 @@ public class KontuaSortu {
             return null;
         }
 
+    }
+
+    static int kontuaSort(String email, String pas, String ize, String abi, String era) throws SQLException {
+
+        Konexioa conn = new Konexioa();
+
+        try {
+            return conn.sortuKontua(email, pas, ize, abi, era);
+
+        }catch (SQLException e){
+            return -1;
+        }finally {
+            conn.konexioaItxi();
+        }
     }
 }

@@ -4,6 +4,8 @@ import DatuBase.Konexioa;
 import Objetuak.DB.Bezero;
 
 import javax.swing.*;
+import java.sql.SQLException;
+import java.util.Objects;
 
 public class Konfigurazioa {
 
@@ -44,7 +46,7 @@ public class Konfigurazioa {
                         conn.erabiltzaileaAldatu(bezero.getIdErabiltzailea(), email, pas, ize, abi, era);
                         break;
 
-                    } else if (emailEzis) {
+                    } else if (emailEzis && !Objects.equals(bezero.getEmaila(), email)) {
                         JOptionPane.showMessageDialog(null, email+" :emaila ezistitzen da.", "Emaila ezistitzen da", JOptionPane.ERROR_MESSAGE);
                     }else {
                         JOptionPane.showMessageDialog(null, era+" :erabiltailea ezistitzen da.", "Erabiltzailea ezistitzen da", JOptionPane.ERROR_MESSAGE);
@@ -62,5 +64,22 @@ public class Konfigurazioa {
 
         }
 
+    }
+
+   static boolean aldatuInformazioa(Bezero bezero, String email, String pasahitza, String izena, String abizena, String erabiltzailea) throws SQLException {
+        Konexioa conn = new Konexioa();
+
+        boolean emailEzis = conn.ezistitzenDaEmail(email);
+        boolean erabiltzaileEzis = conn.ezistitzenDaErabiltzailea(erabiltzailea);
+
+        if ((!emailEzis && !erabiltzaileEzis) || email.equals(bezero.getEmaila()) && erabiltzailea.equals(bezero.getErabiltzaileIzena())) {
+            conn.erabiltzaileaAldatu(bezero.getIdErabiltzailea(), email, pasahitza, izena, abizena, erabiltzailea);
+            return true;
+
+        } else if (emailEzis) {
+            return false;
+        }else {
+            return false;
+        }
     }
 }
