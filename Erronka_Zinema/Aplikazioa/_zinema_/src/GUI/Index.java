@@ -3,11 +3,7 @@ import DatuBase.Konexioa;
 import GUI.LogIn.Konfigurazioa;
 import GUI.LogIn.KontuaSortu;
 import GUI.LogIn.SaioaHasi;
-import Objetuak.DB.Aktoreak;
-import Objetuak.DB.Bezero;
-import Objetuak.DB.Zuzendariak;
-import Objetuak.IrudiakDeskargatu;
-import Objetuak.DB.Pelikulak;
+import Objetuak.DB.*;
 import Objetuak.cookies.Cookie;
 
 import javax.swing.*;
@@ -29,7 +25,7 @@ public class Index {
 
 
     private JFrame frame;
-    private JPanel menua, menua2, pelikulak, aktoreak, peliTitul, aktoreTitul, zuzendariak;
+    private JPanel menua, menua2, pelikulak, aktoreak, peliTitul, aktoreTitul, zuzendariak, myListLabel;
     private JPanel aukera1, aukera2;
     private JButton buttonLogin, buttonSingUp, botoiak;
     private JTextField bilatu;
@@ -414,8 +410,6 @@ public class Index {
         }
         return null;
 
-
-
     }
 
     ArrayList<Aktoreak> aktoList(int zenbat){
@@ -432,7 +426,19 @@ public class Index {
             }
         }
         return null;
+    }
 
+    ArrayList<IkusitakoLista> MyListList(){
+
+        try {
+            conn = new Konexioa();
+            conn.ikusitakoPelikulak();
+            return conn.getIkusitakoPelikulak();
+        }catch (SQLException e){
+            return null;
+        }finally {
+            conn.konexioaItxi();
+        }
 
     }
 
@@ -634,12 +640,14 @@ public class Index {
         asieraraPel(30,false);
         asieraraAkto(-1, false);
         asieraraZuz(-1, false);
+        asieraMyList(-1, false);
     }
 
     void menuAktoreak(){
         asieraraPel(-1,false);
         asieraraAkto(30, false);
         asieraraZuz(-1, false);
+        asieraMyList(-1, false);
 
     }
 
@@ -647,6 +655,8 @@ public class Index {
         asieraraPel(-1,false);
         asieraraAkto(-1, false);
         asieraraZuz(30, false);
+        asieraMyList(-1, false);
+
     }
 
     void menuLaguntza(){
@@ -654,6 +664,11 @@ public class Index {
     }
 
     void menuMyList(){
+        asieraMyList(0, false);
+        asieraraAkto(-1, false);
+        asieraraPel(-1,false);
+        asieraraZuz(-1 , false);
+
 
     }
 
@@ -662,11 +677,9 @@ public class Index {
 
         asieraraPel(7, true);
         asieraraAkto(7, true);
-
-
-
-
-
+        asieraraZuz(-1, false);
+        asieraMyList(-1, false);
+        
     }
 
     void asieraraPel(int z, boolean hasiera){
@@ -770,6 +783,40 @@ public class Index {
             }
             zuzendariak.revalidate();
             zuzendariak.repaint();
+        }
+
+
+
+    }
+
+    void asieraMyList(int z, boolean hasiera){
+        myListLabel.removeAll();
+
+
+        if (z == -1){
+            myListLabel.setVisible(false);
+        }else if (hasiera){
+            myListLabel.setVisible(true);
+        }else {
+            myListLabel.setVisible(true);
+        }
+
+        ArrayList<IkusitakoLista> myList = MyListList();
+
+        if (myList!=null){
+            for (IkusitakoLista list : myList) {
+                //System.out.println(zuz);
+                JLabel irudia = irudiak(list.getPelikula().getIrudiaLokalki(), 130, 200);
+                pelikulaList.put(irudia, list.getPelikula());
+                irudia.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        pelikulaAukeratuta(e);;
+                    }
+                });
+                myListLabel.add(irudia);
+            }
+            myListLabel.revalidate();
+            myListLabel.repaint();
         }
 
 

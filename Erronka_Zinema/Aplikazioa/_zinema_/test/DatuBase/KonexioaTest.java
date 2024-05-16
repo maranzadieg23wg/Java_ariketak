@@ -232,5 +232,25 @@ class KonexioaTest {
         assertEquals(hash123, hash, "[-] Lortu den hash a ez da egokia");
     }
 
+    @Test
+    @DisplayName("Saioa Hasi")
+    void saioaHasi() throws SQLException {
+        conn.saioaHasi();
+
+        conn.erabiltzaileaAldatu(1, "1", "1", "1",",",",");
+
+        conn.ezistitzenDaErabiltzailea("sebastopol");
+
+        conn.sortuKontua();
+
+        conn.menua();
+
+        conn.aktorIDRandom();
+
+        conn.zuzendariLortuLista(1);
+        conn.aktorIDRandom();
+
+    }
+
 
 }

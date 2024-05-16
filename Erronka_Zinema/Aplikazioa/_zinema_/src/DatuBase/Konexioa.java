@@ -31,7 +31,7 @@ public class Konexioa {
 
 
     private static Bezero bezero;
-    ArrayList<IkusitakoLista> ikusitakoPelikulak = new ArrayList<>();
+    private static ArrayList<IkusitakoLista> ikusitakoPelikulak = new ArrayList<>();
 
 
     public Konexioa() throws SQLException {
@@ -628,12 +628,17 @@ public class Konexioa {
 
     //***********************************Ikusteko Pelikula Lista****************************************************
 
+
+    public ArrayList<IkusitakoLista> getIkusitakoPelikulak() {
+        return ikusitakoPelikulak;
+    }
+
     /**
      * ArrayList batean sartu egiten dira ikusi egin diren pelikula guztia eta hauen notak.
      * Horretarako, deitzen den bakoitzean ikusteko ez direla errepikatzen, garbitu egiten dira eta ondoren sortu egiten dira objetuak {@code ikusitakoListaLortu(emaitza)} funtzioaren bitartez
      * <blockquote>{@code ikusitakoPelikulak();}</blockquote>
      */
-    void ikusitakoPelikulak(){
+    public void ikusitakoPelikulak(){
 
         ikusitakoPelikulak.clear();
 
@@ -885,7 +890,7 @@ public class Konexioa {
 
     }
 
-    private int aktorIDRandom() throws SQLException {
+    int aktorIDRandom() throws SQLException {
         int azkenP = azkenekoAktorea();
         int lehenP = lehenengoAktorea();
 

@@ -35,5 +35,7 @@ public class IkusitakoLista {
                 '}';
     }
 
-
+    public Pelikulak getPelikula() {
+        return pelikula;
+    }
 }
