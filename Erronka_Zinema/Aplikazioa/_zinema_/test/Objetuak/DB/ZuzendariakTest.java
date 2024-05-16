@@ -15,7 +15,7 @@ class ZuzendariakTest {
 
     @Test
     void getIrudiaLokalki() {
-        assertEquals("./irudiak/zuzendari/cache-85925-1528261523/image-w856.jpg", zuz.getIrudiaLokalki());
+        assertEquals("./irudiak/zuzendari/image-w856.jpg", zuz.getIrudiaLokalki());
     }
 
     @Test

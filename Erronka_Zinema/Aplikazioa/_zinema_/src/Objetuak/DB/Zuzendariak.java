@@ -66,7 +66,7 @@ public class Zuzendariak {
         setIrudiaLokalki(irudiakDeskargatu.getFitxategiarenIzena());
     }
 
-    private void setIrudiaLokalki(String fitxategiarenIzena) {
+    public void setIrudiaLokalki(String fitxategiarenIzena) {
         irudiaLokalki = fitxategiarenIzena;
     }
 }

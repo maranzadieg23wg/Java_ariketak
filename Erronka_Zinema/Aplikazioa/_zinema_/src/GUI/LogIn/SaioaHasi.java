@@ -48,4 +48,12 @@ public class SaioaHasi {
 
     }
 
+    static Bezero saioa(String erabiltzailea, String pasahitza) throws SQLException {
+        Konexioa conn = new Konexioa();
+        conn.saioaHasi(erabiltzailea, pasahitza);
+
+        return conn.getBezero();
+
+    }
+
 }

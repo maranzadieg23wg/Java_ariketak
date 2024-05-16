@@ -465,6 +465,7 @@ public class Konexioa {
 
 
         ResultSet emaitza = kontsulta.executeQuery();
+        emaitza.next();
 
         return pelikulaObjetua(emaitza);
     }
@@ -516,9 +517,10 @@ public class Konexioa {
 
 
             ResultSet emaitza = kontsulta.executeQuery();
-
+            emaitza.next();
             return pelikulaObjetua(emaitza);
         }catch (SQLException e){
+            System.out.println(e.getMessage());
             return null;
         }
 
@@ -569,7 +571,6 @@ public class Konexioa {
      */
 
     Pelikulak pelikulaObjetua(ResultSet pel) throws SQLException {
-
 
 
         int IDPelikula = pel.getInt("ID_FILMA");
@@ -853,6 +854,8 @@ public class Konexioa {
 
         ResultSet emaitza = kontsulta.executeQuery();
 
+        emaitza.next();
+
         return aktoreakObjetua(emaitza);
     }
 
@@ -889,7 +892,7 @@ public class Konexioa {
         return  (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
     }
 
-    private int ZuzIDRandom() throws SQLException {
+    int ZuzIDRandom() throws SQLException {
         int azkenP = azkenekoZuzendaria();
         int lehenP = lehenengoZuzendaria();
 
@@ -957,8 +960,10 @@ public class Konexioa {
      */
     public Aktoreak aktoreaLortu(int aukera) throws SQLException {
 
+        if (aukera == -1){
+            aukera = aktorIDRandom();
+        }
 
-        aukera = aktorIDRandom();
 
         String sql = "SELECT * FROM AKTOREAK WHERE ID_AKTOREA = ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -968,6 +973,7 @@ public class Konexioa {
 
         ResultSet emaitza = kontsulta.executeQuery();
 
+        emaitza.next();
         return aktoreakObjetua(emaitza);
 
     }
@@ -1161,7 +1167,7 @@ public class Konexioa {
         return lehenengoAktorea;
     }
 
-    int lehenengoZuzendaria() throws SQLException {
+    int azkenekoZuzendaria() throws SQLException {
         String sql = "SELECT ID_FILM_ZUZENDARIA FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA = (SELECT MAX(ID_FILM_ZUZENDARIA) FROM FILM_ZUZENDARIA)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
 
@@ -1176,7 +1182,7 @@ public class Konexioa {
         return lehenengoZuz;
     }
 
-    int azkenekoZuzendaria() throws SQLException {
+    int lehenengoZuzendaria() throws SQLException {
         String sql = "SELECT ID_FILM_ZUZENDARIA FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA = (SELECT MIN(ID_FILM_ZUZENDARIA) FROM FILM_ZUZENDARIA)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
 
