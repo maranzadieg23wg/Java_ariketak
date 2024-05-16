@@ -8,10 +8,7 @@ import Objetuak.cookies.Cookie;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,6 +27,7 @@ public class Index {
     private JButton buttonLogin, buttonSingUp, botoiak;
     private JTextField bilatu;
 
+    Choice aukerak;
 
     private String[] lista;
 
@@ -262,7 +260,7 @@ public class Index {
 
         menua2.add(new JLabel()); //← Gehitzeko utzik dagoen zerbait
 
-        Choice aukerak = new Choice();
+        aukerak = new Choice();
         for (int i =0;i< lista.length;i++){
             String b = lista[i];
 
@@ -273,6 +271,17 @@ public class Index {
 
         bilatu = new JTextField("Search");
         bilatu.setPreferredSize(new Dimension(250, 30));
+
+        bilatu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener el texto del JTextField
+                String searchText = bilatu.getText();
+                // Llamar a la función bilatu con el texto ingresado como argumento
+                bilatuFun(searchText);
+            }
+        });
+
         menua2.add(bilatu);
 
 
@@ -833,6 +842,23 @@ public class Index {
             }
             myListLabel.revalidate();
             myListLabel.repaint();
+        }
+
+
+
+    }
+
+
+    void bilatuFun(String izena){
+
+        String bilatu = aukerak.getSelectedItem();
+        try {
+            conn = new Konexioa();
+
+            ArrayList<Object> lista= conn.bilat(izena, bilatu);
+            conn.konexioaItxi();
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
         }
 
 

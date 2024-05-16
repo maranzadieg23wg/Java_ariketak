@@ -1261,4 +1261,81 @@ public class Konexioa {
     public Bezero getBezero() {
         return bezero;
     }
+
+
+    public ArrayList<Object> bilat(String izena, String non){
+        ArrayList<Object> lista = new ArrayList<>();
+
+        if (non.equals("Pelikulak") || non.equals("myList")){
+            try{
+                String sql = "select * from ? where izena = ?";
+                PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+                kontsulta.setString(1, non);
+                kontsulta.setString(2, izena);
+
+
+                ResultSet emaitza = kontsulta.executeQuery();
+
+                while (emaitza.next()){
+
+                    if (non.equals("Pelikulak")){
+                        Pelikulak pel = pelikulaObjetua(emaitza);
+
+                        lista.add(pel);
+                    }else {
+                        //Begiratu egiten da ea dagoen bezeroaren MyListean ID-a erabiliz
+                        int ida = emaitza.getInt("ID");
+                        if (listanDago(ida)){
+                            Pelikulak pel = pelikulaObjetua(emaitza);
+                            lista.add(pel);
+                        }
+                    }
+                }
+
+
+                return  null;
+            }catch (SQLException e ){
+                System.err.println(e.getMessage());
+                System.err.println("Arazo bat egonda bilatzean bilatzailearekin");
+                return null;
+            }
+        }else {
+
+            try {
+                String izenAbizena[] = izena.split(" ");
+
+                String sql = "select * from ? where izena = ? and abizena = ?";
+                PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+                kontsulta.setString(1, non);
+                kontsulta.setString(2, izenAbizena[0]);
+                kontsulta.setString(2, izenAbizena[1]);
+
+                ResultSet emaitza = kontsulta.executeQuery();
+
+                while (emaitza.next()){
+
+                    if (non.equals("aktoreak")){
+                        Aktoreak akto = aktoreakObjetua(emaitza);
+                        lista.add(akto);
+                    }else {
+                        Zuzendariak zuz = zuzendariObjetua(emaitza);
+                        lista.add(emaitza);
+                    }
+
+
+                }
+            }catch (SQLException e){
+                System.err.println(e.getMessage());
+            }
+
+            return lista;
+
+
+        }
+
+
+
+    }
 }
