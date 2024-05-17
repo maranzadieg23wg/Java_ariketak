@@ -52,7 +52,7 @@ public class Index {
         this.y = y;
         this.izena = izena;
 
-        lista = new String[]{"Pelikulak", "Kktoreak", "Zuzendariak", "Laguntza", "myList"};
+        lista = new String[]{"Pelikulak", "Aktoreak", "Zuzendariak", "Laguntza", "myList"};
 
         pelikulaList = new HashMap<>();
         aktoreList = new HashMap<>();
@@ -101,6 +101,15 @@ public class Index {
 
         erdi = new JPanel();
         erdi.setLayout(new BoxLayout(erdi, BoxLayout.Y_AXIS));
+
+        peliTitul.setBackground(Color.red);
+        pelikulak.setBackground(Color.blue);
+        aktoreTitul.setBackground(Color.yellow);
+        aktoreak.setBackground(Color.black);
+        zuzendariak.setBackground(Color.pink);
+        myListLabel.setBackground(Color.cyan);
+
+
 
         erdi.add(peliTitul);
         erdi.add(pelikulak);
@@ -657,10 +666,11 @@ public class Index {
 
 
     void menuPelikula(){
+        menuGarbia();
         asieraraPel(30,false);
-        asieraraAkto(-1, false);
+        /*asieraraAkto(-1, false);
         asieraraZuz(-1, false);
-        asieraMyList(-1, false);
+        asieraMyList(-1, false);*/
     }
 
     void menuAktoreak(){
@@ -691,7 +701,7 @@ public class Index {
     }
 
     void menuGarbia(){
-        asieraMyList(0, false);
+        asieraMyList(-1, false);
         asieraraAkto(-1, false);
         asieraraPel(-1,false);
         asieraraZuz(-1 , false);
@@ -729,7 +739,7 @@ public class Index {
     void pelikuaGehitu(ArrayList<Pelikulak> newPelikulak){
         if (newPelikulak != null){
             for (Pelikulak pel : newPelikulak) {
-                
+
                 JLabel irudia = irudiak(pel.getIrudiaLokalki(), 130, 200);
                 pelikulaList.put(irudia, pel);
                 irudia.addMouseListener(new MouseAdapter() {
@@ -819,14 +829,14 @@ public class Index {
     }
 
     void asieraMyList(int z, boolean hasiera){
+        myListLabel.removeAll();
         if (conn.getBezero() !=null){
-            myListLabel.removeAll();
 
 
             if (z == -1){
                 myListLabel.setVisible(false);
             }else if (hasiera){
-                myListLabel.setVisible(true);
+                myListLabel.setVisible(false);
             }else {
                 myListLabel.setVisible(true);
             }
@@ -848,6 +858,8 @@ public class Index {
                 myListLabel.revalidate();
                 myListLabel.repaint();
             }
+        }else {
+            myListLabel.setVisible(false);
         }
 
 
@@ -865,14 +877,32 @@ public class Index {
             conn = new Konexioa();
 
             if (bilatu.equals("Pelikulak")){
-                pelikuaGehitu(conn.pelikulaLortu(izena));
+                ArrayList<Pelikulak> pel= conn.pelikulaLortu(izena);
+                if (!pel.isEmpty()){
+                    pelikulak.setVisible(true);
+                    pelikuaGehitu(pel);
+                }
+
             }else if(bilatu.equals("Aktoreak")){
+
                 String[] izenAbizen = izena.split(" ");
-                aktorGehitu(conn.aktoreaLortu(izenAbizen[0], izenAbizen[1]));
+                if (izenAbizen.length<2){
+                    izenAbizen[1]= " ";
+                }
+                ArrayList<Aktoreak> akto = conn.aktoreaLortu(izenAbizen[0], izenAbizen[1]);
+                if (!akto.isEmpty()){
+                    aktoreak.setVisible(true);
+                    aktorGehitu(akto);
+
+                }
 
             }else if (bilatu.equals("Zuzendariak")){
                 String[] izenAbizen = izena.split(" ");
-                zuzGehitu(conn.zuzendariaLortu(izenAbizen[0], izenAbizen[1]));
+                ArrayList<Zuzendariak> zuz = conn.zuzendariaLortu(izenAbizen[0], izenAbizen[1]);
+                if (!zuz.isEmpty()){
+                    zuzendariak.setVisible(true);
+                    zuzGehitu(zuz);
+                }
 
             }else if(bilatu.equals("myList")){
                 /*lista.addAll(pelikulaLortu(izena));

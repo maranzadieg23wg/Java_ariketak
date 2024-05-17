@@ -854,7 +854,7 @@ public class Konexioa {
         abizena = "%"+abizena+"%";
 
         ArrayList<Aktoreak> list = new ArrayList<>();
-        String sql = "SELECT * FROM AKTOREAK WHERE Izena like ? and ABIZENA like ?";
+        String sql = "SELECT * FROM AKTOREAK WHERE Izena like ? or ABIZENA like ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, izena);
         kontsulta.setString(2, abizena);
@@ -876,7 +876,7 @@ public class Konexioa {
         abizena = "%"+abizena+"%";
 
         ArrayList<Zuzendariak> list = new ArrayList<>();
-        String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE IZENA like ? and ABIZENA like ?";
+        String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE IZENA like ? or ABIZENA like ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, izena);
         kontsulta.setString(2, abizena);
