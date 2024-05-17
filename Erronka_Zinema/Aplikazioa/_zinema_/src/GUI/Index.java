@@ -52,7 +52,7 @@ public class Index {
         this.y = y;
         this.izena = izena;
 
-        lista = new String[]{"Pelikulak", "aktoreak", "zuzendariak", "laguntza", "myList"};
+        lista = new String[]{"Pelikulak", "Kktoreak", "Zuzendariak", "Laguntza", "myList"};
 
         pelikulaList = new HashMap<>();
         aktoreList = new HashMap<>();
@@ -722,9 +722,14 @@ public class Index {
         }
         pelikulak.removeAll();
 
-        ArrayList<Pelikulak> newPelikulak = peliList(z);
+        pelikuaGehitu(peliList(z));
+
+    }
+
+    void pelikuaGehitu(ArrayList<Pelikulak> newPelikulak){
         if (newPelikulak != null){
             for (Pelikulak pel : newPelikulak) {
+                
                 JLabel irudia = irudiak(pel.getIrudiaLokalki(), 130, 200);
                 pelikulaList.put(irudia, pel);
                 irudia.addMouseListener(new MouseAdapter() {
@@ -737,9 +742,6 @@ public class Index {
             pelikulak.revalidate();
             pelikulak.repaint();
         }
-
-
-
     }
 
     void asieraraAkto(int z, boolean hasiera){
@@ -758,8 +760,12 @@ public class Index {
             aktoreTitul.setVisible(false);
         }
 
-        ArrayList<Aktoreak> aktoreBerriak = aktoList(z);
+        aktorGehitu(aktoList(z));
 
+
+    }
+
+    void aktorGehitu(ArrayList<Aktoreak> aktoreBerriak){
         if (aktoreBerriak!=null){
             for (Aktoreak akt : aktoreBerriak) {
                 //System.out.println(akt);
@@ -775,9 +781,6 @@ public class Index {
             aktoreak.revalidate();
             aktoreak.repaint();
         }
-
-
-
     }
 
     void asieraraZuz(int z, boolean hasiera){
@@ -792,8 +795,12 @@ public class Index {
             zuzendariak.setVisible(true);
         }
 
-        ArrayList<Zuzendariak> zuzBerriak = zuzList(z);
+        zuzGehitu(zuzList(z));
 
+
+    }
+
+    void zuzGehitu(ArrayList<Zuzendariak> zuzBerriak){
         if (zuzBerriak!=null){
             for (Zuzendariak zuz : zuzBerriak) {
                 //System.out.println(zuz);
@@ -809,40 +816,40 @@ public class Index {
             zuzendariak.revalidate();
             zuzendariak.repaint();
         }
-
-
-
     }
 
     void asieraMyList(int z, boolean hasiera){
-        myListLabel.removeAll();
+        if (conn.getBezero() !=null){
+            myListLabel.removeAll();
 
 
-        if (z == -1){
-            myListLabel.setVisible(false);
-        }else if (hasiera){
-            myListLabel.setVisible(true);
-        }else {
-            myListLabel.setVisible(true);
-        }
-
-        ArrayList<IkusitakoLista> myList = MyListList();
-
-        if (myList!=null){
-            for (IkusitakoLista list : myList) {
-                //System.out.println(zuz);
-                JLabel irudia = irudiak(list.getPelikula().getIrudiaLokalki(), 130, 200);
-                pelikulaList.put(irudia, list.getPelikula());
-                irudia.addMouseListener(new MouseAdapter() {
-                    public void mouseClicked(MouseEvent e) {
-                        pelikulaAukeratuta(e);;
-                    }
-                });
-                myListLabel.add(irudia);
+            if (z == -1){
+                myListLabel.setVisible(false);
+            }else if (hasiera){
+                myListLabel.setVisible(true);
+            }else {
+                myListLabel.setVisible(true);
             }
-            myListLabel.revalidate();
-            myListLabel.repaint();
+
+            ArrayList<IkusitakoLista> myList = MyListList();
+
+            if (myList!=null){
+                for (IkusitakoLista list : myList) {
+                    //System.out.println(zuz);
+                    JLabel irudia = irudiak(list.getPelikula().getIrudiaLokalki(), 130, 200);
+                    pelikulaList.put(irudia, list.getPelikula());
+                    irudia.addMouseListener(new MouseAdapter() {
+                        public void mouseClicked(MouseEvent e) {
+                            pelikulaAukeratuta(e);;
+                        }
+                    });
+                    myListLabel.add(irudia);
+                }
+                myListLabel.revalidate();
+                myListLabel.repaint();
+            }
         }
+
 
 
 
@@ -850,20 +857,39 @@ public class Index {
 
 
     void bilatuFun(String izena){
-
+        menuGarbia();
         String bilatu = aukerak.getSelectedItem();
+        System.out.println("Bilatu: "+bilatu);
+        System.out.println("Izena: "+izena);
         try {
             conn = new Konexioa();
 
-            ArrayList<Object> lista= conn.bilat(izena, bilatu);
+            if (bilatu.equals("Pelikulak")){
+                pelikuaGehitu(conn.pelikulaLortu(izena));
+            }else if(bilatu.equals("Aktoreak")){
+                String[] izenAbizen = izena.split(" ");
+                aktorGehitu(conn.aktoreaLortu(izenAbizen[0], izenAbizen[1]));
+
+            }else if (bilatu.equals("Zuzendariak")){
+                String[] izenAbizen = izena.split(" ");
+                zuzGehitu(conn.zuzendariaLortu(izenAbizen[0], izenAbizen[1]));
+
+            }else if(bilatu.equals("myList")){
+                /*lista.addAll(pelikulaLortu(izena));
+
+                ArrayList<Pelikulak> list = new ArrayList<>();
+
+                for (Object pel : lista){
+                    if (listanDago(p))
+                }*/
+            }
 
             conn.konexioaItxi();
 
-            for (Object o : lista){
-                System.out.println(o);
-            }
         }catch (SQLException e){
             System.err.println(e.getMessage());
+        }finally {
+            conn.konexioaItxi();
         }
 
     }

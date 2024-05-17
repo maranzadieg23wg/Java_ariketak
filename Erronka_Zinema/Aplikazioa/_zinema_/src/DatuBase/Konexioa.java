@@ -456,18 +456,22 @@ public class Konexioa {
      * @return Pelikula
      * @throws SQLException
      */
-    public Pelikulak pelikulaLortu(String izena) throws SQLException {
+    public ArrayList<Pelikulak> pelikulaLortu(String izena) throws SQLException {
 
-        String sql = "SELECT * FROM FILMAK WHERE TITULUA = ?";
+        izena = "%"+izena+"%";
+        ArrayList<Pelikulak> list = new ArrayList<>();
+        String sql = "SELECT * FROM FILMAK WHERE TITULUA like ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, izena);
 
 
 
         ResultSet emaitza = kontsulta.executeQuery();
-        emaitza.next();
+        while (emaitza.next()){
+            list.add(pelikulaObjetua(emaitza));
+        }
 
-        return pelikulaObjetua(emaitza);
+        return list;
     }
 
     /**
@@ -657,6 +661,7 @@ public class Konexioa {
         }catch (SQLException e){
             //System.err.println("e: "+e.getErrorCode());
             System.err.println("Ez da saioa hasi, orduan, ezin da ikusi ikusitako lista");
+
         }
 
 
@@ -748,10 +753,6 @@ public class Konexioa {
         }else {
             return false;
         }
-
-
-
-
     }
 
     /**
@@ -848,9 +849,12 @@ public class Konexioa {
      * @return
      * @throws SQLException
      */
-    public Aktoreak aktoreaLortu(String izena, String abizena) throws SQLException {
+    public ArrayList<Aktoreak> aktoreaLortu(String izena, String abizena) throws SQLException {
+        izena = "%"+izena+"%";
+        abizena = "%"+abizena+"%";
 
-        String sql = "SELECT * FROM AKTOREAK WHERE Izena = ? and ABIZENA =?";
+        ArrayList<Aktoreak> list = new ArrayList<>();
+        String sql = "SELECT * FROM AKTOREAK WHERE Izena like ? and ABIZENA like ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, izena);
         kontsulta.setString(2, abizena);
@@ -859,9 +863,33 @@ public class Konexioa {
 
         ResultSet emaitza = kontsulta.executeQuery();
 
-        emaitza.next();
+        while (emaitza.next()){
+            list.add(aktoreakObjetua(emaitza));
+        }
 
-        return aktoreakObjetua(emaitza);
+        return list;
+    }
+
+    public ArrayList<Zuzendariak> zuzendariaLortu(String izena, String abizena) throws SQLException {
+
+        izena = "%"+izena+"%";
+        abizena = "%"+abizena+"%";
+
+        ArrayList<Zuzendariak> list = new ArrayList<>();
+        String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE IZENA like ? and ABIZENA like ?";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setString(1, izena);
+        kontsulta.setString(2, abizena);
+
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        while (emaitza.next()){
+            list.add(zuzendariObjetua(emaitza));
+        }
+
+        return list;
     }
 
     /**
@@ -1263,79 +1291,32 @@ public class Konexioa {
     }
 
 
-    public ArrayList<Object> bilat(String izena, String non){
-        ArrayList<Object> lista = new ArrayList<>();
-
-        if (non.equals("Pelikulak") || non.equals("myList")){
-            try{
-                String sql = "select * from ? where izena = ?";
-                PreparedStatement kontsulta = conn.prepareStatement(sql);
-
-                kontsulta.setString(1, non);
-                kontsulta.setString(2, izena);
+    /*public ArrayList<Aktoreak> bilat(String izena, String non){
 
 
-                ResultSet emaitza = kontsulta.executeQuery();
+        try {
+            if (non.equals("Pelikulak")){
+                return (pelikulaLortu(izena));
+            }else if(non.equals("Aktoreak")){
+                String[] izenAbizen = izena.split(" ");
+                return (aktoreaLortu(izenAbizen[0], izenAbizen[1]));
 
-                while (emaitza.next()){
+            }else if (non.equals("Zuzendariak")){
+                String[] izenAbizen = izena.split(" ");
+                return (zuzendariaLortu(izenAbizen[0], izenAbizen[1]));
 
-                    if (non.equals("Pelikulak")){
-                        Pelikulak pel = pelikulaObjetua(emaitza);
+            }else if(non.equals("myList")){
+                lista.addAll(pelikulaLortu(izena));
 
-                        lista.add(pel);
-                    }else {
-                        //Begiratu egiten da ea dagoen bezeroaren MyListean ID-a erabiliz
-                        int ida = emaitza.getInt("ID");
-                        if (listanDago(ida)){
-                            Pelikulak pel = pelikulaObjetua(emaitza);
-                            lista.add(pel);
-                        }
-                    }
+                ArrayList<Pelikulak> list = new ArrayList<>();
+
+                for (Object pel : lista){
+                    if (listanDago(p))
                 }
-
-
-                return  null;
-            }catch (SQLException e ){
-                System.err.println(e.getMessage());
-                System.err.println("Arazo bat egonda bilatzean bilatzailearekin");
-                return null;
             }
-        }else {
-
-            try {
-                String izenAbizena[] = izena.split(" ");
-
-                String sql = "select * from ? where izena = ? and abizena = ?";
-                PreparedStatement kontsulta = conn.prepareStatement(sql);
-
-                kontsulta.setString(1, non);
-                kontsulta.setString(2, izenAbizena[0]);
-                kontsulta.setString(2, izenAbizena[1]);
-
-                ResultSet emaitza = kontsulta.executeQuery();
-
-                while (emaitza.next()){
-
-                    if (non.equals("aktoreak")){
-                        Aktoreak akto = aktoreakObjetua(emaitza);
-                        lista.add(akto);
-                    }else {
-                        Zuzendariak zuz = zuzendariObjetua(emaitza);
-                        lista.add(emaitza);
-                    }
-
-
-                }
-            }catch (SQLException e){
-                System.err.println(e.getMessage());
-            }
-
-            return lista;
-
-
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
         }
 
-
-
-    }
+    }*/
 }
