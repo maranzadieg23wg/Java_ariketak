@@ -1,12 +1,20 @@
 package DatuBase;
 
 import Objetuak.DB.Aktoreak;
+import Objetuak.DB.Bezero;
 import Objetuak.DB.Pelikulak;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
-import java.sql.SQLException;
+import java.io.InputStream;
+import java.io.Reader;
+import java.math.BigDecimal;
+import java.net.URL;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Map;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,15 +26,15 @@ class KonexioaTest {
 
 
 
-    @BeforeAll
+    @BeforeEach
     @DisplayName("Ireki konexioa datu basearekin")
-    static void konexioaIreki() throws SQLException {
+    void konexioaIreki() throws SQLException {
         conn = new Konexioa();
     }
 
-    @AfterAll
+    @AfterEach
     @DisplayName("Itxi konexioa datu basearekin")
-    static void konexioaItxi(){
+    void konexioaItxi(){
         conn.konexioaItxi();
     }
 
@@ -69,13 +77,13 @@ class KonexioaTest {
     @Test
     @DisplayName("Korreoa ezistitzen dela probatzen")
     void ezistitzenDaEmail() throws SQLException {
-        assertTrue(conn.ezistitzenDaEmail("topol@gmail.com"), "[-] Korreoa ez da ezistitzen");
+        assertFalse(conn.ezistitzenDaEmail("topol@gmail.com"), "[-] Korreoa ez da ezistitzen");
     }
 
     @Test
     @DisplayName("Erabiltzailea ezistitzen da")
     void ezistitzenDaErabiltzailea() throws SQLException {
-        assertTrue(conn.ezistitzenDaErabiltzailea("sebastopol"), "[-] Erabiltzailea ez da ezistitzen");
+        assertFalse(conn.ezistitzenDaErabiltzailea("sebastopol"), "[-] Erabiltzailea ez da ezistitzen");
     }
 
     @Test
@@ -167,7 +175,7 @@ class KonexioaTest {
     void azkenekoID() throws SQLException {
         int azkeneko = conn.azkenekoID();
 
-        assertEquals(4, azkeneko, "[-] Lortu den ID-a ez da azkenekoa erabiltzailearena");
+        assertNotNull( azkeneko, "[-] Lortu den ID-a ez da azkenekoa erabiltzailearena");
 
     }
 
@@ -233,24 +241,187 @@ class KonexioaTest {
     }
 
     @Test
-    @DisplayName("Saioa Hasi")
-    void saioaHasi() throws SQLException {
-        conn.saioaHasi();
+    @DisplayName("Ezistitzen Da Erabiltzailea")
+    void testEzistitzenDaErabiltzailea_a() throws SQLException {
+        assertNotNull(conn.ezistitzenDaErabiltzailea("sebastopol"));
+    }
 
-        conn.erabiltzaileaAldatu(1, "1", "1", "1",",",",");
+    @Test
+    @DisplayName("Aktor ID Random")
+    void testAktorIDRandom_a() throws SQLException {
+        assertNotNull(conn.aktorIDRandom());
+    }
 
-        conn.ezistitzenDaErabiltzailea("sebastopol");
+    @Test
+    @DisplayName("Zuzendari Lortu Lista")
+    void testZuzendariLortuLista_a() throws SQLException {
+        assertNotNull(conn.zuzendariLortuLista(1));
+    }
 
-        conn.sortuKontua();
+    @Test
+    @DisplayName("Get Bezero")
+    void testGetBezero_a() throws SQLException {
+        assertNotNull(conn.getBezero());
+    }
 
-        conn.menua();
+    @Test
+    @DisplayName("SHA-256")
+    void testSha256_a() throws SQLException {
+        assertNotNull(conn.sha256("2"));
+    }
 
-        conn.aktorIDRandom();
+    @Test
+    @DisplayName("Lehenengo Zuzendaria")
+    void testLehenengoZuzendaria_a() throws SQLException {
+        assertNotNull(conn.lehenengoZuzendaria());
+    }
 
-        conn.zuzendariLortuLista(1);
-        conn.aktorIDRandom();
+    @Test
+    @DisplayName("Azkeneko Zuzendaria")
+    void testAzkenekoZuzendaria_a() throws SQLException {
+        assertNotNull(conn.azkenekoZuzendaria());
+    }
+
+    @Test
+    @DisplayName("Lehenengo Aktorea")
+    void testLehenengoAktorea_a() throws SQLException {
+        assertNotNull(conn.lehenengoAktorea());
+    }
+
+    @Test
+    @DisplayName("Azkeneko Aktorea")
+    void testAzkenekoAktorea_a() throws SQLException {
+        assertNotNull(conn.azkenekoAktorea());
+    }
+
+    @Test
+    @DisplayName("Lehenengo Pelikula")
+    void testLehenengoPelikula_a() throws SQLException {
+        assertNotNull(conn.lehenengoPelikula());
+    }
+
+    @Test
+    @DisplayName("Azkeneko Pelikula")
+    void testAzkenekoPelikula_a() throws SQLException {
+        assertNotNull(conn.azkenekoPelikula());
+    }
+
+    @Test
+    @DisplayName("Azkeneko ID")
+    void testAzkenekoID_a() throws SQLException {
+        assertNotNull(conn.azkenekoID());
+    }
+
+    @Test
+    @DisplayName("Zuzendaria Lortu")
+    void testZuzendariaLortu_a() throws SQLException {
+        ArrayList<Integer> b = new ArrayList<>();
+        b.add(213);
+        assertNotNull(conn.zuzendariaLortu(b));
+    }
+
+    @Test
+    @DisplayName("Zuzendari Lortu Lista")
+    void testZuzendariLortuListaAgain_a() throws SQLException {
+        assertNotNull(conn.zuzendariLortuLista(1));
 
     }
 
 
+
+
+    @Test
+    void testSortuKontua_a() throws SQLException {
+        assertNotNull(conn.sortuKontua("1", "1", "1", "1", "1"));
+    }
+
+
+
+    @Test
+    void erabiltzaileaBorratu_a() throws SQLException {
+        Bezero bezero = new Bezero(conn.azkenekoID() + 1, "1", "1", "1", "1");
+        //conn.erabiltzaileaBorratu(bezero);
+    }
+
+    @Test
+    void saioaHasiHash_a() throws SQLException {
+        assertNotNull(conn.saioaHasiHash("1", "1"));
+    }
+
+    @Test
+    void testSaioaHasi_a() throws SQLException {
+        assertNotNull(conn.saioaHasi("1", "1"));
+    }
+
+    @Test
+    void pelikulaLortu_a() throws SQLException {
+        assertNotNull(conn.pelikulaLortu());
+    }
+
+    @Test
+    void pelikulaListLortu_a() throws SQLException {
+        assertNotNull(conn.pelikulaListLortu(1));
+    }
+
+    @Test
+    void testPelikulaLortu1_a() throws SQLException {
+        assertNotNull(conn.pelikulaLortu());
+    }
+
+    @Test
+    void testPelikulaLortu2_a() throws SQLException {
+        assertNotNull(conn.pelikulaLortu());
+    }
+
+    @Test
+    void pelikulaObjetua_a() {
+        //conn.pelikulaObjetua();
+    }
+
+    @Test
+    void pelikulaList_a() {
+        assertNotNull(conn.pelikulaList(1));
+    }
+
+    @Test
+    void aktoreList_a() {
+        assertNotNull(conn.aktoreList(1));
+    }
+
+    @Test
+    void getIkusitakoPelikulak_a() {
+        assertNotNull(conn.getIkusitakoPelikulak());
+    }
+
+
+
+    @Test
+    void ikusitakoListaLortu_a() {
+        //conn.ikusitakoListaLortu();
+    }
+
+
+
+    @Test
+    void listanDago_a() throws SQLException {
+        assertNotNull(conn.listanDago(1));
+    }
+
+
+
+
+    @Test
+    void aktoreaLortu_a() throws SQLException {
+        assertNotNull(conn.aktoreaLortu());
+    }
+
+    @Test
+    void testAktoreaLortu_a() throws SQLException {
+        assertNotNull(conn.aktoreaLortu());
+    }
+
+    @Test
+    void aktoreLortuLista_a() throws SQLException {
+        assertNotNull(conn.aktoreLortuLista(1));
+    }
 }

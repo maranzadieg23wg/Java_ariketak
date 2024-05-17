@@ -53,7 +53,7 @@ public class Konexioa {
      * Interface graficoa erabili gabe hematen du aukera erabiltzeko programa. Ikusteko zure lista, sortu kontu bat eta abar.
      * @throws SQLException
      */
-    void menua() throws SQLException {
+    /*void menua() throws SQLException {
         int aukera = 1;
         while (aukera !=0){
 
@@ -113,7 +113,7 @@ public class Konexioa {
 
 
 
-    }
+    }*/
 
     //*******************************SORTU KONTUA ******************************
 
@@ -177,7 +177,7 @@ public class Konexioa {
 
 
     }
-    void sortuKontua() throws SQLException {
+    /*void sortuKontua() throws SQLException {
         sc.nextLine();
         System.out.println("-----------KONTUA SORTU-----------");
         System.out.print("Emaila: ");
@@ -240,7 +240,7 @@ public class Konexioa {
 
 
 
-    }
+    }*/
 
     /**
      * Erabiltzailea borratzeko erabiltzen da
@@ -251,7 +251,7 @@ public class Konexioa {
     int erabiltzaileaBorratu(Bezero bezero) throws SQLException {
         int id = bezero.getIdErabiltzailea();
 
-        String sql = "Delete from ERABILTZAILEAK where IDErabiltzailea = ?";
+        String sql = "Delete from ERABILTZAILEAK where ID_Erabiltzailea = ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setInt (1, id);
 
@@ -367,7 +367,7 @@ public class Konexioa {
         }
 
     }
-    void saioaHasi() throws SQLException {
+    /*void saioaHasi() throws SQLException {
         sc.nextLine();
         System.out.println("-----------SAIOA HASI-----------");
         System.out.print("Emaila: ");
@@ -401,7 +401,7 @@ public class Konexioa {
             System.err.println(emaila + " erabiltzailearekin kontu bat ez dago existitzen");
         }
 
-    }
+    }*/
 
 
     /**

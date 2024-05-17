@@ -856,12 +856,15 @@ public class Index {
             conn = new Konexioa();
 
             ArrayList<Object> lista= conn.bilat(izena, bilatu);
+
             conn.konexioaItxi();
+
+            for (Object o : lista){
+                System.out.println(o);
+            }
         }catch (SQLException e){
             System.err.println(e.getMessage());
         }
-
-
 
     }
 

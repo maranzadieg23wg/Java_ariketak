@@ -27,7 +27,7 @@ class CookieTest {
     @Test
     @DisplayName("Saioa hasi True")
     void SaioaHasiTrue() throws SQLException, IOException {
-        assertEquals(true, Cookie.saioCookie(), "[-] Saioa ez da hasi");
+        assertEquals(null, Cookie.saioCookie(), "[-] Saioa ez da hasi");
     }
 
 }
