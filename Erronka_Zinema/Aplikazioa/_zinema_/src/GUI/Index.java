@@ -590,11 +590,11 @@ public class Index {
             logetu();
             //saioMenua();
         }else {
-            try {
+            /*try {
                 Cookie.borratuCache();
             }catch (IOException e){
                 System.err.println("cook: ezin izan da borratu cachea");
-            }
+            }*/
 
         }
     }
@@ -885,10 +885,11 @@ public class Index {
 
             }else if(bilatu.equals("Aktoreak")){
 
-                String[] izenAbizen = izena.split(" ");
-                if (izenAbizen.length<2){
-                    izenAbizen[1]= " ";
+                if (!izena.contains(" ")){
+                    izena=izena+" "+izena;
                 }
+                String[] izenAbizen = izena.split(" ");
+
                 ArrayList<Aktoreak> akto = conn.aktoreaLortu(izenAbizen[0], izenAbizen[1]);
                 if (!akto.isEmpty()){
                     aktoreak.setVisible(true);
@@ -897,6 +898,11 @@ public class Index {
                 }
 
             }else if (bilatu.equals("Zuzendariak")){
+
+                if (!izena.contains(" ")){
+                    izena=izena+" "+izena;
+                }
+
                 String[] izenAbizen = izena.split(" ");
                 ArrayList<Zuzendariak> zuz = conn.zuzendariaLortu(izenAbizen[0], izenAbizen[1]);
                 if (!zuz.isEmpty()){
