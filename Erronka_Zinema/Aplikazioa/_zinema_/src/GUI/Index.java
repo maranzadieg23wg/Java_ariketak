@@ -841,30 +841,39 @@ public class Index {
                 myListLabel.setVisible(true);
             }
 
-            ArrayList<IkusitakoLista> myList = MyListList();
+            gehituMyList(MyListList());
 
-            if (myList!=null){
-                for (IkusitakoLista list : myList) {
-                    //System.out.println(zuz);
-                    JLabel irudia = irudiak(list.getPelikula().getIrudiaLokalki(), 130, 200);
-                    pelikulaList.put(irudia, list.getPelikula());
-                    irudia.addMouseListener(new MouseAdapter() {
-                        public void mouseClicked(MouseEvent e) {
-                            pelikulaAukeratuta(e);;
-                        }
-                    });
-                    myListLabel.add(irudia);
-                }
-                myListLabel.revalidate();
-                myListLabel.repaint();
-            }
         }else {
             myListLabel.setVisible(false);
         }
 
+    }
+
+    void gehituMyList(ArrayList<IkusitakoLista> myList){
 
 
+        if (myList!=null){
+            for (IkusitakoLista list : myList) {
+                System.out.println(list);
+                JLabel irudia = irudiak(list.getPelikula().getIrudiaLokalki(), 130, 200);
+                pelikulaList.put(irudia, list.getPelikula());
+                irudia.addMouseListener(new MouseAdapter() {
+                    public void mouseClicked(MouseEvent e) {
+                        pelikulaAukeratuta(e);;
+                    }
+                });
+                myListLabel.add(irudia);
+            }
+            myListLabel.revalidate();
+            myListLabel.repaint();
+        }else {
 
+
+            String peli = "Ez dago pelikularik zure listan";
+            JLabel peliLabel = new JLabel(peli);
+
+            myListLabel.add(peliLabel);
+        }
     }
 
 
@@ -911,13 +920,16 @@ public class Index {
                 }
 
             }else if(bilatu.equals("myList")){
-                /*lista.addAll(pelikulaLortu(izena));
 
-                ArrayList<Pelikulak> list = new ArrayList<>();
+                ArrayList<IkusitakoLista> list= conn.ikusitakoPelikulakBilatu(izena);
+                if (!list.isEmpty()){
+                    myListLabel.setVisible(true);
+                    gehituMyList(list);
+                }
 
-                for (Object pel : lista){
-                    if (listanDago(p))
-                }*/
+
+
+
             }
 
             conn.konexioaItxi();

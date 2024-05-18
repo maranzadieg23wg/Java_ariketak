@@ -22,6 +22,9 @@ public class Pelikulak {
     int idEstrenaldia;
     int idZuzendaria;
 
+    public String getTituloa() {
+        return tituloa;
+    }
 
     public Pelikulak(int IDPelikula, String tituloa, String generoa, long irabaziak, long aurrekontua, String trailera, String irudia, int idEstrenaldia, int idZuzendaria) {
         this.IDPelikula = IDPelikula;

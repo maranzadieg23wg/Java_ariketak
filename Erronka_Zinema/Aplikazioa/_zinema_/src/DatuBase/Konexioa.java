@@ -664,8 +664,37 @@ public class Konexioa {
 
         }
 
+    }
+
+
+    public ArrayList<IkusitakoLista> ikusitakoPelikulakBilatu(String izena){
+
+        ArrayList<IkusitakoLista> lista = new ArrayList<>();
+        izena = "%"+izena+"%";
+
+        try {
+            String sql = "SELECT * FROM IKUSITAKOLISTA AS ik INNER JOIN FILMAK AS f ON ik.ID_FILMA = f.ID_FILMA WHERE ik.id_erabiltzaile = ? AND f.TITULUA like '?'";
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setInt(1, bezero.getIdErabiltzailea());
+            kontsulta.setString(2, izena);
+
+            ResultSet emaitza = kontsulta.executeQuery();
+
+            while (emaitza.next()){
+                IkusitakoLista list = ikusitakoListaLortu(emaitza);
+
+                lista.add(list);
+            }
+
+            return lista;
+        }catch (SQLException e){
+            System.err.println("e: "+e.getMessage());
+            System.err.println("Ez da saioa hasi, orduan, ezin da ikusi ikusitako lista");
+            return null;
+        }
 
     }
+
 
     /**
      * Jaso egiten da Oraclek bidaltzen duen erantzuna eta honek ateratzen dio behar duen informazioa sortzeko objetua eta ondoren bueltatzen du obejtua.
@@ -854,11 +883,10 @@ public class Konexioa {
         abizena = "%"+abizena+"%";
 
         ArrayList<Aktoreak> list = new ArrayList<>();
-        String sql = "SELECT * FROM AKTOREAK WHERE Izena like ? or ABIZENA like ?";
+        String sql = "SELECT * FROM AKTOREAK WHERE IZENA like ? " + (izena.equals(abizena) ? "OR" : "AND") + " ABIZENA like ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, izena);
         kontsulta.setString(2, abizena);
-
 
 
         ResultSet emaitza = kontsulta.executeQuery();
@@ -876,10 +904,11 @@ public class Konexioa {
         abizena = "%"+abizena+"%";
 
         ArrayList<Zuzendariak> list = new ArrayList<>();
-        String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE IZENA like ? or ABIZENA like ?";
+        String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE IZENA like ? " + (izena.equals(abizena) ? "OR" : "AND") + " ABIZENA like ?";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, izena);
         kontsulta.setString(2, abizena);
+
 
 
 
@@ -906,16 +935,35 @@ public class Konexioa {
     public ArrayList<Aktoreak> aktoreLortuLista(int zenbat) throws SQLException {
 
         if (zenbat!=-1){
-            ArrayList<Integer> zenbaki = new ArrayList<>();
-            for (int i =0;i<zenbat;i++){
+            ArrayList<Integer> zenbaki = aktoIDRandom(zenbat);
+            /*for (int i =0;i<zenbat;i++){
                 zenbaki.add(aktorIDRandom());
-            }
+            }*/
 
 
             return aktoreaLortu(zenbaki);
         }
         return null;
 
+    }
+
+    ArrayList<Integer> aktoIDRandom(int zenbat) throws SQLException {
+        ArrayList<Integer> list = new ArrayList<>();
+
+        String sql = "select ID_AKTOREA from AKTOREAK ORDER BY DBMS_RANDOM.VALUE fetch first ? rows only";
+
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setInt(1, zenbat);
+
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        while (emaitza.next()){
+            list.add(emaitza.getInt("ID_AKTOREA"));
+        }
+
+        return list;
     }
 
     int aktorIDRandom() throws SQLException {
