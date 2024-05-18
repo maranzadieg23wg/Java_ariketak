@@ -12,8 +12,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Konexioa {
-    String ipa = "10.14.4.122";
-    //String ipa = "192.168.1.60";
+    //String ipa = "10.14.4.122";
+    String ipa = "192.168.1.100";
     String DBIzena = "ORCLCDB";
     String username = "taldea3";
     String pasahitza = "batbihiru";
@@ -376,6 +376,82 @@ public class Konexioa {
             conn.close();
         }catch (SQLException e){
             System.err.println("Ezin izan da konexioa itxi.");
+        }
+
+    }
+
+
+
+    public void errepikatuta() throws SQLException {
+        ArrayList<String> list = new ArrayList<>();
+        String sql = "SELECT Izena, Abizena, COUNT(*) as AktoreakCount FROM Aktoreak GROUP BY Izena, Abizena ORDER BY Izena, Abizena";
+
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        while (emaitza.next()){
+            String izena = emaitza.getString("Izena");
+            String abizena = emaitza.getString("Abizena");
+            int zenbat = emaitza.getInt("AktoreakCount");
+
+            if (zenbat>1){
+                list.add(izena+" "+abizena);
+            }
+
+        }
+
+
+        idLortu(list);
+    }
+
+
+    private void idLortu(ArrayList<String> list) throws SQLException {
+
+        for (String izena : list){
+
+            konexiaEgin();
+            ArrayList<Integer> idak = new ArrayList<>();
+
+            String[]izenAbizen = izena.split(" ");
+
+            String sql = "select ID_AKTOREA from Aktoreak where izena = ? and abizena = ?";
+
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setString(1, izenAbizen[0]);
+            kontsulta.setString(2, izenAbizen[1]);
+
+
+            ResultSet emaitza = kontsulta.executeQuery();
+
+            while (emaitza.next()){
+                idak.add(emaitza.getInt("ID_AKTOREA"));
+            }
+
+            int fi = idak.get(0);
+            for (int i=1;i<idak.size();i++){
+
+                String sql2 = "update PELIKULETANLANEGIN set ID_AKTOREA =? where ID_AKTOREA =?";
+
+                PreparedStatement kontsulta2 = conn.prepareStatement(sql2);
+                kontsulta2.setInt(1, fi);
+                kontsulta2.setInt(2, idak.get(i));
+
+
+                ResultSet emaitza2 = kontsulta2.executeQuery();
+
+                String sql3 = "delete from Aktoreak where ID_AKTOREA =?";
+
+                PreparedStatement kontsulta3 = conn.prepareStatement(sql3);
+                kontsulta3.setInt(1, idak.get(i));
+
+
+
+                ResultSet emaitza3 = kontsulta3.executeQuery();
+            }
+            konexioaItxi();
+
         }
 
     }

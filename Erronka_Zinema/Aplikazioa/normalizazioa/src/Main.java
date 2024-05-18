@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -16,10 +17,20 @@ public class Main {
         //URLGehitu();
         //aktoreak();
 
+        //Konexioa conn = new Konexioa();
+        //conn.pelLortu();
+
+        aktoreErrepikatuak();
+
+
+    }
+
+    static void aktoreErrepikatuak() throws SQLException {
         Konexioa conn = new Konexioa();
-        conn.pelLortu();
 
+        conn.errepikatuta();
 
+        conn.konexioaItxi();
 
     }
 
