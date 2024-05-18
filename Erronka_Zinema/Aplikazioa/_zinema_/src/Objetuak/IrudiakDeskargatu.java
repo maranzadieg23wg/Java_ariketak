@@ -16,10 +16,30 @@ public class IrudiakDeskargatu {
 
             InputStream inputStream = url.openStream();
 
-            BufferedReader br1 = new BufferedReader(new FileReader("./fitxategiak/cache/irudiak"));
+            String cache = "./fitxategiak/cache/irudiak";
 
             String fitxategiaIzena = urlString.substring(urlString.lastIndexOf('/') + 1);
             String fitxategiaNonGorde = bukaerakoKarpeta + File.separator + fitxategiaIzena;
+
+            File fitx = new File(fitxategiaNonGorde);
+            File karpe = fitx.getParentFile();
+            if (!karpe.exists()){
+                karpe.mkdirs();
+            }
+
+            File fitx1 = new File(cache);
+            File karpe1 = fitx1.getParentFile();
+            if (!karpe1.exists()){
+                karpe1.mkdirs();
+                BufferedWriter bw = new BufferedWriter(new FileWriter(cache));
+                bw.close();
+            } else if (!fitx1.exists()) {
+                BufferedWriter bw = new BufferedWriter(new FileWriter(cache));
+                bw.close();
+            }
+
+
+            BufferedReader br1 = new BufferedReader(new FileReader(cache));
 
             //fitxategiaNonGorde = fitxategiaNonGorde.replace("\\", "/");
 
@@ -63,6 +83,8 @@ public class IrudiakDeskargatu {
     public IrudiakDeskargatu(String url, String karpeta) {
         this.url = url;
         this.karpeta = karpeta;
+
+
 
         fitxategiarenIzena = irudiaDeskargatu(url, karpeta);
     }

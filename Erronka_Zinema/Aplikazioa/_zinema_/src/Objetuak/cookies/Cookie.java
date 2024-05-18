@@ -9,26 +9,34 @@ public class Cookie {
     public static Bezero saioCookie(){
 
 
+        String url = "./fitxategiak/cookies/saioa";
+        File fitx = new File(url);
         try {
-            BufferedReader br1 = new BufferedReader(new FileReader("./fitxategiak/cookies/saioa"));
+            if (!fitx.exists()){
+                BufferedWriter bw = new BufferedWriter(new FileWriter(url));
+                bw.close();
+            }else {
+                BufferedReader br1 = new BufferedReader(new FileReader(url));
 
-            String line;
-            while ((line = br1.readLine()) !=null){
-                String[] saio = line.split(":");
+                String line;
+                while ((line = br1.readLine()) !=null){
+                    String[] saio = line.split(":");
 
-                //System.out.println(saio[0]+":"+saio[1]);
+                    //System.out.println(saio[0]+":"+saio[1]);
 
-                Konexioa conn = new Konexioa();
+                    Konexioa conn = new Konexioa();
 
-                boolean bai = conn.saioaHasiHash(saio[0], saio[1]);
+                    boolean bai = conn.saioaHasiHash(saio[0], saio[1]);
 
-                if (bai){
-                    return conn.getBezero();
-                }else {
+                    if (bai){
+                        return conn.getBezero();
+                    }else {
 
-                    return null;
+                        return null;
+                    }
                 }
             }
+
         }catch (Exception e){
             return null;
         }
@@ -41,6 +49,7 @@ public class Cookie {
     public static void borratuCache() throws IOException {
 
         try {
+
             BufferedWriter bw1 = new BufferedWriter(new FileWriter("./fitxategiak/cookies/saioa", false));
             bw1.write("");
 
@@ -68,6 +77,20 @@ public class Cookie {
             if (karpeta1.exists() && karpeta1.isDirectory()) {
 
                 File[] fitxategia = karpeta1.listFiles();
+
+
+                for (File fitx : fitxategia) {
+                    fitx.delete();
+                }
+
+
+            }
+
+            File karpeta12 = new File("irudiak/zuzendari");
+
+            if (karpeta12.exists() && karpeta12.isDirectory()) {
+
+                File[] fitxategia = karpeta12.listFiles();
 
 
                 for (File fitx : fitxategia) {
