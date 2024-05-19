@@ -99,6 +99,19 @@ public class API {
 
     }
 
+
+    public static String sinopsis(String izena) throws IOException {
+        try {
+            JSONObject movie = jsonLortu(pelikulaLortu(izena));
+
+            String posterPath = movie.getString("overview");
+            return posterPath;
+        }catch (Exception e){
+            return "";
+        }
+
+    }
+
     public static String pelikulaIMG (String izena) throws IOException {
         try {
             Response erantzuna = pelikulaLortu(izena);

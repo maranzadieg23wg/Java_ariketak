@@ -21,7 +21,7 @@ public class Main {
         //conn.pelLortu();
 
         aktoreErrepikatuak();
-
+        sinopsisgehitu();
 
     }
 
@@ -29,6 +29,16 @@ public class Main {
         Konexioa conn = new Konexioa();
 
         conn.errepikatuta();
+
+        conn.konexioaItxi();
+
+    }
+
+
+    static void sinopsisgehitu() throws SQLException, IOException {
+        Konexioa conn = new Konexioa();
+
+        conn.gehituSinopsis();
 
         conn.konexioaItxi();
 

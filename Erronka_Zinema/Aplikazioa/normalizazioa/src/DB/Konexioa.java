@@ -455,4 +455,33 @@ public class Konexioa {
         }
 
     }
+
+
+   public void gehituSinopsis() throws SQLException, IOException {
+        String sql = "select ID_FILMA, TITULUA from FILMAK";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        ResultSet emaitza = kontsulta.executeQuery();
+
+        while (emaitza.next()){
+            konexiaEgin();
+            int id = emaitza.getInt("ID_FILMA");
+            String sip = emaitza.getString("TITULUA");
+
+            String sinopsis = API.sinopsis(sip);
+
+            System.out.println(sip+": "+sinopsis);
+
+            String sql2 = "update FILMAK set SINOPSIS =? where ID_FILMA =?";
+
+            PreparedStatement kontsulta2 = conn.prepareStatement(sql2);
+            kontsulta2.setString(1, sinopsis);
+            kontsulta2.setInt(2, id);
+
+
+            ResultSet emaitza2 = kontsulta2.executeQuery();
+
+            konexioaItxi();
+        }
+
+    }
 }
