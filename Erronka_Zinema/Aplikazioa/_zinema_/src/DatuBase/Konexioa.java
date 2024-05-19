@@ -687,22 +687,25 @@ public class Konexioa {
      */
     public void ikusitakoPelikulak(){
 
-        if (!ikusitakoPelikulak.isEmpty()){
+        if (ikusitakoPelikulak !=null){
             ikusitakoPelikulak.clear();
         }
 
         try {
-            String sql = "select * from IKUSITAKOLISTA where (id_erabiltzaile = ?)";
-            PreparedStatement kontsulta = conn.prepareStatement(sql);
-            kontsulta.setString(1, String.valueOf(bezero.getIdErabiltzailea()));
+            if (bezero !=null){
+                String sql = "select * from IKUSITAKOLISTA where (id_erabiltzaile = ?)";
+                PreparedStatement kontsulta = conn.prepareStatement(sql);
+                kontsulta.setString(1, String.valueOf(bezero.getIdErabiltzailea()));
 
-            ResultSet emaitza = kontsulta.executeQuery();
+                ResultSet emaitza = kontsulta.executeQuery();
 
-            while (emaitza.next()){
-                IkusitakoLista list = ikusitakoListaLortu(emaitza);
+                while (emaitza.next()){
+                    IkusitakoLista list = ikusitakoListaLortu(emaitza);
 
-                ikusitakoPelikulak.add(list);
+                    ikusitakoPelikulak.add(list);
+                }
             }
+
         }catch (SQLException e){
             //System.err.println("e: "+e.getErrorCode());
             System.err.println("Ez da saioa hasi, orduan, ezin da ikusi ikusitako lista");
@@ -1392,6 +1395,9 @@ public class Konexioa {
         return bezero;
     }
 
+    public static void saioaItzi(){
+        bezero = null;
+    }
 
     /*public ArrayList<Aktoreak> bilat(String izena, String non){
 

@@ -281,12 +281,26 @@ public class Index {
         bilatu = new JTextField("Search");
         bilatu.setPreferredSize(new Dimension(250, 30));
 
+        bilatu.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (bilatu.getText().equals("Search")) {
+                    bilatu.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (bilatu.getText().isEmpty()) {
+                    bilatu.setText("Search");
+                }
+            }
+        });
+
         bilatu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Obtener el texto del JTextField
                 String searchText = bilatu.getText();
-                // Llamar a la función bilatu con el texto ingresado como argumento
                 bilatuFun(searchText);
             }
         });
@@ -915,6 +929,15 @@ public class Index {
                 if (!pel.isEmpty()){
                     pelikulak.setVisible(true);
                     pelikuaGehitu(pel);
+                }else {
+                    pelikulak.setVisible(true);
+
+
+                    JLabel ezDaAurkitu = new JLabel("Ez da aurkitu "+izena+" pelikula");
+
+                    pelikulak.add(ezDaAurkitu);
+                    pelikulak.revalidate();
+                    pelikulak.repaint();
                 }
 
             }else if(bilatu.equals("Aktoreak")){
@@ -929,6 +952,15 @@ public class Index {
                     aktoreak.setVisible(true);
                     aktorGehitu(akto);
 
+                }else {
+                    aktoreak.setVisible(true);
+
+
+                    JLabel ezDaAurkitu = new JLabel("Ez da aurkitu "+izena+" aktorea");
+
+                    aktoreak.add(ezDaAurkitu);
+                    aktoreak.revalidate();
+                    aktoreak.repaint();
                 }
 
             }else if (bilatu.equals("Zuzendariak")){
@@ -942,6 +974,15 @@ public class Index {
                 if (!zuz.isEmpty()){
                     zuzendariak.setVisible(true);
                     zuzGehitu(zuz);
+                }else {
+                    zuzendariak.setVisible(true);
+
+
+                    JLabel ezDaAurkitu = new JLabel("Ez da aurkitu "+izena+" zuzendaria");
+
+                    zuzendariak.add(ezDaAurkitu);
+                    zuzendariak.revalidate();
+                    zuzendariak.repaint();
                 }
 
             }else if(bilatu.equals("myList")){
