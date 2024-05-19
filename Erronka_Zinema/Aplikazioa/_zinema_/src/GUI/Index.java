@@ -52,7 +52,7 @@ public class Index {
         this.y = y;
         this.izena = izena;
 
-        lista = new String[]{"Pelikulak", "Aktoreak", "Zuzendariak", "Laguntza", "myList"};
+        lista = new String[]{"Pelikulak", "Aktoreak", "Zuzendariak", "myList"};
 
         pelikulaList = new HashMap<>();
         aktoreList = new HashMap<>();
@@ -618,6 +618,7 @@ public class Index {
                         System.out.println(bezero);
                     } else if (aukera.equals("Konfigurazioa")) {
                         System.out.println("Konfigurazioa egiten dago");
+                        bezero = conn.getBezero();
                         Konfigurazioa.datuakAldatu(bezero);
                     } else if (aukera.equals("Saioa itzi")) {
                         try {
@@ -654,9 +655,7 @@ public class Index {
             menuAktoreak();
         } else if (izena.equals(lista[2])) {
             menuZuzendaria();
-        }else if (izena.equals(lista[3])){
-            menuLaguntza();
-        }else if (izena.equals(lista[4])){
+        }else if (izena.equals(lista[3])) {
             menuMyList();
         }else {
             System.err.println("Arazo bat gertatu egin da, aukeratu egin da aukera bat ez dagoena. menuBotoiak()");
@@ -840,9 +839,34 @@ public class Index {
             }else {
                 myListLabel.setVisible(true);
             }
+            ArrayList<IkusitakoLista> list = MyListList();
 
-            gehituMyList(MyListList());
+            if (!list.isEmpty()){
+                gehituMyList(list);
+            }else if (bezero !=null){
+                myListLabel.setVisible(true);
 
+
+                JLabel ezDuzuSaioa = new JLabel("Ez daukazu pelikularik zure listan");
+
+                myListLabel.add(ezDuzuSaioa);
+                myListLabel.revalidate();
+                myListLabel.repaint();
+            }else {
+                System.out.println(111);
+
+            }
+
+        }else if (z != -1){
+            myListLabel.removeAll();
+            myListLabel.setVisible(true);
+
+
+            JLabel ezDuzuSaioa = new JLabel("Ez duzu saioa hasi");
+
+            myListLabel.add(ezDuzuSaioa);
+            myListLabel.revalidate();
+            myListLabel.repaint();
         }else {
             myListLabel.setVisible(false);
         }
@@ -851,6 +875,7 @@ public class Index {
 
     void gehituMyList(ArrayList<IkusitakoLista> myList){
 
+        myListLabel.removeAll();
 
         if (myList!=null){
             for (IkusitakoLista list : myList) {
@@ -921,10 +946,33 @@ public class Index {
 
             }else if(bilatu.equals("myList")){
 
-                ArrayList<IkusitakoLista> list= conn.ikusitakoPelikulakBilatu(izena);
+                myListLabel.removeAll();
+                ArrayList<IkusitakoLista> list = new ArrayList<>();
+                if (bezero !=null){
+                    list= conn.ikusitakoPelikulakBilatu(izena);
+                }
                 if (!list.isEmpty()){
                     myListLabel.setVisible(true);
                     gehituMyList(list);
+                }else if (bezero !=null){
+                    myListLabel.setVisible(true);
+
+
+                    JLabel ezDuzuSaioa = new JLabel("Ez daukazu pelikularik zure listan");
+
+                    myListLabel.add(ezDuzuSaioa);
+                    myListLabel.revalidate();
+                    myListLabel.repaint();
+                }else {
+                    System.out.println(111);
+                    myListLabel.setVisible(true);
+
+
+                    JLabel ezDuzuSaioa = new JLabel("Ez duzu saioa hasi");
+
+                    myListLabel.add(ezDuzuSaioa);
+                    myListLabel.revalidate();
+                    myListLabel.repaint();
                 }
 
 

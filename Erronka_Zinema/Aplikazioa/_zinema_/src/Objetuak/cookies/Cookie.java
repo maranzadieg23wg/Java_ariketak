@@ -99,6 +99,8 @@ public class Cookie {
 
 
             }
+
+            Konexioa.borratuLista();
         }catch (IOException e){
             System.err.println("Arazo bat gertatu da borratzean datuak");
 

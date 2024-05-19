@@ -2,6 +2,7 @@ package GUI.LogIn;
 
 import DatuBase.Konexioa;
 import Objetuak.DB.Bezero;
+import Objetuak.cookies.Cookie;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -43,7 +44,14 @@ public class Konfigurazioa {
 
 
                     if ((!emailEzis && !erabiltzaileEzis) || email.equals(bezero.getEmaila()) && era.equals(bezero.getErabiltzaileIzena())) {
-                        conn.erabiltzaileaAldatu(bezero.getIdErabiltzailea(), email, pas, ize, abi, era);
+                        if (pas.equals("")){
+                            conn.erabiltzaileaAldatu(bezero.getIdErabiltzailea(), email, ize, abi, era);
+
+                        }else {
+                            conn.erabiltzaileaAldatu(bezero.getIdErabiltzailea(), email, pas, ize, abi, era);
+                        }
+
+
                         break;
 
                     } else if (emailEzis && !Objects.equals(bezero.getEmaila(), email)) {

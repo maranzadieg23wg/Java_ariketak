@@ -1,9 +1,9 @@
 package DatuBase;
 import Objetuak.DB.*;
+import Objetuak.cookies.Cookie;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.swing.*;
+import java.io.*;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -275,12 +275,20 @@ public class Konexioa {
             if (rowsAffected > 0) {
                 System.out.println("Aldatu egin da erabiltzailearen datuak");
 
+
+                Cookie.borratuCache();
+
+                BufferedWriter bw = new BufferedWriter(new FileWriter("fitxategiak/cookies/saioa"));
+                bw.write(era+":"+pas);
+                bw.close();
+
+                bezero=Cookie.saioCookie();
             } else {
                 System.err.println("Errore bat gertatu da aldatzean informazioa");
             }
-        }catch (SQLException e){
+        }catch (SQLException | IOException e){
             System.err.println("Ezin izan da aldatu erabiltzailearen datuak");
-            System.err.println("Message: "+e.getErrorCode());
+            System.err.println("Message: "+e.getMessage());
         }
 
         try {
@@ -289,7 +297,42 @@ public class Konexioa {
             System.err.println("Ezin izan da saioa hasi");
             System.err.println(e.getErrorCode());
         }
+    }
 
+    public void erabiltzaileaAldatu(int id, String email, String izena, String abizena, String era){
+
+
+        try {
+            String sql = "update ERABILTZAILEAK set izena =?, abizena =?, emaila=?, erabiltzailea=? where ID_ERABILTZAILE = ?";
+            PreparedStatement kontsulta = conn.prepareStatement(sql);
+            kontsulta.setString(1, izena);
+            kontsulta.setString(2, abizena);
+            kontsulta.setString(3, email);
+            kontsulta.setString(4, era);
+            kontsulta.setInt(5, id);
+
+            int rowsAffected = kontsulta.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Aldatu egin da erabiltzailearen datuak");
+
+                BufferedReader br = new BufferedReader(new FileReader("fitxategiak/cookies/saioa"));
+                String line = br.readLine();
+                String[] erabiltzailea = line.split(":");
+                br.close();
+
+                erabiltzailea[0]= era;
+
+                BufferedWriter bw = new BufferedWriter(new FileWriter("fitxategiak/cookies/saioa"));
+                bw.write(erabiltzailea[0]+":"+erabiltzailea[1]);
+                bw.close();
+                bezero = Cookie.saioCookie();
+            } else {
+                System.err.println("Errore bat gertatu da aldatzean informazioa");
+            }
+        }catch (SQLException | IOException e){
+            System.err.println("Ezin izan da aldatu erabiltzailearen datuak");
+            System.err.println("Message: "+e.getMessage());
+        }
 
     }
 
@@ -644,7 +687,9 @@ public class Konexioa {
      */
     public void ikusitakoPelikulak(){
 
-        ikusitakoPelikulak.clear();
+        if (!ikusitakoPelikulak.isEmpty()){
+            ikusitakoPelikulak.clear();
+        }
 
         try {
             String sql = "select * from IKUSITAKOLISTA where (id_erabiltzaile = ?)";
@@ -673,7 +718,8 @@ public class Konexioa {
         izena = "%"+izena+"%";
 
         try {
-            String sql = "SELECT * FROM IKUSITAKOLISTA AS ik INNER JOIN FILMAK AS f ON ik.ID_FILMA = f.ID_FILMA WHERE ik.id_erabiltzaile = ? AND f.TITULUA like '?'";
+            String sql = "SELECT * FROM IKUSITAKOLISTA ik INNER JOIN FILMAK f ON ik.ID_FILMA = f.ID_FILMA WHERE ik.id_erabiltzaile = ? AND f.TITULUA like ?";
+            //String sql = "SELECT * FROM IKUSITAKOLISTA ik INNER JOIN FILMAK f ON ik.ID_FILMA = f.ID_FILMA WHERE ik.id_erabiltzaile = 6 AND f.TITULUA LIKE '%Way%'";
             PreparedStatement kontsulta = conn.prepareStatement(sql);
             kontsulta.setInt(1, bezero.getIdErabiltzailea());
             kontsulta.setString(2, izena);
@@ -693,6 +739,10 @@ public class Konexioa {
             return null;
         }
 
+    }
+
+    public static void borratuLista (){
+        ikusitakoPelikulak = null;
     }
 
 
@@ -1310,7 +1360,11 @@ public class Konexioa {
             System.err.println("Ezin izan da konexioa egin");
             //System.out.println(e.getErrorCode());
             if (e.getErrorCode() == 12541){
+
                 System.err.println(e.getErrorCode()+": ez da aurkitu TNS-a");
+
+                String dbEzAurkitu= "Ezin izan da konexioa egin DB-arekin. Begiratu ea daukazun interneterako sarbidea";
+                JOptionPane.showMessageDialog(null, dbEzAurkitu, "Error", JOptionPane.ERROR_MESSAGE);
             }
 
 
