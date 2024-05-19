@@ -111,6 +111,8 @@ public class Index {
 
 
 
+
+
         erdi.add(peliTitul);
         erdi.add(pelikulak);
         erdi.add(aktoreTitul);
@@ -120,14 +122,21 @@ public class Index {
         //erdi.add(aktoreTitul);
         //erdi.add(aktoreak);
 
+
+
+
         frame.add(menuak, BorderLayout.NORTH);
 
         frame.add(erdi, BorderLayout.CENTER);
         //frame.add(centerPanel, BorderLayout.CENTER);
 
+
+
+
         frame.pack();
         frame.setVisible(true);
     }
+
 
 
 
