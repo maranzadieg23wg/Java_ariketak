@@ -187,10 +187,13 @@ public class PelikulaInformazioa {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         GehituListara.gehituListara(pelikulak.getIDPelikula());
+                        pelikularenInformazia.setVisible(false);
                         pelikularenInformazia.revalidate();
                         pelikularenInformazia.repaint();
+                        pelikularenInformazia.setVisible(true);
 
-                      
+
+
                     }
                 });
                 informazioa.add(listaraGehitu);
