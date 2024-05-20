@@ -75,8 +75,18 @@ public class IrudiakDeskargatu {
 
             return fitxategiaNonGorde;
         } catch (IOException e) {
+            String karpeta = "irudiak/errorIrudia/";
+            String url = "irudiak/errorIrudia/Image_not_available.png";
+            File fitx = new File(url);
+            File karpe = fitx.getParentFile();
+            if (!karpe.exists()){
+                karpe.mkdirs();
+            }
+            if (!fitx.exists()){
+                IrudiakDeskargatu.irudiaDeskargatu("https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png", karpeta);
+            }
             //e.printStackTrace();
-            return "irudiak/errorIrudia/image_not_available.png";
+            return url;
         }
     }
 
