@@ -1,5 +1,6 @@
 package GUI;
 import DatuBase.Konexioa;
+import GUI.Informazioa.PelikulaInformazioa;
 import GUI.LogIn.Konfigurazioa;
 import GUI.LogIn.KontuaSortu;
 import GUI.LogIn.SaioaHasi;
@@ -545,13 +546,30 @@ public class Index {
         return akt;
     }*/
 
-    void pelikulaAukeratuta(MouseEvent e){
+    void pelikulaAukeratuta(MouseEvent e) {
+        try {
+            menuGarbia();
 
-        menuGarbia();
+            Object source = e.getSource();
 
-        Pelikulak pel = pelikulaList.get(e.getSource());
-        System.out.println(pel);
+            if (source instanceof JComponent && pelikulaList.containsKey(source)) {
+                Pelikulak pel = pelikulaList.get(source);
+
+                pelikulaInformazioa.removeAll();
+
+                pelikulaInformazioa.add(PelikulaInformazioa.peliInfo(pel));
+
+                pelikulaInformazioa.revalidate();
+                pelikulaInformazioa.repaint();
+                pelikulaInformazioa.setVisible(true);
+            } else {
+                System.err.println("Aukeratutako pelikua ez dago listan");
+            }
+        } catch (SQLException i) {
+            System.err.println(i.getMessage());
+        }
     }
+
 
     void aktoreaAukeratu(MouseEvent e){
 
@@ -920,7 +938,9 @@ public class Index {
                 pelikulaList.put(irudia, list.getPelikula());
                 irudia.addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
-                        pelikulaAukeratuta(e);;
+                        pelikulaAukeratuta(e);
+
+
                     }
                 });
                 myListLabel.add(irudia);

@@ -1346,6 +1346,14 @@ public class Konexioa {
         }
     }
 
+    public ResultSet estrenaldia(int id) throws SQLException {
+        String sql = "select * from ESTREINALDIAK where ID_ESTREINALDIA = ?";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+        kontsulta.setInt(1, id);
+
+
+        return kontsulta.executeQuery();
+    }
 
 
     //************************KONEXIOA*********************************

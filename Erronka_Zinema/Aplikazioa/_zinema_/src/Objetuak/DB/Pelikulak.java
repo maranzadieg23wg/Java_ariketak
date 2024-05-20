@@ -98,4 +98,36 @@ public class Pelikulak {
 
         setirudiaLokalki(irudiakDeskargatu.getFitxategiarenIzena());
     }
+
+    public int getIDPelikula() {
+        return IDPelikula;
+    }
+
+    public String getGeneroa() {
+        return generoa;
+    }
+
+    public long getIrabaziak() {
+        return irabaziak;
+    }
+
+    public long getAurrekontua() {
+        return aurrekontua;
+    }
+
+    public String getTrailera() {
+        return trailera;
+    }
+
+    public int getIdEstrenaldia() {
+        return idEstrenaldia;
+    }
+
+    public int getIdZuzendaria() {
+        return idZuzendaria;
+    }
+
+    public String getSinopsis() {
+        return sinopsis;
+    }
 }
