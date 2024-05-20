@@ -21,12 +21,13 @@ public class Pelikulak {
     String irudiaLokalki;
     int idEstrenaldia;
     int idZuzendaria;
+    String sinopsis;
 
     public String getTituloa() {
         return tituloa;
     }
 
-    public Pelikulak(int IDPelikula, String tituloa, String generoa, long irabaziak, long aurrekontua, String trailera, String irudia, int idEstrenaldia, int idZuzendaria) {
+    public Pelikulak(int IDPelikula, String tituloa, String generoa, long irabaziak, long aurrekontua, String trailera, String irudia, int idEstrenaldia, int idZuzendaria, String sinopsis) {
         this.IDPelikula = IDPelikula;
         this.tituloa = tituloa;
         this.generoa = generoa;
@@ -36,6 +37,7 @@ public class Pelikulak {
         this.irudia = irudia;
         this.idEstrenaldia = idEstrenaldia;
         this.idZuzendaria = idZuzendaria;
+        this.sinopsis = sinopsis;
 
         lokalIrudia();
     }
@@ -53,6 +55,7 @@ public class Pelikulak {
                 ", irudiaLokalki='" + irudiaLokalki + '\'' +
                 ", idEstrenaldia=" + idEstrenaldia +
                 ", idZuzendaria=" + idZuzendaria +
+                ", sinopsis='" + sinopsis + '\'' +
                 '}';
     }
 

@@ -108,10 +108,10 @@ class KonexioaTest {
             delimiter = ','
     )
     @DisplayName("Jurassic Park Pelikula lortu ID bitartez")
-    void jurasicTtestPelikulaLortu(int id, String tituloa, String generoa, long irabaziak, long aurrekontua, String trailera, String irudia, int estrenaldia, int zuzendaria) throws SQLException {
+    void jurasicTtestPelikulaLortu(int id, String tituloa, String generoa, long irabaziak, long aurrekontua, String trailera, String irudia, int estrenaldia, int zuzendaria, String sinopsis) throws SQLException {
 
         //System.out.println(id);
-        Pelikulak jurassic = new Pelikulak(id, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, estrenaldia, zuzendaria);
+        Pelikulak jurassic = new Pelikulak(id, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, estrenaldia, zuzendaria, sinopsis);
         assertEquals(conn.pelikulaLortu(id), jurassic, "[-] Ezin izan da Jurasic Park pelikula lortu");
     }
 
@@ -119,7 +119,7 @@ class KonexioaTest {
     @RepeatedTest(3)
     @DisplayName("Jurassic Park Pelikula lortu izenaren bitartez")
     void jurasicTestPelikulaLortu() throws SQLException {
-        Pelikulak jurasic = new Pelikulak(3928, "Jurassic Park", "Action;Adventure;Sci-Fi", 1045573035,63000000, "https://www.youtube.com/watch?v=k8k9GeZCb-8", "http://image.tmdb.org/t/p/w500/b1xCNnyrPebIc7EWNZIa6jhb1Ww.jpg", 814, 268);
+        Pelikulak jurasic = new Pelikulak(3928, "Jurassic Park", "Action;Adventure;Sci-Fi", 1045573035,63000000, "https://www.youtube.com/watch?v=k8k9GeZCb-8", "http://image.tmdb.org/t/p/w500/b1xCNnyrPebIc7EWNZIa6jhb1Ww.jpg", 814, 268, "");
         assertEquals(conn.pelikulaLortu("Jurassic Park"), jurasic, "[-] Ezin izan da Jurasic Park pelikula lortu");
     }
 

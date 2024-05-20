@@ -19,8 +19,8 @@ import java.util.Scanner;
 
 public class Konexioa {
 
-    //String ipa = "10.14.4.122";
-    String ipa = "192.168.1.100";
+    String ipa = "10.14.4.122";
+    //String ipa = "192.168.1.100";
     String DBIzena = "ORCLCDB";
     String username = "taldea3";
     String pasahitza = "batbihiru";
@@ -629,8 +629,9 @@ public class Konexioa {
         String irudia = pel.getString("IRUDIA");
         int idEstrenaldia = pel.getInt("ID_ESTREINALDIA");
         int idZuzendaria = pel.getInt("ID_FILM_ZUZENDARIA");
+        String sinopsis = pel.getString("SINOPSIS");
 
-        return new Pelikulak(IDPelikula, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, idEstrenaldia, idZuzendaria);
+        return new Pelikulak(IDPelikula, tituloa, generoa, irabaziak, aurrekontua, trailera, irudia, idEstrenaldia, idZuzendaria, sinopsis);
 
 
     }

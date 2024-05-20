@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PelikulakTest {
 
-    Pelikulak jurasic = new Pelikulak(101, "Jurassic Park", "Acci�n/Aventura", 900000000,63000000, "https://www.youtube.com/watch?v=lc0UehYemQA", "https://hips.hearstapps.com/hmg-prod/images/1202186-copia-64f056b7a8612.jpg", 19930611, 201);
+    Pelikulak jurasic = new Pelikulak(101, "Jurassic Park", "Acci�n/Aventura", 900000000,63000000, "https://www.youtube.com/watch?v=lc0UehYemQA", "https://hips.hearstapps.com/hmg-prod/images/1202186-copia-64f056b7a8612.jpg", 19930611, 201, "");
 
 
 
@@ -40,7 +40,7 @@ class PelikulakTest {
     @Test
     @DisplayName("Konprobatu ea ongi begiratzen dituen objetuak")
     void testEquals() {
-        Pelikulak jurasic1 = new Pelikulak(101, "Jurassic Park", "Acci�n/Aventura", 900000000,63000000, "https://www.youtube.com/watch?v=lc0UehYemQA", "https://hips.hearstapps.com/hmg-prod/images/1202186-copia-64f056b7a8612.jpg", 19930611, 201);
+        Pelikulak jurasic1 = new Pelikulak(101, "Jurassic Park", "Acci�n/Aventura", 900000000,63000000, "https://www.youtube.com/watch?v=lc0UehYemQA", "https://hips.hearstapps.com/hmg-prod/images/1202186-copia-64f056b7a8612.jpg", 19930611, 201, "");
 
         assertEquals(jurasic1, jurasic, "[-]Pelikula objetua ez da egokia");
     }
