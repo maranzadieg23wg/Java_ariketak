@@ -20,7 +20,7 @@ public class Main {
         //Konexioa conn = new Konexioa();
         //conn.pelLortu();
 
-        aktoreErrepikatuak();
+        //aktoreErrepikatuak();
         sinopsisgehitu();
 
     }

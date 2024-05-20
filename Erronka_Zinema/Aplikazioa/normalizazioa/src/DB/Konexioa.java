@@ -12,8 +12,8 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Konexioa {
-    //String ipa = "10.14.4.122";
-    String ipa = "192.168.1.100";
+    String ipa = "10.14.4.122";
+    //String ipa = "192.168.1.100";
     String DBIzena = "ORCLCDB";
     String username = "taldea3";
     String pasahitza = "batbihiru";
