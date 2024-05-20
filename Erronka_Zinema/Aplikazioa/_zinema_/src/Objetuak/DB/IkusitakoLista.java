@@ -35,6 +35,18 @@ public class IkusitakoLista {
                 '}';
     }
 
+    public int getIkusita() {
+        return ikusita;
+    }
+
+    public float getNota() {
+        return nota;
+    }
+
+    public int getIkus_kop() {
+        return ikus_kop;
+    }
+
     public Pelikulak getPelikula() {
         return pelikula;
     }

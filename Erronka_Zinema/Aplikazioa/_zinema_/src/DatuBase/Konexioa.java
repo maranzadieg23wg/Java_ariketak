@@ -19,8 +19,8 @@ import java.util.Scanner;
 
 public class Konexioa {
 
-    String ipa = "10.14.4.122";
-    //String ipa = "192.168.1.100";
+    //String ipa = "10.14.4.122";
+    String ipa = "192.168.1.100";
     String DBIzena = "ORCLCDB";
     String username = "taldea3";
     String pasahitza = "batbihiru";
@@ -573,6 +573,9 @@ public class Konexioa {
 
     }
 
+
+
+
     public ArrayList<Pelikulak> pelikulaLortu(ArrayList<Integer> zenbakiak) throws SQLException {
 
         ArrayList<Pelikulak> lista = new ArrayList<>();
@@ -782,10 +785,10 @@ public class Konexioa {
      * @param ikusKop
      * @throws SQLException
      */
-    void gehituIkusitakoPeli(int IDPeli, int ikusita, float nota, int ikusKop) throws SQLException {
+    public void gehituIkusitakoPeli(int IDPeli, int ikusita, float nota, int ikusKop) throws SQLException {
 
 
-        if (!listanDago(IDPeli)){
+        if (listanDago(IDPeli) == null){
 
             String sql = "Insert into IKUSITAKOLISTA values (?, ?, ?, ?, ?)";
             PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -822,9 +825,9 @@ public class Konexioa {
      * @return True False
      * @throws SQLException
      */
-    boolean listanDago(int IDPeli) throws SQLException {
+    public IkusitakoLista listanDago(int IDPeli) throws SQLException {
 
-        String sql = "select * from IKUSITAKOLISTA where (id_erabiltzaile = ? and ID_FILMA = ?)";
+        String sql = "select * from IKUSITAKOLISTA where (ID_ERABILTZAILE = ? and ID_FILMA = ?)";
         PreparedStatement kontsulta = conn.prepareStatement(sql);
         kontsulta.setString(1, String.valueOf(bezero.getIdErabiltzailea()));
         kontsulta.setString(2, String.valueOf(IDPeli));
@@ -832,10 +835,12 @@ public class Konexioa {
         ResultSet emaitza = kontsulta.executeQuery();
 
         if (emaitza.next()){
-            return true;
+            return ikusitakoListaLortu(emaitza);
         }else {
-            return false;
+            return null;
         }
+
+
     }
 
     /**
@@ -849,10 +854,10 @@ public class Konexioa {
      * @param ikusKop
      * @throws SQLException
      */
-    void notaAldatu(int IDPeli, int ikusita, float nota, int ikusKop) throws SQLException {
+    public void notaAldatu(int IDPeli, int ikusita, float nota, int ikusKop) throws SQLException {
 
 
-        if (listanDago(IDPeli)){
+        if (listanDago(IDPeli) != null){
 
             String sql = "update IKUSITAKOLISTA set IKUSITA =?, nota =?, ikus_kop=? where ID_ERABILTZAILE = ? and ID_FILMA = ?";
             PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -894,7 +899,7 @@ public class Konexioa {
     void listatikanBorratu(int IDPeli) throws SQLException {
 
 
-        if (listanDago(IDPeli)){
+        if (listanDago(IDPeli) == null){
 
             String sql = "delete from IKUSITAKOLISTA where ID_ERABILTZAILE = ? and ID_FILMA = ?";
             PreparedStatement kontsulta = conn.prepareStatement(sql);
@@ -1084,6 +1089,45 @@ public class Konexioa {
 
 
         return lista;
+    }
+
+    public Zuzendariak pelikulaZuzendaria(int id) throws SQLException {
+        String sql = "SELECT fz.* FROM FILM_ZUZENDARIA fz INNER JOIN ZUZENDUTA z ON fz.ID_FILM_ZUZENDARIA = z.ID_FILM_ZUZENDARIA WHERE z.ID_FILMA = ?";
+
+        //String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA IN (213,223)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+
+        kontsulta.setInt(1,id);
+
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+        if (emaitza.next()){
+            return zuzendariObjetua(emaitza);
+        }else {
+            return null;
+        }
+
+    }
+
+    public ArrayList<Aktoreak> pelikulakoAktoreak(int id) throws SQLException {
+        ArrayList<Aktoreak> list = new ArrayList<>();
+        String sql = "SELECT fz.* FROM AKTOREAK fz INNER JOIN PELIKULETANlANEGIN z ON fz.ID_AKTOREA = z.ID_AKTOREA WHERE z.ID_FILMA = ?";
+
+        //String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA IN (213,223)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+
+        kontsulta.setInt(1,id);
+
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+       while (emaitza.next()) {
+           list.add(aktoreakObjetua(emaitza));
+       }
+       return list;
     }
     /**
      * Aktore baten ID-a erabiltzen lortzen dugu bere informazioa eta hau bidaltzen da {@code aktoreakObjetua(emaitza)} funtziora bueltatzeko Aktoreak objetu bat.
