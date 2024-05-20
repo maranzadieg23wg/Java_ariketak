@@ -22,7 +22,7 @@ public class Index {
 
 
     private JFrame frame;
-    private JPanel menua, menua2, pelikulak, aktoreak, peliTitul, aktoreTitul, zuzendariak, myListLabel;
+    private JPanel menua, menua2, pelikulak, aktoreak, peliTitul, aktoreTitul, zuzendariak, myListLabel, pelikulaInformazioa, aktoreInformazioa, zuzendariInformazioa;
     private JPanel aukera1, aukera2;
     private JButton buttonLogin, buttonSingUp, botoiak;
     private JTextField bilatu;
@@ -60,6 +60,9 @@ public class Index {
 
         zuzendariak = new JPanel();
         myListLabel = new JPanel();
+        pelikulaInformazioa = new JPanel();
+        aktoreInformazioa = new JPanel();
+        zuzendariInformazioa = new JPanel();
 
         this.bezero = null;
 
@@ -108,6 +111,9 @@ public class Index {
         aktoreak.setBackground(Color.black);
         zuzendariak.setBackground(Color.pink);
         myListLabel.setBackground(Color.cyan);
+        pelikulaInformazioa.setBackground(Color.MAGENTA);
+        aktoreInformazioa.setBackground(Color.green);
+        zuzendariInformazioa.setBackground(Color.GRAY);
 
 
 
@@ -119,9 +125,9 @@ public class Index {
         erdi.add(aktoreak);
         erdi.add(zuzendariak);
         erdi.add(myListLabel);
-        //erdi.add(aktoreTitul);
-        //erdi.add(aktoreak);
-
+        erdi.add(pelikulaInformazioa);
+        erdi.add(aktoreInformazioa);
+        erdi.add(zuzendariInformazioa);
 
 
 
@@ -696,18 +702,20 @@ public class Index {
     }
 
     void menuAktoreak(){
-        asieraraPel(-1,false);
+        menuGarbia();
         asieraraAkto(30, false);
+        /*asieraraPel(-1,false);
         asieraraZuz(-1, false);
-        asieraMyList(-1, false);
+        asieraMyList(-1, false);*/
 
     }
 
     void menuZuzendaria(){
-        asieraraPel(-1,false);
-        asieraraAkto(-1, false);
+        menuGarbia();
         asieraraZuz(30, false);
-        asieraMyList(-1, false);
+        /*asieraraPel(-1,false);
+        asieraraAkto(-1, false);
+        asieraMyList(-1, false);*/
 
     }
 
@@ -716,10 +724,11 @@ public class Index {
     }
 
     void menuMyList(){
+        menuGarbia();
         asieraMyList(0, false);
-        asieraraAkto(-1, false);
+        /*asieraraAkto(-1, false);
         asieraraPel(-1,false);
-        asieraraZuz(-1 , false);
+        asieraraZuz(-1 , false);*/
     }
 
     void menuGarbia(){
@@ -727,15 +736,19 @@ public class Index {
         asieraraAkto(-1, false);
         asieraraPel(-1,false);
         asieraraZuz(-1 , false);
+        pelikulaInformazioa.setVisible(false);
+        aktoreInformazioa.setVisible(false);
+        zuzendariInformazioa.setVisible(false);
+
     }
 
 
     void asierara() throws SQLException {
-
+        menuGarbia();
         asieraraPel(7, true);
         asieraraAkto(7, true);
-        asieraraZuz(-1, false);
-        asieraMyList(-1, false);
+        /*asieraraZuz(-1, false);
+        asieraMyList(-1, false);*/
 
     }
 
