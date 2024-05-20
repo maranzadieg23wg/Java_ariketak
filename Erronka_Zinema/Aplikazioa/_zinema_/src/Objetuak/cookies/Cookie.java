@@ -11,7 +11,12 @@ public class Cookie {
 
         String url = "./fitxategiak/cookies/saioa";
         File fitx = new File(url);
+        File karpeta = fitx.getParentFile();
         try {
+
+            if (!karpeta.exists()){
+                karpeta.mkdirs();
+            }
             if (!fitx.exists()){
                 BufferedWriter bw = new BufferedWriter(new FileWriter(url));
                 bw.close();
