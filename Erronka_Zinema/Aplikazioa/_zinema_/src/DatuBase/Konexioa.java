@@ -1298,7 +1298,7 @@ public class Konexioa {
             lehenengoAktorea = emaitza.getInt(1);
         }
 
-        //System.out.println("Azkenekoa: "+lehenengoAktorea);
+        //System.out.println("Azkenekoa: "+lehenengoAktorea);   
         return lehenengoAktorea;
     }
 

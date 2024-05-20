@@ -146,6 +146,8 @@ public class Index {
 
 
 
+    private final  static int buttonWidth =  80;
+    private final  static int buttonHeight =  30;
 
     void menua() throws SQLException {
 
@@ -191,8 +193,8 @@ public class Index {
         buttonLogin = new JButton("Login");
         buttonSingUp = new JButton("SignUp");
 
-        buttonLogin.setPreferredSize(new Dimension(80, 30));
-        buttonSingUp.setPreferredSize(new Dimension(80, 30));
+        buttonLogin.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
+        buttonSingUp.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
 
 
 
