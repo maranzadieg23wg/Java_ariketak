@@ -53,7 +53,7 @@ public class PelikulaInformazioa {
         return pelikularenInformazia;
     }
 
-    static JPanel pelikulaDatu(Pelikulak pelikulak) throws SQLException {
+    private static JPanel pelikulaDatu(Pelikulak pelikulak) throws SQLException {
         Konexioa conn = new Konexioa();
         int id = pelikulak.getIDPelikula();
         Zuzendariak zuzendariak = conn.pelikulaZuzendaria(id);
@@ -77,7 +77,15 @@ public class PelikulaInformazioa {
                 public void mouseClicked(MouseEvent e) {
                     Object source = e.getSource();
                     Zuzendariak zuz = zuzendariList.get(source);
-                    System.out.println(zuz);
+                    pelikularenInformazia.removeAll();
+                    try {
+                        pelikularenInformazia.add(ZuzendariInformazioa.zuzInfo(zuz));
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    pelikularenInformazia.revalidate();
+                    pelikularenInformazia.repaint();
+
                 }
             });
 
@@ -107,7 +115,7 @@ public class PelikulaInformazioa {
 
     }
 
-    static JPanel informazioa(Pelikulak pelikulak) throws SQLException {
+    private static JPanel informazioa(Pelikulak pelikulak) throws SQLException {
         JPanel informazioa = new JPanel();
         informazioa.setLayout(new GridLayout(6, 1)); // Cambiado a 6 filas para acomodar la sinopsis
 
@@ -169,6 +177,12 @@ public class PelikulaInformazioa {
                     public void actionPerformed(ActionEvent e) {
                         NotaAldatu.notaAldatu(pelikulak.getIDPelikula(), lista.getNota(), lista.getIkus_kop());
 
+                        pelikularenInformazia.removeAll();
+                        try {
+                            pelikularenInformazia.add(peliInfo(pelikulak));
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         pelikularenInformazia.revalidate();
                         pelikularenInformazia.repaint();
                     }
@@ -190,11 +204,14 @@ public class PelikulaInformazioa {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         GehituListara.gehituListara(pelikulak.getIDPelikula());
-                        pelikularenInformazia.setVisible(false);
+                        pelikularenInformazia.removeAll();
+                        try {
+                            pelikularenInformazia.add(peliInfo(pelikulak));
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         pelikularenInformazia.revalidate();
                         pelikularenInformazia.repaint();
-                        pelikularenInformazia.setVisible(true);
-
 
 
                     }
@@ -213,7 +230,7 @@ public class PelikulaInformazioa {
         return informazioa;
     }
 
-    static JPanel aktoreak(Pelikulak pel) throws SQLException {
+    private static JPanel aktoreak(Pelikulak pel) throws SQLException {
         int id = pel.getIDPelikula();
 
         Konexioa conn = new Konexioa();
@@ -232,6 +249,16 @@ public class PelikulaInformazioa {
                     Object source = e.getSource();
                     Aktoreak akt = aktoreList.get(source);
                     System.out.println(akt);
+                    try {
+                        pelikularenInformazia.removeAll();
+                        pelikularenInformazia.add(AktoreInformazioa.aktoInfo(akt));
+                        pelikularenInformazia.revalidate();
+                        pelikularenInformazia.repaint();
+
+
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             });
 
@@ -242,7 +269,7 @@ public class PelikulaInformazioa {
     }
 
 
-    static JLabel irudiak(String url, int x, int y) {
+    private static JLabel irudiak(String url, int x, int y) {
         ImageIcon originalIcon = new ImageIcon(url);
         Image img = originalIcon.getImage();
         Image img1 = img.getScaledInstance(x, y, Image.SCALE_SMOOTH);
@@ -253,7 +280,7 @@ public class PelikulaInformazioa {
         return label;
     }
 
-    static JLabel zuriaZatia(int luzeera, int altuera){
+    private static JLabel zuriaZatia(int luzeera, int altuera){
         JLabel zuria = new JLabel();
         zuria.setPreferredSize(new Dimension(luzeera, altuera));
         zuria.setMaximumSize(new Dimension(luzeera, altuera));

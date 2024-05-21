@@ -1,6 +1,8 @@
 package GUI;
 import DatuBase.Konexioa;
+import GUI.Informazioa.AktoreInformazioa;
 import GUI.Informazioa.PelikulaInformazioa;
+import GUI.Informazioa.ZuzendariInformazioa;
 import GUI.LogIn.Konfigurazioa;
 import GUI.LogIn.KontuaSortu;
 import GUI.LogIn.SaioaHasi;
@@ -45,6 +47,9 @@ public class Index {
 
     private Bezero bezero;
     private Konexioa conn;
+
+    private Pelikulak film;
+    private String bilatutakoa;
 
 
     public Index(int x, int y, String izena) throws SQLException {
@@ -106,7 +111,7 @@ public class Index {
         erdi = new JPanel();
         erdi.setLayout(new BoxLayout(erdi, BoxLayout.Y_AXIS));
 
-        peliTitul.setBackground(Color.red);
+        /*peliTitul.setBackground(Color.red);
         pelikulak.setBackground(Color.blue);
         aktoreTitul.setBackground(Color.yellow);
         aktoreak.setBackground(Color.black);
@@ -114,7 +119,7 @@ public class Index {
         myListLabel.setBackground(Color.cyan);
         pelikulaInformazioa.setBackground(Color.MAGENTA);
         aktoreInformazioa.setBackground(Color.green);
-        zuzendariInformazioa.setBackground(Color.GRAY);
+        zuzendariInformazioa.setBackground(Color.GRAY);*/
 
 
 
@@ -317,6 +322,7 @@ public class Index {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String searchText = bilatu.getText();
+                bilatutakoa = searchText;
                 bilatuFun(searchText);
             }
         });
@@ -328,6 +334,8 @@ public class Index {
 
 
     }
+
+
 
 
     void pelikulak() throws SQLException {
@@ -562,6 +570,8 @@ public class Index {
                 pelikulaInformazioa.revalidate();
                 pelikulaInformazioa.repaint();
                 pelikulaInformazioa.setVisible(true);
+
+                film = pel;
             } else {
                 System.err.println("Aukeratutako pelikua ez dago listan");
             }
@@ -576,7 +586,21 @@ public class Index {
         menuGarbia();
 
         Aktoreak akto = aktoreList.get(e.getSource());
-        System.out.println(akto);
+
+
+        try {
+            aktoreInformazioa.removeAll();
+
+            aktoreInformazioa.add(AktoreInformazioa.aktoInfo(akto));
+
+            aktoreInformazioa.revalidate();
+            aktoreInformazioa.repaint();
+            aktoreInformazioa.setVisible(true);
+            System.out.println(akto);
+        }catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
     }
 
     void zuzendariaAukeratu(MouseEvent e){
@@ -584,8 +608,18 @@ public class Index {
         menuGarbia();
 
         Zuzendariak zuz = zuzendariList.get(e.getSource());
-        System.out.println(zuz);
-    }
+        try {
+            zuzendariInformazioa.removeAll();
+
+            zuzendariInformazioa.add(ZuzendariInformazioa.zuzInfo(zuz));
+
+            zuzendariInformazioa.revalidate();
+            zuzendariInformazioa.repaint();
+            zuzendariInformazioa.setVisible(true);
+            System.out.println(zuz);
+        }catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }    }
 
     JLabel zuriaZatia (int luzeera){
         JLabel zuria = new JLabel();
@@ -613,6 +647,25 @@ public class Index {
 
             aukera1.setVisible(false);
             aukera2.setVisible(true);
+
+
+            if (film !=null){
+                pelikulaInformazioa.removeAll();
+
+                pelikulaInformazioa.add(PelikulaInformazioa.peliInfo(film));
+
+                pelikulaInformazioa.revalidate();
+                pelikulaInformazioa.repaint();
+            }
+
+            /*if (bilatutakoa !=null){
+                myListLabel.removeAll();
+                bilatuFun(bilatutakoa);
+                myListLabel.revalidate();
+                myListLabel.repaint();
+            }*/
+
+
             //menua();
         }
 
@@ -670,8 +723,18 @@ public class Index {
                     } else if (aukera.equals("Saioa itzi")) {
                         try {
                             Cookie.borratuCache();
+                            if (film !=null){
+                                pelikulaInformazioa.removeAll();
+                                film.lokalIrudia();
+                                pelikulaInformazioa.add(PelikulaInformazioa.peliInfo(film));
+                                System.out.println(film);
+                                pelikulaInformazioa.revalidate();
+                                pelikulaInformazioa.repaint();
+                            }
                         } catch (IOException ex) {
                             JOptionPane.showMessageDialog(null, "Arazo bat gertatu egin da saioa izteko momentuan", "Saioa itzi", JOptionPane.ERROR_MESSAGE);
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
                         }
 
                         bezero = null;
@@ -1047,7 +1110,7 @@ public class Index {
                     myListLabel.revalidate();
                     myListLabel.repaint();
                 }else {
-                    System.out.println(111);
+
                     myListLabel.setVisible(true);
 
 

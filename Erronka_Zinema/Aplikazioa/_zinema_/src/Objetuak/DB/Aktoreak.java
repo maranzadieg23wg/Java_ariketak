@@ -29,6 +29,34 @@ public class Aktoreak {
         lokalIrudia();
     }
 
+    public int getId_aktora() {
+        return id_aktora;
+    }
+
+    public String getIzena() {
+        return izena;
+    }
+
+    public String getAbizena() {
+        return abizena;
+    }
+
+    public String getJaiotze_Data() {
+        return jaiotze_Data;
+    }
+
+    public String getNazionalitatea() {
+        return nazionalitatea;
+    }
+
+    public String getEmaila() {
+        return emaila;
+    }
+
+    public String getTelefonoa() {
+        return telefonoa;
+    }
+
     public void setirudiaLokalki(String irudiaLokalki) {
         this.irudiaLokalki = irudiaLokalki;
     }

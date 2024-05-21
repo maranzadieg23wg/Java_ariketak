@@ -1,63 +1,57 @@
 package GUI.Informazioa;
 
 import DatuBase.Konexioa;
-import GUI.Informazioa.notak.GehituListara;
-import GUI.Informazioa.notak.NotaAldatu;
-import Objetuak.DB.*;
+import Objetuak.DB.Aktoreak;
+import Objetuak.DB.Pelikulak;
+import Objetuak.DB.Zuzendariak;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AktoreInformazioa {
+public class ZuzendariInformazioa {
     private static HashMap<JLabel, Pelikulak> peliLista;
 
 
-    private static JPanel aktorearenInformazioa;
+    private static JPanel zuzendariarenInformazioa;
 
-    public static JPanel aktoInfo(Aktoreak aktore) throws SQLException {
+    public static JPanel zuzInfo(Zuzendariak zuz) throws SQLException {
 
         peliLista = new HashMap<>();
 
 
-        aktorearenInformazioa = new JPanel();
-        aktorearenInformazioa.setLayout(new BoxLayout(aktorearenInformazioa, BoxLayout.Y_AXIS));
+        zuzendariarenInformazioa = new JPanel();
+        zuzendariarenInformazioa.setLayout(new BoxLayout(zuzendariarenInformazioa, BoxLayout.Y_AXIS));
 
-        String izab = aktore.getIzena()+" "+aktore.getAbizena();
+        String izab = zuz.getIzena()+" "+zuz.getAbizena();
         JLabel izenBuru = new JLabel(izab);
 
-        aktorearenInformazioa.add(izenBuru);
-        aktorearenInformazioa.add(zuriaZatia(30, 50));
+        zuzendariarenInformazioa.add(izenBuru);
+        zuzendariarenInformazioa.add(zuriaZatia(30, 50));
 
 
-        JPanel datuak = aktoreDatuak(aktore);
+        JPanel datuak = zuzDatuak(zuz);
 
-        aktorearenInformazioa.add(datuak, BorderLayout.CENTER);
+        zuzendariarenInformazioa.add(datuak, BorderLayout.CENTER);
 
-        aktorearenInformazioa.add(pelikulak(aktore), BorderLayout.SOUTH);
+        zuzendariarenInformazioa.add(pelikulak(zuz), BorderLayout.SOUTH);
 
 
 
-        return aktorearenInformazioa;
+        return zuzendariarenInformazioa;
     }
 
-    private static JPanel aktoreDatuak(Aktoreak aktoreDatuak) throws SQLException {
+    private static JPanel zuzDatuak(Zuzendariak zuzDatu) throws SQLException {
         JPanel datuak = new JPanel();
         datuak.setLayout(new BorderLayout());
 
         JPanel irudiak = new JPanel();
         irudiak.setLayout(new BoxLayout(irudiak, BoxLayout.Y_AXIS));
-        irudiak.add(irudiak(aktoreDatuak.getIrudiaLokalki(), 130, 200));
+        irudiak.add(irudiak(zuzDatu.getIrudiaLokalki(), 130, 200));
 
         JPanel informazioaPanel = new JPanel();
         informazioaPanel.setLayout(new FlowLayout(FlowLayout.CENTER)); // Alineación al centro
@@ -72,12 +66,12 @@ public class AktoreInformazioa {
 
 
 
-    private static JScrollPane pelikulak(Aktoreak akt) throws SQLException {
-        int id = akt.getId_aktora();
+    private static JScrollPane pelikulak(Zuzendariak zuz) throws SQLException {
+        int id = zuz.getId();
 
         Konexioa conn = new Konexioa();
 
-        ArrayList<Pelikulak> list = conn.pelikuletanLanEgin(id);
+        ArrayList<Pelikulak> list = conn.pelikulakZuzendu(id);
 
         JPanel pelPanela = new JPanel();
         pelPanela.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -97,10 +91,10 @@ public class AktoreInformazioa {
                     System.out.println(peli);
 
                     try {
-                        aktorearenInformazioa.removeAll();
-                        aktorearenInformazioa.add(PelikulaInformazioa.peliInfo(peli));
-                        aktorearenInformazioa.revalidate();
-                        aktorearenInformazioa.repaint();
+                        zuzendariarenInformazioa.removeAll();
+                        zuzendariarenInformazioa.add(PelikulaInformazioa.peliInfo(peli));
+                        zuzendariarenInformazioa.revalidate();
+                        zuzendariarenInformazioa.repaint();
 
 
                     } catch (SQLException ex) {

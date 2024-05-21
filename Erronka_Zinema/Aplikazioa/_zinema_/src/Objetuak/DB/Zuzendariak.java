@@ -69,4 +69,24 @@ public class Zuzendariak {
     public void setIrudiaLokalki(String fitxategiarenIzena) {
         irudiaLokalki = fitxategiarenIzena;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getIzena() {
+        return izena;
+    }
+
+    public String getAbizena() {
+        return abizena;
+    }
+
+    public int getJaiotzeData() {
+        return jaiotzeData;
+    }
+
+    public String getSexua() {
+        return sexua;
+    }
 }

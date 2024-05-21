@@ -20,8 +20,8 @@ import java.util.Scanner;
 
 public class Konexioa {
 
-    String ipa = "10.14.4.122";
-    //String ipa = "192.168.1.100";
+    //String ipa = "10.14.4.122";
+    String ipa = "192.168.1.100";
     String DBIzena = "ORCLCDB";
     String username = "taldea3";
     String pasahitza = "batbihiru";
@@ -697,6 +697,8 @@ public class Konexioa {
 
         if (ikusitakoPelikulak !=null){
             ikusitakoPelikulak.clear();
+        }else {
+            ikusitakoPelikulak = new ArrayList<>();
         }
 
         try {
@@ -1132,6 +1134,44 @@ public class Konexioa {
            list.add(aktoreakObjetua(emaitza));
        }
        return list;
+    }
+
+    public ArrayList<Pelikulak> pelikuletanLanEgin(int id) throws SQLException {
+        ArrayList<Pelikulak> list = new ArrayList<>();
+        String sql = "SELECT fz.* FROM FILMAK fz INNER JOIN PELIKULETANlANEGIN z ON fz.ID_FILMA = z.ID_FILMA WHERE z.ID_AKTOREA = ?";
+
+        //String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA IN (213,223)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+
+        kontsulta.setInt(1,id);
+
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+        while (emaitza.next()) {
+            list.add(pelikulaObjetua(emaitza));
+        }
+        return list;
+    }
+
+    public ArrayList<Pelikulak> pelikulakZuzendu(int id) throws SQLException {
+        ArrayList<Pelikulak> list = new ArrayList<>();
+        String sql = "SELECT fz.* FROM FILMAK fz INNER JOIN ZUZENDUTA z ON fz.ID_FILMA = z.ID_FILMA WHERE z.ID_FILM_ZUZENDARIA = ?";
+
+        //String sql = "SELECT * FROM FILM_ZUZENDARIA WHERE ID_FILM_ZUZENDARIA IN (213,223)";
+        PreparedStatement kontsulta = conn.prepareStatement(sql);
+
+
+        kontsulta.setInt(1,id);
+
+
+
+        ResultSet emaitza = kontsulta.executeQuery();
+        while (emaitza.next()) {
+            list.add(pelikulaObjetua(emaitza));
+        }
+        return list;
     }
     /**
      * Aktore baten ID-a erabiltzen lortzen dugu bere informazioa eta hau bidaltzen da {@code aktoreakObjetua(emaitza)} funtziora bueltatzeko Aktoreak objetu bat.
