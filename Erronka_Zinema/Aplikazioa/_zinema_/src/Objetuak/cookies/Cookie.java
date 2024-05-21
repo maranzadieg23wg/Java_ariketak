@@ -2,6 +2,7 @@ package Objetuak.cookies;
 
 import DatuBase.Konexioa;
 import Objetuak.DB.Bezero;
+import Objetuak.Encrypt;
 
 import java.io.*;
 
@@ -25,6 +26,7 @@ public class Cookie {
 
                 String line;
                 while ((line = br1.readLine()) !=null){
+                    line = Encrypt.decrypt(line);
                     String[] saio = line.split(":");
 
                     //System.out.println(saio[0]+":"+saio[1]);

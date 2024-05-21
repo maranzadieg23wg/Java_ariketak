@@ -1,5 +1,6 @@
 package DatuBase;
 import Objetuak.DB.*;
+import Objetuak.Encrypt;
 import Objetuak.cookies.Cookie;
 
 import javax.swing.*;
@@ -391,10 +392,13 @@ public class Konexioa {
 
                 try{
                     BufferedWriter bw1 = new BufferedWriter(new FileWriter("./fitxategiak/cookies/saioa", false));
-                    bw1.write(email+":"+pasahitzaHash);
+                    String encirpted = Encrypt.encript(email+":"+pasahitzaHash);
+                    bw1.write(encirpted);
                     bw1.close();
                 }catch (IOException e){
                     System.err.println("Arazo bat egon da cokian idaztean datuak.");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
 
                 return true;
