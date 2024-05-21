@@ -162,10 +162,6 @@ public class PelikulaInformazioa {
             IkusitakoLista lista = co.listanDago(pelikulak.getIDPelikula());
             System.out.println(lista);
             if (lista !=null){
-                JLabel nota = new JLabel("Nota: "+lista.getNota());
-                JLabel ikusitakoKopurua = new JLabel("Ikusitako kopurua: "+lista.getIkus_kop());
-                informazioa.add(nota);
-                informazioa.add(ikusitakoKopurua);
 
                 JButton notaAldatu = new JButton("Nota aldatu");
                 notaAldatu.addActionListener(new ActionListener() {
@@ -180,6 +176,13 @@ public class PelikulaInformazioa {
 
 
                 informazioa.add(notaAldatu);
+
+                JLabel nota = new JLabel("Nota: "+lista.getNota());
+                JLabel ikusitakoKopurua = new JLabel("Ikusitako kopurua: "+lista.getIkus_kop());
+                informazioa.add(nota);
+                informazioa.add(ikusitakoKopurua);
+
+
 
             }else {
                 JButton listaraGehitu = new JButton("Listara gehitu");
