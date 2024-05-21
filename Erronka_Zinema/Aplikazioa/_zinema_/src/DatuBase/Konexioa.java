@@ -259,6 +259,9 @@ public class Konexioa {
         return kontsulta.executeUpdate();
     }
 
+    /*
+    * Erabiltzailearen datuak aldatzen dira erabiltzailearen datuak erabiltzen UPDATE bat.
+    * Funtzio hau erabiltzen da pasahitza aldatu behar denean*/
     public void erabiltzaileaAldatu(int id, String email, String pas, String izena, String abizena, String era){
         pas = sha256(pas);
 
@@ -300,6 +303,9 @@ public class Konexioa {
         }
     }
 
+    /**
+     * Erabiltzailearen datuak aldatzen dira erabiltzailearen datuak erabiltzen UPDATE bat.
+     * Funtzio hau erabiltzen da pasahitza ez denean aldatu behar*/
     public void erabiltzaileaAldatu(int id, String email, String izena, String abizena, String era){
 
 
@@ -338,6 +344,9 @@ public class Konexioa {
     }
 
     //***************************************SAIOA HASI****************************************
+    /*
+    * Funtzio hau erabiltzen da saioa hasteko erabiltzen pasahitza bat haseatuta dagoena.
+    * Hau erabiltzen du Coocki objetuak saioa hasteko erabiltzen fitxategi bat lokalki gordeta dagoena*/
     public boolean saioaHasiHash(String email, String pasahitza) throws SQLException {
 
         String sql = "select * from ERABILTZAILEAK where (emaila = ? or erabiltzailea = ?) and pasahitza = ?";
@@ -366,6 +375,11 @@ public class Konexioa {
             return false;
         }
     }
+
+    /**
+     * Funtzio hau erabiltzen da saioa hasteko erabiltzen pasahitza bat ez dagoena haseatuta.
+     * Honek haseatzen du momentuan.
+     */
     public boolean saioaHasi(String email, String pasahitza) throws SQLException {
 
         try {
@@ -532,6 +546,8 @@ public class Konexioa {
         return pelikulaLortu(-1);
     }
 
+    /**
+    * Zartzen zaio zenbat pelikula nahi diren lortu eta honek bueltatzen du Pelikulen Array list bat tamaina horretakoa*/
     public ArrayList<Pelikulak> pelikulaListLortu(int zenbat) throws SQLException {
 
         if (zenbat!=-1){
@@ -579,7 +595,9 @@ public class Konexioa {
 
 
 
-
+    /**
+     * Pasatzen zaio ArrayList bat Interrekoa daukagana ID lista bat.
+     * Honekin selecta egitean esaten zaio bueltatzeko dauden Pelikula guztiak ID- horiekin*/
     public ArrayList<Pelikulak> pelikulaLortu(ArrayList<Integer> zenbakiak) throws SQLException {
 
         ArrayList<Pelikulak> lista = new ArrayList<>();
@@ -643,6 +661,8 @@ public class Konexioa {
 
     }
 
+    /**
+     * Hemen ezartzen diozu zenbat pelikula nahi diren lortu eta honek deitzen dio funtzio bateri eta banaka banaka lortzen ditu Pelikula objetuak*/
     public ArrayList<Pelikulak> pelikulaList(int zenbat){
 
         ArrayList <Pelikulak> list = new ArrayList<>();
@@ -658,6 +678,8 @@ public class Konexioa {
         return list;
     }
 
+    /**
+     * Hemen ezartzen diozu zenbat Aktore nahi diren lortu eta honek deitzen dio funtzio bateri eta banaka banaka lortzen ditu Aktore objetuak*/
     public ArrayList<Aktoreak> aktoreList(int zenbat){
         ArrayList <Aktoreak> list = new ArrayList<>();
 
@@ -673,6 +695,8 @@ public class Konexioa {
     }
 
 
+    /**
+     * Pelikula aleatorio baten ID-a bueltatzen du. Kontuan artzen du zein den ID handiena eta txikiena eta honen arabera aukeratzen du zenbaki aleatorio bat, bi zenbakiak barne edukita*/
     private int pelikulaIDRandom() throws SQLException {
         int azkenP = azkenekoPelikula();
         int lehenP = lehenengoPelikula();
@@ -683,6 +707,9 @@ public class Konexioa {
 
     //***********************************Ikusteko Pelikula Lista****************************************************
 
+    /***
+     * Bueltatzen du ikusitako pelikula guztien ArrayList bat
+     */
 
     public ArrayList<IkusitakoLista> getIkusitakoPelikulak() {
         return ikusitakoPelikulak;
@@ -725,6 +752,9 @@ public class Konexioa {
     }
 
 
+    /**
+     * Funtzio hau erabiltzen bilatzailearekin batera.
+     * Honek izen bat bidaltzen dio. Funtzioak select bat egiten du inner join erabiliz filmak eta ikusitako listen artean aukeratzeko film guztiak daukatena izen antzeko bat*/
     public ArrayList<IkusitakoLista> ikusitakoPelikulakBilatu(String izena){
 
         ArrayList<IkusitakoLista> lista = new ArrayList<>();
@@ -754,8 +784,10 @@ public class Konexioa {
 
     }
 
+    /**
+     * Saioa hizten denean ikusitakoPelikuleen lista garbitu egiten da. Edukitzeko ikusitako lista bat saioa hasieta egon behar delako.*/
     public static void borratuLista (){
-        ikusitakoPelikulak = null;
+        ikusitakoPelikulak.clear();
     }
 
 
@@ -963,6 +995,12 @@ public class Konexioa {
         return list;
     }
 
+
+    /**
+     * Bilatu egiten dira dauden zuzendari guztiak izen eta abizen horrekin.
+     * Horretarako egiten dena da begiratu ea sartu egin den izen eta abizena berbera diren.
+     * Berberak baldin badira esan nahi du bilatzailean sartu egin dena izanda bakarrik izen edo abizena. Orduan bilatzeko, bilatzen dira zuzendari guztiak izen edo abizen horrekin.
+     * Desberdinak izanda begiratu egingo ziren zuzendari guztiak izen eta abizen horrekin.*/
     public ArrayList<Zuzendariak> zuzendariaLortu(String izena, String abizena) throws SQLException {
 
         izena = "%"+izena+"%";
@@ -997,6 +1035,8 @@ public class Konexioa {
         return aktoreaLortu(-1);
     }
 
+    /**
+     * Lortu egiten da Aktore ArrayList bat, ezanez zenbat aktore nahi diren, eta honen arabera bueltatzen du array bat aktoreekin aukeratuta aleatorioki.*/
     public ArrayList<Aktoreak> aktoreLortuLista(int zenbat) throws SQLException {
 
         if (zenbat!=-1){
@@ -1012,6 +1052,10 @@ public class Konexioa {
 
     }
 
+    /**
+     * Aktoreen ID-ak ez daudenez seguidan hau da, ez daude {0,1,2,3}, daude {0,5,8,9}
+     * Orduan lortzea ID-bat artzen zenbaki handieta eta txikiena eta horien tartean dauden zenbaki bat artzea ez zen aukera.
+     * Orduan egiten dena da ordenatu aleatorioki dauden datuak eta aukeratu lehenego X Aktore, ezarri den aktore kantitatea*/
     ArrayList<Integer> aktoIDRandom(int zenbat) throws SQLException {
         ArrayList<Integer> list = new ArrayList<>();
 
@@ -1031,6 +1075,11 @@ public class Konexioa {
         return list;
     }
 
+    /**
+     * Aukeratzen da zenbaki bat aleatorioki kontuan hartuta zein den ID handiena eta txikiena
+     * @deprecated Metodoa ezin da erabili egoki, ID-ak ez daudelako seguidan*/
+
+    @Deprecated
     int aktorIDRandom() throws SQLException {
         int azkenP = azkenekoAktorea();
         int lehenP = lehenengoAktorea();
@@ -1038,6 +1087,8 @@ public class Konexioa {
         return  (int) (Math.random() * (azkenP - lehenP + 1)) + lehenP;
     }
 
+    /**
+     * Artzen du zuzendarien ID handiena eta txikiena, eta bi hauen artean bueltatzen du ID bat aleatorioki aukeratuta tarte horretakoa.*/
     int ZuzIDRandom() throws SQLException {
         int azkenP = azkenekoZuzendaria();
         int lehenP = lehenengoZuzendaria();
@@ -1046,6 +1097,9 @@ public class Konexioa {
     }
 
 
+    /**
+     * Esaten zaio zenbat Zuzendari nahi diren. Horren arabera lista batera gehitzen ditu guzti horien ID-ak eta ondoren eskatzen zaio zuzendari lista zuzendariaLortu() funtzioari
+     * bertan sartzen ArrayList-a Integer motakoa*/
     public ArrayList<Zuzendariak> zuzendariLortuLista(int zenbat) throws SQLException {
 
         if (zenbat!=-1){
@@ -1061,6 +1115,10 @@ public class Konexioa {
 
     }
 
+
+    /**
+     * Egiten dena da gehitu ? listako ID-bakoitzeko eta ondoren aldatu egiten dira ID-en gatik.
+     * Bueltatu egiten du ArrayBat zuzendari guztiekin daukatena ID-hori.*/
     public ArrayList<Zuzendariak> zuzendariaLortu(ArrayList<Integer> zenbaki) throws SQLException {
         ArrayList<Zuzendariak> lista = new ArrayList<>();
 
