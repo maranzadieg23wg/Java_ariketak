@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -14,10 +15,22 @@ public class Main {
     public static void main(String[] args) throws IOException, SQLException {
 
         //URLGehitu();
-        aktoreak();
+        //aktoreak();
 
-        //https://developer.themoviedb.org/reference/movie-credits
 
+        //aktoreErrepikatuak();
+        sinopsisgehitu();
+
+
+    }
+
+
+    static void sinopsisgehitu() throws SQLException, IOException {
+        Konexioa conn = new Konexioa();
+
+        conn.gehituSinopsis();
+
+        conn.konexioaItxi();
 
     }
 
